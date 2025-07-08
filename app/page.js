@@ -437,12 +437,14 @@ export default function MarwyckCopilot() {
   }
 
   const formatDate = (date) => {
-    return date.toLocaleDateString('fr-FR', {
+    const formatted = date.toLocaleDateString('fr-FR', {
       weekday: 'long',
       day: 'numeric',
       month: 'long',
       year: 'numeric'
     })
+    // Capitaliser la première lettre
+    return formatted.charAt(0).toUpperCase() + formatted.slice(1)
   }
 
   const eventQuickActions = [
