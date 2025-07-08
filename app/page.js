@@ -68,13 +68,52 @@ export default function MarwyckCopilot() {
     {
       id: 1,
       role: 'assistant',
-      content: "Bonjour ! Je suis Marwyck, votre copilote IA. Comment puis-je vous aider aujourd'hui ?",
+      content: "Bonjour ! Je suis Marwyck, votre assistant IA. Comment puis-je vous aider aujourd'hui ?",
       timestamp: new Date(Date.now() - 3600000)
     }
   ])
   const [inputMessage, setInputMessage] = useState('')
   const [isTyping, setIsTyping] = useState(false)
+  const [currentTime, setCurrentTime] = useState(new Date())
+  const [trafficStatus, setTrafficStatus] = useState('good') // 'good', 'medium', 'heavy'
+  const [darkMode, setDarkMode] = useState(false)
   const messagesEndRef = useRef(null)
+
+  // Update time every second
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date())
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [])
+
+  // Simulate traffic status changes
+  useEffect(() => {
+    const trafficTimer = setInterval(() => {
+      const statuses = ['good', 'medium', 'heavy']
+      const randomStatus = statuses[Math.floor(Math.random() * statuses.length)]
+      setTrafficStatus(randomStatus)
+    }, 30000) // Change every 30 seconds
+    return () => clearInterval(trafficTimer)
+  }, [])
+
+  const getTrafficColor = () => {
+    switch (trafficStatus) {
+      case 'good': return 'text-green-500'
+      case 'medium': return 'text-orange-500'
+      case 'heavy': return 'text-red-500'
+      default: return 'text-gray-500'
+    }
+  }
+
+  const getTrafficText = () => {
+    switch (trafficStatus) {
+      case 'good': return 'Fluide'
+      case 'medium': return 'Modéré'
+      case 'heavy': return 'Saturé'
+      default: return 'Inconnu'
+    }
+  }
 
   // Mock data
   const dossiers = [
