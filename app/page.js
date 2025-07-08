@@ -65,7 +65,13 @@ import {
   Navigation,
   Sparkles,
   FileUp,
-  MoreHorizontal
+  MoreHorizontal,
+  Info,
+  UserCircle,
+  Palette,
+  X,
+  Save,
+  ContactIcon as Contact
 } from 'lucide-react'
 
 export default function MarwyckCopilot() {
@@ -88,7 +94,28 @@ export default function MarwyckCopilot() {
   const [trafficStatus, setTrafficStatus] = useState('good')
   const [darkMode, setDarkMode] = useState(false)
   const [isRecording, setIsRecording] = useState(false)
+  const [showColorPicker, setShowColorPicker] = useState(false)
+  const [accentColor, setAccentColor] = useState('#00C4FF')
+  const [showNewEventDialog, setShowNewEventDialog] = useState(false)
+  const [showProposeDialog, setShowProposeDialog] = useState(false)
+  const [showRescheduleDialog, setShowRescheduleDialog] = useState(false)
+  const [showEventDetails, setShowEventDetails] = useState(false)
+  const [selectedEvent, setSelectedEvent] = useState(null)
+  const [showEditDossier, setShowEditDossier] = useState(false)
+  const [selectedDossier, setSelectedDossier] = useState(null)
   const messagesEndRef = useRef(null)
+
+  // Available accent colors
+  const accentColors = [
+    { name: 'Cyan', value: '#00C4FF' },
+    { name: 'Blue', value: '#3B82F6' },
+    { name: 'Purple', value: '#8B5CF6' },
+    { name: 'Pink', value: '#EC4899' },
+    { name: 'Green', value: '#10B981' },
+    { name: 'Orange', value: '#F59E0B' },
+    { name: 'Red', value: '#EF4444' },
+    { name: 'Emerald', value: '#059669' }
+  ]
 
   // Update time every second
   useEffect(() => {
@@ -107,6 +134,11 @@ export default function MarwyckCopilot() {
     }, 30000)
     return () => clearInterval(trafficTimer)
   }, [])
+
+  // Update CSS custom property when accent color changes
+  useEffect(() => {
+    document.documentElement.style.setProperty('--accent-cyan', accentColor)
+  }, [accentColor])
 
   const getTrafficColor = () => {
     switch (trafficStatus) {
@@ -138,13 +170,6 @@ export default function MarwyckCopilot() {
     { id: 'john-smith', name: 'John Smith' },
     { id: 'marie-durant', name: 'Marie Durant' },
     { id: 'paul-martin', name: 'Paul Martin' }
-  ]
-
-  const quickActions = [
-    { id: 'new-contact', name: 'Nouveau Contact', icon: User },
-    { id: 'schedule-visit', name: 'Planifier Visite', icon: Calendar },
-    { id: 'send-estimate', name: 'Envoyer Estimation', icon: Calculator },
-    { id: 'follow-up', name: 'Relance Client', icon: Phone }
   ]
 
   const getWeekLabel = (weekOffset) => {
@@ -227,6 +252,9 @@ export default function MarwyckCopilot() {
       type: 'vente', 
       status: 'active', 
       priority: 'high',
+      contacts: [
+        { id: 1, name: 'John Smith', email: 'john@email.com', phone: '+1234567890', role: 'Vendeur' }
+      ],
       documents: [
         { id: 1, name: 'Compromis de vente', type: 'PDF', status: 'signed', required: true },
         { id: 2, name: 'Diagnostics techniques', type: 'PDF', status: 'received', required: true },
@@ -239,6 +267,9 @@ export default function MarwyckCopilot() {
       type: 'achat', 
       status: 'pending', 
       priority: 'medium',
+      contacts: [
+        { id: 2, name: 'Marie Durant', email: 'marie@email.com', phone: '+1234567891', role: 'Acheteur' }
+      ],
       documents: [
         { id: 4, name: 'Offre d\'achat', type: 'PDF', status: 'received', required: true },
         { id: 5, name: 'Justificatifs revenus', type: 'PDF', status: 'missing', required: true }
@@ -247,9 +278,9 @@ export default function MarwyckCopilot() {
   ])
 
   const calendarEvents = [
-    { id: 1, title: 'Visite 123 Oak Street', time: '14:00', type: 'visit', client: 'John Smith' },
-    { id: 2, title: 'Signature chez notaire', time: '16:30', type: 'signature', client: 'Marie Durant' },
-    { id: 3, title: 'Estimation 456 Pine Ave', time: '10:00', type: 'estimation', client: 'Paul Martin' }
+    { id: 1, title: 'Visite 123 Oak Street', time: '14:00', type: 'visit', client: 'John Smith', description: 'Visite de la propriété avec le client' },
+    { id: 2, title: 'Signature chez notaire', time: '16:30', type: 'signature', client: 'Marie Durant', description: 'Signature des documents officiels' },
+    { id: 3, title: 'Estimation 456 Pine Ave', time: '10:00', type: 'estimation', client: 'Paul Martin', description: 'Évaluation de la propriété' }
   ]
 
   const scrollToBottom = () => {
@@ -351,6 +382,7 @@ export default function MarwyckCopilot() {
       type: type,
       status: 'active',
       priority: 'medium',
+      contacts: [],
       documents: documentsTemplates[type].map((doc, index) => ({
         id: Date.now() + index,
         name: doc.name,
@@ -360,6 +392,10 @@ export default function MarwyckCopilot() {
       }))
     }
     setDossiersList(prev => [...prev, newDossier])
+  }
+
+  const deleteDossier = (dossierId) => {
+    setDossiersList(prev => prev.filter(d => d.id !== dossierId))
   }
 
   const getSuggestedActions = (dossier) => {
@@ -392,7 +428,6 @@ export default function MarwyckCopilot() {
     setIsRecording(!isRecording)
     if (!isRecording) {
       console.log('Starting voice transcription...')
-      // Simulate transcription
       setTimeout(() => {
         setInputMessage('Transcription: Bonjour, je souhaite programmer une visite pour demain.')
         setIsRecording(false)
@@ -400,16 +435,76 @@ export default function MarwyckCopilot() {
     }
   }
 
-  const handleQuickAction = (actionId) => {
-    console.log('Quick action triggered:', actionId)
-    // Handle quick actions
+  const formatDate = (date) => {
+    return date.toLocaleDateString('fr-FR', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    })
   }
+
+  const eventQuickActions = [
+    { id: 'reschedule', name: 'Replanifier', icon: Calendar },
+    { id: 'cancel', name: 'Annuler', icon: X },
+    { id: 'edit', name: 'Modifier', icon: Edit },
+    { id: 'duplicate', name: 'Dupliquer', icon: Copy }
+  ]
 
   return (
     <div className={`flex h-screen ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
+      {/* Color Picker Sidebar */}
+      {showColorPicker && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex">
+          <div className={`w-80 h-full ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-xl p-6`}>
+            <div className="flex items-center justify-between mb-6">
+              <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                Personnaliser les couleurs
+              </h3>
+              <Button variant="ghost" size="sm" onClick={() => setShowColorPicker(false)}>
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label className={`block text-sm font-medium mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                  Couleur principale
+                </label>
+                <div className="grid grid-cols-4 gap-3">
+                  {accentColors.map(color => (
+                    <button
+                      key={color.value}
+                      onClick={() => setAccentColor(color.value)}
+                      className={`w-12 h-12 rounded-xl border-2 transition-all ${
+                        accentColor === color.value ? 'border-gray-400 scale-110' : 'border-gray-200'
+                      }`}
+                      style={{ backgroundColor: color.value }}
+                      title={color.name}
+                    />
+                  ))}
+                </div>
+              </div>
+              
+              <div className="pt-4 border-t">
+                <Button 
+                  onClick={() => setShowColorPicker(false)}
+                  className="w-full"
+                  style={{ backgroundColor: accentColor }}
+                >
+                  <Save className="w-4 h-4 mr-2" />
+                  Appliquer
+                </Button>
+              </div>
+            </div>
+          </div>
+          <div className="flex-1" onClick={() => setShowColorPicker(false)} />
+        </div>
+      )}
+
       {/* Sidebar */}
-      <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-300 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r flex flex-col`}>
-        <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+      <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-300 ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} border-r flex flex-col`}>
+        <div className={`p-4 border-b flex items-center justify-between ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
           {!sidebarCollapsed && (
             <div>
               <div className="text-xl font-bold gradient-logo font-plus-jakarta tracking-tight">
@@ -435,16 +530,18 @@ export default function MarwyckCopilot() {
               { id: 'planning', label: 'Planning', icon: Calendar },
               { id: 'documents', label: 'Documents', icon: FileText },
               { id: 'estimation', label: 'Estimation', icon: Calculator },
-              { id: 'communications', label: 'SMS & Appels', icon: Phone }
+              { id: 'communications', label: 'SMS & Appels', icon: Phone },
+              { id: 'account', label: 'Compte', icon: UserCircle }
             ].map(item => (
               <li key={item.id}>
                 <button
                   onClick={() => setActiveTab(item.id)}
                   className={`w-full flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     activeTab === item.id
-                      ? 'bg-accent-cyan text-white'
-                      : `${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'}`
+                      ? 'text-white'
+                      : `${darkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-700 hover:bg-gray-100'}`
                   }`}
+                  style={activeTab === item.id ? { backgroundColor: accentColor } : {}}
                   title={sidebarCollapsed ? item.label : ''}
                 >
                   <item.icon className="w-4 h-4 mr-3" />
@@ -456,7 +553,7 @@ export default function MarwyckCopilot() {
         </nav>
 
         {/* Bottom Section */}
-        <div className="p-2 border-t border-gray-200 dark:border-gray-700">
+        <div className={`p-2 border-t ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
           <div className="space-y-1">
             <Button
               variant="ghost"
@@ -469,18 +566,12 @@ export default function MarwyckCopilot() {
               {!sidebarCollapsed && (darkMode ? 'Mode Clair' : 'Mode Sombre')}
             </Button>
             <button
-              className={`w-full flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'}`}
+              onClick={() => setShowColorPicker(true)}
+              className={`w-full flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${darkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-700 hover:bg-gray-100'}`}
               title={sidebarCollapsed ? 'Dev Tools' : ''}
             >
-              <Code className="w-4 h-4 mr-3" />
+              <Palette className="w-4 h-4 mr-3" />
               {!sidebarCollapsed && 'Dev Tools'}
-            </button>
-            <button
-              className={`w-full flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'}`}
-              title={sidebarCollapsed ? 'Compte' : ''}
-            >
-              <User className="w-4 h-4 mr-3" />
-              {!sidebarCollapsed && 'Compte'}
             </button>
           </div>
         </div>
@@ -498,9 +589,15 @@ export default function MarwyckCopilot() {
               {activeTab === 'documents' && 'Documents'}
               {activeTab === 'estimation' && 'Estimation'}
               {activeTab === 'communications' && 'SMS & Appels'}
+              {activeTab === 'account' && 'Compte'}
             </h1>
           </div>
           <div className="flex items-center space-x-6">
+            {/* Date */}
+            <div className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+              {formatDate(currentTime)}
+            </div>
+            
             {/* Live Time */}
             <div className={`flex items-center space-x-2 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
               <Clock className="w-4 h-4" />
@@ -511,29 +608,11 @@ export default function MarwyckCopilot() {
             <div className="flex items-center space-x-2">
               <Navigation className={`w-4 h-4 ${getTrafficColor()}`} />
               <span className={`text-sm ${getTrafficColor()}`}>
-                {getTrafficText()}
+                Traffic: {getTrafficText()}
               </span>
             </div>
 
-            {/* Quick Actions */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button size="sm" className="bg-accent-cyan hover:bg-accent-cyan-hover text-white rounded-full px-4">
-                  <Sparkles className="w-4 h-4 mr-2" />
-                  Actions
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                {quickActions.map(action => (
-                  <DropdownMenuItem key={action.id} onClick={() => handleQuickAction(action.id)}>
-                    <action.icon className="w-4 h-4 mr-2" />
-                    {action.name}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            <div className="w-8 h-8 rounded-full bg-accent-cyan flex items-center justify-center">
+            <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: accentColor }}>
               <User className="w-4 h-4 text-white" />
             </div>
           </div>
@@ -559,6 +638,7 @@ export default function MarwyckCopilot() {
                         size="sm"
                         onClick={() => setCurrentWeek(currentWeek - 1)}
                         disabled={currentWeek <= -1}
+                        className="rounded-full"
                       >
                         <ChevronLeft className="w-4 h-4" />
                       </Button>
@@ -566,7 +646,8 @@ export default function MarwyckCopilot() {
                         variant="outline"
                         size="sm"
                         onClick={() => setCurrentWeek(currentWeek + 1)}
-                        disabled={currentWeek >= 1}
+                        disabled={currentWeek >= 0}
+                        className="rounded-full"
                       >
                         <ChevronRight className="w-4 h-4" />
                       </Button>
@@ -585,7 +666,7 @@ export default function MarwyckCopilot() {
                         <CardTitle className={`text-sm font-medium ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                           {kpi.title}
                         </CardTitle>
-                        <kpi.icon className={`w-4 h-4 ${kpi.color}`} />
+                        <kpi.icon className={`w-4 h-4 ${kpi.color === 'text-accent-cyan' ? '' : kpi.color}`} style={kpi.color === 'text-accent-cyan' ? { color: accentColor } : {}} />
                       </CardHeader>
                       <CardContent>
                         <div className={`text-2xl font-bold font-space-grotesk mb-1 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -611,9 +692,9 @@ export default function MarwyckCopilot() {
                         {recentActivities.map(activity => (
                           <div key={activity.id} className="flex items-center space-x-3">
                             <div className="flex-shrink-0">
-                              {activity.type === 'sms' && <Smartphone className="w-5 h-5 text-accent-cyan" />}
-                              {activity.type === 'email' && <Mail className="w-5 h-5 text-accent-cyan" />}
-                              {activity.type === 'call' && <PhoneCall className="w-5 h-5 text-accent-cyan" />}
+                              {activity.type === 'sms' && <Smartphone className="w-5 h-5" style={{ color: accentColor }} />}
+                              {activity.type === 'email' && <Mail className="w-5 h-5" style={{ color: accentColor }} />}
+                              {activity.type === 'call' && <PhoneCall className="w-5 h-5" style={{ color: accentColor }} />}
                             </div>
                             <div className="flex-1 min-w-0">
                               <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -642,7 +723,7 @@ export default function MarwyckCopilot() {
                         {calendarEvents.map(event => (
                           <div key={event.id} className="flex items-center space-x-3">
                             <div className="flex-shrink-0">
-                              <Calendar className="w-5 h-5 text-accent-cyan" />
+                              <Calendar className="w-5 h-5" style={{ color: accentColor }} />
                             </div>
                             <div className="flex-1 min-w-0">
                               <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -669,27 +750,81 @@ export default function MarwyckCopilot() {
           {activeTab === 'chat' && (
             <div className="h-full flex flex-col">
               <div className={`border-b p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
-                <div className="flex items-center space-x-4">
-                  <div className="flex-1">
-                    <Select value={selectedClient} onValueChange={setSelectedClient}>
-                      <SelectTrigger className="w-64">
-                        <SelectValue placeholder="Choisir un client" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {clients.map(client => (
-                          <SelectItem key={client.id} value={client.id}>
-                            {client.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <div className="flex-1">
+                      <Select value={selectedClient} onValueChange={setSelectedClient}>
+                        <SelectTrigger className="w-64 rounded-full">
+                          <SelectValue placeholder="Choisir un client" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {clients.map(client => (
+                            <SelectItem key={client.id} value={client.id}>
+                              {client.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    {selectedClient !== 'all' && (
+                      <Badge variant="outline" style={{ borderColor: accentColor, color: accentColor }}>
+                        <FolderOpen className="w-3 h-3 mr-1" />
+                        {clients.find(c => c.id === selectedClient)?.name}
+                      </Badge>
+                    )}
                   </div>
-                  {selectedClient !== 'all' && (
-                    <Badge variant="outline" className="border-accent-cyan text-accent-cyan">
-                      <FolderOpen className="w-3 h-3 mr-1" />
-                      {clients.find(c => c.id === selectedClient)?.name}
-                    </Badge>
-                  )}
+                  
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="outline" size="sm" className="rounded-full">
+                        <Info className="w-4 h-4 mr-2" />
+                        Commandes
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Commandes disponibles</DialogTitle>
+                      </DialogHeader>
+                      <div className="space-y-3">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                            <Phone className="w-4 h-4 text-white" />
+                          </div>
+                          <div>
+                            <p className="font-medium">/relance</p>
+                            <p className="text-sm text-gray-500">Programmer des relances automatiques</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                            <Home className="w-4 h-4 text-white" />
+                          </div>
+                          <div>
+                            <p className="font-medium">/estimation</p>
+                            <p className="text-sm text-gray-500">Estimer la valeur d'un bien</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                            <Calendar className="w-4 h-4 text-white" />
+                          </div>
+                          <div>
+                            <p className="font-medium">/rdv</p>
+                            <p className="text-sm text-gray-500">Planifier un rendez-vous</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                            <FileText className="w-4 h-4 text-white" />
+                          </div>
+                          <div>
+                            <p className="font-medium">/docs</p>
+                            <p className="text-sm text-gray-500">Vérifier les documents d'un dossier</p>
+                          </div>
+                        </div>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
                 </div>
               </div>
 
@@ -703,7 +838,7 @@ export default function MarwyckCopilot() {
                       >
                         <div className="flex items-start space-x-3 max-w-2xl">
                           {message.role === 'assistant' && (
-                            <div className="w-8 h-8 rounded-full bg-accent-cyan flex items-center justify-center flex-shrink-0">
+                            <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: accentColor }}>
                               <Sparkles className="w-4 h-4 text-white" />
                             </div>
                           )}
@@ -730,15 +865,15 @@ export default function MarwyckCopilot() {
                     {isTyping && (
                       <div className="flex justify-start">
                         <div className="flex items-start space-x-3 max-w-2xl">
-                          <div className="w-8 h-8 rounded-full bg-accent-cyan flex items-center justify-center flex-shrink-0">
+                          <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: accentColor }}>
                             <Sparkles className="w-4 h-4 text-white" />
                           </div>
                           <div className={`px-4 py-3 rounded-2xl ${darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'} shadow-sm`}>
                             <div className="flex items-center space-x-2">
                               <div className="flex space-x-1">
-                                <div className="w-2 h-2 bg-accent-cyan rounded-full animate-bounce"></div>
-                                <div className="w-2 h-2 bg-accent-cyan rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                                <div className="w-2 h-2 bg-accent-cyan rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                                <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: accentColor }}></div>
+                                <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: accentColor, animationDelay: '0.1s' }}></div>
+                                <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: accentColor, animationDelay: '0.2s' }}></div>
                               </div>
                               <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Marwyck tape...</span>
                             </div>
@@ -784,13 +919,11 @@ export default function MarwyckCopilot() {
                     <Button 
                       onClick={handleSendMessage}
                       disabled={!inputMessage.trim()}
-                      className="bg-accent-cyan hover:bg-accent-cyan-hover text-white p-3 rounded-full"
+                      className="text-white p-3 rounded-full"
+                      style={{ backgroundColor: accentColor }}
                     >
                       <Send className="w-4 h-4" />
                     </Button>
-                  </div>
-                  <div className={`mt-2 text-xs ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>
-                    Commandes disponibles: /relance, /estimation, /rdv, /docs
                   </div>
                 </div>
               </div>
@@ -813,7 +946,8 @@ export default function MarwyckCopilot() {
                       <Button
                         onClick={() => addNewDossier('vente')}
                         size="sm"
-                        className="bg-accent-cyan hover:bg-accent-cyan-hover text-white"
+                        className="text-white rounded-full"
+                        style={{ backgroundColor: accentColor }}
                       >
                         <Plus className="w-4 h-4 mr-2" />
                         Vente
@@ -822,6 +956,7 @@ export default function MarwyckCopilot() {
                         onClick={() => addNewDossier('achat')}
                         size="sm"
                         variant="outline"
+                        className="rounded-full"
                       >
                         <Plus className="w-4 h-4 mr-2" />
                         Achat
@@ -830,6 +965,7 @@ export default function MarwyckCopilot() {
                         onClick={() => addNewDossier('location')}
                         size="sm"
                         variant="outline"
+                        className="rounded-full"
                       >
                         <Plus className="w-4 h-4 mr-2" />
                         Location
@@ -843,9 +979,9 @@ export default function MarwyckCopilot() {
                     <Card key={dossier.id} className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                       <CardHeader>
                         <div className="flex items-center justify-between">
-                          <div>
+                          <div className="flex-1">
                             <CardTitle className={`text-lg font-semibold flex items-center space-x-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                              <Building className="w-5 h-5 text-accent-cyan" />
+                              <Building className="w-5 h-5" style={{ color: accentColor }} />
                               <span>{dossier.address}</span>
                             </CardTitle>
                             <div className="flex items-center space-x-2 mt-2">
@@ -859,6 +995,27 @@ export default function MarwyckCopilot() {
                                 {dossier.status}
                               </Badge>
                             </div>
+                          </div>
+                          <div className="flex items-center space-x-1">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => {
+                                setSelectedDossier(dossier)
+                                setShowEditDossier(true)
+                              }}
+                              className="p-2"
+                            >
+                              <Edit className="w-4 h-4" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => deleteDossier(dossier.id)}
+                              className="p-2 text-red-500 hover:text-red-700"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
                           </div>
                         </div>
                       </CardHeader>
@@ -874,7 +1031,7 @@ export default function MarwyckCopilot() {
                                     <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{doc.name}</span>
                                   </div>
                                   {doc.status === 'missing' && (
-                                    <Button size="sm" variant="outline" className="text-xs">
+                                    <Button size="sm" variant="outline" className="text-xs rounded-full">
                                       Relancer
                                     </Button>
                                   )}
@@ -888,7 +1045,7 @@ export default function MarwyckCopilot() {
                             <div className="space-y-1">
                               {getSuggestedActions(dossier).map((action, index) => (
                                 <div key={index} className="flex items-center space-x-2">
-                                  <Target className="w-3 h-3 text-accent-cyan" />
+                                  <Target className="w-3 h-3" style={{ color: accentColor }} />
                                   <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{action}</span>
                                 </div>
                               ))}
@@ -896,7 +1053,7 @@ export default function MarwyckCopilot() {
                           </div>
                           
                           <div className="pt-2 border-t">
-                            <Button size="sm" className="w-full bg-accent-cyan hover:bg-accent-cyan-hover text-white">
+                            <Button size="sm" className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
                               Gérer le dossier
                             </Button>
                           </div>
@@ -927,6 +1084,7 @@ export default function MarwyckCopilot() {
                         size="sm"
                         onClick={() => setCurrentWeek(currentWeek - 1)}
                         disabled={currentWeek <= -1}
+                        className="rounded-full"
                       >
                         <ChevronLeft className="w-4 h-4" />
                         Précédente
@@ -936,6 +1094,7 @@ export default function MarwyckCopilot() {
                         size="sm"
                         onClick={() => setCurrentWeek(0)}
                         disabled={currentWeek === 0}
+                        className="rounded-full"
                       >
                         Aujourd'hui
                       </Button>
@@ -943,7 +1102,8 @@ export default function MarwyckCopilot() {
                         variant="outline"
                         size="sm"
                         onClick={() => setCurrentWeek(currentWeek + 1)}
-                        disabled={currentWeek >= 1}
+                        disabled={currentWeek >= 0}
+                        className="rounded-full"
                       >
                         Suivante
                         <ChevronRight className="w-4 h-4" />
@@ -965,7 +1125,13 @@ export default function MarwyckCopilot() {
                               <h3 className={`font-medium mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{day}</h3>
                               <div className="space-y-2">
                                 {index === 0 && (
-                                  <div className="bg-cyan-50 dark:bg-cyan-900/20 border border-cyan-200 dark:border-cyan-800 rounded p-3">
+                                  <div 
+                                    className="bg-cyan-50 dark:bg-cyan-900/20 border border-cyan-200 dark:border-cyan-800 rounded p-3 cursor-pointer hover:shadow-md transition-shadow"
+                                    onClick={() => {
+                                      setSelectedEvent(calendarEvents[0])
+                                      setShowEventDetails(true)
+                                    }}
+                                  >
                                     <div className="flex items-center justify-between">
                                       <div>
                                         <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -973,14 +1139,20 @@ export default function MarwyckCopilot() {
                                         </p>
                                         <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>14:00 - 15:00</p>
                                       </div>
-                                      <Badge variant="outline" className="text-accent-cyan border-accent-cyan">
+                                      <Badge variant="outline" style={{ borderColor: accentColor, color: accentColor }}>
                                         Visite
                                       </Badge>
                                     </div>
                                   </div>
                                 )}
                                 {index === 1 && (
-                                  <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded p-3">
+                                  <div 
+                                    className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded p-3 cursor-pointer hover:shadow-md transition-shadow"
+                                    onClick={() => {
+                                      setSelectedEvent(calendarEvents[1])
+                                      setShowEventDetails(true)
+                                    }}
+                                  >
                                     <div className="flex items-center justify-between">
                                       <div>
                                         <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -1012,18 +1184,114 @@ export default function MarwyckCopilot() {
                       </CardHeader>
                       <CardContent>
                         <div className="space-y-3">
-                          <Button className="w-full bg-accent-cyan hover:bg-accent-cyan-hover text-white">
-                            <Plus className="w-4 h-4 mr-2" />
-                            Nouveau RDV
-                          </Button>
-                          <Button variant="outline" className="w-full">
-                            <Calendar className="w-4 h-4 mr-2" />
-                            Proposer créneaux
-                          </Button>
-                          <Button variant="outline" className="w-full">
-                            <Clock className="w-4 h-4 mr-2" />
-                            Replanifier
-                          </Button>
+                          <Dialog open={showNewEventDialog} onOpenChange={setShowNewEventDialog}>
+                            <DialogTrigger asChild>
+                              <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
+                                <Plus className="w-4 h-4 mr-2" />
+                                Nouveau RDV
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent>
+                              <DialogHeader>
+                                <DialogTitle>Créer un nouveau rendez-vous</DialogTitle>
+                              </DialogHeader>
+                              <div className="space-y-4">
+                                <div>
+                                  <label className="block text-sm font-medium mb-2">Titre</label>
+                                  <Input placeholder="Ex: Visite appartement" className="rounded-xl" />
+                                </div>
+                                <div>
+                                  <label className="block text-sm font-medium mb-2">Heure</label>
+                                  <Input type="time" className="rounded-xl" />
+                                </div>
+                                <div>
+                                  <label className="block text-sm font-medium mb-2">Informations complémentaires</label>
+                                  <Textarea placeholder="Détails du rendez-vous..." className="rounded-xl" />
+                                </div>
+                                <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
+                                  Créer le RDV
+                                </Button>
+                              </div>
+                            </DialogContent>
+                          </Dialog>
+
+                          <Dialog open={showProposeDialog} onOpenChange={setShowProposeDialog}>
+                            <DialogTrigger asChild>
+                              <Button variant="outline" className="w-full rounded-full">
+                                <Calendar className="w-4 h-4 mr-2" />
+                                Proposer créneaux
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent>
+                              <DialogHeader>
+                                <DialogTitle>Proposer des créneaux</DialogTitle>
+                              </DialogHeader>
+                              <div className="space-y-4">
+                                <div>
+                                  <label className="block text-sm font-medium mb-2">Client/Dossier</label>
+                                  <Select>
+                                    <SelectTrigger className="rounded-xl">
+                                      <SelectValue placeholder="Choisir un dossier" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      {dossiersList.map(dossier => (
+                                        <SelectItem key={dossier.id} value={dossier.id.toString()}>
+                                          {dossier.address}
+                                        </SelectItem>
+                                      ))}
+                                    </SelectContent>
+                                  </Select>
+                                </div>
+                                <div>
+                                  <label className="block text-sm font-medium mb-2">Créneaux à proposer</label>
+                                  <Textarea placeholder="Ex: Lundi 14h-15h, Mardi 10h-11h..." className="rounded-xl" />
+                                </div>
+                                <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
+                                  <Sparkles className="w-4 h-4 mr-2" />
+                                  Laisser l'IA proposer
+                                </Button>
+                              </div>
+                            </DialogContent>
+                          </Dialog>
+
+                          <Dialog open={showRescheduleDialog} onOpenChange={setShowRescheduleDialog}>
+                            <DialogTrigger asChild>
+                              <Button variant="outline" className="w-full rounded-full">
+                                <Clock className="w-4 h-4 mr-2" />
+                                Replanifier
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent>
+                              <DialogHeader>
+                                <DialogTitle>Replanifier un rendez-vous</DialogTitle>
+                              </DialogHeader>
+                              <div className="space-y-4">
+                                <div>
+                                  <label className="block text-sm font-medium mb-2">Rendez-vous à replanifier</label>
+                                  <Select>
+                                    <SelectTrigger className="rounded-xl">
+                                      <SelectValue placeholder="Choisir un RDV" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      {calendarEvents.map(event => (
+                                        <SelectItem key={event.id} value={event.id.toString()}>
+                                          {event.title} - {event.time}
+                                        </SelectItem>
+                                      ))}
+                                    </SelectContent>
+                                  </Select>
+                                </div>
+                                <div>
+                                  <label className="block text-sm font-medium mb-2">Nouveaux créneaux</label>
+                                  <Textarea placeholder="Proposer de nouveaux créneaux..." className="rounded-xl" />
+                                </div>
+                                <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
+                                  <Sparkles className="w-4 h-4 mr-2" />
+                                  Laisser l'IA replanifier
+                                </Button>
+                              </div>
+                            </DialogContent>
+                          </Dialog>
                         </div>
                       </CardContent>
                     </Card>
@@ -1057,6 +1325,100 @@ export default function MarwyckCopilot() {
             </div>
           )}
 
+          {/* Event Details Dialog */}
+          <Dialog open={showEventDetails} onOpenChange={setShowEventDetails}>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Détails du rendez-vous</DialogTitle>
+              </DialogHeader>
+              {selectedEvent && (
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="font-semibold text-lg">{selectedEvent.title}</h3>
+                    <p className="text-sm text-gray-500">{selectedEvent.time}</p>
+                    <p className="text-sm text-gray-600 mt-2">{selectedEvent.description}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm"><strong>Client:</strong> {selectedEvent.client}</p>
+                    <p className="text-sm"><strong>Type:</strong> {selectedEvent.type}</p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 pt-4">
+                    {eventQuickActions.map(action => (
+                      <Button
+                        key={action.id}
+                        variant="outline"
+                        size="sm"
+                        className="rounded-full"
+                      >
+                        <action.icon className="w-4 h-4 mr-2" />
+                        {action.name}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </DialogContent>
+          </Dialog>
+
+          {/* Edit Dossier Dialog */}
+          <Dialog open={showEditDossier} onOpenChange={setShowEditDossier}>
+            <DialogContent className="max-w-2xl">
+              <DialogHeader>
+                <DialogTitle>Modifier le dossier</DialogTitle>
+              </DialogHeader>
+              {selectedDossier && (
+                <div className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Adresse</label>
+                    <Input defaultValue={selectedDossier.address} className="rounded-xl" />
+                  </div>
+                  
+                  <div>
+                    <h4 className="font-medium mb-3">Contacts</h4>
+                    {selectedDossier.contacts?.map(contact => (
+                      <div key={contact.id} className="border rounded-lg p-3 mb-3">
+                        <div className="grid grid-cols-2 gap-3">
+                          <Input defaultValue={contact.name} placeholder="Nom" className="rounded-xl" />
+                          <Input defaultValue={contact.email} placeholder="Email" className="rounded-xl" />
+                          <Input defaultValue={contact.phone} placeholder="Téléphone" className="rounded-xl" />
+                          <Input defaultValue={contact.role} placeholder="Rôle" className="rounded-xl" />
+                        </div>
+                      </div>
+                    ))}
+                    <Button variant="outline" size="sm" className="rounded-full">
+                      <Plus className="w-4 h-4 mr-2" />
+                      Ajouter un contact
+                    </Button>
+                  </div>
+
+                  <div>
+                    <h4 className="font-medium mb-3">Documents</h4>
+                    {selectedDossier.documents?.map(doc => (
+                      <div key={doc.id} className="flex items-center justify-between p-2 border rounded mb-2">
+                        <span className="text-sm">{doc.name}</span>
+                        <Select defaultValue={doc.status}>
+                          <SelectTrigger className="w-32 rounded-xl">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="missing">Manquant</SelectItem>
+                            <SelectItem value="received">Reçu</SelectItem>
+                            <SelectItem value="signed">Signé</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
+                    <Save className="w-4 h-4 mr-2" />
+                    Sauvegarder les modifications
+                  </Button>
+                </div>
+              )}
+            </DialogContent>
+          </Dialog>
+
           {/* Estimation */}
           {activeTab === 'estimation' && (
             <div className="p-6 h-full overflow-y-auto">
@@ -1079,14 +1441,14 @@ export default function MarwyckCopilot() {
                           <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                             Adresse du bien
                           </label>
-                          <Input placeholder="123 Oak Street, City, State" />
+                          <Input placeholder="123 Oak Street, City, State" className="rounded-xl" />
                         </div>
                         <div>
                           <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                             Type de bien
                           </label>
                           <Select>
-                            <SelectTrigger>
+                            <SelectTrigger className="rounded-xl">
                               <SelectValue placeholder="Choisir le type" />
                             </SelectTrigger>
                             <SelectContent>
@@ -1102,16 +1464,16 @@ export default function MarwyckCopilot() {
                             <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                               Surface (m²)
                             </label>
-                            <Input type="number" placeholder="150" />
+                            <Input type="number" placeholder="150" className="rounded-xl" />
                           </div>
                           <div>
                             <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                               Chambres
                             </label>
-                            <Input type="number" placeholder="3" />
+                            <Input type="number" placeholder="3" className="rounded-xl" />
                           </div>
                         </div>
-                        <Button className="w-full bg-accent-cyan hover:bg-accent-cyan-hover text-white">
+                        <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
                           <Calculator className="w-4 h-4 mr-2" />
                           Générer l'estimation
                         </Button>
@@ -1133,7 +1495,7 @@ export default function MarwyckCopilot() {
                         <div className={`rounded-lg p-4 ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
                           <div className="text-center">
                             <p className={`text-sm mb-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Fourchette d'estimation</p>
-                            <div className="text-3xl font-bold font-space-grotesk text-accent-cyan">
+                            <div className="text-3xl font-bold font-space-grotesk" style={{ color: accentColor }}>
                               $420,000 - $450,000
                             </div>
                           </div>
@@ -1156,11 +1518,11 @@ export default function MarwyckCopilot() {
 
                         <div className="pt-4 border-t">
                           <div className="flex space-x-2">
-                            <Button size="sm" variant="outline" className="flex-1">
+                            <Button size="sm" variant="outline" className="flex-1 rounded-full">
                               <Download className="w-4 h-4 mr-2" />
                               Rapport PDF
                             </Button>
-                            <Button size="sm" className="flex-1 bg-accent-cyan hover:bg-accent-cyan-hover text-white">
+                            <Button size="sm" className="flex-1 text-white rounded-full" style={{ backgroundColor: accentColor }}>
                               <Send className="w-4 h-4 mr-2" />
                               Envoyer
                             </Button>
@@ -1188,12 +1550,12 @@ export default function MarwyckCopilot() {
                             <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Il y a {estimation.date}</p>
                           </div>
                           <div className="text-right">
-                            <p className="font-medium text-accent-cyan">{estimation.price}</p>
+                            <p className="font-medium" style={{ color: accentColor }}>{estimation.price}</p>
                             <div className="flex items-center space-x-2 mt-1">
-                              <Button size="sm" variant="outline">
+                              <Button size="sm" variant="outline" className="rounded-full">
                                 <Eye className="w-3 h-3" />
                               </Button>
-                              <Button size="sm" variant="outline">
+                              <Button size="sm" variant="outline" className="rounded-full">
                                 <Download className="w-3 h-3" />
                               </Button>
                             </div>
@@ -1232,8 +1594,8 @@ export default function MarwyckCopilot() {
                         ].map((msg, index) => (
                           <div key={index} className={`flex items-start space-x-3 p-3 border rounded-lg ${darkMode ? 'border-gray-700' : 'border-gray-100'}`}>
                             <div className="flex-shrink-0">
-                              {msg.type === 'sms' && <Smartphone className="w-5 h-5 text-accent-cyan" />}
-                              {msg.type === 'email' && <Mail className="w-5 h-5 text-accent-cyan" />}
+                              {msg.type === 'sms' && <Smartphone className="w-5 h-5" style={{ color: accentColor }} />}
+                              {msg.type === 'email' && <Mail className="w-5 h-5" style={{ color: accentColor }} />}
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
@@ -1266,7 +1628,7 @@ export default function MarwyckCopilot() {
                         ].map((call, index) => (
                           <div key={index} className={`flex items-center space-x-3 p-3 border rounded-lg ${darkMode ? 'border-gray-700' : 'border-gray-100'}`}>
                             <div className="flex-shrink-0">
-                              <PhoneCall className={`w-5 h-5 ${call.type === 'outbound' ? 'text-accent-cyan' : 'text-green-500'}`} />
+                              <PhoneCall className={`w-5 h-5 ${call.type === 'outbound' ? '' : 'text-green-500'}`} style={call.type === 'outbound' ? { color: accentColor } : {}} />
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
@@ -1284,6 +1646,103 @@ export default function MarwyckCopilot() {
                             </div>
                           </div>
                         ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Account */}
+          {activeTab === 'account' && (
+            <div className="p-6 h-full overflow-y-auto">
+              <div className="max-w-4xl mx-auto">
+                <div className="mb-8">
+                  <h2 className={`text-2xl font-bold font-plus-jakarta mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                    Mon Compte
+                  </h2>
+                  <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Gérez vos informations personnelles et préférences</p>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                  <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
+                    <CardHeader>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Profil</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div className="text-center">
+                          <div className="w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                            <User className="w-10 h-10 text-white" />
+                          </div>
+                          <h3 className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Agent Immobilier</h3>
+                          <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>agent@marwyck.ai</p>
+                        </div>
+                        <Button variant="outline" className="w-full rounded-full">
+                          <Edit className="w-4 h-4 mr-2" />
+                          Modifier le profil
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
+                    <CardHeader>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Préférences</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Mode sombre</span>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setDarkMode(!darkMode)}
+                            className="rounded-full"
+                          >
+                            {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                          </Button>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Couleur principale</span>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setShowColorPicker(true)}
+                            className="rounded-full"
+                          >
+                            <Palette className="w-4 h-4" />
+                          </Button>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Notifications</span>
+                          <Button variant="outline" size="sm" className="rounded-full">
+                            <Settings className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
+                    <CardHeader>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Statistiques</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Dossiers actifs</span>
+                          <span className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>{dossiersList.length}</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Messages envoyés</span>
+                          <span className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>156</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Temps gagné</span>
+                          <span className="font-medium text-success">32.5h</span>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
