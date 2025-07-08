@@ -80,14 +80,59 @@ export default function MarwyckCopilot() {
   const dossiers = [
     { id: 1, address: '123 Oak Street', type: 'Vente', status: 'active', priority: 'high' },
     { id: 2, address: '456 Pine Avenue', type: 'Achat', status: 'pending', priority: 'medium' },
-    { id: 3, address: '789 Elm Drive', type: 'Vente', status: 'completed', priority: 'low' }
+    { id: 3, address: '789 Elm Drive', type: 'Location', status: 'completed', priority: 'low' }
   ]
 
+  const clients = [
+    { id: 'all', name: 'Tous les clients' },
+    { id: 'john-smith', name: 'John Smith' },
+    { id: 'marie-durant', name: 'Marie Durant' },
+    { id: 'paul-martin', name: 'Paul Martin' }
+  ]
+
+  const getWeekLabel = (weekOffset) => {
+    const dates = ['12-18 Jan', '19-25 Jan', '26-01 Fév']
+    const labels = ['Semaine précédente', 'Cette semaine', 'Semaine suivante']
+    return { date: dates[weekOffset + 1], label: labels[weekOffset + 1] }
+  }
+
   const kpis = [
-    { title: 'Heures Gagnées', value: '28.5', change: '+12%', icon: Clock, color: 'text-success' },
-    { title: 'Relances Envoyées', value: '142', change: '+8%', icon: Send, color: 'text-accent-cyan' },
-    { title: 'Docs Complétés', value: '89%', change: '+5%', icon: FileText, color: 'text-success' },
-    { title: 'RDV Planifiés', value: '24', change: '+18%', icon: Calendar, color: 'text-accent-cyan' }
+    { 
+      title: 'Heures Gagnées', 
+      value: '32.5', 
+      previousValue: '28.5',
+      change: '+14%', 
+      icon: Clock, 
+      color: 'text-success',
+      trend: 'up'
+    },
+    { 
+      title: 'Relances Envoyées', 
+      value: '156', 
+      previousValue: '142',
+      change: '+10%', 
+      icon: Send, 
+      color: 'text-accent-cyan',
+      trend: 'up'
+    },
+    { 
+      title: 'Docs Complétés', 
+      value: '92%', 
+      previousValue: '89%',
+      change: '+3%', 
+      icon: FileText, 
+      color: 'text-success',
+      trend: 'up'
+    },
+    { 
+      title: 'RDV Planifiés', 
+      value: '28', 
+      previousValue: '24',
+      change: '+17%', 
+      icon: Calendar, 
+      color: 'text-accent-cyan',
+      trend: 'up'
+    }
   ]
 
   const recentActivities = [
@@ -96,12 +141,53 @@ export default function MarwyckCopilot() {
     { id: 3, type: 'call', contact: 'Paul Martin', message: 'Appel de suivi effectué', time: '08:45', status: 'completed' }
   ]
 
-  const documents = [
-    { id: 1, name: 'Compromis de vente', type: 'PDF', status: 'signed', required: true },
-    { id: 2, name: 'Diagnostics techniques', type: 'PDF', status: 'received', required: true },
-    { id: 3, name: 'Attestation assurance', type: 'PDF', status: 'missing', required: true },
-    { id: 4, name: 'Certificat énergétique', type: 'PDF', status: 'pending', required: false }
-  ]
+  const documentsTemplates = {
+    vente: [
+      { name: 'Compromis de vente', required: true },
+      { name: 'Diagnostics techniques', required: true },
+      { name: 'Attestation assurance', required: true },
+      { name: 'Certificat énergétique', required: false },
+      { name: 'Procuration', required: false }
+    ],
+    achat: [
+      { name: 'Offre d\'achat', required: true },
+      { name: 'Justificatifs revenus', required: true },
+      { name: 'Attestation financement', required: true },
+      { name: 'Pièce d\'identité', required: true }
+    ],
+    location: [
+      { name: 'Bail de location', required: true },
+      { name: 'État des lieux', required: true },
+      { name: 'Dossier locataire', required: true },
+      { name: 'Assurance habitation', required: true }
+    ]
+  }
+
+  const [dossiersList, setDossiersList] = useState([
+    { 
+      id: 1, 
+      address: '123 Oak Street', 
+      type: 'vente', 
+      status: 'active', 
+      priority: 'high',
+      documents: [
+        { id: 1, name: 'Compromis de vente', type: 'PDF', status: 'signed', required: true },
+        { id: 2, name: 'Diagnostics techniques', type: 'PDF', status: 'received', required: true },
+        { id: 3, name: 'Attestation assurance', type: 'PDF', status: 'missing', required: true }
+      ]
+    },
+    { 
+      id: 2, 
+      address: '456 Pine Avenue', 
+      type: 'achat', 
+      status: 'pending', 
+      priority: 'medium',
+      documents: [
+        { id: 4, name: 'Offre d\'achat', type: 'PDF', status: 'received', required: true },
+        { id: 5, name: 'Justificatifs revenus', type: 'PDF', status: 'missing', required: true }
+      ]
+    }
+  ])
 
   const calendarEvents = [
     { id: 1, title: 'Visite 123 Oak Street', time: '14:00', type: 'visit', client: 'John Smith' },
@@ -202,24 +288,77 @@ export default function MarwyckCopilot() {
     }
   }
 
+  const addNewDossier = (type) => {
+    const newDossier = {
+      id: Date.now(),
+      address: 'Nouvelle adresse',
+      type: type,
+      status: 'active',
+      priority: 'medium',
+      documents: documentsTemplates[type].map((doc, index) => ({
+        id: Date.now() + index,
+        name: doc.name,
+        type: 'PDF',
+        status: 'missing',
+        required: doc.required
+      }))
+    }
+    setDossiersList(prev => [...prev, newDossier])
+  }
+
+  const getSuggestedActions = (dossier) => {
+    const missingDocs = dossier.documents.filter(doc => doc.status === 'missing')
+    const actions = []
+    
+    if (missingDocs.length > 0) {
+      actions.push(`Relancer pour ${missingDocs.length} document(s) manquant(s)`)
+    }
+    
+    if (dossier.type === 'vente') {
+      actions.push('Programmer visite')
+      actions.push('Envoyer estimation')
+    } else if (dossier.type === 'achat') {
+      actions.push('Vérifier financement')
+      actions.push('Planifier négociation')
+    } else if (dossier.type === 'location') {
+      actions.push('Vérifier dossier locataire')
+      actions.push('Programmer état des lieux')
+    }
+    
+    return actions
+  }
+
   return (
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
-      <div className="w-64 bg-white border-r border-gray-200 flex flex-col">
-        <div className="p-6 border-b border-gray-200">
-          <div className="text-2xl font-bold gradient-logo font-plus-jakarta tracking-tight">
-            MARWYCK
-          </div>
-          <p className="text-sm text-gray-600 mt-1">Copilote IA</p>
+      <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-300 bg-white border-r border-gray-200 flex flex-col`}>
+        <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+          {!sidebarCollapsed && (
+            <div>
+              <div className="text-xl font-bold gradient-logo font-plus-jakarta tracking-tight">
+                MARWYCK
+              </div>
+              <p className="text-xs text-gray-600 mt-1">Copilote IA</p>
+            </div>
+          )}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            className="p-2"
+          >
+            <Menu className="w-4 h-4" />
+          </Button>
         </div>
         
-        <nav className="flex-1 p-4">
-          <ul className="space-y-2">
+        <nav className="flex-1 p-2">
+          <ul className="space-y-1">
             {[
               { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
               { id: 'chat', label: 'Chat', icon: MessageCircle },
               { id: 'planning', label: 'Planning', icon: Calendar },
               { id: 'documents', label: 'Documents', icon: FileText },
+              { id: 'estimation', label: 'Estimation', icon: Calculator },
               { id: 'communications', label: 'SMS & Appels', icon: Phone }
             ].map(item => (
               <li key={item.id}>
@@ -230,14 +369,35 @@ export default function MarwyckCopilot() {
                       ? 'bg-accent-cyan text-white'
                       : 'text-gray-700 hover:bg-gray-100'
                   }`}
+                  title={sidebarCollapsed ? item.label : ''}
                 >
                   <item.icon className="w-4 h-4 mr-3" />
-                  {item.label}
+                  {!sidebarCollapsed && item.label}
                 </button>
               </li>
             ))}
           </ul>
         </nav>
+
+        {/* Bottom Section */}
+        <div className="p-2 border-t border-gray-200">
+          <div className="space-y-1">
+            <button
+              className="w-full flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+              title={sidebarCollapsed ? 'Dev Tools' : ''}
+            >
+              <Code className="w-4 h-4 mr-3" />
+              {!sidebarCollapsed && 'Dev Tools'}
+            </button>
+            <button
+              className="w-full flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+              title={sidebarCollapsed ? 'Compte' : ''}
+            >
+              <User className="w-4 h-4 mr-3" />
+              {!sidebarCollapsed && 'Compte'}
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Main Content */}
@@ -245,9 +405,14 @@ export default function MarwyckCopilot() {
         {/* Header */}
         <div className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <Badge variant="outline" className="border-accent-cyan text-accent-cyan">
-              📂 {activeDossier}
-            </Badge>
+            <h1 className="text-lg font-semibold text-gray-900">
+              {activeTab === 'dashboard' && 'Dashboard'}
+              {activeTab === 'chat' && 'Chat'}
+              {activeTab === 'planning' && 'Planning'}
+              {activeTab === 'documents' && 'Documents'}
+              {activeTab === 'estimation' && 'Estimation'}
+              {activeTab === 'communications' && 'SMS & Appels'}
+            </h1>
           </div>
           <div className="flex items-center space-x-4">
             <Button size="sm" className="bg-accent-cyan hover:bg-accent-cyan-hover text-white">
@@ -267,10 +432,35 @@ export default function MarwyckCopilot() {
             <div className="p-6 h-full overflow-y-auto">
               <div className="max-w-7xl mx-auto">
                 <div className="mb-8">
-                  <h1 className="text-2xl font-bold text-gray-900 font-plus-jakarta mb-2">
-                    Dashboard
-                  </h1>
-                  <p className="text-gray-600">Vue d'ensemble de votre activité</p>
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <h2 className="text-2xl font-bold text-gray-900 font-plus-jakarta">
+                        {getWeekLabel(currentWeek).label}
+                      </h2>
+                      <p className="text-gray-600">{getWeekLabel(currentWeek).date}</p>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setCurrentWeek(currentWeek - 1)}
+                        disabled={currentWeek <= -1}
+                      >
+                        <ChevronLeft className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setCurrentWeek(currentWeek + 1)}
+                        disabled={currentWeek >= 1}
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+                  <p className="text-sm text-gray-600">
+                    Efficacité en hausse de <span className="font-medium text-success">+12%</span> par rapport à la semaine précédente
+                  </p>
                 </div>
 
                 {/* KPIs */}
@@ -287,7 +477,10 @@ export default function MarwyckCopilot() {
                         <div className="text-2xl font-bold font-space-grotesk mb-1">
                           {kpi.value}
                         </div>
-                        <p className="text-xs text-success">{kpi.change}</p>
+                        <div className="flex items-center space-x-2">
+                          <p className="text-xs text-success">{kpi.change}</p>
+                          <p className="text-xs text-gray-500">vs {kpi.previousValue}</p>
+                        </div>
                       </CardContent>
                     </Card>
                   ))}
@@ -361,6 +554,31 @@ export default function MarwyckCopilot() {
           {/* Chat */}
           {activeTab === 'chat' && (
             <div className="h-full flex flex-col">
+              <div className="border-b border-gray-200 p-4 bg-white">
+                <div className="flex items-center space-x-4">
+                  <div className="flex-1">
+                    <Select value={selectedClient} onValueChange={setSelectedClient}>
+                      <SelectTrigger className="w-64">
+                        <SelectValue placeholder="Choisir un client" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {clients.map(client => (
+                          <SelectItem key={client.id} value={client.id}>
+                            {client.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  {selectedClient !== 'all' && (
+                    <Badge variant="outline" className="border-accent-cyan text-accent-cyan">
+                      <FolderOpen className="w-3 h-3 mr-1" />
+                      {clients.find(c => c.id === selectedClient)?.name}
+                    </Badge>
+                  )}
+                </div>
+              </div>
+
               <div className="flex-1 overflow-y-auto p-6">
                 <div className="max-w-4xl mx-auto">
                   <div className="space-y-4">
@@ -424,69 +642,110 @@ export default function MarwyckCopilot() {
           {/* Documents */}
           {activeTab === 'documents' && (
             <div className="p-6 h-full overflow-y-auto">
-              <div className="max-w-4xl mx-auto">
+              <div className="max-w-6xl mx-auto">
                 <div className="mb-8">
-                  <h1 className="text-2xl font-bold text-gray-900 font-plus-jakarta mb-2">
-                    Documents
-                  </h1>
-                  <p className="text-gray-600">Gestion des pièces du dossier {activeDossier}</p>
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <h2 className="text-2xl font-bold text-gray-900 font-plus-jakarta">
+                        Gestion des Dossiers
+                      </h2>
+                      <p className="text-gray-600">Gérez vos dossiers et documents</p>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Button
+                        onClick={() => addNewDossier('vente')}
+                        size="sm"
+                        className="bg-accent-cyan hover:bg-accent-cyan-hover text-white"
+                      >
+                        <Plus className="w-4 h-4 mr-2" />
+                        Vente
+                      </Button>
+                      <Button
+                        onClick={() => addNewDossier('achat')}
+                        size="sm"
+                        variant="outline"
+                      >
+                        <Plus className="w-4 h-4 mr-2" />
+                        Achat
+                      </Button>
+                      <Button
+                        onClick={() => addNewDossier('location')}
+                        size="sm"
+                        variant="outline"
+                      >
+                        <Plus className="w-4 h-4 mr-2" />
+                        Location
+                      </Button>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg font-semibold">Checklist Documents</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-4">
-                        {documents.map(doc => (
-                          <div key={doc.id} className="flex items-center justify-between">
-                            <div className="flex items-center space-x-3">
-                              {getStatusIcon(doc.status)}
-                              <div>
-                                <p className="text-sm font-medium text-gray-900">
-                                  {doc.name}
-                                </p>
-                                <p className="text-xs text-gray-500">{doc.type}</p>
-                              </div>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              {doc.status === 'missing' && (
-                                <Button size="sm" variant="outline" className="text-accent-cyan border-accent-cyan">
-                                  Relancer
-                                </Button>
-                              )}
-                              {doc.status === 'received' && (
-                                <Button size="sm" variant="outline">
-                                  <Eye className="w-4 h-4" />
-                                </Button>
-                              )}
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {dossiersList.map(dossier => (
+                    <Card key={dossier.id} className="hover:shadow-lg transition-shadow">
+                      <CardHeader>
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <CardTitle className="text-lg font-semibold flex items-center space-x-2">
+                              <Building className="w-5 h-5 text-accent-cyan" />
+                              <span>{dossier.address}</span>
+                            </CardTitle>
+                            <div className="flex items-center space-x-2 mt-2">
+                              <Badge variant="outline" className="text-xs">
+                                {dossier.type}
+                              </Badge>
+                              <Badge 
+                                variant={dossier.status === 'active' ? 'default' : 'secondary'}
+                                className="text-xs"
+                              >
+                                {dossier.status}
+                              </Badge>
                             </div>
                           </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg font-semibold">Upload Documents</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-accent-cyan transition-colors">
-                        <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                        <p className="text-sm text-gray-600 mb-2">
-                          Glissez-déposez vos fichiers ici
-                        </p>
-                        <p className="text-xs text-gray-500 mb-4">
-                          PDF, DOC, DOCX jusqu'à 10MB
-                        </p>
-                        <Button size="sm" className="bg-accent-cyan hover:bg-accent-cyan-hover text-white">
-                          Choisir des fichiers
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-4">
+                          <div>
+                            <h4 className="font-medium text-sm mb-2">Documents</h4>
+                            <div className="space-y-2">
+                              {dossier.documents.map(doc => (
+                                <div key={doc.id} className="flex items-center justify-between">
+                                  <div className="flex items-center space-x-2">
+                                    {getStatusIcon(doc.status)}
+                                    <span className="text-sm">{doc.name}</span>
+                                  </div>
+                                  {doc.status === 'missing' && (
+                                    <Button size="sm" variant="outline" className="text-xs">
+                                      Relancer
+                                    </Button>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                          
+                          <div>
+                            <h4 className="font-medium text-sm mb-2">Actions suggérées</h4>
+                            <div className="space-y-1">
+                              {getSuggestedActions(dossier).map((action, index) => (
+                                <div key={index} className="flex items-center space-x-2">
+                                  <Target className="w-3 h-3 text-accent-cyan" />
+                                  <span className="text-xs text-gray-600">{action}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                          
+                          <div className="pt-2 border-t">
+                            <Button size="sm" className="w-full bg-accent-cyan hover:bg-accent-cyan-hover text-white">
+                              Gérer le dossier
+                            </Button>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
                 </div>
               </div>
             </div>
@@ -497,10 +756,42 @@ export default function MarwyckCopilot() {
             <div className="p-6 h-full overflow-y-auto">
               <div className="max-w-6xl mx-auto">
                 <div className="mb-8">
-                  <h1 className="text-2xl font-bold text-gray-900 font-plus-jakarta mb-2">
-                    Planning
-                  </h1>
-                  <p className="text-gray-600">Gestion de votre calendrier et rendez-vous</p>
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <h2 className="text-2xl font-bold text-gray-900 font-plus-jakarta">
+                        Planning - {getWeekLabel(currentWeek).label}
+                      </h2>
+                      <p className="text-gray-600">{getWeekLabel(currentWeek).date}</p>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setCurrentWeek(currentWeek - 1)}
+                        disabled={currentWeek <= -1}
+                      >
+                        <ChevronLeft className="w-4 h-4" />
+                        Précédente
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setCurrentWeek(0)}
+                        disabled={currentWeek === 0}
+                      >
+                        Aujourd'hui
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setCurrentWeek(currentWeek + 1)}
+                        disabled={currentWeek >= 1}
+                      >
+                        Suivante
+                        <ChevronRight className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -608,14 +899,164 @@ export default function MarwyckCopilot() {
             </div>
           )}
 
+          {/* Estimation */}
+          {activeTab === 'estimation' && (
+            <div className="p-6 h-full overflow-y-auto">
+              <div className="max-w-4xl mx-auto">
+                <div className="mb-8">
+                  <h2 className="text-2xl font-bold text-gray-900 font-plus-jakarta mb-2">
+                    Estimation de Biens
+                  </h2>
+                  <p className="text-gray-600">Obtenez des estimations rapides et précises</p>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg font-semibold">Nouvelle Estimation</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Adresse du bien
+                          </label>
+                          <Input placeholder="123 Oak Street, City, State" />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Type de bien
+                          </label>
+                          <Select>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Choisir le type" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="house">Maison</SelectItem>
+                              <SelectItem value="apartment">Appartement</SelectItem>
+                              <SelectItem value="condo">Condo</SelectItem>
+                              <SelectItem value="land">Terrain</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                              Surface (m²)
+                            </label>
+                            <Input type="number" placeholder="150" />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                              Chambres
+                            </label>
+                            <Input type="number" placeholder="3" />
+                          </div>
+                        </div>
+                        <Button className="w-full bg-accent-cyan hover:bg-accent-cyan-hover text-white">
+                          <Calculator className="w-4 h-4 mr-2" />
+                          Générer l'estimation
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg font-semibold">Estimation Simulée</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div className="text-center">
+                          <p className="text-sm text-gray-600 mb-2">Estimation pour</p>
+                          <h3 className="text-lg font-semibold">123 Oak Street</h3>
+                        </div>
+                        
+                        <div className="bg-gray-50 rounded-lg p-4">
+                          <div className="text-center">
+                            <p className="text-sm text-gray-600 mb-2">Fourchette d'estimation</p>
+                            <div className="text-3xl font-bold font-space-grotesk text-accent-cyan">
+                              $420,000 - $450,000
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm text-gray-600">Estimation moyenne</span>
+                            <span className="font-medium">$435,000</span>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm text-gray-600">Comparables utilisés</span>
+                            <span className="font-medium">8 propriétés</span>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm text-gray-600">Confiance</span>
+                            <span className="font-medium text-success">85%</span>
+                          </div>
+                        </div>
+
+                        <div className="pt-4 border-t">
+                          <div className="flex space-x-2">
+                            <Button size="sm" variant="outline" className="flex-1">
+                              <Download className="w-4 h-4 mr-2" />
+                              Rapport PDF
+                            </Button>
+                            <Button size="sm" className="flex-1 bg-accent-cyan hover:bg-accent-cyan-hover text-white">
+                              <Send className="w-4 h-4 mr-2" />
+                              Envoyer
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <Card className="mt-6">
+                  <CardHeader>
+                    <CardTitle className="text-lg font-semibold">Estimations Récentes</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      {[
+                        { address: '123 Oak Street', price: '$420,000 - $450,000', date: '2 jours' },
+                        { address: '456 Pine Avenue', price: '$380,000 - $410,000', date: '1 semaine' },
+                        { address: '789 Elm Drive', price: '$520,000 - $560,000', date: '2 semaines' }
+                      ].map((estimation, index) => (
+                        <div key={index} className="flex items-center justify-between p-3 border border-gray-100 rounded-lg">
+                          <div>
+                            <p className="font-medium text-gray-900">{estimation.address}</p>
+                            <p className="text-sm text-gray-500">Il y a {estimation.date}</p>
+                          </div>
+                          <div className="text-right">
+                            <p className="font-medium text-accent-cyan">{estimation.price}</p>
+                            <div className="flex items-center space-x-2 mt-1">
+                              <Button size="sm" variant="outline">
+                                <Eye className="w-3 h-3" />
+                              </Button>
+                              <Button size="sm" variant="outline">
+                                <Download className="w-3 h-3" />
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          )}
+
           {/* Communications */}
           {activeTab === 'communications' && (
             <div className="p-6 h-full overflow-y-auto">
               <div className="max-w-6xl mx-auto">
                 <div className="mb-8">
-                  <h1 className="text-2xl font-bold text-gray-900 font-plus-jakarta mb-2">
+                  <h2 className="text-2xl font-bold text-gray-900 font-plus-jakarta mb-2">
                     SMS & Appels
-                  </h1>
+                  </h2>
                   <p className="text-gray-600">Historique des communications</p>
                 </div>
 
