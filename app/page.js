@@ -11,6 +11,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Progress } from '@/components/ui/progress'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { 
   MessageCircle, 
   Phone, 
@@ -55,14 +56,23 @@ import {
   Code,
   Building,
   FolderOpen,
-  Calculator
+  Calculator,
+  Paperclip,
+  Mic,
+  MicOff,
+  Sun,
+  Moon,
+  Navigation,
+  Sparkles,
+  FileUp,
+  MoreHorizontal
 } from 'lucide-react'
 
 export default function MarwyckCopilot() {
   const [activeTab, setActiveTab] = useState('dashboard')
   const [activeDossier, setActiveDossier] = useState('123 Oak Street')
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
-  const [currentWeek, setCurrentWeek] = useState(0) // 0 = cette semaine, -1 = précédente, +1 = suivante
+  const [currentWeek, setCurrentWeek] = useState(0)
   const [selectedClient, setSelectedClient] = useState('all')
   const [messages, setMessages] = useState([
     {
@@ -75,8 +85,9 @@ export default function MarwyckCopilot() {
   const [inputMessage, setInputMessage] = useState('')
   const [isTyping, setIsTyping] = useState(false)
   const [currentTime, setCurrentTime] = useState(new Date())
-  const [trafficStatus, setTrafficStatus] = useState('good') // 'good', 'medium', 'heavy'
+  const [trafficStatus, setTrafficStatus] = useState('good')
   const [darkMode, setDarkMode] = useState(false)
+  const [isRecording, setIsRecording] = useState(false)
   const messagesEndRef = useRef(null)
 
   // Update time every second
@@ -93,7 +104,7 @@ export default function MarwyckCopilot() {
       const statuses = ['good', 'medium', 'heavy']
       const randomStatus = statuses[Math.floor(Math.random() * statuses.length)]
       setTrafficStatus(randomStatus)
-    }, 30000) // Change every 30 seconds
+    }, 30000)
     return () => clearInterval(trafficTimer)
   }, [])
 
@@ -127,6 +138,13 @@ export default function MarwyckCopilot() {
     { id: 'john-smith', name: 'John Smith' },
     { id: 'marie-durant', name: 'Marie Durant' },
     { id: 'paul-martin', name: 'Paul Martin' }
+  ]
+
+  const quickActions = [
+    { id: 'new-contact', name: 'Nouveau Contact', icon: User },
+    { id: 'schedule-visit', name: 'Planifier Visite', icon: Calendar },
+    { id: 'send-estimate', name: 'Envoyer Estimation', icon: Calculator },
+    { id: 'follow-up', name: 'Relance Client', icon: Phone }
   ]
 
   const getWeekLabel = (weekOffset) => {
@@ -256,7 +274,6 @@ export default function MarwyckCopilot() {
     setInputMessage('')
     setIsTyping(true)
 
-    // Simulate AI response
     setTimeout(() => {
       const aiResponse = generateAIResponse(inputMessage)
       setMessages(prev => [...prev, {
@@ -367,17 +384,37 @@ export default function MarwyckCopilot() {
     return actions
   }
 
+  const handleFileUpload = () => {
+    console.log('File upload triggered')
+  }
+
+  const handleVoiceTranscription = () => {
+    setIsRecording(!isRecording)
+    if (!isRecording) {
+      console.log('Starting voice transcription...')
+      // Simulate transcription
+      setTimeout(() => {
+        setInputMessage('Transcription: Bonjour, je souhaite programmer une visite pour demain.')
+        setIsRecording(false)
+      }, 3000)
+    }
+  }
+
+  const handleQuickAction = (actionId) => {
+    console.log('Quick action triggered:', actionId)
+    // Handle quick actions
+  }
+
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className={`flex h-screen ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
       {/* Sidebar */}
-      <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-300 bg-white border-r border-gray-200 flex flex-col`}>
-        <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+      <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-300 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r flex flex-col`}>
+        <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
           {!sidebarCollapsed && (
             <div>
               <div className="text-xl font-bold gradient-logo font-plus-jakarta tracking-tight">
                 MARWYCK
               </div>
-              <p className="text-xs text-gray-600 mt-1">Copilote IA</p>
             </div>
           )}
           <Button
@@ -406,7 +443,7 @@ export default function MarwyckCopilot() {
                   className={`w-full flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     activeTab === item.id
                       ? 'bg-accent-cyan text-white'
-                      : 'text-gray-700 hover:bg-gray-100'
+                      : `${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'}`
                   }`}
                   title={sidebarCollapsed ? item.label : ''}
                 >
@@ -419,17 +456,27 @@ export default function MarwyckCopilot() {
         </nav>
 
         {/* Bottom Section */}
-        <div className="p-2 border-t border-gray-200">
+        <div className="p-2 border-t border-gray-200 dark:border-gray-700">
           <div className="space-y-1">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setDarkMode(!darkMode)}
+              className="w-full justify-start px-3 py-2"
+              title={sidebarCollapsed ? 'Toggle Theme' : ''}
+            >
+              {darkMode ? <Sun className="w-4 h-4 mr-3" /> : <Moon className="w-4 h-4 mr-3" />}
+              {!sidebarCollapsed && (darkMode ? 'Mode Clair' : 'Mode Sombre')}
+            </Button>
             <button
-              className="w-full flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+              className={`w-full flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'}`}
               title={sidebarCollapsed ? 'Dev Tools' : ''}
             >
               <Code className="w-4 h-4 mr-3" />
               {!sidebarCollapsed && 'Dev Tools'}
             </button>
             <button
-              className="w-full flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+              className={`w-full flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'}`}
               title={sidebarCollapsed ? 'Compte' : ''}
             >
               <User className="w-4 h-4 mr-3" />
@@ -442,9 +489,9 @@ export default function MarwyckCopilot() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
-        <div className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+        <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-6 py-4 flex items-center justify-between`}>
           <div className="flex items-center space-x-4">
-            <h1 className="text-lg font-semibold text-gray-900">
+            <h1 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
               {activeTab === 'dashboard' && 'Dashboard'}
               {activeTab === 'chat' && 'Chat'}
               {activeTab === 'planning' && 'Planning'}
@@ -453,14 +500,42 @@ export default function MarwyckCopilot() {
               {activeTab === 'communications' && 'SMS & Appels'}
             </h1>
           </div>
-          <div className="flex items-center space-x-4">
-            <Button size="sm" className="bg-accent-cyan hover:bg-accent-cyan-hover text-white">
-              <Plus className="w-4 h-4 mr-2" />
-              Action rapide
-            </Button>
-            <Avatar className="w-8 h-8">
-              <AvatarFallback>AG</AvatarFallback>
-            </Avatar>
+          <div className="flex items-center space-x-6">
+            {/* Live Time */}
+            <div className={`flex items-center space-x-2 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+              <Clock className="w-4 h-4" />
+              <span>{currentTime.toLocaleTimeString()}</span>
+            </div>
+            
+            {/* Traffic Status */}
+            <div className="flex items-center space-x-2">
+              <Navigation className={`w-4 h-4 ${getTrafficColor()}`} />
+              <span className={`text-sm ${getTrafficColor()}`}>
+                {getTrafficText()}
+              </span>
+            </div>
+
+            {/* Quick Actions */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button size="sm" className="bg-accent-cyan hover:bg-accent-cyan-hover text-white rounded-full px-4">
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  Actions
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                {quickActions.map(action => (
+                  <DropdownMenuItem key={action.id} onClick={() => handleQuickAction(action.id)}>
+                    <action.icon className="w-4 h-4 mr-2" />
+                    {action.name}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <div className="w-8 h-8 rounded-full bg-accent-cyan flex items-center justify-center">
+              <User className="w-4 h-4 text-white" />
+            </div>
           </div>
         </div>
 
@@ -473,10 +548,10 @@ export default function MarwyckCopilot() {
                 <div className="mb-8">
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-900 font-plus-jakarta">
+                      <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                         {getWeekLabel(currentWeek).label}
                       </h2>
-                      <p className="text-gray-600">{getWeekLabel(currentWeek).date}</p>
+                      <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{getWeekLabel(currentWeek).date}</p>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Button
@@ -497,7 +572,7 @@ export default function MarwyckCopilot() {
                       </Button>
                     </div>
                   </div>
-                  <p className="text-sm text-gray-600">
+                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                     Efficacité en hausse de <span className="font-medium text-success">+12%</span> par rapport à la semaine précédente
                   </p>
                 </div>
@@ -505,20 +580,20 @@ export default function MarwyckCopilot() {
                 {/* KPIs */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                   {kpis.map((kpi, index) => (
-                    <Card key={index} className="hover:shadow-lg transition-shadow">
+                    <Card key={index} className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium text-gray-600">
+                        <CardTitle className={`text-sm font-medium ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                           {kpi.title}
                         </CardTitle>
                         <kpi.icon className={`w-4 h-4 ${kpi.color}`} />
                       </CardHeader>
                       <CardContent>
-                        <div className="text-2xl font-bold font-space-grotesk mb-1">
+                        <div className={`text-2xl font-bold font-space-grotesk mb-1 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                           {kpi.value}
                         </div>
                         <div className="flex items-center space-x-2">
                           <p className="text-xs text-success">{kpi.change}</p>
-                          <p className="text-xs text-gray-500">vs {kpi.previousValue}</p>
+                          <p className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>vs {kpi.previousValue}</p>
                         </div>
                       </CardContent>
                     </Card>
@@ -527,9 +602,9 @@ export default function MarwyckCopilot() {
 
                 {/* Recent Activity */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <Card>
+                  <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
                     <CardHeader>
-                      <CardTitle className="text-lg font-semibold">Activité récente</CardTitle>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Activité récente</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
@@ -541,15 +616,15 @@ export default function MarwyckCopilot() {
                               {activity.type === 'call' && <PhoneCall className="w-5 h-5 text-accent-cyan" />}
                             </div>
                             <div className="flex-1 min-w-0">
-                              <p className="text-sm font-medium text-gray-900">
+                              <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                                 {activity.contact}
                               </p>
-                              <p className="text-sm text-gray-500 truncate">
+                              <p className={`text-sm truncate ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                                 {activity.message}
                               </p>
                             </div>
                             <div className="flex items-center space-x-2">
-                              <span className="text-xs text-gray-500">{activity.time}</span>
+                              <span className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>{activity.time}</span>
                               {getStatusIcon(activity.status)}
                             </div>
                           </div>
@@ -558,9 +633,9 @@ export default function MarwyckCopilot() {
                     </CardContent>
                   </Card>
 
-                  <Card>
+                  <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
                     <CardHeader>
-                      <CardTitle className="text-lg font-semibold">Prochains RDV</CardTitle>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Prochains RDV</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
@@ -570,10 +645,10 @@ export default function MarwyckCopilot() {
                               <Calendar className="w-5 h-5 text-accent-cyan" />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <p className="text-sm font-medium text-gray-900">
+                              <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                                 {event.title}
                               </p>
-                              <p className="text-sm text-gray-500">
+                              <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                                 {event.client} • {event.time}
                               </p>
                             </div>
@@ -593,7 +668,7 @@ export default function MarwyckCopilot() {
           {/* Chat */}
           {activeTab === 'chat' && (
             <div className="h-full flex flex-col">
-              <div className="border-b border-gray-200 p-4 bg-white">
+              <div className={`border-b p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
                 <div className="flex items-center space-x-4">
                   <div className="flex-1">
                     <Select value={selectedClient} onValueChange={setSelectedClient}>
@@ -620,30 +695,54 @@ export default function MarwyckCopilot() {
 
               <div className="flex-1 overflow-y-auto p-6">
                 <div className="max-w-4xl mx-auto">
-                  <div className="space-y-4">
+                  <div className="space-y-6">
                     {messages.map(message => (
                       <div
                         key={message.id}
                         className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                       >
-                        <div
-                          className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
-                            message.role === 'user'
-                              ? 'bg-gray-100 text-gray-900'
-                              : 'bg-white border border-accent-cyan text-gray-900'
-                          }`}
-                        >
-                          <p className="text-sm whitespace-pre-wrap">{message.content}</p>
-                          <p className="text-xs text-gray-500 mt-1">
-                            {message.timestamp.toLocaleTimeString()}
-                          </p>
+                        <div className="flex items-start space-x-3 max-w-2xl">
+                          {message.role === 'assistant' && (
+                            <div className="w-8 h-8 rounded-full bg-accent-cyan flex items-center justify-center flex-shrink-0">
+                              <Sparkles className="w-4 h-4 text-white" />
+                            </div>
+                          )}
+                          <div
+                            className={`px-4 py-3 rounded-2xl ${
+                              message.role === 'user'
+                                ? `${darkMode ? 'bg-gray-600 text-white' : 'bg-gray-100 text-gray-900'}`
+                                : `${darkMode ? 'bg-gray-800 border border-gray-700 text-white' : 'bg-white border border-gray-200 text-gray-900'} shadow-sm`
+                            }`}
+                          >
+                            <p className="text-sm whitespace-pre-wrap leading-relaxed">{message.content}</p>
+                            <p className={`text-xs mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                              {message.timestamp.toLocaleTimeString()}
+                            </p>
+                          </div>
+                          {message.role === 'user' && (
+                            <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0">
+                              <User className="w-4 h-4 text-gray-600" />
+                            </div>
+                          )}
                         </div>
                       </div>
                     ))}
                     {isTyping && (
                       <div className="flex justify-start">
-                        <div className="bg-white border border-accent-cyan px-4 py-2 rounded-lg">
-                          <p className="text-sm text-gray-500">Marwyck tape...</p>
+                        <div className="flex items-start space-x-3 max-w-2xl">
+                          <div className="w-8 h-8 rounded-full bg-accent-cyan flex items-center justify-center flex-shrink-0">
+                            <Sparkles className="w-4 h-4 text-white" />
+                          </div>
+                          <div className={`px-4 py-3 rounded-2xl ${darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'} shadow-sm`}>
+                            <div className="flex items-center space-x-2">
+                              <div className="flex space-x-1">
+                                <div className="w-2 h-2 bg-accent-cyan rounded-full animate-bounce"></div>
+                                <div className="w-2 h-2 bg-accent-cyan rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                                <div className="w-2 h-2 bg-accent-cyan rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                              </div>
+                              <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Marwyck tape...</span>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     )}
@@ -652,25 +751,45 @@ export default function MarwyckCopilot() {
                 </div>
               </div>
               
-              <div className="border-t border-gray-200 bg-white p-4">
+              <div className={`border-t p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
                 <div className="max-w-4xl mx-auto">
-                  <div className="flex space-x-2">
-                    <Input
-                      value={inputMessage}
-                      onChange={(e) => setInputMessage(e.target.value)}
-                      onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                      placeholder="Tapez votre message ou une commande (ex: /relance, /estimation)..."
-                      className="flex-1"
-                    />
+                  <div className="flex items-end space-x-2">
+                    <div className="flex-1">
+                      <div className={`flex items-center space-x-2 p-3 rounded-2xl border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'}`}>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={handleFileUpload}
+                          className="p-2 hover:bg-gray-200 dark:hover:bg-gray-600"
+                        >
+                          <Paperclip className="w-4 h-4" />
+                        </Button>
+                        <Input
+                          value={inputMessage}
+                          onChange={(e) => setInputMessage(e.target.value)}
+                          onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                          placeholder="Tapez votre message..."
+                          className="flex-1 border-0 bg-transparent focus:ring-0 focus:outline-none"
+                        />
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={handleVoiceTranscription}
+                          className={`p-2 ${isRecording ? 'text-red-500' : 'hover:bg-gray-200 dark:hover:bg-gray-600'}`}
+                        >
+                          {isRecording ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+                        </Button>
+                      </div>
+                    </div>
                     <Button 
                       onClick={handleSendMessage}
                       disabled={!inputMessage.trim()}
-                      className="bg-accent-cyan hover:bg-accent-cyan-hover text-white"
+                      className="bg-accent-cyan hover:bg-accent-cyan-hover text-white p-3 rounded-full"
                     >
                       <Send className="w-4 h-4" />
                     </Button>
                   </div>
-                  <div className="mt-2 text-xs text-gray-500">
+                  <div className={`mt-2 text-xs ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>
                     Commandes disponibles: /relance, /estimation, /rdv, /docs
                   </div>
                 </div>
@@ -685,10 +804,10 @@ export default function MarwyckCopilot() {
                 <div className="mb-8">
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-900 font-plus-jakarta">
+                      <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                         Gestion des Dossiers
                       </h2>
-                      <p className="text-gray-600">Gérez vos dossiers et documents</p>
+                      <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Gérez vos dossiers et documents</p>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Button
@@ -721,11 +840,11 @@ export default function MarwyckCopilot() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                   {dossiersList.map(dossier => (
-                    <Card key={dossier.id} className="hover:shadow-lg transition-shadow">
+                    <Card key={dossier.id} className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                       <CardHeader>
                         <div className="flex items-center justify-between">
                           <div>
-                            <CardTitle className="text-lg font-semibold flex items-center space-x-2">
+                            <CardTitle className={`text-lg font-semibold flex items-center space-x-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                               <Building className="w-5 h-5 text-accent-cyan" />
                               <span>{dossier.address}</span>
                             </CardTitle>
@@ -746,13 +865,13 @@ export default function MarwyckCopilot() {
                       <CardContent>
                         <div className="space-y-4">
                           <div>
-                            <h4 className="font-medium text-sm mb-2">Documents</h4>
+                            <h4 className={`font-medium text-sm mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Documents</h4>
                             <div className="space-y-2">
                               {dossier.documents.map(doc => (
                                 <div key={doc.id} className="flex items-center justify-between">
                                   <div className="flex items-center space-x-2">
                                     {getStatusIcon(doc.status)}
-                                    <span className="text-sm">{doc.name}</span>
+                                    <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{doc.name}</span>
                                   </div>
                                   {doc.status === 'missing' && (
                                     <Button size="sm" variant="outline" className="text-xs">
@@ -765,12 +884,12 @@ export default function MarwyckCopilot() {
                           </div>
                           
                           <div>
-                            <h4 className="font-medium text-sm mb-2">Actions suggérées</h4>
+                            <h4 className={`font-medium text-sm mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Actions suggérées</h4>
                             <div className="space-y-1">
                               {getSuggestedActions(dossier).map((action, index) => (
                                 <div key={index} className="flex items-center space-x-2">
                                   <Target className="w-3 h-3 text-accent-cyan" />
-                                  <span className="text-xs text-gray-600">{action}</span>
+                                  <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{action}</span>
                                 </div>
                               ))}
                             </div>
@@ -797,10 +916,10 @@ export default function MarwyckCopilot() {
                 <div className="mb-8">
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-900 font-plus-jakarta">
+                      <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                         Planning - {getWeekLabel(currentWeek).label}
                       </h2>
-                      <p className="text-gray-600">{getWeekLabel(currentWeek).date}</p>
+                      <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{getWeekLabel(currentWeek).date}</p>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Button
@@ -835,24 +954,24 @@ export default function MarwyckCopilot() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   <div className="lg:col-span-2">
-                    <Card>
+                    <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
                       <CardHeader>
-                        <CardTitle className="text-lg font-semibold">Calendrier de la semaine</CardTitle>
+                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Calendrier de la semaine</CardTitle>
                       </CardHeader>
                       <CardContent>
                         <div className="space-y-4">
                           {['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'].map((day, index) => (
-                            <div key={day} className="border-b border-gray-100 pb-4">
-                              <h3 className="font-medium text-gray-900 mb-2">{day}</h3>
+                            <div key={day} className={`border-b pb-4 ${darkMode ? 'border-gray-700' : 'border-gray-100'}`}>
+                              <h3 className={`font-medium mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{day}</h3>
                               <div className="space-y-2">
                                 {index === 0 && (
-                                  <div className="bg-cyan-50 border border-cyan-200 rounded p-3">
+                                  <div className="bg-cyan-50 dark:bg-cyan-900/20 border border-cyan-200 dark:border-cyan-800 rounded p-3">
                                     <div className="flex items-center justify-between">
                                       <div>
-                                        <p className="text-sm font-medium text-gray-900">
+                                        <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                                           Visite 123 Oak Street
                                         </p>
-                                        <p className="text-xs text-gray-500">14:00 - 15:00</p>
+                                        <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>14:00 - 15:00</p>
                                       </div>
                                       <Badge variant="outline" className="text-accent-cyan border-accent-cyan">
                                         Visite
@@ -861,13 +980,13 @@ export default function MarwyckCopilot() {
                                   </div>
                                 )}
                                 {index === 1 && (
-                                  <div className="bg-green-50 border border-green-200 rounded p-3">
+                                  <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded p-3">
                                     <div className="flex items-center justify-between">
                                       <div>
-                                        <p className="text-sm font-medium text-gray-900">
+                                        <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                                           Signature notaire
                                         </p>
-                                        <p className="text-xs text-gray-500">16:30 - 17:30</p>
+                                        <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>16:30 - 17:30</p>
                                       </div>
                                       <Badge variant="outline" className="text-green-600 border-green-600">
                                         Signature
@@ -876,7 +995,7 @@ export default function MarwyckCopilot() {
                                   </div>
                                 )}
                                 {index > 1 && (
-                                  <p className="text-sm text-gray-500 italic">Aucun rendez-vous</p>
+                                  <p className={`text-sm italic ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>Aucun rendez-vous</p>
                                 )}
                               </div>
                             </div>
@@ -887,9 +1006,9 @@ export default function MarwyckCopilot() {
                   </div>
 
                   <div>
-                    <Card>
+                    <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
                       <CardHeader>
-                        <CardTitle className="text-lg font-semibold">Actions rapides</CardTitle>
+                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Actions rapides</CardTitle>
                       </CardHeader>
                       <CardContent>
                         <div className="space-y-3">
@@ -909,24 +1028,24 @@ export default function MarwyckCopilot() {
                       </CardContent>
                     </Card>
 
-                    <Card className="mt-6">
+                    <Card className={`mt-6 ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                       <CardHeader>
-                        <CardTitle className="text-lg font-semibold">Rappels</CardTitle>
+                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Rappels</CardTitle>
                       </CardHeader>
                       <CardContent>
                         <div className="space-y-3">
                           <div className="flex items-center space-x-2">
                             <AlertCircle className="w-4 h-4 text-yellow-500" />
                             <div>
-                              <p className="text-sm font-medium">Visite demain</p>
-                              <p className="text-xs text-gray-500">Préparer les clés</p>
+                              <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Visite demain</p>
+                              <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Préparer les clés</p>
                             </div>
                           </div>
                           <div className="flex items-center space-x-2">
                             <AlertCircle className="w-4 h-4 text-yellow-500" />
                             <div>
-                              <p className="text-sm font-medium">Rappel SMS</p>
-                              <p className="text-xs text-gray-500">Envoyer rappel client</p>
+                              <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Rappel SMS</p>
+                              <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Envoyer rappel client</p>
                             </div>
                           </div>
                         </div>
@@ -943,27 +1062,27 @@ export default function MarwyckCopilot() {
             <div className="p-6 h-full overflow-y-auto">
               <div className="max-w-4xl mx-auto">
                 <div className="mb-8">
-                  <h2 className="text-2xl font-bold text-gray-900 font-plus-jakarta mb-2">
+                  <h2 className={`text-2xl font-bold font-plus-jakarta mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                     Estimation de Biens
                   </h2>
-                  <p className="text-gray-600">Obtenez des estimations rapides et précises</p>
+                  <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Obtenez des estimations rapides et précises</p>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <Card>
+                  <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
                     <CardHeader>
-                      <CardTitle className="text-lg font-semibold">Nouvelle Estimation</CardTitle>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Nouvelle Estimation</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                             Adresse du bien
                           </label>
                           <Input placeholder="123 Oak Street, City, State" />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                             Type de bien
                           </label>
                           <Select>
@@ -980,13 +1099,13 @@ export default function MarwyckCopilot() {
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                            <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                               Surface (m²)
                             </label>
                             <Input type="number" placeholder="150" />
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                            <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                               Chambres
                             </label>
                             <Input type="number" placeholder="3" />
@@ -1000,20 +1119,20 @@ export default function MarwyckCopilot() {
                     </CardContent>
                   </Card>
 
-                  <Card>
+                  <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
                     <CardHeader>
-                      <CardTitle className="text-lg font-semibold">Estimation Simulée</CardTitle>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Estimation Simulée</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
                         <div className="text-center">
-                          <p className="text-sm text-gray-600 mb-2">Estimation pour</p>
-                          <h3 className="text-lg font-semibold">123 Oak Street</h3>
+                          <p className={`text-sm mb-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Estimation pour</p>
+                          <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>123 Oak Street</h3>
                         </div>
                         
-                        <div className="bg-gray-50 rounded-lg p-4">
+                        <div className={`rounded-lg p-4 ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
                           <div className="text-center">
-                            <p className="text-sm text-gray-600 mb-2">Fourchette d'estimation</p>
+                            <p className={`text-sm mb-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Fourchette d'estimation</p>
                             <div className="text-3xl font-bold font-space-grotesk text-accent-cyan">
                               $420,000 - $450,000
                             </div>
@@ -1022,15 +1141,15 @@ export default function MarwyckCopilot() {
 
                         <div className="space-y-3">
                           <div className="flex items-center justify-between">
-                            <span className="text-sm text-gray-600">Estimation moyenne</span>
-                            <span className="font-medium">$435,000</span>
+                            <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Estimation moyenne</span>
+                            <span className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>$435,000</span>
                           </div>
                           <div className="flex items-center justify-between">
-                            <span className="text-sm text-gray-600">Comparables utilisés</span>
-                            <span className="font-medium">8 propriétés</span>
+                            <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Comparables utilisés</span>
+                            <span className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>8 propriétés</span>
                           </div>
                           <div className="flex items-center justify-between">
-                            <span className="text-sm text-gray-600">Confiance</span>
+                            <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Confiance</span>
                             <span className="font-medium text-success">85%</span>
                           </div>
                         </div>
@@ -1052,9 +1171,9 @@ export default function MarwyckCopilot() {
                   </Card>
                 </div>
 
-                <Card className="mt-6">
+                <Card className={`mt-6 ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                   <CardHeader>
-                    <CardTitle className="text-lg font-semibold">Estimations Récentes</CardTitle>
+                    <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Estimations Récentes</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
@@ -1063,10 +1182,10 @@ export default function MarwyckCopilot() {
                         { address: '456 Pine Avenue', price: '$380,000 - $410,000', date: '1 semaine' },
                         { address: '789 Elm Drive', price: '$520,000 - $560,000', date: '2 semaines' }
                       ].map((estimation, index) => (
-                        <div key={index} className="flex items-center justify-between p-3 border border-gray-100 rounded-lg">
+                        <div key={index} className={`flex items-center justify-between p-3 border rounded-lg ${darkMode ? 'border-gray-700' : 'border-gray-100'}`}>
                           <div>
-                            <p className="font-medium text-gray-900">{estimation.address}</p>
-                            <p className="text-sm text-gray-500">Il y a {estimation.date}</p>
+                            <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>{estimation.address}</p>
+                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Il y a {estimation.date}</p>
                           </div>
                           <div className="text-right">
                             <p className="font-medium text-accent-cyan">{estimation.price}</p>
@@ -1093,16 +1212,16 @@ export default function MarwyckCopilot() {
             <div className="p-6 h-full overflow-y-auto">
               <div className="max-w-6xl mx-auto">
                 <div className="mb-8">
-                  <h2 className="text-2xl font-bold text-gray-900 font-plus-jakarta mb-2">
+                  <h2 className={`text-2xl font-bold font-plus-jakarta mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                     SMS & Appels
                   </h2>
-                  <p className="text-gray-600">Historique des communications</p>
+                  <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Historique des communications</p>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <Card>
+                  <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
                     <CardHeader>
-                      <CardTitle className="text-lg font-semibold">Messages récents</CardTitle>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Messages récents</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
@@ -1111,22 +1230,22 @@ export default function MarwyckCopilot() {
                           { type: 'email', contact: 'Marie Durant', message: 'Documents à signer envoyés', time: '09:15', status: 'opened' },
                           { type: 'sms', contact: 'Paul Martin', message: 'Estimation disponible', time: '08:45', status: 'sent' }
                         ].map((msg, index) => (
-                          <div key={index} className="flex items-start space-x-3 p-3 border border-gray-100 rounded-lg">
+                          <div key={index} className={`flex items-start space-x-3 p-3 border rounded-lg ${darkMode ? 'border-gray-700' : 'border-gray-100'}`}>
                             <div className="flex-shrink-0">
                               {msg.type === 'sms' && <Smartphone className="w-5 h-5 text-accent-cyan" />}
                               {msg.type === 'email' && <Mail className="w-5 h-5 text-accent-cyan" />}
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
-                                <p className="text-sm font-medium text-gray-900">
+                                <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                                   {msg.contact}
                                 </p>
                                 <div className="flex items-center space-x-2">
-                                  <span className="text-xs text-gray-500">{msg.time}</span>
+                                  <span className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>{msg.time}</span>
                                   {getStatusIcon(msg.status)}
                                 </div>
                               </div>
-                              <p className="text-sm text-gray-600 mt-1">{msg.message}</p>
+                              <p className={`text-sm mt-1 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{msg.message}</p>
                             </div>
                           </div>
                         ))}
@@ -1134,9 +1253,9 @@ export default function MarwyckCopilot() {
                     </CardContent>
                   </Card>
 
-                  <Card>
+                  <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
                     <CardHeader>
-                      <CardTitle className="text-lg font-semibold">Appels récents</CardTitle>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Appels récents</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
@@ -1145,21 +1264,21 @@ export default function MarwyckCopilot() {
                           { contact: 'Marie Durant', duration: '1:20', time: '11:30', type: 'inbound', status: 'completed' },
                           { contact: 'Paul Martin', duration: '0:00', time: '10:15', type: 'outbound', status: 'missed' }
                         ].map((call, index) => (
-                          <div key={index} className="flex items-center space-x-3 p-3 border border-gray-100 rounded-lg">
+                          <div key={index} className={`flex items-center space-x-3 p-3 border rounded-lg ${darkMode ? 'border-gray-700' : 'border-gray-100'}`}>
                             <div className="flex-shrink-0">
                               <PhoneCall className={`w-5 h-5 ${call.type === 'outbound' ? 'text-accent-cyan' : 'text-green-500'}`} />
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
-                                <p className="text-sm font-medium text-gray-900">
+                                <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                                   {call.contact}
                                 </p>
                                 <div className="flex items-center space-x-2">
-                                  <span className="text-xs text-gray-500">{call.time}</span>
+                                  <span className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>{call.time}</span>
                                   {getStatusIcon(call.status)}
                                 </div>
                               </div>
-                              <p className="text-sm text-gray-600 mt-1">
+                              <p className={`text-sm mt-1 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                                 {call.type === 'outbound' ? 'Appel sortant' : 'Appel entrant'} • {call.duration}
                               </p>
                             </div>
