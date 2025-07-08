@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Progress } from '@/components/ui/progress'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { 
   MessageCircle, 
   Phone, 
@@ -45,15 +46,24 @@ import {
   Trash2,
   ChevronRight,
   ChevronDown,
+  ChevronLeft,
   Star,
   CheckCircle2,
   XCircle,
-  AlertTriangle
+  AlertTriangle,
+  Menu,
+  Code,
+  Building,
+  FolderOpen,
+  Calculator
 } from 'lucide-react'
 
 export default function MarwyckCopilot() {
   const [activeTab, setActiveTab] = useState('dashboard')
   const [activeDossier, setActiveDossier] = useState('123 Oak Street')
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [currentWeek, setCurrentWeek] = useState(0) // 0 = cette semaine, -1 = précédente, +1 = suivante
+  const [selectedClient, setSelectedClient] = useState('all')
   const [messages, setMessages] = useState([
     {
       id: 1,
