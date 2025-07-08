@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge'
 import { Textarea } from '@/components/ui/textarea'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogOverlay } from '@/components/ui/dialog'
 import { Progress } from '@/components/ui/progress'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
@@ -107,6 +107,8 @@ export default function MarwyckCopilot() {
   const [selectedEvent, setSelectedEvent] = useState(null)
   const [showEditDossier, setShowEditDossier] = useState(false)
   const [selectedDossier, setSelectedDossier] = useState(null)
+  const [newEventData, setNewEventData] = useState({ title: '', time: '', details: '' })
+  const [editingDossier, setEditingDossier] = useState(null)
   const messagesEndRef = useRef(null)
 
   // Available accent colors
@@ -169,6 +171,67 @@ export default function MarwyckCopilot() {
     { id: 3, address: '789 Elm Drive', type: 'Location', status: 'completed', priority: 'low' }
   ]
 
+  const documentsTemplates = {
+    vente: [
+      { name: 'Compromis de vente', required: true },
+      { name: 'Diagnostics techniques', required: true },
+      { name: 'Attestation assurance', required: true },
+      { name: 'Certificat énergétique', required: false },
+      { name: 'Procuration', required: false }
+    ],
+    achat: [
+      { name: 'Offre d\'achat', required: true },
+      { name: 'Justificatifs revenus', required: true },
+      { name: 'Attestation financement', required: true },
+      { name: 'Pièce d\'identité', required: true }
+    ],
+    location: [
+      { name: 'Bail de location', required: true },
+      { name: 'État des lieux', required: true },
+      { name: 'Dossier locataire', required: true },
+      { name: 'Assurance habitation', required: true }
+    ]
+  }
+
+  const [dossiersList, setDossiersList] = useState([
+    { 
+      id: 1, 
+      address: '123 Oak Street', 
+      type: 'vente', 
+      status: 'active', 
+      priority: 'high',
+      contacts: [
+        { id: 1, name: 'John Smith', email: 'john@email.com', phone: '+1234567890', role: 'Vendeur' }
+      ],
+      documents: [
+        { id: 1, name: 'Compromis de vente', type: 'PDF', status: 'signed', required: true },
+        { id: 2, name: 'Diagnostics techniques', type: 'PDF', status: 'received', required: true },
+        { id: 3, name: 'Attestation assurance', type: 'PDF', status: 'missing', required: true }
+      ]
+    },
+    { 
+      id: 2, 
+      address: '456 Pine Avenue', 
+      type: 'achat', 
+      status: 'pending', 
+      priority: 'medium',
+      contacts: [
+        { id: 2, name: 'Marie Durant', email: 'marie@email.com', phone: '+1234567891', role: 'Acheteur' }
+      ],
+      documents: [
+        { id: 4, name: 'Offre d\'achat', type: 'PDF', status: 'received', required: true },
+        { id: 5, name: 'Justificatifs revenus', type: 'PDF', status: 'missing', required: true }
+      ]
+    }
+  ])
+
+  const [calendarEvents, setCalendarEvents] = useState([
+    { id: 1, title: 'Visite 123 Oak Street', time: '14:00', type: 'visit', client: 'John Smith', description: 'Visite de la propriété avec le client' },
+    { id: 2, title: 'Signature chez notaire', time: '16:30', type: 'signature', client: 'Marie Durant', description: 'Signature des documents officiels' },
+    { id: 3, title: 'Estimation 456 Pine Ave', time: '10:00', type: 'estimation', client: 'Paul Martin', description: 'Évaluation de la propriété' }
+  ])
+
+  // Dynamic clients based on dossiers
   const clients = [
     { id: 'general', name: 'Général' },
     ...dossiersList.map(dossier => ({
@@ -226,66 +289,6 @@ export default function MarwyckCopilot() {
     { id: 1, type: 'sms', contact: 'John Smith', message: 'Rappel visite demain 14h', time: '10:30', status: 'sent' },
     { id: 2, type: 'email', contact: 'Marie Durant', message: 'Documents signés reçus', time: '09:15', status: 'delivered' },
     { id: 3, type: 'call', contact: 'Paul Martin', message: 'Appel de suivi effectué', time: '08:45', status: 'completed' }
-  ]
-
-  const documentsTemplates = {
-    vente: [
-      { name: 'Compromis de vente', required: true },
-      { name: 'Diagnostics techniques', required: true },
-      { name: 'Attestation assurance', required: true },
-      { name: 'Certificat énergétique', required: false },
-      { name: 'Procuration', required: false }
-    ],
-    achat: [
-      { name: 'Offre d\'achat', required: true },
-      { name: 'Justificatifs revenus', required: true },
-      { name: 'Attestation financement', required: true },
-      { name: 'Pièce d\'identité', required: true }
-    ],
-    location: [
-      { name: 'Bail de location', required: true },
-      { name: 'État des lieux', required: true },
-      { name: 'Dossier locataire', required: true },
-      { name: 'Assurance habitation', required: true }
-    ]
-  }
-
-  const [dossiersList, setDossiersList] = useState([
-    { 
-      id: 1, 
-      address: '123 Oak Street', 
-      type: 'vente', 
-      status: 'active', 
-      priority: 'high',
-      contacts: [
-        { id: 1, name: 'John Smith', email: 'john@email.com', phone: '+1234567890', role: 'Vendeur' }
-      ],
-      documents: [
-        { id: 1, name: 'Compromis de vente', type: 'PDF', status: 'signed', required: true },
-        { id: 2, name: 'Diagnostics techniques', type: 'PDF', status: 'received', required: true },
-        { id: 3, name: 'Attestation assurance', type: 'PDF', status: 'missing', required: true }
-      ]
-    },
-    { 
-      id: 2, 
-      address: '456 Pine Avenue', 
-      type: 'achat', 
-      status: 'pending', 
-      priority: 'medium',
-      contacts: [
-        { id: 2, name: 'Marie Durant', email: 'marie@email.com', phone: '+1234567891', role: 'Acheteur' }
-      ],
-      documents: [
-        { id: 4, name: 'Offre d\'achat', type: 'PDF', status: 'received', required: true },
-        { id: 5, name: 'Justificatifs revenus', type: 'PDF', status: 'missing', required: true }
-      ]
-    }
-  ])
-
-  const calendarEvents = [
-    { id: 1, title: 'Visite 123 Oak Street', time: '14:00', type: 'visit', client: 'John Smith', description: 'Visite de la propriété avec le client' },
-    { id: 2, title: 'Signature chez notaire', time: '16:30', type: 'signature', client: 'Marie Durant', description: 'Signature des documents officiels' },
-    { id: 3, title: 'Estimation 456 Pine Ave', time: '10:00', type: 'estimation', client: 'Paul Martin', description: 'Évaluation de la propriété' }
   ]
 
   const scrollToBottom = () => {
@@ -467,12 +470,58 @@ export default function MarwyckCopilot() {
     ]
   }
 
+  // Handle new event creation
+  const handleCreateEvent = () => {
+    if (newEventData.title && newEventData.time) {
+      const newEvent = {
+        id: Date.now(),
+        title: newEventData.title,
+        time: newEventData.time,
+        type: 'meeting',
+        client: 'Nouveau client',
+        description: newEventData.details || 'Nouveau rendez-vous'
+      }
+      setCalendarEvents(prev => [...prev, newEvent])
+      setNewEventData({ title: '', time: '', details: '' })
+      setShowNewEventDialog(false)
+    }
+  }
+
+  // Handle dossier editing
+  const handleEditDossier = (dossier) => {
+    setEditingDossier({ ...dossier })
+    setSelectedDossier(dossier)
+    setShowEditDossier(true)
+  }
+
+  const handleSaveDossier = () => {
+    if (editingDossier) {
+      setDossiersList(prev => 
+        prev.map(d => d.id === editingDossier.id ? editingDossier : d)
+      )
+      setShowEditDossier(false)
+      setEditingDossier(null)
+      setSelectedDossier(null)
+    }
+  }
+
+  const updateDocumentStatus = (docId, newStatus) => {
+    if (editingDossier) {
+      setEditingDossier(prev => ({
+        ...prev,
+        documents: prev.documents.map(doc =>
+          doc.id === docId ? { ...doc, status: newStatus } : doc
+        )
+      }))
+    }
+  }
+
   return (
     <div className={`flex h-screen ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
       {/* Color Picker Sidebar */}
       {showColorPicker && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex">
-          <div className={`w-80 h-full ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-xl p-6 rounded-r-xl`}>
+          <div className={`w-80 h-full ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-xl p-6 rounded-r-xl`}>
             <div className="flex items-center justify-between mb-6">
               <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                 Couleurs
@@ -797,9 +846,9 @@ export default function MarwyckCopilot() {
                     <div className="flex-1">
                       <Select value={selectedClient} onValueChange={setSelectedClient}>
                         <SelectTrigger className={`w-64 rounded-full ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
-                          <SelectValue placeholder="Choisir un client" />
+                          <SelectValue placeholder="Choisir un dossier" />
                         </SelectTrigger>
-                        <SelectContent className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                        <SelectContent className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
                           {clients.map(client => (
                             <SelectItem key={client.id} value={client.id} className="rounded-lg">
                               {client.name}
@@ -823,7 +872,7 @@ export default function MarwyckCopilot() {
                         Aide IA
                       </Button>
                     </DialogTrigger>
-                    <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                    <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-md`}>
                       <DialogHeader>
                         <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
                           Ce que je peux faire pour vous
@@ -1044,10 +1093,7 @@ export default function MarwyckCopilot() {
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => {
-                                setSelectedDossier(dossier)
-                                setShowEditDossier(true)
-                              }}
+                              onClick={() => handleEditDossier(dossier)}
                               className="p-2 rounded-full"
                             >
                               <Edit className="w-4 h-4" />
@@ -1168,48 +1214,35 @@ export default function MarwyckCopilot() {
                             <div key={day} className={`border-b pb-4 ${darkMode ? 'border-gray-700' : 'border-gray-100'}`}>
                               <h3 className={`font-medium mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{day}</h3>
                               <div className="space-y-2">
-                                {index === 0 && (
-                                  <div 
-                                    className="bg-cyan-50 dark:bg-cyan-900/20 border border-cyan-200 dark:border-cyan-800 rounded-xl p-3 cursor-pointer hover:shadow-md transition-shadow"
-                                    onClick={() => {
-                                      setSelectedEvent(calendarEvents[0])
-                                      setShowEventDetails(true)
-                                    }}
-                                  >
-                                    <div className="flex items-center justify-between">
-                                      <div>
-                                        <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                          Visite 123 Oak Street
-                                        </p>
-                                        <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>14:00 - 15:00</p>
+                                {calendarEvents
+                                  .filter(event => {
+                                    if (index === 0) return event.id === 1
+                                    if (index === 1) return event.id === 2
+                                    return false
+                                  })
+                                  .map(event => (
+                                    <div 
+                                      key={event.id}
+                                      className="bg-cyan-50 dark:bg-cyan-900/20 border border-cyan-200 dark:border-cyan-800 rounded-xl p-3 cursor-pointer hover:shadow-md transition-shadow"
+                                      onClick={() => {
+                                        setSelectedEvent(event)
+                                        setShowEventDetails(true)
+                                      }}
+                                    >
+                                      <div className="flex items-center justify-between">
+                                        <div>
+                                          <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                            {event.title}
+                                          </p>
+                                          <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{event.time}</p>
+                                        </div>
+                                        <Badge variant="outline" style={{ borderColor: accentColor, color: accentColor }} className="rounded-full">
+                                          {event.type}
+                                        </Badge>
                                       </div>
-                                      <Badge variant="outline" style={{ borderColor: accentColor, color: accentColor }} className="rounded-full">
-                                        Visite
-                                      </Badge>
                                     </div>
-                                  </div>
-                                )}
-                                {index === 1 && (
-                                  <div 
-                                    className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-3 cursor-pointer hover:shadow-md transition-shadow"
-                                    onClick={() => {
-                                      setSelectedEvent(calendarEvents[1])
-                                      setShowEventDetails(true)
-                                    }}
-                                  >
-                                    <div className="flex items-center justify-between">
-                                      <div>
-                                        <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                          Signature notaire
-                                        </p>
-                                        <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>16:30 - 17:30</p>
-                                      </div>
-                                      <Badge variant="outline" className="text-green-600 border-green-600 rounded-full">
-                                        Signature
-                                      </Badge>
-                                    </div>
-                                  </div>
-                                )}
+                                  ))
+                                }
                                 {index > 1 && (
                                   <p className={`text-sm italic ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>Aucun rendez-vous</p>
                                 )}
@@ -1235,7 +1268,7 @@ export default function MarwyckCopilot() {
                                 Nouveau RDV
                               </Button>
                             </DialogTrigger>
-                            <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                            <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-md`}>
                               <DialogHeader>
                                 <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
                                   Créer un nouveau rendez-vous
@@ -1244,17 +1277,36 @@ export default function MarwyckCopilot() {
                               <div className="space-y-4">
                                 <div>
                                   <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Titre</label>
-                                  <Input placeholder="Ex: Visite appartement" className="rounded-xl" />
+                                  <Input 
+                                    placeholder="Ex: Visite appartement" 
+                                    className="rounded-xl" 
+                                    value={newEventData.title}
+                                    onChange={(e) => setNewEventData({...newEventData, title: e.target.value})}
+                                  />
                                 </div>
                                 <div>
                                   <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Heure</label>
-                                  <Input type="time" className="rounded-xl" />
+                                  <Input 
+                                    type="time" 
+                                    className="rounded-xl" 
+                                    value={newEventData.time}
+                                    onChange={(e) => setNewEventData({...newEventData, time: e.target.value})}
+                                  />
                                 </div>
                                 <div>
                                   <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Informations complémentaires</label>
-                                  <Textarea placeholder="Détails du rendez-vous..." className="rounded-xl" />
+                                  <Textarea 
+                                    placeholder="Détails du rendez-vous..." 
+                                    className="rounded-xl" 
+                                    value={newEventData.details}
+                                    onChange={(e) => setNewEventData({...newEventData, details: e.target.value})}
+                                  />
                                 </div>
-                                <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
+                                <Button 
+                                  onClick={handleCreateEvent}
+                                  className="w-full text-white rounded-full" 
+                                  style={{ backgroundColor: accentColor }}
+                                >
                                   Créer le RDV
                                 </Button>
                               </div>
@@ -1268,7 +1320,7 @@ export default function MarwyckCopilot() {
                                 Proposer créneaux
                               </Button>
                             </DialogTrigger>
-                            <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                            <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-md`}>
                               <DialogHeader>
                                 <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
                                   Proposer des créneaux
@@ -1309,7 +1361,7 @@ export default function MarwyckCopilot() {
                                 Replanifier
                               </Button>
                             </DialogTrigger>
-                            <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                            <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-md`}>
                               <DialogHeader>
                                 <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
                                   Replanifier un rendez-vous
@@ -1377,7 +1429,7 @@ export default function MarwyckCopilot() {
 
           {/* Event Details Dialog */}
           <Dialog open={showEventDetails} onOpenChange={setShowEventDetails}>
-            <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+            <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-md`}>
               <DialogHeader>
                 <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
                   Détails du rendez-vous
@@ -1414,28 +1466,72 @@ export default function MarwyckCopilot() {
 
           {/* Edit Dossier Dialog */}
           <Dialog open={showEditDossier} onOpenChange={setShowEditDossier}>
-            <DialogContent className={`max-w-2xl rounded-2xl ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+            <DialogContent className={`max-w-2xl rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
               <DialogHeader>
                 <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
                   Modifier le dossier
                 </DialogTitle>
               </DialogHeader>
-              {selectedDossier && (
+              {editingDossier && (
                 <div className="space-y-6">
                   <div>
                     <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Adresse</label>
-                    <Input defaultValue={selectedDossier.address} className="rounded-xl" />
+                    <Input 
+                      value={editingDossier.address} 
+                      onChange={(e) => setEditingDossier({...editingDossier, address: e.target.value})}
+                      className="rounded-xl" 
+                    />
                   </div>
                   
                   <div>
                     <h4 className={`font-medium mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Contacts</h4>
-                    {selectedDossier.contacts?.map(contact => (
-                      <div key={contact.id} className={`border rounded-xl p-3 mb-3 ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                    {editingDossier.contacts?.map(contact => (
+                      <div key={contact.id} className={`border rounded-xl p-3 mb-3 ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
                         <div className="grid grid-cols-2 gap-3">
-                          <Input defaultValue={contact.name} placeholder="Nom" className="rounded-xl" />
-                          <Input defaultValue={contact.email} placeholder="Email" className="rounded-xl" />
-                          <Input defaultValue={contact.phone} placeholder="Téléphone" className="rounded-xl" />
-                          <Input defaultValue={contact.role} placeholder="Rôle" className="rounded-xl" />
+                          <Input 
+                            value={contact.name} 
+                            onChange={(e) => {
+                              const updatedContacts = editingDossier.contacts.map(c =>
+                                c.id === contact.id ? {...c, name: e.target.value} : c
+                              )
+                              setEditingDossier({...editingDossier, contacts: updatedContacts})
+                            }}
+                            placeholder="Nom" 
+                            className="rounded-xl" 
+                          />
+                          <Input 
+                            value={contact.email} 
+                            onChange={(e) => {
+                              const updatedContacts = editingDossier.contacts.map(c =>
+                                c.id === contact.id ? {...c, email: e.target.value} : c
+                              )
+                              setEditingDossier({...editingDossier, contacts: updatedContacts})
+                            }}
+                            placeholder="Email" 
+                            className="rounded-xl" 
+                          />
+                          <Input 
+                            value={contact.phone} 
+                            onChange={(e) => {
+                              const updatedContacts = editingDossier.contacts.map(c =>
+                                c.id === contact.id ? {...c, phone: e.target.value} : c
+                              )
+                              setEditingDossier({...editingDossier, contacts: updatedContacts})
+                            }}
+                            placeholder="Téléphone" 
+                            className="rounded-xl" 
+                          />
+                          <Input 
+                            value={contact.role} 
+                            onChange={(e) => {
+                              const updatedContacts = editingDossier.contacts.map(c =>
+                                c.id === contact.id ? {...c, role: e.target.value} : c
+                              )
+                              setEditingDossier({...editingDossier, contacts: updatedContacts})
+                            }}
+                            placeholder="Rôle" 
+                            className="rounded-xl" 
+                          />
                         </div>
                       </div>
                     ))}
@@ -1447,10 +1543,10 @@ export default function MarwyckCopilot() {
 
                   <div>
                     <h4 className={`font-medium mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Documents</h4>
-                    {selectedDossier.documents?.map(doc => (
-                      <div key={doc.id} className={`flex items-center justify-between p-2 border rounded-xl mb-2 ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                    {editingDossier.documents?.map(doc => (
+                      <div key={doc.id} className={`flex items-center justify-between p-2 border rounded-xl mb-2 ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
                         <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{doc.name}</span>
-                        <Select defaultValue={doc.status}>
+                        <Select value={doc.status} onValueChange={(value) => updateDocumentStatus(doc.id, value)}>
                           <SelectTrigger className="w-32 rounded-xl">
                             <SelectValue />
                           </SelectTrigger>
@@ -1464,7 +1560,11 @@ export default function MarwyckCopilot() {
                     ))}
                   </div>
 
-                  <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
+                  <Button 
+                    onClick={handleSaveDossier}
+                    className="w-full text-white rounded-full" 
+                    style={{ backgroundColor: accentColor }}
+                  >
                     <Save className="w-4 h-4 mr-2" />
                     Sauvegarder les modifications
                   </Button>
