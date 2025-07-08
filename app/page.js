@@ -171,9 +171,10 @@ export default function MarwyckCopilot() {
 
   const clients = [
     { id: 'general', name: 'Général' },
-    { id: 'john-smith', name: 'John Smith' },
-    { id: 'marie-durant', name: 'Marie Durant' },
-    { id: 'paul-martin', name: 'Paul Martin' }
+    ...dossiersList.map(dossier => ({
+      id: dossier.id.toString(),
+      name: dossier.address
+    }))
   ]
 
   const getWeekLabel = (weekOffset) => {
