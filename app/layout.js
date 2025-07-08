@@ -1,14 +1,19 @@
+import { Inter, Plus_Jakarta_Sans, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const plusJakarta = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-plus-jakarta' })
+const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space-grotesk' })
+
 export const metadata = {
-  title: 'Next.js MongoDB Template',
-  description: 'A simple template with App Router, MongoDB, and shadcn/ui',
+  title: 'Marwyck Copilot',
+  description: 'AI-powered assistant for real estate agents',
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className={`${inter.variable} ${plusJakarta.variable} ${spaceGrotesk.variable}`}>
+      <body className="min-h-screen bg-gray-50 font-inter antialiased">
         {children}
       </body>
     </html>

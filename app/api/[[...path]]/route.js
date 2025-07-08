@@ -1,123 +1,299 @@
-import { MongoClient } from 'mongodb'
-import { v4 as uuidv4 } from 'uuid'
 import { NextResponse } from 'next/server'
+import { MongoClient } from 'mongodb'
 
-// MongoDB connection
-let client
-let db
+let client = null
+let db = null
 
-async function connectToMongo() {
-  if (!process.env.MONGO_URL || !process.env.DB_NAME) {
-    throw new Error('MONGO_URL and DB_NAME environment variables are required')
-  }
-
+async function connectToDatabase() {
   if (!client) {
     try {
       client = new MongoClient(process.env.MONGO_URL)
       await client.connect()
-      db = client.db(process.env.DB_NAME)
-      
-      // Test the connection
-      await db.admin().ping()
-      console.log('Connected to MongoDB successfully')
+      db = client.db('marwyck')
+      console.log('Connected to MongoDB')
     } catch (error) {
-      console.error('Failed to connect to MongoDB:', error)
-      client = null
+      console.error('MongoDB connection error:', error)
       throw error
     }
   }
   return db
 }
 
-// Helper function to handle CORS
-function handleCORS(response) {
-  response.headers.set('Access-Control-Allow-Origin', '*')
-  response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-  response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-  response.headers.set('Access-Control-Allow-Credentials', 'true')
-  return response
-}
-
-// OPTIONS handler for CORS
-export async function OPTIONS() {
-  return handleCORS(new NextResponse(null, { status: 200 }))
-}
-
-// Route handler function
-async function handleRoute(request, { params }) {
-  const { path = [] } = await params
-  const route = `/${path.join('/')}`
-  const method = request.method
-
+// GET /api/health
+async function handleHealth() {
   try {
-    const db = await connectToMongo()
-
-    // Root endpoint - consolidate both root routes
-    if ((route === '/root' || route === '/') && method === 'GET') {
-      return handleCORS(NextResponse.json({ message: "Hello World" }))
-    }
-
-    // Status endpoints - POST /api/status
-    if (route === '/status' && method === 'POST') {
-      const body = await request.json()
-      
-      if (!body.client_name) {
-        return handleCORS(NextResponse.json(
-          { error: "client_name is required" }, 
-          { status: 400 }
-        ))
-      }
-
-      const statusObj = {
-        id: uuidv4(),
-        client_name: body.client_name,
-        timestamp: new Date()
-      }
-
-      await db.collection('status_checks').insertOne(statusObj)
-      return handleCORS(NextResponse.json(statusObj))
-    }
-
-    // Status endpoints - GET /api/status
-    if (route === '/status' && method === 'GET') {
-      const statusChecks = await db.collection('status_checks')
-        .find({})
-        .limit(1000)
-        .toArray()
-
-      // Remove MongoDB's _id field from response
-      const cleanedStatusChecks = statusChecks.map(({ _id, ...rest }) => rest)
-      
-      return handleCORS(NextResponse.json(cleanedStatusChecks))
-    }
-
-    // Route not found
-    return handleCORS(NextResponse.json(
-      { error: `Route ${route} not found` }, 
-      { status: 404 }
-    ))
-
+    const database = await connectToDatabase()
+    await database.admin().ping()
+    return NextResponse.json({ status: 'healthy', timestamp: new Date().toISOString() })
   } catch (error) {
-    console.error('API Error:', error)
-    
-    // Handle specific MongoDB connection errors
-    if (error.message.includes('MONGO_URL') || error.message.includes('DB_NAME')) {
-      return handleCORS(NextResponse.json(
-        { error: "Database configuration error" }, 
-        { status: 500 }
-      ))
-    }
-
-    return handleCORS(NextResponse.json(
-      { error: "Internal server error" }, 
-      { status: 500 }
-    ))
+    return NextResponse.json({ status: 'error', error: error.message }, { status: 500 })
   }
 }
 
-// Export all HTTP methods
-export const GET = handleRoute
-export const POST = handleRoute
-export const PUT = handleRoute
-export const DELETE = handleRoute
-export const PATCH = handleRoute
+// GET /api/dossiers
+async function handleGetDossiers() {
+  try {
+    const database = await connectToDatabase()
+    const dossiers = await database.collection('dossiers').find({}).toArray()
+    return NextResponse.json(dossiers)
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}
+
+// POST /api/dossiers
+async function handleCreateDossier(request) {
+  try {
+    const database = await connectToDatabase()
+    const body = await request.json()
+    const dossier = {
+      id: Date.now().toString(),
+      address: body.address,
+      type: body.type,
+      status: 'active',
+      priority: body.priority || 'medium',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }
+    
+    await database.collection('dossiers').insertOne(dossier)
+    return NextResponse.json(dossier, { status: 201 })
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}
+
+// GET /api/messages
+async function handleGetMessages() {
+  try {
+    const database = await connectToDatabase()
+    const messages = await database.collection('messages').find({}).sort({ timestamp: 1 }).toArray()
+    return NextResponse.json(messages)
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}
+
+// POST /api/messages
+async function handleCreateMessage(request) {
+  try {
+    const database = await connectToDatabase()
+    const body = await request.json()
+    const message = {
+      id: Date.now().toString(),
+      role: body.role,
+      content: body.content,
+      dossierId: body.dossierId,
+      timestamp: new Date()
+    }
+    
+    await database.collection('messages').insertOne(message)
+    return NextResponse.json(message, { status: 201 })
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}
+
+// POST /api/relances
+async function handleCreateRelance(request) {
+  try {
+    const database = await connectToDatabase()
+    const body = await request.json()
+    
+    // Simulate multi-channel follow-up
+    const relance = {
+      id: Date.now().toString(),
+      contactId: body.contactId,
+      type: body.type, // 'sms', 'email', 'call'
+      message: body.message,
+      scheduledAt: new Date(body.scheduledAt),
+      status: 'scheduled',
+      createdAt: new Date()
+    }
+    
+    await database.collection('relances').insertOne(relance)
+    
+    // Simulate immediate execution for demo
+    const executionResult = {
+      ...relance,
+      status: 'sent',
+      executedAt: new Date(),
+      simulation: true
+    }
+    
+    return NextResponse.json(executionResult, { status: 201 })
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}
+
+// GET /api/documents
+async function handleGetDocuments(request) {
+  try {
+    const database = await connectToDatabase()
+    const url = new URL(request.url)
+    const dossierId = url.searchParams.get('dossierId')
+    
+    const query = dossierId ? { dossierId } : {}
+    const documents = await database.collection('documents').find(query).toArray()
+    return NextResponse.json(documents)
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}
+
+// POST /api/documents
+async function handleCreateDocument(request) {
+  try {
+    const database = await connectToDatabase()
+    const body = await request.json()
+    
+    const document = {
+      id: Date.now().toString(),
+      dossierId: body.dossierId,
+      name: body.name,
+      type: body.type,
+      status: body.status || 'received',
+      required: body.required || false,
+      uploadedAt: new Date(),
+      updatedAt: new Date()
+    }
+    
+    await database.collection('documents').insertOne(document)
+    return NextResponse.json(document, { status: 201 })
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}
+
+// GET /api/calendar
+async function handleGetCalendar() {
+  try {
+    const database = await connectToDatabase()
+    const events = await database.collection('calendar').find({}).toArray()
+    return NextResponse.json(events)
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}
+
+// POST /api/calendar
+async function handleCreateEvent(request) {
+  try {
+    const database = await connectToDatabase()
+    const body = await request.json()
+    
+    const event = {
+      id: Date.now().toString(),
+      title: body.title,
+      start: new Date(body.start),
+      end: new Date(body.end),
+      type: body.type,
+      client: body.client,
+      dossierId: body.dossierId,
+      createdAt: new Date()
+    }
+    
+    await database.collection('calendar').insertOne(event)
+    return NextResponse.json(event, { status: 201 })
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}
+
+// POST /api/estimation
+async function handleCreateEstimation(request) {
+  try {
+    const database = await connectToDatabase()
+    const body = await request.json()
+    
+    // Simulate property estimation
+    const estimation = {
+      id: Date.now().toString(),
+      dossierId: body.dossierId,
+      address: body.address,
+      estimationLow: 420000,
+      estimationHigh: 450000,
+      comparables: 8,
+      confidence: 85,
+      createdAt: new Date(),
+      simulation: true
+    }
+    
+    await database.collection('estimations').insertOne(estimation)
+    return NextResponse.json(estimation, { status: 201 })
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}
+
+// GET /api/kpis
+async function handleGetKPIs() {
+  try {
+    const database = await connectToDatabase()
+    
+    // Simulate KPI calculation
+    const kpis = {
+      hoursGained: 28.5,
+      relancesSent: 142,
+      docsCompleted: 89,
+      rdvScheduled: 24,
+      calculatedAt: new Date()
+    }
+    
+    return NextResponse.json(kpis)
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}
+
+// Main router
+export async function GET(request) {
+  const pathname = new URL(request.url).pathname
+  
+  switch (pathname) {
+    case '/api/health':
+      return handleHealth()
+    case '/api/dossiers':
+      return handleGetDossiers()
+    case '/api/messages':
+      return handleGetMessages()
+    case '/api/documents':
+      return handleGetDocuments(request)
+    case '/api/calendar':
+      return handleGetCalendar()
+    case '/api/kpis':
+      return handleGetKPIs()
+    default:
+      return NextResponse.json({ error: 'Not found' }, { status: 404 })
+  }
+}
+
+export async function POST(request) {
+  const pathname = new URL(request.url).pathname
+  
+  switch (pathname) {
+    case '/api/dossiers':
+      return handleCreateDossier(request)
+    case '/api/messages':
+      return handleCreateMessage(request)
+    case '/api/relances':
+      return handleCreateRelance(request)
+    case '/api/documents':
+      return handleCreateDocument(request)
+    case '/api/calendar':
+      return handleCreateEvent(request)
+    case '/api/estimation':
+      return handleCreateEstimation(request)
+    default:
+      return NextResponse.json({ error: 'Not found' }, { status: 404 })
+  }
+}
+
+export async function PUT(request) {
+  return NextResponse.json({ error: 'Method not implemented' }, { status: 501 })
+}
+
+export async function DELETE(request) {
+  return NextResponse.json({ error: 'Method not implemented' }, { status: 501 })
+}
