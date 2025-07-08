@@ -71,7 +71,8 @@ import {
   Palette,
   X,
   Save,
-  ContactIcon as Contact
+  ContactIcon as Contact,
+  Copy
 } from 'lucide-react'
 
 export default function MarwyckCopilot() {
