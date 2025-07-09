@@ -169,7 +169,19 @@ backend:
       - comment: "No backend functionality was broken during the frontend changes. All API endpoints are working as expected."
 
 frontend:
-  - task: "Convert French text to English throughout the application"
+  - task: "Fix dark mode colors to use true gray tones (no blue tints)"
+    implemented: false
+    working: false
+    file: "/app/app/globals.css"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: false
+      - agent: "main"
+      - comment: "User reports dark mode still has blue tints, wants true gray like ChatGPT/Google"
+  
+  - task: "Reposition planning page navigation arrows above week display"
     implemented: false
     working: false
     file: "/app/app/page.js"
@@ -179,31 +191,91 @@ frontend:
     status_history:
       - working: false
       - agent: "main"
-      - comment: "Need to convert all French text to English in the UI"
-  
-  - task: "Fix dark theme to use true gray colors"
+      - comment: "Currently arrows are positioned to the right of week display, need to move them above"
+
+  - task: "Fix modal styling for Create new event modal"
     implemented: false
     working: false
-    file: "/app/app/globals.css"
+    file: "/app/app/page.js"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: false
+      - agent: "main"
+      - comment: "Modal has square borders and grays out background, needs rounded borders and no background graying"
+
+  - task: "Fix modal styling for Propose time slots modal"
+    implemented: false
+    working: false
+    file: "/app/app/page.js"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: false
+      - agent: "main"
+      - comment: "Modal has square borders and grays out background, needs rounded borders and no background graying"
+
+  - task: "Fix modal styling for Reschedule appointment modal"
+    implemented: false
+    working: false
+    file: "/app/app/page.js"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: false
+      - agent: "main"
+      - comment: "Modal has square borders and grays out background, needs rounded borders and no background graying"
+
+  - task: "Add date field to event creation and modification forms"
+    implemented: false
+    working: false
+    file: "/app/app/page.js"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
     status_history:
       - working: false
       - agent: "main"
-      - comment: "Need to ensure dark theme uses true gray colors consistently"
+      - comment: "Event creation form missing date field, needs to be added"
 
-  - task: "Check light/dark theme consistency"
+  - task: "Add delete button to event details modal"
     implemented: false
     working: false
-    file: "/app/app/globals.css"
+    file: "/app/app/page.js"
     stuck_count: 0
-    priority: "medium"
+    priority: "high"
     needs_retesting: true
     status_history:
       - working: false
       - agent: "main"
-      - comment: "Need to review and ensure consistency between light and dark themes"
+      - comment: "Event details modal needs delete button and proper styling"
+
+  - task: "Fix event details modal styling"
+    implemented: false
+    working: false
+    file: "/app/app/page.js"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: false
+      - agent: "main"
+      - comment: "Event details modal has square borders and grays out background, needs rounded borders and no background graying"
+
+  - task: "Ensure all text remains in English"
+    implemented: true
+    working: true
+    file: "/app/app/page.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+      - agent: "main"
+      - comment: "All text appears to be in English already"
 
 metadata:
   created_by: "main_agent"
