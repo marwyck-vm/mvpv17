@@ -883,58 +883,41 @@ export default function MarwyckCopilot() {
       </Dialog>
 
       {/* Planning Modal - Reschedule */}
-      {showRescheduleDialog && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div 
-            className="fixed inset-0" 
-            onClick={() => setShowRescheduleDialog(false)}
-          />
-          <div className={`relative max-w-md w-full ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} rounded-2xl shadow-2xl border p-6`}>
-            <div className="flex items-center justify-between mb-4">
-              <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                Reschedule an appointment
-              </h3>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => setShowRescheduleDialog(false)} 
-                className="rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
-              >
-                <X className="w-4 h-4" />
-              </Button>
+      <Dialog open={showRescheduleDialog} onOpenChange={setShowRescheduleDialog}>
+        <DialogContent className="sm:max-w-md rounded-2xl">
+          <DialogHeader>
+            <DialogTitle>Reschedule an appointment</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Appointment to reschedule</label>
+              <Select>
+                <SelectTrigger className="rounded-xl">
+                  <SelectValue placeholder="Choose an appointment" />
+                </SelectTrigger>
+                <SelectContent className="rounded-xl">
+                  {calendarEvents.map(event => (
+                    <SelectItem key={event.id} value={event.id.toString()}>
+                      {event.title} - {event.time}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
-            
-            <div className="space-y-4">
-              <div>
-                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Appointment to reschedule</label>
-                <Select>
-                  <SelectTrigger className="rounded-xl">
-                    <SelectValue placeholder="Choose an appointment" />
-                  </SelectTrigger>
-                  <SelectContent className="rounded-xl">
-                    {calendarEvents.map(event => (
-                      <SelectItem key={event.id} value={event.id.toString()}>
-                        {event.title} - {event.time}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>New date</label>
-                <Input type="date" className="rounded-xl" />
-              </div>
-              <div>
-                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>New time</label>
-                <Input type="time" className="rounded-xl" />
-              </div>
-              <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
-                Reschedule
-              </Button>
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>New date</label>
+              <Input type="date" className="rounded-xl" />
             </div>
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>New time</label>
+              <Input type="time" className="rounded-xl" />
+            </div>
+            <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
+              Reschedule
+            </Button>
           </div>
-        </div>
-      )}
+        </DialogContent>
+      </Dialog>
 
       {/* Event Details Modal */}
       {showEventDetails && (
