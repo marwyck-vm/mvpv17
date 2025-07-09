@@ -1494,11 +1494,16 @@ export default function MarwyckCopilot() {
             <div className="p-6 h-full overflow-y-auto">
               <div className="max-w-6xl mx-auto">
                 <div className="mb-8">
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="mb-4">
+                    <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                      Planning
+                    </h2>
+                  </div>
+                  <div className="flex items-center justify-between">
                     <div>
-                      <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                        Planning - {getWeekLabel(currentWeek).label}
-                      </h2>
+                      <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                        {getWeekLabel(currentWeek).label}
+                      </h3>
                       <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{getWeekLabel(currentWeek).date}</p>
                     </div>
                     <div className="flex items-center space-x-2">
