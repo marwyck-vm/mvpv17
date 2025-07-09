@@ -84,14 +84,16 @@ export default function MarwyckCopilot() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [currentWeek, setCurrentWeek] = useState(0)
   const [selectedClient, setSelectedClient] = useState('general')
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      role: 'assistant',
-      content: "Hello! I'm Marwyck, your AI assistant. How can I help you today?",
-      timestamp: new Date(Date.now() - 3600000)
-    }
-  ])
+  const [messages, setMessages] = useState({
+    general: [
+      {
+        id: 1,
+        role: 'assistant',
+        content: "Hello! I'm Marwyck, your AI assistant. How can I help you today?",
+        timestamp: new Date(Date.now() - 3600000)
+      }
+    ]
+  })
   const [inputMessage, setInputMessage] = useState('')
   const [isTyping, setIsTyping] = useState(false)
   const [currentTime, setCurrentTime] = useState(new Date())
