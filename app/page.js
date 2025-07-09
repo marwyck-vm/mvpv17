@@ -723,22 +723,22 @@ export default function MarwyckCopilot() {
         </div>
       )}
 
-      {/* AI Help Floating Card */}
-      {showAIHelp && (
+      {/* Planning Modal - New Event */}
+      {showNewEventDialog && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div 
             className="fixed inset-0" 
-            onClick={() => setShowAIHelp(false)}
+            onClick={() => setShowNewEventDialog(false)}
           />
           <div className={`relative max-w-md w-full ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} rounded-2xl shadow-2xl border p-6`}>
             <div className="flex items-center justify-between mb-4">
               <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                What I can do for you
+                Create new appointment
               </h3>
               <Button 
                 variant="ghost" 
                 size="sm" 
-                onClick={() => setShowAIHelp(false)} 
+                onClick={() => setShowNewEventDialog(false)} 
                 className="rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <X className="w-4 h-4" />
@@ -746,40 +746,231 @@ export default function MarwyckCopilot() {
             </div>
             
             <div className="space-y-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                  <Phone className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Schedule follow-ups</p>
-                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Automatic SMS, email and call scheduling</p>
+              <div>
+                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Title</label>
+                <Input 
+                  placeholder="Ex: Apartment visit" 
+                  className="rounded-xl" 
+                  value={newEventData.title}
+                  onChange={(e) => setNewEventData({...newEventData, title: e.target.value})}
+                />
+              </div>
+              <div>
+                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Date</label>
+                <Input 
+                  type="date" 
+                  className="rounded-xl" 
+                  value={newEventData.date}
+                  onChange={(e) => setNewEventData({...newEventData, date: e.target.value})}
+                />
+              </div>
+              <div>
+                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Time</label>
+                <Input 
+                  type="time" 
+                  className="rounded-xl" 
+                  value={newEventData.time}
+                  onChange={(e) => setNewEventData({...newEventData, time: e.target.value})}
+                />
+              </div>
+              <div>
+                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Additional information</label>
+                <Textarea 
+                  placeholder="Appointment details..." 
+                  className="rounded-xl" 
+                  value={newEventData.details}
+                  onChange={(e) => setNewEventData({...newEventData, details: e.target.value})}
+                />
+              </div>
+              <Button 
+                onClick={handleCreateEvent}
+                className="w-full text-white rounded-full" 
+                style={{ backgroundColor: accentColor }}
+              >
+                Create Appointment
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Planning Modal - Propose Slots */}
+      {showProposeDialog && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div 
+            className="fixed inset-0" 
+            onClick={() => setShowProposeDialog(false)}
+          />
+          <div className={`relative max-w-md w-full ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} rounded-2xl shadow-2xl border p-6`}>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                Propose time slots
+              </h3>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => setShowProposeDialog(false)} 
+                className="rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Client/File</label>
+                <Select>
+                  <SelectTrigger className="rounded-xl">
+                    <SelectValue placeholder="Choose a file" />
+                  </SelectTrigger>
+                  <SelectContent className="rounded-xl">
+                    {dossiersList.map(dossier => (
+                      <SelectItem key={dossier.id} value={dossier.id.toString()}>
+                        {dossier.address}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Date range</label>
+                <div className="grid grid-cols-2 gap-2">
+                  <Input type="date" className="rounded-xl" />
+                  <Input type="date" className="rounded-xl" />
                 </div>
               </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                  <Home className="w-5 h-5 text-white" />
+              <div>
+                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Slots to propose</label>
+                <Textarea placeholder="Ex: Monday 2pm-3pm, Tuesday 10:30am-11:30am..." className="rounded-xl" />
+              </div>
+              <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
+                <Sparkles className="w-4 h-4 mr-2" />
+                Let AI propose
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Planning Modal - Reschedule */}
+      {showRescheduleDialog && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div 
+            className="fixed inset-0" 
+            onClick={() => setShowRescheduleDialog(false)}
+          />
+          <div className={`relative max-w-md w-full ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} rounded-2xl shadow-2xl border p-6`}>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                Reschedule an appointment
+              </h3>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => setShowRescheduleDialog(false)} 
+                className="rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Appointment to reschedule</label>
+                <Select>
+                  <SelectTrigger className="rounded-xl">
+                    <SelectValue placeholder="Choose an appointment" />
+                  </SelectTrigger>
+                  <SelectContent className="rounded-xl">
+                    {calendarEvents.map(event => (
+                      <SelectItem key={event.id} value={event.id.toString()}>
+                        {event.title} - {event.time}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>New date</label>
+                <Input type="date" className="rounded-xl" />
+              </div>
+              <div>
+                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>New time</label>
+                <Input type="time" className="rounded-xl" />
+              </div>
+              <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
+                Reschedule
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Event Details Modal */}
+      {showEventDetails && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div 
+            className="fixed inset-0" 
+            onClick={() => setShowEventDetails(false)}
+          />
+          <div className={`relative max-w-md w-full ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} rounded-2xl shadow-2xl border p-6`}>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                {selectedEvent?.title}
+              </h3>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => setShowEventDetails(false)} 
+                className="rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Date</label>
+                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{selectedEvent?.date}</p>
                 </div>
                 <div>
-                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Property estimates</p>
-                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Generate estimates based on comparables</p>
+                  <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Time</label>
+                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{selectedEvent?.time}</p>
                 </div>
               </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                  <Calendar className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Schedule appointments</p>
-                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Automatic calendar management</p>
-                </div>
+              <div>
+                <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Client</label>
+                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{selectedEvent?.client}</p>
               </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                  <FileText className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Manage documents</p>
-                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Track missing documents and automatic reminders</p>
+              <div>
+                <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Description</label>
+                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{selectedEvent?.description}</p>
+              </div>
+              <div>
+                <label className={`block text-sm font-medium mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Actions</label>
+                <div className="grid grid-cols-2 gap-2">
+                  <Button variant="outline" size="sm" className="rounded-full">
+                    <Edit className="w-4 h-4 mr-2" />
+                    Edit
+                  </Button>
+                  <Button variant="outline" size="sm" className="rounded-full">
+                    <Calendar className="w-4 h-4 mr-2" />
+                    Reschedule
+                  </Button>
+                  <Button variant="outline" size="sm" className="rounded-full">
+                    <Copy className="w-4 h-4 mr-2" />
+                    Duplicate
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="rounded-full text-red-600 hover:text-red-700 hover:bg-red-50"
+                    onClick={() => handleDeleteEvent(selectedEvent.id)}
+                  >
+                    <Trash2 className="w-4 h-4 mr-2" />
+                    Delete
+                  </Button>
                 </div>
               </div>
             </div>
