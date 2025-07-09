@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "The user wants me to make the dark theme properly gray (not bluish), check consistency between dark and light themes, and convert everything from French to English."
+user_problem_statement: "The user wants to fix dark mode colors to true gray tones (no blue tints like ChatGPT/Google), reposition planning page navigation arrows above the week display, fix modal styling issues (Create new event, Propose time slots, Reschedule appointment modals should have rounded borders and not gray out background), add date field to event creation/modification forms, add delete button to event details modal, and ensure everything remains in English."
 
 backend:
   - task: "Verify all API routes are functioning correctly"
