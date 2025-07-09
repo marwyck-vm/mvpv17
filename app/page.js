@@ -116,6 +116,7 @@ export default function MarwyckCopilot() {
   const [trafficStatus, setTrafficStatus] = useState('good')
   const [darkMode, setDarkMode] = useState(false)
   const [isRecording, setIsRecording] = useState(false)
+  const [showColorPicker, setShowColorPicker] = useState(false)
   const [showAIHelp, setShowAIHelp] = useState(false)
   const [accentColor, setAccentColor] = useState('#00C4FF')
   const [showNewEventDialog, setShowNewEventDialog] = useState(false)
@@ -714,6 +715,70 @@ export default function MarwyckCopilot() {
         </div>
       )}
 
+      {/* AI Help Floating Card */}
+      {showAIHelp && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div 
+            className="fixed inset-0" 
+            onClick={() => setShowAIHelp(false)}
+          />
+          <div className={`relative max-w-md w-full ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} rounded-2xl shadow-2xl border p-6`}>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                What I can do for you
+              </h3>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => setShowAIHelp(false)} 
+                className="rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                  <Phone className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Schedule follow-ups</p>
+                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Automatic SMS, email and call scheduling</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                  <Home className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Property estimates</p>
+                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Generate estimates based on comparables</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                  <Calendar className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Schedule appointments</p>
+                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Automatic calendar management</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                  <FileText className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Manage documents</p>
+                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Track missing documents and automatic reminders</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Sidebar */}
       <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-300 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r flex flex-col`}>
         <div className={`p-4 border-b flex items-center justify-between ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
@@ -820,7 +885,7 @@ export default function MarwyckCopilot() {
             <div className="flex items-center space-x-2">
               <Navigation className={`w-4 h-4 ${getTrafficColor()}`} />
               <span className={`text-sm ${getTrafficColor()}`}>
-                Traffic: {getTrafficText()}
+                Traffic nearby: {getTrafficText()}
               </span>
             </div>
           </div>
@@ -1177,59 +1242,15 @@ export default function MarwyckCopilot() {
                     )}
                   </div>
                   
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button variant="outline" size="sm" className="rounded-full">
-                        <Info className="w-4 h-4 mr-2" />
-                        AI Help
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-md`} style={{ backgroundColor: 'transparent' }}>
-                      <DialogHeader>
-                        <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
-                          What I can do for you
-                        </DialogTitle>
-                      </DialogHeader>
-                      <div className="space-y-4">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                            <Phone className="w-5 h-5 text-white" />
-                          </div>
-                          <div>
-                            <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Schedule follow-ups</p>
-                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Automatic SMS, email and call scheduling</p>
-                          </div>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                            <Home className="w-5 h-5 text-white" />
-                          </div>
-                          <div>
-                            <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Property estimates</p>
-                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Generate estimates based on comparables</p>
-                          </div>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                            <Calendar className="w-5 h-5 text-white" />
-                          </div>
-                          <div>
-                            <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Schedule appointments</p>
-                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Automatic calendar management</p>
-                          </div>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                            <FileText className="w-5 h-5 text-white" />
-                          </div>
-                          <div>
-                            <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Manage documents</p>
-                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Track missing documents and automatic reminders</p>
-                          </div>
-                        </div>
-                      </div>
-                    </DialogContent>
-                  </Dialog>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="rounded-full"
+                    onClick={() => setShowAIHelp(true)}
+                  >
+                    <Info className="w-4 h-4 mr-2" />
+                    AI Help
+                  </Button>
                 </div>
               </div>
 
@@ -1295,7 +1316,7 @@ export default function MarwyckCopilot() {
                 <div className="max-w-4xl mx-auto">
                   <div className="flex items-end space-x-2">
                     <div className="flex-1">
-                      <div className={`flex items-center space-x-2 p-3 rounded-2xl border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'}`}>
+                      <div className={`flex items-center space-x-2 p-3 rounded-2xl ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
                         <Button
                           variant="ghost"
                           size="sm"
@@ -1309,7 +1330,7 @@ export default function MarwyckCopilot() {
                           onChange={(e) => setInputMessage(e.target.value)}
                           onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                           placeholder="Type your message..."
-                          className="flex-1 border-0 bg-transparent focus:ring-0 focus:outline-none"
+                          className="flex-1 border-0 bg-transparent focus:ring-0 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
                         />
                         <Button
                           variant="ghost"
