@@ -724,68 +724,51 @@ export default function MarwyckCopilot() {
       )}
 
       {/* AI Help Floating Card */}
-      {showAIHelp && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div 
-            className="fixed inset-0" 
-            onClick={() => setShowAIHelp(false)}
-          />
-          <div className={`relative max-w-md w-full ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} rounded-2xl shadow-2xl border p-6`}>
-            <div className="flex items-center justify-between mb-4">
-              <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                What I can do for you
-              </h3>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => setShowAIHelp(false)} 
-                className="rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
-              >
-                <X className="w-4 h-4" />
-              </Button>
+      <Dialog open={showAIHelp} onOpenChange={setShowAIHelp}>
+        <DialogContent className="sm:max-w-md rounded-2xl">
+          <DialogHeader>
+            <DialogTitle>What I can do for you</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                <Phone className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Schedule follow-ups</p>
+                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Automatic SMS, email and call scheduling</p>
+              </div>
             </div>
-            
-            <div className="space-y-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                  <Phone className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Schedule follow-ups</p>
-                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Automatic SMS, email and call scheduling</p>
-                </div>
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                <Home className="w-5 h-5 text-white" />
               </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                  <Home className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Property estimates</p>
-                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Generate estimates based on comparables</p>
-                </div>
+              <div>
+                <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Property estimates</p>
+                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Generate estimates based on comparables</p>
               </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                  <Calendar className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Schedule appointments</p>
-                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Automatic calendar management</p>
-                </div>
+            </div>
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                <Calendar className="w-5 h-5 text-white" />
               </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                  <FileText className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Manage documents</p>
-                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Track missing documents and automatic reminders</p>
-                </div>
+              <div>
+                <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Schedule appointments</p>
+                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Automatic calendar management</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                <FileText className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Manage documents</p>
+                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Track missing documents and automatic reminders</p>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        </DialogContent>
+      </Dialog>
 
       {/* Planning Modal - New Event */}
       <Dialog open={showNewEventDialog} onOpenChange={setShowNewEventDialog}>
