@@ -92,6 +92,22 @@ export default function MarwyckCopilot() {
         content: "Hello! I'm Marwyck, your AI assistant. How can I help you today?",
         timestamp: new Date(Date.now() - 3600000)
       }
+    ],
+    '1': [
+      {
+        id: 1,
+        role: 'assistant',
+        content: "Hello! I can help you with 123 Oak Street. What would you like to know about this property?",
+        timestamp: new Date(Date.now() - 3600000)
+      }
+    ],
+    '2': [
+      {
+        id: 1,
+        role: 'assistant',
+        content: "Hi! I'm here to assist with 456 Pine Avenue. How can I help you today?",
+        timestamp: new Date(Date.now() - 3600000)
+      }
     ]
   })
   const [inputMessage, setInputMessage] = useState('')
@@ -111,6 +127,12 @@ export default function MarwyckCopilot() {
   const [selectedDossier, setSelectedDossier] = useState(null)
   const [newEventData, setNewEventData] = useState({ title: '', time: '', details: '' })
   const [editingDossier, setEditingDossier] = useState(null)
+  const [meetingChecklist, setMeetingChecklist] = useState([
+    { id: 1, text: "Prepare property keys", checked: false },
+    { id: 2, text: "Confirm time with client", checked: false },
+    { id: 3, text: "Gather all necessary documents", checked: false },
+    { id: 4, text: "Check route and travel time", checked: false }
+  ])
   const messagesEndRef = useRef(null)
 
   // Available accent colors
@@ -242,50 +264,116 @@ export default function MarwyckCopilot() {
     }))
   ]
 
-  const getWeekLabel = (weekOffset) => {
-    const dates = ['12-18 Jan', '19-25 Jan', '26-01 Feb']
-    const labels = ['Previous week', 'This week', 'Next week']
-    return { date: dates[weekOffset + 1], label: labels[weekOffset + 1] }
+  // Get current messages for selected client
+  const getCurrentMessages = () => {
+    return messages[selectedClient] || []
   }
 
-  const kpis = [
-    { 
-      title: 'Hours Saved', 
-      value: '32.5', 
-      previousValue: '28.5',
-      change: '+14%', 
-      icon: Clock, 
-      color: 'text-success',
-      trend: 'up'
-    },
-    { 
-      title: 'Follow-ups Sent', 
-      value: '156', 
-      previousValue: '142',
-      change: '+10%', 
-      icon: Send, 
-      color: 'text-accent-cyan',
-      trend: 'up'
-    },
-    { 
-      title: 'Docs Completed', 
-      value: '92%', 
-      previousValue: '89%',
-      change: '+3%', 
-      icon: FileText, 
-      color: 'text-success',
-      trend: 'up'
-    },
-    { 
-      title: 'Appointments Scheduled', 
-      value: '28', 
-      previousValue: '24',
-      change: '+17%', 
-      icon: Calendar, 
-      color: 'text-accent-cyan',
-      trend: 'up'
+  // Add message to current client
+  const addMessageToClient = (message) => {
+    setMessages(prev => ({
+      ...prev,
+      [selectedClient]: [...(prev[selectedClient] || []), message]
+    }))
+  }
+
+  // Get real week label based on current date and offset
+  const getWeekLabel = (weekOffset) => {
+    const today = new Date()
+    const currentWeekStart = new Date(today)
+    currentWeekStart.setDate(today.getDate() - today.getDay() + 1) // Monday of current week
+    
+    const targetWeekStart = new Date(currentWeekStart)
+    targetWeekStart.setDate(currentWeekStart.getDate() + (weekOffset * 7))
+    
+    const targetWeekEnd = new Date(targetWeekStart)
+    targetWeekEnd.setDate(targetWeekStart.getDate() + 6)
+    
+    const formatDate = (date) => {
+      const options = { month: 'short', day: 'numeric' }
+      return date.toLocaleDateString('en-US', options)
     }
-  ]
+    
+    const dateRange = `${formatDate(targetWeekStart)} - ${formatDate(targetWeekEnd)}`
+    
+    let label
+    if (weekOffset === 0) {
+      label = 'This week'
+    } else if (weekOffset === -1) {
+      label = 'Previous week'
+    } else if (weekOffset === 1) {
+      label = 'Next week'
+    } else if (weekOffset < 0) {
+      label = `${Math.abs(weekOffset)} weeks ago`
+    } else {
+      label = `In ${weekOffset} weeks`
+    }
+    
+    return { date: dateRange, label }
+  }
+
+  // Dynamic KPIs based on current week
+  const getKpisForWeek = (weekOffset) => {
+    const baseKpis = [
+      { 
+        title: 'Hours Saved', 
+        value: '32.5', 
+        previousValue: '28.5',
+        change: '+14%', 
+        icon: Clock, 
+        color: 'text-success',
+        trend: 'up'
+      },
+      { 
+        title: 'Follow-ups Sent', 
+        value: '156', 
+        previousValue: '142',
+        change: '+10%', 
+        icon: Send, 
+        color: 'text-accent-cyan',
+        trend: 'up'
+      },
+      { 
+        title: 'Docs Completed', 
+        value: '92%', 
+        previousValue: '89%',
+        change: '+3%', 
+        icon: FileText, 
+        color: 'text-success',
+        trend: 'up'
+      },
+      { 
+        title: 'Appointments Scheduled', 
+        value: '28', 
+        previousValue: '24',
+        change: '+17%', 
+        icon: Calendar, 
+        color: 'text-accent-cyan',
+        trend: 'up'
+      }
+    ]
+
+    if (weekOffset === -1) {
+      return [
+        { ...baseKpis[0], value: '28.5', previousValue: '31.2', change: '-9%', color: 'text-red-500', trend: 'down' },
+        { ...baseKpis[1], value: '142', previousValue: '158', change: '-10%', color: 'text-red-500', trend: 'down' },
+        { ...baseKpis[2], value: '89%', previousValue: '92%', change: '-3%', color: 'text-red-500', trend: 'down' },
+        { ...baseKpis[3], value: '24', previousValue: '29', change: '-17%', color: 'text-red-500', trend: 'down' }
+      ]
+    } else if (weekOffset === 0) {
+      return baseKpis
+    } else {
+      // Future weeks - projected data
+      return [
+        { ...baseKpis[0], value: '35.8', previousValue: '32.5', change: '+10%', color: 'text-success', trend: 'up' },
+        { ...baseKpis[1], value: '164', previousValue: '156', change: '+5%', color: 'text-success', trend: 'up' },
+        { ...baseKpis[2], value: '94%', previousValue: '92%', change: '+2%', color: 'text-success', trend: 'up' },
+        { ...baseKpis[3], value: '32', previousValue: '28', change: '+14%', color: 'text-success', trend: 'up' }
+      ]
+    }
+  }
+
+  const kpis = getKpisForWeek(currentWeek)
 
   const recentActivities = [
     { id: 1, type: 'sms', contact: 'John Smith', message: 'Visit reminder tomorrow 2pm', time: '10:30', status: 'sent' },
@@ -299,43 +387,49 @@ export default function MarwyckCopilot() {
 
   useEffect(() => {
     scrollToBottom()
-  }, [messages])
+  }, [messages, selectedClient])
 
   const handleSendMessage = async () => {
     if (!inputMessage.trim()) return
 
+    const currentMessages = getCurrentMessages()
     const userMessage = {
-      id: messages.length + 1,
+      id: currentMessages.length + 1,
       role: 'user',
       content: inputMessage,
       timestamp: new Date()
     }
 
-    setMessages(prev => [...prev, userMessage])
+    addMessageToClient(userMessage)
     setInputMessage('')
     setIsTyping(true)
 
     setTimeout(() => {
-      const aiResponse = generateAIResponse(inputMessage)
-      setMessages(prev => [...prev, {
-        id: prev.length + 1,
+      const aiResponse = generateAIResponse(inputMessage, selectedClient)
+      addMessageToClient({
+        id: currentMessages.length + 2,
         role: 'assistant',
         content: aiResponse,
         timestamp: new Date()
-      }])
+      })
       setIsTyping(false)
     }, 1500)
   }
 
-  const generateAIResponse = (message) => {
+  const generateAIResponse = (message, clientId) => {
     const lowerMessage = message.toLowerCase()
     
+    // Get specific dossier info if not general
+    const currentDossier = clientId !== 'general' ? dossiersList.find(d => d.id.toString() === clientId) : null
+    
     if (lowerMessage.includes('/followup') || lowerMessage.includes('follow')) {
-      return "✅ Follow-up scheduled!\n\n📧 Email sent to John Smith\n📱 SMS scheduled for tomorrow 9am\n📞 Follow-up call planned\n\nWould you like to see the follow-up details?"
+      const clientName = currentDossier ? currentDossier.contacts[0]?.name || 'Client' : 'John Smith'
+      return `✅ Follow-up scheduled for ${currentDossier ? currentDossier.address : 'selected property'}!\n\n📧 Email sent to ${clientName}\n📱 SMS scheduled for tomorrow 9am\n📞 Follow-up call planned\n\nWould you like to see the follow-up details?`
     }
     
     if (lowerMessage.includes('/estimate') || lowerMessage.includes('estimate')) {
-      return "🏠 Estimate generated for 123 Oak Street!\n\n💰 Range: $420,000 - $450,000\n📊 Based on 8 recent comparables\n📄 PDF report available\n\nWould you like me to send the report to the client?"
+      const address = currentDossier ? currentDossier.address : '123 Oak Street'
+      return `🏠 Estimate generated for ${address}!\n\n💰 Range: $420,000 - $450,000\n📊 Based on 8 recent comparables\n📄 PDF report available\n\nWould you like me to send the report to the client?`
     }
     
     if (lowerMessage.includes('/appointment') || lowerMessage.includes('meeting')) {
@@ -343,10 +437,28 @@ export default function MarwyckCopilot() {
     }
     
     if (lowerMessage.includes('/docs') || lowerMessage.includes('documents')) {
-      return "📋 Document status for 123 Oak Street:\n\n✅ Sales agreement signed\n✅ Diagnostics received\n❌ Insurance certificate missing\n⏳ Energy certificate pending\n\nSend reminders for missing documents?"
+      const address = currentDossier ? currentDossier.address : '123 Oak Street'
+      const docs = currentDossier ? currentDossier.documents : []
+      let docStatus = `📋 Document status for ${address}:\n\n`
+      
+      if (docs.length > 0) {
+        docs.forEach(doc => {
+          const icon = doc.status === 'signed' || doc.status === 'received' ? '✅' : doc.status === 'missing' ? '❌' : '⏳'
+          docStatus += `${icon} ${doc.name} ${doc.status}\n`
+        })
+      } else {
+        docStatus += "✅ Sales agreement signed\n✅ Diagnostics received\n❌ Insurance certificate missing\n⏳ Energy certificate pending\n"
+      }
+      
+      docStatus += "\nSend reminders for missing documents?"
+      return docStatus
     }
     
-    return "I can help you with:\n\n📞 Schedule automatic follow-ups\n🏠 Estimate property values\n📅 Plan appointments\n📋 Check document status\n\nWhat would you like to do?"
+    const contextMessage = currentDossier 
+      ? `I can help you with ${currentDossier.address} (${currentDossier.type}):\n\n`
+      : "I can help you with:\n\n"
+    
+    return contextMessage + "📞 Schedule automatic follow-ups\n🏠 Estimate property values\n📅 Plan appointments\n📋 Check document status\n\nWhat would you like to do?"
   }
 
   const getStatusColor = (status) => {
@@ -402,10 +514,29 @@ export default function MarwyckCopilot() {
       }))
     }
     setDossiersList(prev => [...prev, newDossier])
+    
+    // Initialize messages for new dossier
+    setMessages(prev => ({
+      ...prev,
+      [newDossier.id.toString()]: [
+        {
+          id: 1,
+          role: 'assistant',
+          content: `Hello! I'm here to help you with ${newDossier.address}. What can I assist you with today?`,
+          timestamp: new Date()
+        }
+      ]
+    }))
   }
 
   const deleteDossier = (dossierId) => {
     setDossiersList(prev => prev.filter(d => d.id !== dossierId))
+    // Remove messages for deleted dossier
+    setMessages(prev => {
+      const newMessages = { ...prev }
+      delete newMessages[dossierId.toString()]
+      return newMessages
+    })
   }
 
   const getSuggestedActions = (dossier) => {
@@ -462,13 +593,22 @@ export default function MarwyckCopilot() {
     { id: 'duplicate', name: 'Duplicate', icon: Copy }
   ]
 
-  const getNextMeetingPreparation = () => {
-    return [
-      "📋 Prepare property keys",
-      "📞 Confirm time with client",
-      "🗂️ Gather all necessary documents",
-      "🚗 Check route and travel time"
-    ]
+  const toggleChecklistItem = (id) => {
+    setMeetingChecklist(prev => 
+      prev.map(item => 
+        item.id === id ? { ...item, checked: !item.checked } : item
+      )
+    )
+  }
+
+  const getTypeColor = (type) => {
+    switch (type) {
+      case 'visit': return 'bg-blue-100 text-blue-800 border-blue-200'
+      case 'signature': return 'bg-green-100 text-green-800 border-green-200'
+      case 'estimation': return 'bg-purple-100 text-purple-800 border-purple-200'
+      case 'meeting': return 'bg-orange-100 text-orange-800 border-orange-200'
+      default: return 'bg-gray-100 text-gray-800 border-gray-200'
+    }
   }
 
   // Handle new event creation
@@ -705,7 +845,6 @@ export default function MarwyckCopilot() {
                         variant="outline"
                         size="sm"
                         onClick={() => setCurrentWeek(currentWeek - 1)}
-                        disabled={currentWeek <= -1}
                         className="rounded-full"
                       >
                         <ChevronLeft className="w-4 h-4" />
@@ -714,7 +853,6 @@ export default function MarwyckCopilot() {
                         variant="outline"
                         size="sm"
                         onClick={() => setCurrentWeek(currentWeek + 1)}
-                        disabled={currentWeek >= 0}
                         className="rounded-full"
                       >
                         <ChevronRight className="w-4 h-4" />
@@ -722,7 +860,7 @@ export default function MarwyckCopilot() {
                     </div>
                   </div>
                   <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                    Efficiency increased by <span className="font-medium text-success">+12%</span> from last week
+                    Efficiency {kpis[0].change.startsWith('+') ? 'increased' : 'decreased'} by <span className={`font-medium ${kpis[0].change.startsWith('+') ? 'text-success' : 'text-red-500'}`}>{kpis[0].change}</span> from last week
                   </p>
                 </div>
 
@@ -741,7 +879,7 @@ export default function MarwyckCopilot() {
                           {kpi.value}
                         </div>
                         <div className="flex items-center space-x-2">
-                          <p className="text-xs text-success">{kpi.change}</p>
+                          <p className={`text-xs ${kpi.change.startsWith('+') ? 'text-success' : 'text-red-500'}`}>{kpi.change}</p>
                           <p className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>vs {kpi.previousValue}</p>
                         </div>
                       </CardContent>
@@ -789,7 +927,7 @@ export default function MarwyckCopilot() {
                       </CardHeader>
                       <CardContent>
                         <div className="space-y-4">
-                          {calendarEvents.map(event => (
+                          {calendarEvents.slice(0, 3).map(event => (
                             <div key={event.id} className="flex items-center space-x-3">
                               <div className="flex-shrink-0">
                                 <Calendar className="w-5 h-5" style={{ color: accentColor }} />
@@ -802,7 +940,10 @@ export default function MarwyckCopilot() {
                                   {event.client} • {event.time}
                                 </p>
                               </div>
-                              <Badge variant="outline" className="text-xs">
+                              <Badge 
+                                variant="outline" 
+                                className={`text-xs rounded-full border ${getTypeColor(event.type)}`}
+                              >
                                 {event.type}
                               </Badge>
                             </div>
@@ -823,10 +964,21 @@ export default function MarwyckCopilot() {
                           For your visit tomorrow:
                         </p>
                         <div className="space-y-2">
-                          {getNextMeetingPreparation().map((item, index) => (
-                            <div key={index} className="flex items-center space-x-2">
-                              <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                              <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{item}</span>
+                          {meetingChecklist.map((item) => (
+                            <div key={item.id} className="flex items-center space-x-2">
+                              <button
+                                onClick={() => toggleChecklistItem(item.id)}
+                                className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-colors ${
+                                  item.checked 
+                                    ? 'bg-green-500 border-green-500' 
+                                    : `border-gray-300 ${darkMode ? 'border-gray-600' : ''}`
+                                }`}
+                              >
+                                {item.checked && <CheckCircle className="w-3 h-3 text-white" />}
+                              </button>
+                              <span className={`text-sm ${item.checked ? 'line-through opacity-75' : ''} ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                                📋 {item.text}
+                              </span>
                             </div>
                           ))}
                         </div>
@@ -1032,7 +1184,7 @@ export default function MarwyckCopilot() {
                         AI Help
                       </Button>
                     </DialogTrigger>
-                    <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-md`}>
+                    <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-md`} style={{ backgroundColor: 'transparent' }}>
                       <DialogHeader>
                         <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
                           What I can do for you
@@ -1084,7 +1236,7 @@ export default function MarwyckCopilot() {
               <div className="flex-1 overflow-y-auto p-6">
                 <div className="max-w-4xl mx-auto">
                   <div className="space-y-6">
-                    {messages.map(message => (
+                    {getCurrentMessages().map(message => (
                       <div
                         key={message.id}
                         className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
@@ -1333,7 +1485,6 @@ export default function MarwyckCopilot() {
                         variant="outline"
                         size="sm"
                         onClick={() => setCurrentWeek(currentWeek - 1)}
-                        disabled={currentWeek <= -1}
                         className="rounded-full"
                       >
                         <ChevronLeft className="w-4 h-4" />
@@ -1352,7 +1503,6 @@ export default function MarwyckCopilot() {
                         variant="outline"
                         size="sm"
                         onClick={() => setCurrentWeek(currentWeek + 1)}
-                        disabled={currentWeek >= 0}
                         className="rounded-full"
                       >
                         Next
@@ -1396,7 +1546,10 @@ export default function MarwyckCopilot() {
                                           </p>
                                           <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{event.time}</p>
                                         </div>
-                                        <Badge variant="outline" style={{ borderColor: accentColor, color: accentColor }} className="rounded-full">
+                                        <Badge 
+                                          variant="outline" 
+                                          className={`text-xs rounded-full border ${getTypeColor(event.type)}`}
+                                        >
                                           {event.type}
                                         </Badge>
                                       </div>
