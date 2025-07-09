@@ -614,19 +614,27 @@ export default function MarwyckCopilot() {
 
   // Handle new event creation
   const handleCreateEvent = () => {
-    if (newEventData.title && newEventData.time) {
+    if (newEventData.title && newEventData.time && newEventData.date) {
       const newEvent = {
         id: Date.now(),
         title: newEventData.title,
+        date: newEventData.date,
         time: newEventData.time,
         type: 'meeting',
         client: 'New client',
         description: newEventData.details || 'New appointment'
       }
       setCalendarEvents(prev => [...prev, newEvent])
-      setNewEventData({ title: '', time: '', details: '' })
+      setNewEventData({ title: '', date: '', time: '', details: '' })
       setShowNewEventDialog(false)
     }
+  }
+
+  // Handle event deletion
+  const handleDeleteEvent = (eventId) => {
+    setCalendarEvents(prev => prev.filter(event => event.id !== eventId))
+    setShowEventDetails(false)
+    setSelectedEvent(null)
   }
 
   // Handle dossier editing
