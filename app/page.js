@@ -251,9 +251,9 @@ export default function MarwyckCopilot() {
   ])
 
   const [calendarEvents, setCalendarEvents] = useState([
-    { id: 1, title: 'Visit 123 Oak Street', time: '14:00', type: 'visit', client: 'John Smith', description: 'Property visit with client' },
-    { id: 2, title: 'Notary signing', time: '16:30', type: 'signature', client: 'Marie Durant', description: 'Official document signing' },
-    { id: 3, title: 'Estimate 456 Pine Ave', time: '10:00', type: 'estimation', client: 'Paul Martin', description: 'Property valuation' }
+    { id: 1, title: 'Visit 123 Oak Street', date: '2024-12-16', time: '14:00', type: 'visit', client: 'John Smith', description: 'Property visit with client' },
+    { id: 2, title: 'Notary signing', date: '2024-12-16', time: '16:30', type: 'signature', client: 'Marie Durant', description: 'Official document signing' },
+    { id: 3, title: 'Estimate 456 Pine Ave', date: '2024-12-17', time: '10:00', type: 'estimation', client: 'Paul Martin', description: 'Property valuation' }
   ])
 
   // Dynamic clients based on dossiers
