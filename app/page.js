@@ -1608,138 +1608,32 @@ export default function MarwyckCopilot() {
                       </CardHeader>
                       <CardContent>
                         <div className="space-y-3">
-                          <Dialog open={showNewEventDialog} onOpenChange={setShowNewEventDialog}>
-                            <DialogTrigger asChild>
-                              <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
-                                <Plus className="w-4 h-4 mr-2" />
-                                New Appointment
-                              </Button>
-                            </DialogTrigger>
-                            <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-md`}>
-                              <DialogHeader>
-                                <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
-                                  Create new appointment
-                                </DialogTitle>
-                              </DialogHeader>
-                              <div className="space-y-4">
-                                <div>
-                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Title</label>
-                                  <Input 
-                                    placeholder="Ex: Apartment visit" 
-                                    className="rounded-xl" 
-                                    value={newEventData.title}
-                                    onChange={(e) => setNewEventData({...newEventData, title: e.target.value})}
-                                  />
-                                </div>
-                                <div>
-                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Time</label>
-                                  <Input 
-                                    type="time" 
-                                    className="rounded-xl" 
-                                    value={newEventData.time}
-                                    onChange={(e) => setNewEventData({...newEventData, time: e.target.value})}
-                                  />
-                                </div>
-                                <div>
-                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Additional information</label>
-                                  <Textarea 
-                                    placeholder="Appointment details..." 
-                                    className="rounded-xl" 
-                                    value={newEventData.details}
-                                    onChange={(e) => setNewEventData({...newEventData, details: e.target.value})}
-                                  />
-                                </div>
-                                <Button 
-                                  onClick={handleCreateEvent}
-                                  className="w-full text-white rounded-full" 
-                                  style={{ backgroundColor: accentColor }}
-                                >
-                                  Create Appointment
-                                </Button>
-                              </div>
-                            </DialogContent>
-                          </Dialog>
+                          <Button 
+                            className="w-full text-white rounded-full" 
+                            style={{ backgroundColor: accentColor }}
+                            onClick={() => setShowNewEventDialog(true)}
+                          >
+                            <Plus className="w-4 h-4 mr-2" />
+                            New Appointment
+                          </Button>
 
-                          <Dialog open={showProposeDialog} onOpenChange={setShowProposeDialog}>
-                            <DialogTrigger asChild>
-                              <Button variant="outline" className="w-full rounded-full">
-                                <Calendar className="w-4 h-4 mr-2" />
-                                Propose slots
-                              </Button>
-                            </DialogTrigger>
-                            <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-md`}>
-                              <DialogHeader>
-                                <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
-                                  Propose time slots
-                                </DialogTitle>
-                              </DialogHeader>
-                              <div className="space-y-4">
-                                <div>
-                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Client/File</label>
-                                  <Select>
-                                    <SelectTrigger className="rounded-xl">
-                                      <SelectValue placeholder="Choose a file" />
-                                    </SelectTrigger>
-                                    <SelectContent className="rounded-xl">
-                                      {dossiersList.map(dossier => (
-                                        <SelectItem key={dossier.id} value={dossier.id.toString()}>
-                                          {dossier.address}
-                                        </SelectItem>
-                                      ))}
-                                    </SelectContent>
-                                  </Select>
-                                </div>
-                                <div>
-                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Slots to propose</label>
-                                  <Textarea placeholder="Ex: Monday 2pm-3pm, Tuesday 10:30am-11:30am..." className="rounded-xl" />
-                                </div>
-                                <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
-                                  <Sparkles className="w-4 h-4 mr-2" />
-                                  Let AI propose
-                                </Button>
-                              </div>
-                            </DialogContent>
-                          </Dialog>
+                          <Button 
+                            variant="outline" 
+                            className="w-full rounded-full"
+                            onClick={() => setShowProposeDialog(true)}
+                          >
+                            <Calendar className="w-4 h-4 mr-2" />
+                            Propose slots
+                          </Button>
 
-                          <Dialog open={showRescheduleDialog} onOpenChange={setShowRescheduleDialog}>
-                            <DialogTrigger asChild>
-                              <Button variant="outline" className="w-full rounded-full">
-                                <Clock className="w-4 h-4 mr-2" />
-                                Reschedule
-                              </Button>
-                            </DialogTrigger>
-                            <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-md`}>
-                              <DialogHeader>
-                                <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
-                                  Reschedule an appointment
-                                </DialogTitle>
-                              </DialogHeader>
-                              <div className="space-y-4">
-                                <div>
-                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Appointment to reschedule</label>
-                                  <Select>
-                                    <SelectTrigger className="rounded-xl">
-                                      <SelectValue placeholder="Choose an appointment" />
-                                    </SelectTrigger>
-                                    <SelectContent className="rounded-xl">
-                                      {calendarEvents.map(event => (
-                                        <SelectItem key={event.id} value={event.id.toString()}>
-                                          {event.title} - {event.time}
-                                        </SelectItem>
-                                      ))}
-                                    </SelectContent>
-                                  </Select>
-                                </div>
-                                <div>
-                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>New time</label>
-                                  <Input type="time" className="rounded-xl" />
-                                </div>
-                                <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
-                                  Reschedule
-                                </Button>
-                              </div>
-                            </DialogContent>
-                          </Dialog>
+                          <Button 
+                            variant="outline" 
+                            className="w-full rounded-full"
+                            onClick={() => setShowRescheduleDialog(true)}
+                          >
+                            <Clock className="w-4 h-4 mr-2" />
+                            Reschedule
+                          </Button>
                         </div>
                       </CardContent>
                     </Card>
