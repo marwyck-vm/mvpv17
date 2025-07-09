@@ -126,7 +126,7 @@ export default function MarwyckCopilot() {
   const [selectedEvent, setSelectedEvent] = useState(null)
   const [showEditDossier, setShowEditDossier] = useState(false)
   const [selectedDossier, setSelectedDossier] = useState(null)
-  const [newEventData, setNewEventData] = useState({ title: '', time: '', details: '' })
+  const [newEventData, setNewEventData] = useState({ title: '', date: '', time: '', details: '' })
   const [editingDossier, setEditingDossier] = useState(null)
   const [meetingChecklist, setMeetingChecklist] = useState([
     { id: 1, text: "Prepare property keys", checked: false },
