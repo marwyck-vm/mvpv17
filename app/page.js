@@ -842,62 +842,45 @@ export default function MarwyckCopilot() {
       </Dialog>
 
       {/* Planning Modal - Propose Slots */}
-      {showProposeDialog && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div 
-            className="fixed inset-0" 
-            onClick={() => setShowProposeDialog(false)}
-          />
-          <div className={`relative max-w-md w-full ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} rounded-2xl shadow-2xl border p-6`}>
-            <div className="flex items-center justify-between mb-4">
-              <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                Propose time slots
-              </h3>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => setShowProposeDialog(false)} 
-                className="rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
-              >
-                <X className="w-4 h-4" />
-              </Button>
+      <Dialog open={showProposeDialog} onOpenChange={setShowProposeDialog}>
+        <DialogContent className="sm:max-w-md rounded-2xl">
+          <DialogHeader>
+            <DialogTitle>Propose time slots</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Client/File</label>
+              <Select>
+                <SelectTrigger className="rounded-xl">
+                  <SelectValue placeholder="Choose a file" />
+                </SelectTrigger>
+                <SelectContent className="rounded-xl">
+                  {dossiersList.map(dossier => (
+                    <SelectItem key={dossier.id} value={dossier.id.toString()}>
+                      {dossier.address}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
-            
-            <div className="space-y-4">
-              <div>
-                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Client/File</label>
-                <Select>
-                  <SelectTrigger className="rounded-xl">
-                    <SelectValue placeholder="Choose a file" />
-                  </SelectTrigger>
-                  <SelectContent className="rounded-xl">
-                    {dossiersList.map(dossier => (
-                      <SelectItem key={dossier.id} value={dossier.id.toString()}>
-                        {dossier.address}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Date range</label>
+              <div className="grid grid-cols-2 gap-2">
+                <Input type="date" className="rounded-xl" />
+                <Input type="date" className="rounded-xl" />
               </div>
-              <div>
-                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Date range</label>
-                <div className="grid grid-cols-2 gap-2">
-                  <Input type="date" className="rounded-xl" />
-                  <Input type="date" className="rounded-xl" />
-                </div>
-              </div>
-              <div>
-                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Slots to propose</label>
-                <Textarea placeholder="Ex: Monday 2pm-3pm, Tuesday 10:30am-11:30am..." className="rounded-xl" />
-              </div>
-              <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
-                <Sparkles className="w-4 h-4 mr-2" />
-                Let AI propose
-              </Button>
             </div>
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Slots to propose</label>
+              <Textarea placeholder="Ex: Monday 2pm-3pm, Tuesday 10:30am-11:30am..." className="rounded-xl" />
+            </div>
+            <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
+              <Sparkles className="w-4 h-4 mr-2" />
+              Let AI propose
+            </Button>
           </div>
-        </div>
-      )}
+        </DialogContent>
+      </Dialog>
 
       {/* Planning Modal - Reschedule */}
       {showRescheduleDialog && (
