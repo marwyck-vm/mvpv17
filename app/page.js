@@ -116,7 +116,7 @@ export default function MarwyckCopilot() {
   const [trafficStatus, setTrafficStatus] = useState('good')
   const [darkMode, setDarkMode] = useState(false)
   const [isRecording, setIsRecording] = useState(false)
-  const [showColorPicker, setShowColorPicker] = useState(false)
+  const [showAIHelp, setShowAIHelp] = useState(false)
   const [accentColor, setAccentColor] = useState('#00C4FF')
   const [showNewEventDialog, setShowNewEventDialog] = useState(false)
   const [showProposeDialog, setShowProposeDialog] = useState(false)
