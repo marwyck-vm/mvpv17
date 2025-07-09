@@ -788,75 +788,58 @@ export default function MarwyckCopilot() {
       )}
 
       {/* Planning Modal - New Event */}
-      {showNewEventDialog && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div 
-            className="fixed inset-0" 
-            onClick={() => setShowNewEventDialog(false)}
-          />
-          <div className={`relative max-w-md w-full ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} rounded-2xl shadow-2xl border p-6`}>
-            <div className="flex items-center justify-between mb-4">
-              <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                Create new appointment
-              </h3>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => setShowNewEventDialog(false)} 
-                className="rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
-              >
-                <X className="w-4 h-4" />
-              </Button>
+      <Dialog open={showNewEventDialog} onOpenChange={setShowNewEventDialog}>
+        <DialogContent className="sm:max-w-md rounded-2xl">
+          <DialogHeader>
+            <DialogTitle>Create new appointment</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Title</label>
+              <Input 
+                placeholder="Ex: Apartment visit" 
+                className="rounded-xl" 
+                value={newEventData.title}
+                onChange={(e) => setNewEventData({...newEventData, title: e.target.value})}
+              />
             </div>
-            
-            <div className="space-y-4">
-              <div>
-                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Title</label>
-                <Input 
-                  placeholder="Ex: Apartment visit" 
-                  className="rounded-xl" 
-                  value={newEventData.title}
-                  onChange={(e) => setNewEventData({...newEventData, title: e.target.value})}
-                />
-              </div>
-              <div>
-                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Date</label>
-                <Input 
-                  type="date" 
-                  className="rounded-xl" 
-                  value={newEventData.date}
-                  onChange={(e) => setNewEventData({...newEventData, date: e.target.value})}
-                />
-              </div>
-              <div>
-                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Time</label>
-                <Input 
-                  type="time" 
-                  className="rounded-xl" 
-                  value={newEventData.time}
-                  onChange={(e) => setNewEventData({...newEventData, time: e.target.value})}
-                />
-              </div>
-              <div>
-                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Additional information</label>
-                <Textarea 
-                  placeholder="Appointment details..." 
-                  className="rounded-xl" 
-                  value={newEventData.details}
-                  onChange={(e) => setNewEventData({...newEventData, details: e.target.value})}
-                />
-              </div>
-              <Button 
-                onClick={handleCreateEvent}
-                className="w-full text-white rounded-full" 
-                style={{ backgroundColor: accentColor }}
-              >
-                Create Appointment
-              </Button>
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Date</label>
+              <Input 
+                type="date" 
+                className="rounded-xl" 
+                value={newEventData.date}
+                onChange={(e) => setNewEventData({...newEventData, date: e.target.value})}
+              />
             </div>
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Time</label>
+              <Input 
+                type="time" 
+                className="rounded-xl" 
+                value={newEventData.time}
+                onChange={(e) => setNewEventData({...newEventData, time: e.target.value})}
+              />
+            </div>
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Additional information</label>
+              <Textarea 
+                placeholder="Appointment details..." 
+                className="rounded-xl" 
+                value={newEventData.details}
+                onChange={(e) => setNewEventData({...newEventData, details: e.target.value})}
+              />
+            </div>
+            <Button 
+              onClick={handleCreateEvent}
+              className="w-full text-white rounded-full" 
+              style={{ backgroundColor: accentColor }}
+            >
+              Create Appointment
+            </Button>
           </div>
-        </div>
-      )}
+        </DialogContent>
+      </Dialog>
 
       {/* Planning Modal - Propose Slots */}
       {showProposeDialog && (
