@@ -88,7 +88,7 @@ export default function MarwyckCopilot() {
     {
       id: 1,
       role: 'assistant',
-      content: "Bonjour ! Je suis Marwyck, votre assistant IA. Comment puis-je vous aider aujourd'hui ?",
+      content: "Hello! I'm Marwyck, your AI assistant. How can I help you today?",
       timestamp: new Date(Date.now() - 3600000)
     }
   ])
@@ -157,39 +157,39 @@ export default function MarwyckCopilot() {
 
   const getTrafficText = () => {
     switch (trafficStatus) {
-      case 'good': return 'Fluide'
-      case 'medium': return 'Modéré'
-      case 'heavy': return 'Saturé'
-      default: return 'Inconnu'
+      case 'good': return 'Light'
+      case 'medium': return 'Moderate'
+      case 'heavy': return 'Heavy'
+      default: return 'Unknown'
     }
   }
 
   // Mock data
   const dossiers = [
-    { id: 1, address: '123 Oak Street', type: 'Vente', status: 'active', priority: 'high' },
-    { id: 2, address: '456 Pine Avenue', type: 'Achat', status: 'pending', priority: 'medium' },
-    { id: 3, address: '789 Elm Drive', type: 'Location', status: 'completed', priority: 'low' }
+    { id: 1, address: '123 Oak Street', type: 'Sale', status: 'active', priority: 'high' },
+    { id: 2, address: '456 Pine Avenue', type: 'Purchase', status: 'pending', priority: 'medium' },
+    { id: 3, address: '789 Elm Drive', type: 'Rental', status: 'completed', priority: 'low' }
   ]
 
   const documentsTemplates = {
-    vente: [
-      { name: 'Compromis de vente', required: true },
-      { name: 'Diagnostics techniques', required: true },
-      { name: 'Attestation assurance', required: true },
-      { name: 'Certificat énergétique', required: false },
-      { name: 'Procuration', required: false }
+    sale: [
+      { name: 'Sales agreement', required: true },
+      { name: 'Technical diagnostics', required: true },
+      { name: 'Insurance certificate', required: true },
+      { name: 'Energy certificate', required: false },
+      { name: 'Power of attorney', required: false }
     ],
-    achat: [
-      { name: 'Offre d\'achat', required: true },
-      { name: 'Justificatifs revenus', required: true },
-      { name: 'Attestation financement', required: true },
-      { name: 'Pièce d\'identité', required: true }
+    purchase: [
+      { name: 'Purchase offer', required: true },
+      { name: 'Income verification', required: true },
+      { name: 'Financing certificate', required: true },
+      { name: 'ID document', required: true }
     ],
-    location: [
-      { name: 'Bail de location', required: true },
-      { name: 'État des lieux', required: true },
-      { name: 'Dossier locataire', required: true },
-      { name: 'Assurance habitation', required: true }
+    rental: [
+      { name: 'Rental agreement', required: true },
+      { name: 'Property inspection', required: true },
+      { name: 'Tenant file', required: true },
+      { name: 'Home insurance', required: true }
     ]
   }
 
@@ -197,43 +197,43 @@ export default function MarwyckCopilot() {
     { 
       id: 1, 
       address: '123 Oak Street', 
-      type: 'vente', 
+      type: 'sale', 
       status: 'active', 
       priority: 'high',
       contacts: [
-        { id: 1, name: 'John Smith', email: 'john@email.com', phone: '+1234567890', role: 'Vendeur' }
+        { id: 1, name: 'John Smith', email: 'john@email.com', phone: '+1234567890', role: 'Seller' }
       ],
       documents: [
-        { id: 1, name: 'Compromis de vente', type: 'PDF', status: 'signed', required: true },
-        { id: 2, name: 'Diagnostics techniques', type: 'PDF', status: 'received', required: true },
-        { id: 3, name: 'Attestation assurance', type: 'PDF', status: 'missing', required: true }
+        { id: 1, name: 'Sales agreement', type: 'PDF', status: 'signed', required: true },
+        { id: 2, name: 'Technical diagnostics', type: 'PDF', status: 'received', required: true },
+        { id: 3, name: 'Insurance certificate', type: 'PDF', status: 'missing', required: true }
       ]
     },
     { 
       id: 2, 
       address: '456 Pine Avenue', 
-      type: 'achat', 
+      type: 'purchase', 
       status: 'pending', 
       priority: 'medium',
       contacts: [
-        { id: 2, name: 'Marie Durant', email: 'marie@email.com', phone: '+1234567891', role: 'Acheteur' }
+        { id: 2, name: 'Marie Durant', email: 'marie@email.com', phone: '+1234567891', role: 'Buyer' }
       ],
       documents: [
-        { id: 4, name: 'Offre d\'achat', type: 'PDF', status: 'received', required: true },
-        { id: 5, name: 'Justificatifs revenus', type: 'PDF', status: 'missing', required: true }
+        { id: 4, name: 'Purchase offer', type: 'PDF', status: 'received', required: true },
+        { id: 5, name: 'Income verification', type: 'PDF', status: 'missing', required: true }
       ]
     }
   ])
 
   const [calendarEvents, setCalendarEvents] = useState([
-    { id: 1, title: 'Visite 123 Oak Street', time: '14:00', type: 'visit', client: 'John Smith', description: 'Visite de la propriété avec le client' },
-    { id: 2, title: 'Signature chez notaire', time: '16:30', type: 'signature', client: 'Marie Durant', description: 'Signature des documents officiels' },
-    { id: 3, title: 'Estimation 456 Pine Ave', time: '10:00', type: 'estimation', client: 'Paul Martin', description: 'Évaluation de la propriété' }
+    { id: 1, title: 'Visit 123 Oak Street', time: '14:00', type: 'visit', client: 'John Smith', description: 'Property visit with client' },
+    { id: 2, title: 'Notary signing', time: '16:30', type: 'signature', client: 'Marie Durant', description: 'Official document signing' },
+    { id: 3, title: 'Estimate 456 Pine Ave', time: '10:00', type: 'estimation', client: 'Paul Martin', description: 'Property valuation' }
   ])
 
   // Dynamic clients based on dossiers
   const clients = [
-    { id: 'general', name: 'Général' },
+    { id: 'general', name: 'General' },
     ...dossiersList.map(dossier => ({
       id: dossier.id.toString(),
       name: dossier.address
@@ -241,14 +241,14 @@ export default function MarwyckCopilot() {
   ]
 
   const getWeekLabel = (weekOffset) => {
-    const dates = ['12-18 Jan', '19-25 Jan', '26-01 Fév']
-    const labels = ['Semaine précédente', 'Cette semaine', 'Semaine suivante']
+    const dates = ['12-18 Jan', '19-25 Jan', '26-01 Feb']
+    const labels = ['Previous week', 'This week', 'Next week']
     return { date: dates[weekOffset + 1], label: labels[weekOffset + 1] }
   }
 
   const kpis = [
     { 
-      title: 'Heures Gagnées', 
+      title: 'Hours Saved', 
       value: '32.5', 
       previousValue: '28.5',
       change: '+14%', 
@@ -257,7 +257,7 @@ export default function MarwyckCopilot() {
       trend: 'up'
     },
     { 
-      title: 'Relances Envoyées', 
+      title: 'Follow-ups Sent', 
       value: '156', 
       previousValue: '142',
       change: '+10%', 
@@ -266,7 +266,7 @@ export default function MarwyckCopilot() {
       trend: 'up'
     },
     { 
-      title: 'Docs Complétés', 
+      title: 'Docs Completed', 
       value: '92%', 
       previousValue: '89%',
       change: '+3%', 
@@ -275,7 +275,7 @@ export default function MarwyckCopilot() {
       trend: 'up'
     },
     { 
-      title: 'RDV Planifiés', 
+      title: 'Appointments Scheduled', 
       value: '28', 
       previousValue: '24',
       change: '+17%', 
@@ -286,9 +286,9 @@ export default function MarwyckCopilot() {
   ]
 
   const recentActivities = [
-    { id: 1, type: 'sms', contact: 'John Smith', message: 'Rappel visite demain 14h', time: '10:30', status: 'sent' },
-    { id: 2, type: 'email', contact: 'Marie Durant', message: 'Documents signés reçus', time: '09:15', status: 'delivered' },
-    { id: 3, type: 'call', contact: 'Paul Martin', message: 'Appel de suivi effectué', time: '08:45', status: 'completed' }
+    { id: 1, type: 'sms', contact: 'John Smith', message: 'Visit reminder tomorrow 2pm', time: '10:30', status: 'sent' },
+    { id: 2, type: 'email', contact: 'Marie Durant', message: 'Signed documents received', time: '09:15', status: 'delivered' },
+    { id: 3, type: 'call', contact: 'Paul Martin', message: 'Follow-up call completed', time: '08:45', status: 'completed' }
   ]
 
   const scrollToBottom = () => {
@@ -328,23 +328,23 @@ export default function MarwyckCopilot() {
   const generateAIResponse = (message) => {
     const lowerMessage = message.toLowerCase()
     
-    if (lowerMessage.includes('/relance') || lowerMessage.includes('relance')) {
-      return "✅ Relance programmée !\n\n📧 Email envoyé à John Smith\n📱 SMS programmé pour demain 9h\n📞 Appel de suivi planifié\n\nSouhaitez-vous voir le détail des relances ?"
+    if (lowerMessage.includes('/followup') || lowerMessage.includes('follow')) {
+      return "✅ Follow-up scheduled!\n\n📧 Email sent to John Smith\n📱 SMS scheduled for tomorrow 9am\n📞 Follow-up call planned\n\nWould you like to see the follow-up details?"
     }
     
-    if (lowerMessage.includes('/estimation') || lowerMessage.includes('estimation')) {
-      return "🏠 Estimation générée pour 123 Oak Street !\n\n💰 Fourchette: $420,000 - $450,000\n📊 Basé sur 8 comparables récents\n📄 Rapport PDF disponible\n\nVoulez-vous que j'envoie le rapport au client ?"
+    if (lowerMessage.includes('/estimate') || lowerMessage.includes('estimate')) {
+      return "🏠 Estimate generated for 123 Oak Street!\n\n💰 Range: $420,000 - $450,000\n📊 Based on 8 recent comparables\n📄 PDF report available\n\nWould you like me to send the report to the client?"
     }
     
-    if (lowerMessage.includes('/rdv') || lowerMessage.includes('rendez-vous')) {
-      return "📅 Créneaux disponibles trouvés !\n\n🕐 Demain 14h00 - 15h00\n🕑 Jeudi 10h30 - 11h30\n🕒 Vendredi 16h00 - 17h00\n\nQuel créneau confirmer ?"
+    if (lowerMessage.includes('/appointment') || lowerMessage.includes('meeting')) {
+      return "📅 Available time slots found!\n\n🕐 Tomorrow 2:00pm - 3:00pm\n🕑 Thursday 10:30am - 11:30am\n🕒 Friday 4:00pm - 5:00pm\n\nWhich time slot should I confirm?"
     }
     
     if (lowerMessage.includes('/docs') || lowerMessage.includes('documents')) {
-      return "📋 Statut des documents pour 123 Oak Street :\n\n✅ Compromis signé\n✅ Diagnostics reçus\n❌ Attestation assurance manquante\n⏳ Certificat énergétique en attente\n\nRelancer pour les pièces manquantes ?"
+      return "📋 Document status for 123 Oak Street:\n\n✅ Sales agreement signed\n✅ Diagnostics received\n❌ Insurance certificate missing\n⏳ Energy certificate pending\n\nSend reminders for missing documents?"
     }
     
-    return "Je peux vous aider avec :\n\n📞 Programmer des relances automatiques\n🏠 Estimer la valeur d'un bien\n📅 Planifier un rendez-vous\n📋 Vérifier les documents d'un dossier\n\nQue souhaitez-vous faire ?"
+    return "I can help you with:\n\n📞 Schedule automatic follow-ups\n🏠 Estimate property values\n📅 Plan appointments\n📋 Check document status\n\nWhat would you like to do?"
   }
 
   const getStatusColor = (status) => {
@@ -386,7 +386,7 @@ export default function MarwyckCopilot() {
   const addNewDossier = (type) => {
     const newDossier = {
       id: Date.now(),
-      address: 'Nouvelle adresse',
+      address: 'New address',
       type: type,
       status: 'active',
       priority: 'medium',
@@ -411,18 +411,18 @@ export default function MarwyckCopilot() {
     const actions = []
     
     if (missingDocs.length > 0) {
-      actions.push(`Relancer pour ${missingDocs.length} document(s) manquant(s)`)
+      actions.push(`Send reminder for ${missingDocs.length} missing document(s)`)
     }
     
-    if (dossier.type === 'vente') {
-      actions.push('Programmer visite')
-      actions.push('Envoyer estimation')
-    } else if (dossier.type === 'achat') {
-      actions.push('Vérifier financement')
-      actions.push('Planifier négociation')
-    } else if (dossier.type === 'location') {
-      actions.push('Vérifier dossier locataire')
-      actions.push('Programmer état des lieux')
+    if (dossier.type === 'sale') {
+      actions.push('Schedule property visit')
+      actions.push('Send estimate')
+    } else if (dossier.type === 'purchase') {
+      actions.push('Check financing')
+      actions.push('Plan negotiation')
+    } else if (dossier.type === 'rental') {
+      actions.push('Check tenant file')
+      actions.push('Schedule property inspection')
     }
     
     return actions
@@ -437,36 +437,35 @@ export default function MarwyckCopilot() {
     if (!isRecording) {
       console.log('Starting voice transcription...')
       setTimeout(() => {
-        setInputMessage('Transcription: Bonjour, je souhaite programmer une visite pour demain.')
+        setInputMessage('Transcription: Hello, I would like to schedule a visit for tomorrow.')
         setIsRecording(false)
       }, 3000)
     }
   }
 
   const formatDate = (date) => {
-    const formatted = date.toLocaleDateString('fr-FR', {
+    const formatted = date.toLocaleDateString('en-US', {
       weekday: 'long',
       day: 'numeric',
       month: 'long',
       year: 'numeric'
     })
-    // Capitaliser la première lettre
-    return formatted.charAt(0).toUpperCase() + formatted.slice(1)
+    return formatted
   }
 
   const eventQuickActions = [
-    { id: 'reschedule', name: 'Replanifier', icon: Calendar },
-    { id: 'cancel', name: 'Annuler', icon: X },
-    { id: 'edit', name: 'Modifier', icon: Edit },
-    { id: 'duplicate', name: 'Dupliquer', icon: Copy }
+    { id: 'reschedule', name: 'Reschedule', icon: Calendar },
+    { id: 'cancel', name: 'Cancel', icon: X },
+    { id: 'edit', name: 'Edit', icon: Edit },
+    { id: 'duplicate', name: 'Duplicate', icon: Copy }
   ]
 
   const getNextMeetingPreparation = () => {
     return [
-      "📋 Préparer les clés de la propriété",
-      "📞 Confirmer l'heure avec le client",
-      "🗂️ Rassembler tous les documents nécessaires",
-      "🚗 Vérifier l'itinéraire et prévoir le temps de trajet"
+      "📋 Prepare property keys",
+      "📞 Confirm time with client",
+      "🗂️ Gather all necessary documents",
+      "🚗 Check route and travel time"
     ]
   }
 
@@ -478,8 +477,8 @@ export default function MarwyckCopilot() {
         title: newEventData.title,
         time: newEventData.time,
         type: 'meeting',
-        client: 'Nouveau client',
-        description: newEventData.details || 'Nouveau rendez-vous'
+        client: 'New client',
+        description: newEventData.details || 'New appointment'
       }
       setCalendarEvents(prev => [...prev, newEvent])
       setNewEventData({ title: '', time: '', details: '' })
@@ -524,7 +523,7 @@ export default function MarwyckCopilot() {
           <div className={`w-80 h-full ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-xl p-6 rounded-r-xl`}>
             <div className="flex items-center justify-between mb-6">
               <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                Couleurs
+                Colors
               </h3>
               <Button variant="ghost" size="sm" onClick={() => setShowColorPicker(false)} className="rounded-full">
                 <X className="w-4 h-4" />
@@ -534,7 +533,7 @@ export default function MarwyckCopilot() {
             <div className="space-y-6">
               <div>
                 <label className={`block text-sm font-medium mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                  Couleur principale
+                  Primary color
                 </label>
                 <div className="space-y-4">
                   {accentColors.map(color => (
@@ -564,7 +563,7 @@ export default function MarwyckCopilot() {
                   style={{ backgroundColor: accentColor }}
                 >
                   <Save className="w-4 h-4 mr-2" />
-                  Appliquer
+                  Apply
                 </Button>
               </div>
             </div>
@@ -601,8 +600,8 @@ export default function MarwyckCopilot() {
               { id: 'planning', label: 'Planning', icon: Calendar },
               { id: 'documents', label: 'Documents', icon: FileText },
               { id: 'estimation', label: 'Estimation', icon: Calculator },
-              { id: 'communications', label: 'SMS & Appels', icon: Phone },
-              { id: 'account', label: 'Compte', icon: UserCircle }
+              { id: 'communications', label: 'SMS & Calls', icon: Phone },
+              { id: 'account', label: 'Account', icon: UserCircle }
             ].map(item => (
               <li key={item.id}>
                 <button
@@ -634,15 +633,15 @@ export default function MarwyckCopilot() {
               title={sidebarCollapsed ? 'Toggle Theme' : ''}
             >
               {darkMode ? <Sun className="w-4 h-4 mr-3" /> : <Moon className="w-4 h-4 mr-3" />}
-              {!sidebarCollapsed && (darkMode ? 'Mode Clair' : 'Mode Sombre')}
+              {!sidebarCollapsed && (darkMode ? 'Light Mode' : 'Dark Mode')}
             </Button>
             <button
               onClick={() => setShowColorPicker(true)}
               className={`w-full flex items-center px-3 py-2 rounded-full text-sm font-medium transition-colors ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'}`}
-              title={sidebarCollapsed ? 'Couleurs' : ''}
+              title={sidebarCollapsed ? 'Colors' : ''}
             >
               <Palette className="w-4 h-4 mr-3" />
-              {!sidebarCollapsed && 'Couleurs'}
+              {!sidebarCollapsed && 'Colors'}
             </button>
           </div>
         </div>
@@ -659,8 +658,8 @@ export default function MarwyckCopilot() {
               {activeTab === 'planning' && 'Planning'}
               {activeTab === 'documents' && 'Documents'}
               {activeTab === 'estimation' && 'Estimation'}
-              {activeTab === 'communications' && 'SMS & Appels'}
-              {activeTab === 'account' && 'Compte'}
+              {activeTab === 'communications' && 'SMS & Calls'}
+              {activeTab === 'account' && 'Account'}
             </h1>
           </div>
           <div className="flex items-center space-x-6">
@@ -721,7 +720,7 @@ export default function MarwyckCopilot() {
                     </div>
                   </div>
                   <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                    Efficacité en hausse de <span className="font-medium text-success">+12%</span> par rapport à la semaine précédente
+                    Efficiency increased by <span className="font-medium text-success">+12%</span> from last week
                   </p>
                 </div>
 
@@ -752,7 +751,7 @@ export default function MarwyckCopilot() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
                     <CardHeader>
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Activité récente</CardTitle>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Recent Activity</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
@@ -784,7 +783,7 @@ export default function MarwyckCopilot() {
                   <div className="space-y-6">
                     <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
                       <CardHeader>
-                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Prochains RDV</CardTitle>
+                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Upcoming Appointments</CardTitle>
                       </CardHeader>
                       <CardContent>
                         <div className="space-y-4">
@@ -814,12 +813,12 @@ export default function MarwyckCopilot() {
                       <CardHeader>
                         <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} flex items-center`}>
                           <Lightbulb className="w-5 h-5 mr-2" style={{ color: accentColor }} />
-                          Préparation RDV
+                          Meeting Preparation
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
                         <p className={`text-sm mb-3 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                          Pour votre visite de demain :
+                          For your visit tomorrow:
                         </p>
                         <div className="space-y-2">
                           {getNextMeetingPreparation().map((item, index) => (
@@ -837,6 +836,165 @@ export default function MarwyckCopilot() {
             </div>
           )}
 
+          {/* Account Tab */}
+          {activeTab === 'account' && (
+            <div className="p-6 h-full overflow-y-auto">
+              <div className="max-w-4xl mx-auto">
+                <div className="mb-8">
+                  <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                    Account Settings
+                  </h2>
+                  <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Manage your profile and preferences</p>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                  {/* Profile Section */}
+                  <Card className={`lg:col-span-2 ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
+                    <CardHeader>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Profile Information</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-6">
+                        <div className="flex items-center space-x-4">
+                          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+                            <User className="w-10 h-10 text-white" />
+                          </div>
+                          <div>
+                            <h3 className={`text-lg font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>John Doe</h3>
+                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Real Estate Agent</p>
+                          </div>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Full Name</label>
+                            <Input defaultValue="John Doe" className="rounded-xl" />
+                          </div>
+                          <div>
+                            <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Email</label>
+                            <Input defaultValue="john@marwyck.com" className="rounded-xl" />
+                          </div>
+                          <div>
+                            <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Phone</label>
+                            <Input defaultValue="+1 (555) 123-4567" className="rounded-xl" />
+                          </div>
+                          <div>
+                            <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Agency</label>
+                            <Input defaultValue="Marwyck Real Estate" className="rounded-xl" />
+                          </div>
+                        </div>
+                        
+                        <Button className="text-white rounded-full" style={{ backgroundColor: accentColor }}>
+                          <Save className="w-4 h-4 mr-2" />
+                          Update Profile
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Statistics */}
+                  <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
+                    <CardHeader>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Your Stats</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            <Clock className="w-4 h-4" style={{ color: accentColor }} />
+                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Total Hours Saved</span>
+                          </div>
+                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>847h</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            <FileText className="w-4 h-4" style={{ color: accentColor }} />
+                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Files Processed</span>
+                          </div>
+                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>1,234</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            <Calendar className="w-4 h-4" style={{ color: accentColor }} />
+                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Appointments</span>
+                          </div>
+                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>456</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            <Send className="w-4 h-4" style={{ color: accentColor }} />
+                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Messages Sent</span>
+                          </div>
+                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>3,789</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Preferences */}
+                <Card className={`mt-6 ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
+                  <CardHeader>
+                    <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Preferences</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <h4 className={`font-medium mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Notifications</h4>
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between">
+                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Email notifications</span>
+                            <input type="checkbox" defaultChecked className="rounded" />
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>SMS notifications</span>
+                            <input type="checkbox" defaultChecked className="rounded" />
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Push notifications</span>
+                            <input type="checkbox" className="rounded" />
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <h4 className={`font-medium mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Language & Region</h4>
+                        <div className="space-y-3">
+                          <div>
+                            <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Language</label>
+                            <Select defaultValue="en">
+                              <SelectTrigger className="rounded-xl">
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent className="rounded-xl">
+                                <SelectItem value="en">English</SelectItem>
+                                <SelectItem value="fr">French</SelectItem>
+                                <SelectItem value="es">Spanish</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <div>
+                            <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Time Zone</label>
+                            <Select defaultValue="pst">
+                              <SelectTrigger className="rounded-xl">
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent className="rounded-xl">
+                                <SelectItem value="pst">Pacific Time</SelectItem>
+                                <SelectItem value="est">Eastern Time</SelectItem>
+                                <SelectItem value="cst">Central Time</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          )}
+
           {/* Chat */}
           {activeTab === 'chat' && (
             <div className="h-full flex flex-col">
@@ -846,7 +1004,7 @@ export default function MarwyckCopilot() {
                     <div className="flex-1">
                       <Select value={selectedClient} onValueChange={setSelectedClient}>
                         <SelectTrigger className={`w-64 rounded-full ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
-                          <SelectValue placeholder="Choisir un dossier" />
+                          <SelectValue placeholder="Choose a file" />
                         </SelectTrigger>
                         <SelectContent className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
                           {clients.map(client => (
@@ -869,13 +1027,13 @@ export default function MarwyckCopilot() {
                     <DialogTrigger asChild>
                       <Button variant="outline" size="sm" className="rounded-full">
                         <Info className="w-4 h-4 mr-2" />
-                        Aide IA
+                        AI Help
                       </Button>
                     </DialogTrigger>
                     <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-md`}>
                       <DialogHeader>
                         <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
-                          Ce que je peux faire pour vous
+                          What I can do for you
                         </DialogTitle>
                       </DialogHeader>
                       <div className="space-y-4">
@@ -884,8 +1042,8 @@ export default function MarwyckCopilot() {
                             <Phone className="w-5 h-5 text-white" />
                           </div>
                           <div>
-                            <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Programmer des relances</p>
-                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Envoi automatique de SMS, emails et appels de suivi</p>
+                            <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Schedule follow-ups</p>
+                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Automatic SMS, email and call scheduling</p>
                           </div>
                         </div>
                         <div className="flex items-center space-x-3">
@@ -893,8 +1051,8 @@ export default function MarwyckCopilot() {
                             <Home className="w-5 h-5 text-white" />
                           </div>
                           <div>
-                            <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Estimer des biens</p>
-                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Génération d'estimations basées sur les comparables</p>
+                            <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Property estimates</p>
+                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Generate estimates based on comparables</p>
                           </div>
                         </div>
                         <div className="flex items-center space-x-3">
@@ -902,8 +1060,8 @@ export default function MarwyckCopilot() {
                             <Calendar className="w-5 h-5 text-white" />
                           </div>
                           <div>
-                            <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Planifier des rendez-vous</p>
-                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Organisation automatique de votre agenda</p>
+                            <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Schedule appointments</p>
+                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Automatic calendar management</p>
                           </div>
                         </div>
                         <div className="flex items-center space-x-3">
@@ -911,8 +1069,8 @@ export default function MarwyckCopilot() {
                             <FileText className="w-5 h-5 text-white" />
                           </div>
                           <div>
-                            <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Gérer les documents</p>
-                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Suivi des pièces manquantes et relances automatiques</p>
+                            <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Manage documents</p>
+                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Track missing documents and automatic reminders</p>
                           </div>
                         </div>
                       </div>
@@ -968,7 +1126,7 @@ export default function MarwyckCopilot() {
                                 <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: accentColor, animationDelay: '0.1s' }}></div>
                                 <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: accentColor, animationDelay: '0.2s' }}></div>
                               </div>
-                              <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Marwyck tape...</span>
+                              <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Marwyck is typing...</span>
                             </div>
                           </div>
                         </div>
@@ -996,7 +1154,7 @@ export default function MarwyckCopilot() {
                           value={inputMessage}
                           onChange={(e) => setInputMessage(e.target.value)}
                           onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                          placeholder="Tapez votre message..."
+                          placeholder="Type your message..."
                           className="flex-1 border-0 bg-transparent focus:ring-0 focus:outline-none"
                         />
                         <Button
@@ -1031,37 +1189,37 @@ export default function MarwyckCopilot() {
                   <div className="flex items-center justify-between mb-4">
                     <div>
                       <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                        Gestion des Dossiers
+                        File Management
                       </h2>
-                      <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Gérez vos dossiers et documents</p>
+                      <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Manage your files and documents</p>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Button
-                        onClick={() => addNewDossier('vente')}
+                        onClick={() => addNewDossier('sale')}
                         size="sm"
                         className="text-white rounded-full"
                         style={{ backgroundColor: accentColor }}
                       >
                         <Plus className="w-4 h-4 mr-2" />
-                        Vente
+                        Sale
                       </Button>
                       <Button
-                        onClick={() => addNewDossier('achat')}
+                        onClick={() => addNewDossier('purchase')}
                         size="sm"
                         variant="outline"
                         className="rounded-full"
                       >
                         <Plus className="w-4 h-4 mr-2" />
-                        Achat
+                        Purchase
                       </Button>
                       <Button
-                        onClick={() => addNewDossier('location')}
+                        onClick={() => addNewDossier('rental')}
                         size="sm"
                         variant="outline"
                         className="rounded-full"
                       >
                         <Plus className="w-4 h-4 mr-2" />
-                        Location
+                        Rental
                       </Button>
                     </div>
                   </div>
@@ -1122,7 +1280,7 @@ export default function MarwyckCopilot() {
                                   </div>
                                   {doc.status === 'missing' && (
                                     <Button size="sm" variant="outline" className="text-xs rounded-full">
-                                      Relancer
+                                      Remind
                                     </Button>
                                   )}
                                 </div>
@@ -1131,7 +1289,7 @@ export default function MarwyckCopilot() {
                           </div>
                           
                           <div>
-                            <h4 className={`font-medium text-sm mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Actions suggérées</h4>
+                            <h4 className={`font-medium text-sm mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Suggested actions</h4>
                             <div className="space-y-1">
                               {getSuggestedActions(dossier).map((action, index) => (
                                 <div key={index} className="flex items-center space-x-2">
@@ -1144,7 +1302,7 @@ export default function MarwyckCopilot() {
                           
                           <div className="pt-2 border-t">
                             <Button size="sm" className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
-                              Gérer le dossier
+                              Manage file
                             </Button>
                           </div>
                         </div>
@@ -1177,7 +1335,7 @@ export default function MarwyckCopilot() {
                         className="rounded-full"
                       >
                         <ChevronLeft className="w-4 h-4" />
-                        Précédente
+                        Previous
                       </Button>
                       <Button
                         variant="outline"
@@ -1186,7 +1344,7 @@ export default function MarwyckCopilot() {
                         disabled={currentWeek === 0}
                         className="rounded-full"
                       >
-                        Aujourd'hui
+                        Today
                       </Button>
                       <Button
                         variant="outline"
@@ -1195,7 +1353,7 @@ export default function MarwyckCopilot() {
                         disabled={currentWeek >= 0}
                         className="rounded-full"
                       >
-                        Suivante
+                        Next
                         <ChevronRight className="w-4 h-4" />
                       </Button>
                     </div>
@@ -1206,11 +1364,11 @@ export default function MarwyckCopilot() {
                   <div className="lg:col-span-2">
                     <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                       <CardHeader>
-                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Calendrier de la semaine</CardTitle>
+                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Weekly Calendar</CardTitle>
                       </CardHeader>
                       <CardContent>
                         <div className="space-y-4">
-                          {['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'].map((day, index) => (
+                          {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map((day, index) => (
                             <div key={day} className={`border-b pb-4 ${darkMode ? 'border-gray-700' : 'border-gray-100'}`}>
                               <h3 className={`font-medium mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{day}</h3>
                               <div className="space-y-2">
@@ -1244,7 +1402,7 @@ export default function MarwyckCopilot() {
                                   ))
                                 }
                                 {index > 1 && (
-                                  <p className={`text-sm italic ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>Aucun rendez-vous</p>
+                                  <p className={`text-sm italic ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>No appointments</p>
                                 )}
                               </div>
                             </div>
@@ -1257,7 +1415,7 @@ export default function MarwyckCopilot() {
                   <div>
                     <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                       <CardHeader>
-                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Actions rapides</CardTitle>
+                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Quick Actions</CardTitle>
                       </CardHeader>
                       <CardContent>
                         <div className="space-y-3">
@@ -1265,27 +1423,27 @@ export default function MarwyckCopilot() {
                             <DialogTrigger asChild>
                               <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
                                 <Plus className="w-4 h-4 mr-2" />
-                                Nouveau RDV
+                                New Appointment
                               </Button>
                             </DialogTrigger>
                             <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-md`}>
                               <DialogHeader>
                                 <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
-                                  Créer un nouveau rendez-vous
+                                  Create new appointment
                                 </DialogTitle>
                               </DialogHeader>
                               <div className="space-y-4">
                                 <div>
-                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Titre</label>
+                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Title</label>
                                   <Input 
-                                    placeholder="Ex: Visite appartement" 
+                                    placeholder="Ex: Apartment visit" 
                                     className="rounded-xl" 
                                     value={newEventData.title}
                                     onChange={(e) => setNewEventData({...newEventData, title: e.target.value})}
                                   />
                                 </div>
                                 <div>
-                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Heure</label>
+                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Time</label>
                                   <Input 
                                     type="time" 
                                     className="rounded-xl" 
@@ -1294,9 +1452,9 @@ export default function MarwyckCopilot() {
                                   />
                                 </div>
                                 <div>
-                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Informations complémentaires</label>
+                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Additional information</label>
                                   <Textarea 
-                                    placeholder="Détails du rendez-vous..." 
+                                    placeholder="Appointment details..." 
                                     className="rounded-xl" 
                                     value={newEventData.details}
                                     onChange={(e) => setNewEventData({...newEventData, details: e.target.value})}
@@ -1307,7 +1465,7 @@ export default function MarwyckCopilot() {
                                   className="w-full text-white rounded-full" 
                                   style={{ backgroundColor: accentColor }}
                                 >
-                                  Créer le RDV
+                                  Create Appointment
                                 </Button>
                               </div>
                             </DialogContent>
@@ -1317,21 +1475,21 @@ export default function MarwyckCopilot() {
                             <DialogTrigger asChild>
                               <Button variant="outline" className="w-full rounded-full">
                                 <Calendar className="w-4 h-4 mr-2" />
-                                Proposer créneaux
+                                Propose slots
                               </Button>
                             </DialogTrigger>
                             <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-md`}>
                               <DialogHeader>
                                 <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
-                                  Proposer des créneaux
+                                  Propose time slots
                                 </DialogTitle>
                               </DialogHeader>
                               <div className="space-y-4">
                                 <div>
-                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Client/Dossier</label>
+                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Client/File</label>
                                   <Select>
                                     <SelectTrigger className="rounded-xl">
-                                      <SelectValue placeholder="Choisir un dossier" />
+                                      <SelectValue placeholder="Choose a file" />
                                     </SelectTrigger>
                                     <SelectContent className="rounded-xl">
                                       {dossiersList.map(dossier => (
@@ -1343,12 +1501,12 @@ export default function MarwyckCopilot() {
                                   </Select>
                                 </div>
                                 <div>
-                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Créneaux à proposer</label>
-                                  <Textarea placeholder="Ex: Lundi 14h-15h, Mardi 10h-11h..." className="rounded-xl" />
+                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Slots to propose</label>
+                                  <Textarea placeholder="Ex: Monday 2pm-3pm, Tuesday 10:30am-11:30am..." className="rounded-xl" />
                                 </div>
                                 <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
                                   <Sparkles className="w-4 h-4 mr-2" />
-                                  Laisser l'IA proposer
+                                  Let AI propose
                                 </Button>
                               </div>
                             </DialogContent>
@@ -1358,21 +1516,21 @@ export default function MarwyckCopilot() {
                             <DialogTrigger asChild>
                               <Button variant="outline" className="w-full rounded-full">
                                 <Clock className="w-4 h-4 mr-2" />
-                                Replanifier
+                                Reschedule
                               </Button>
                             </DialogTrigger>
                             <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-md`}>
                               <DialogHeader>
                                 <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
-                                  Replanifier un rendez-vous
+                                  Reschedule an appointment
                                 </DialogTitle>
                               </DialogHeader>
                               <div className="space-y-4">
                                 <div>
-                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Rendez-vous à replanifier</label>
+                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Appointment to reschedule</label>
                                   <Select>
                                     <SelectTrigger className="rounded-xl">
-                                      <SelectValue placeholder="Choisir un RDV" />
+                                      <SelectValue placeholder="Choose an appointment" />
                                     </SelectTrigger>
                                     <SelectContent className="rounded-xl">
                                       {calendarEvents.map(event => (
@@ -1384,40 +1542,15 @@ export default function MarwyckCopilot() {
                                   </Select>
                                 </div>
                                 <div>
-                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Nouveaux créneaux</label>
-                                  <Textarea placeholder="Proposer de nouveaux créneaux..." className="rounded-xl" />
+                                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>New time</label>
+                                  <Input type="time" className="rounded-xl" />
                                 </div>
                                 <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
-                                  <Sparkles className="w-4 h-4 mr-2" />
-                                  Laisser l'IA replanifier
+                                  Reschedule
                                 </Button>
                               </div>
                             </DialogContent>
                           </Dialog>
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    <Card className={`mt-6 rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                      <CardHeader>
-                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Rappels</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-3">
-                          <div className="flex items-center space-x-2">
-                            <AlertCircle className="w-4 h-4 text-yellow-500" />
-                            <div>
-                              <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Visite demain</p>
-                              <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Préparer les clés</p>
-                            </div>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <AlertCircle className="w-4 h-4 text-yellow-500" />
-                            <div>
-                              <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Rappel SMS</p>
-                              <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Envoyer rappel client</p>
-                            </div>
-                          </div>
                         </div>
                       </CardContent>
                     </Card>
@@ -1427,295 +1560,90 @@ export default function MarwyckCopilot() {
             </div>
           )}
 
-          {/* Event Details Dialog */}
-          <Dialog open={showEventDetails} onOpenChange={setShowEventDetails}>
-            <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-md`}>
-              <DialogHeader>
-                <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
-                  Détails du rendez-vous
-                </DialogTitle>
-              </DialogHeader>
-              {selectedEvent && (
-                <div className="space-y-4">
-                  <div>
-                    <h3 className={`font-semibold text-lg ${darkMode ? 'text-white' : 'text-gray-900'}`}>{selectedEvent.title}</h3>
-                    <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{selectedEvent.time}</p>
-                    <p className={`text-sm mt-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>{selectedEvent.description}</p>
-                  </div>
-                  <div>
-                    <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}><strong>Client:</strong> {selectedEvent.client}</p>
-                    <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}><strong>Type:</strong> {selectedEvent.type}</p>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 pt-4">
-                    {eventQuickActions.map(action => (
-                      <Button
-                        key={action.id}
-                        variant="outline"
-                        size="sm"
-                        className="rounded-full"
-                      >
-                        <action.icon className="w-4 h-4 mr-2" />
-                        {action.name}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </DialogContent>
-          </Dialog>
-
-          {/* Edit Dossier Dialog */}
-          <Dialog open={showEditDossier} onOpenChange={setShowEditDossier}>
-            <DialogContent className={`max-w-2xl rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
-              <DialogHeader>
-                <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
-                  Modifier le dossier
-                </DialogTitle>
-              </DialogHeader>
-              {editingDossier && (
-                <div className="space-y-6">
-                  <div>
-                    <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Adresse</label>
-                    <Input 
-                      value={editingDossier.address} 
-                      onChange={(e) => setEditingDossier({...editingDossier, address: e.target.value})}
-                      className="rounded-xl" 
-                    />
-                  </div>
-                  
-                  <div>
-                    <h4 className={`font-medium mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Contacts</h4>
-                    {editingDossier.contacts?.map(contact => (
-                      <div key={contact.id} className={`border rounded-xl p-3 mb-3 ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
-                        <div className="grid grid-cols-2 gap-3">
-                          <Input 
-                            value={contact.name} 
-                            onChange={(e) => {
-                              const updatedContacts = editingDossier.contacts.map(c =>
-                                c.id === contact.id ? {...c, name: e.target.value} : c
-                              )
-                              setEditingDossier({...editingDossier, contacts: updatedContacts})
-                            }}
-                            placeholder="Nom" 
-                            className="rounded-xl" 
-                          />
-                          <Input 
-                            value={contact.email} 
-                            onChange={(e) => {
-                              const updatedContacts = editingDossier.contacts.map(c =>
-                                c.id === contact.id ? {...c, email: e.target.value} : c
-                              )
-                              setEditingDossier({...editingDossier, contacts: updatedContacts})
-                            }}
-                            placeholder="Email" 
-                            className="rounded-xl" 
-                          />
-                          <Input 
-                            value={contact.phone} 
-                            onChange={(e) => {
-                              const updatedContacts = editingDossier.contacts.map(c =>
-                                c.id === contact.id ? {...c, phone: e.target.value} : c
-                              )
-                              setEditingDossier({...editingDossier, contacts: updatedContacts})
-                            }}
-                            placeholder="Téléphone" 
-                            className="rounded-xl" 
-                          />
-                          <Input 
-                            value={contact.role} 
-                            onChange={(e) => {
-                              const updatedContacts = editingDossier.contacts.map(c =>
-                                c.id === contact.id ? {...c, role: e.target.value} : c
-                              )
-                              setEditingDossier({...editingDossier, contacts: updatedContacts})
-                            }}
-                            placeholder="Rôle" 
-                            className="rounded-xl" 
-                          />
-                        </div>
-                      </div>
-                    ))}
-                    <Button variant="outline" size="sm" className="rounded-full">
-                      <Plus className="w-4 h-4 mr-2" />
-                      Ajouter un contact
-                    </Button>
-                  </div>
-
-                  <div>
-                    <h4 className={`font-medium mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Documents</h4>
-                    {editingDossier.documents?.map(doc => (
-                      <div key={doc.id} className={`flex items-center justify-between p-2 border rounded-xl mb-2 ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
-                        <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{doc.name}</span>
-                        <Select value={doc.status} onValueChange={(value) => updateDocumentStatus(doc.id, value)}>
-                          <SelectTrigger className="w-32 rounded-xl">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent className="rounded-xl">
-                            <SelectItem value="missing">Manquant</SelectItem>
-                            <SelectItem value="received">Reçu</SelectItem>
-                            <SelectItem value="signed">Signé</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    ))}
-                  </div>
-
-                  <Button 
-                    onClick={handleSaveDossier}
-                    className="w-full text-white rounded-full" 
-                    style={{ backgroundColor: accentColor }}
-                  >
-                    <Save className="w-4 h-4 mr-2" />
-                    Sauvegarder les modifications
-                  </Button>
-                </div>
-              )}
-            </DialogContent>
-          </Dialog>
-
           {/* Estimation */}
           {activeTab === 'estimation' && (
             <div className="p-6 h-full overflow-y-auto">
               <div className="max-w-4xl mx-auto">
                 <div className="mb-8">
-                  <h2 className={`text-2xl font-bold font-plus-jakarta mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                    Estimation de Biens
+                  <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                    Property Estimation
                   </h2>
-                  <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Obtenez des estimations rapides et précises</p>
+                  <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Get instant property value estimates</p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                    <CardHeader>
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Nouvelle Estimation</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-4">
-                        <div>
-                          <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                            Adresse du bien
-                          </label>
-                          <Input placeholder="123 Oak Street, City, State" className="rounded-xl" />
-                        </div>
-                        <div>
-                          <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                            Type de bien
-                          </label>
-                          <Select>
-                            <SelectTrigger className="rounded-xl">
-                              <SelectValue placeholder="Choisir le type" />
-                            </SelectTrigger>
-                            <SelectContent className="rounded-xl">
-                              <SelectItem value="house">Maison</SelectItem>
-                              <SelectItem value="apartment">Appartement</SelectItem>
-                              <SelectItem value="condo">Condo</SelectItem>
-                              <SelectItem value="land">Terrain</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                              Surface (m²)
-                            </label>
-                            <Input type="number" placeholder="150" className="rounded-xl" />
-                          </div>
-                          <div>
-                            <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                              Chambres
-                            </label>
-                            <Input type="number" placeholder="3" className="rounded-xl" />
-                          </div>
-                        </div>
-                        <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
-                          <Calculator className="w-4 h-4 mr-2" />
-                          Générer l'estimation
-                        </Button>
+                <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
+                  <CardHeader>
+                    <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Property Details</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Address</label>
+                        <Input placeholder="123 Main Street" className="rounded-xl" />
                       </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                    <CardHeader>
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Estimation Simulée</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-4">
-                        <div className="text-center">
-                          <p className={`text-sm mb-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Estimation pour</p>
-                          <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>123 Oak Street</h3>
-                        </div>
-                        
-                        <div className={`rounded-xl p-4 ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
-                          <div className="text-center">
-                            <p className={`text-sm mb-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Fourchette d'estimation</p>
-                            <div className="text-3xl font-bold font-space-grotesk" style={{ color: accentColor }}>
-                              $420,000 - $450,000
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="space-y-3">
-                          <div className="flex items-center justify-between">
-                            <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Estimation moyenne</span>
-                            <span className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>$435,000</span>
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Comparables utilisés</span>
-                            <span className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>8 propriétés</span>
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Confiance</span>
-                            <span className="font-medium text-success">85%</span>
-                          </div>
-                        </div>
-
-                        <div className="pt-4 border-t">
-                          <div className="flex space-x-2">
-                            <Button size="sm" variant="outline" className="flex-1 rounded-full">
-                              <Download className="w-4 h-4 mr-2" />
-                              Rapport PDF
-                            </Button>
-                            <Button size="sm" className="flex-1 text-white rounded-full" style={{ backgroundColor: accentColor }}>
-                              <Send className="w-4 h-4 mr-2" />
-                              Envoyer
-                            </Button>
-                          </div>
-                        </div>
+                      <div>
+                        <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>City</label>
+                        <Input placeholder="New York" className="rounded-xl" />
                       </div>
-                    </CardContent>
-                  </Card>
-                </div>
+                      <div>
+                        <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Property Type</label>
+                        <Select>
+                          <SelectTrigger className="rounded-xl">
+                            <SelectValue placeholder="Choose type" />
+                          </SelectTrigger>
+                          <SelectContent className="rounded-xl">
+                            <SelectItem value="house">House</SelectItem>
+                            <SelectItem value="apartment">Apartment</SelectItem>
+                            <SelectItem value="condo">Condo</SelectItem>
+                            <SelectItem value="townhouse">Townhouse</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Square Feet</label>
+                        <Input type="number" placeholder="1500" className="rounded-xl" />
+                      </div>
+                      <div>
+                        <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Bedrooms</label>
+                        <Input type="number" placeholder="3" className="rounded-xl" />
+                      </div>
+                      <div>
+                        <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Bathrooms</label>
+                        <Input type="number" placeholder="2" className="rounded-xl" />
+                      </div>
+                    </div>
+                    
+                    <div className="mt-6">
+                      <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
+                        <Calculator className="w-4 h-4 mr-2" />
+                        Generate Estimate
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
 
                 <Card className={`mt-6 rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                   <CardHeader>
-                    <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Estimations Récentes</CardTitle>
+                    <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Estimated Value</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-3">
-                      {[
-                        { address: '123 Oak Street', price: '$420,000 - $450,000', date: '2 jours' },
-                        { address: '456 Pine Avenue', price: '$380,000 - $410,000', date: '1 semaine' },
-                        { address: '789 Elm Drive', price: '$520,000 - $560,000', date: '2 semaines' }
-                      ].map((estimation, index) => (
-                        <div key={index} className={`flex items-center justify-between p-3 border rounded-xl ${darkMode ? 'border-gray-700' : 'border-gray-100'}`}>
-                          <div>
-                            <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>{estimation.address}</p>
-                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Il y a {estimation.date}</p>
-                          </div>
-                          <div className="text-right">
-                            <p className="font-medium" style={{ color: accentColor }}>{estimation.price}</p>
-                            <div className="flex items-center space-x-2 mt-1">
-                              <Button size="sm" variant="outline" className="rounded-full">
-                                <Eye className="w-3 h-3" />
-                              </Button>
-                              <Button size="sm" variant="outline" className="rounded-full">
-                                <Download className="w-3 h-3" />
-                              </Button>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
+                    <div className="text-center py-8">
+                      <div className={`text-4xl font-bold font-space-grotesk mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`} style={{ color: accentColor }}>
+                        $485,000 - $515,000
+                      </div>
+                      <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                        Based on 12 comparable properties in the area
+                      </p>
+                      <div className="mt-6 flex justify-center space-x-4">
+                        <Button variant="outline" className="rounded-full">
+                          <Download className="w-4 h-4 mr-2" />
+                          Download Report
+                        </Button>
+                        <Button className="text-white rounded-full" style={{ backgroundColor: accentColor }}>
+                          <Mail className="w-4 h-4 mr-2" />
+                          Send to Client
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -1728,174 +1656,77 @@ export default function MarwyckCopilot() {
             <div className="p-6 h-full overflow-y-auto">
               <div className="max-w-6xl mx-auto">
                 <div className="mb-8">
-                  <h2 className={`text-2xl font-bold font-plus-jakarta mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                    SMS & Appels
+                  <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                    Communications History
                   </h2>
-                  <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Historique des communications</p>
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                    <CardHeader>
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Messages récents</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-4">
-                        {[
-                          { type: 'sms', contact: 'John Smith', message: 'Rappel: Visite demain à 14h', time: '10:30', status: 'delivered' },
-                          { type: 'email', contact: 'Marie Durant', message: 'Documents à signer envoyés', time: '09:15', status: 'opened' },
-                          { type: 'sms', contact: 'Paul Martin', message: 'Estimation disponible', time: '08:45', status: 'sent' }
-                        ].map((msg, index) => (
-                          <div key={index} className={`flex items-start space-x-3 p-3 border rounded-xl ${darkMode ? 'border-gray-700' : 'border-gray-100'}`}>
-                            <div className="flex-shrink-0">
-                              {msg.type === 'sms' && <Smartphone className="w-5 h-5" style={{ color: accentColor }} />}
-                              {msg.type === 'email' && <Mail className="w-5 h-5" style={{ color: accentColor }} />}
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center justify-between">
-                                <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                  {msg.contact}
-                                </p>
-                                <div className="flex items-center space-x-2">
-                                  <span className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>{msg.time}</span>
-                                  {getStatusIcon(msg.status)}
-                                </div>
-                              </div>
-                              <p className={`text-sm mt-1 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{msg.message}</p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                    <CardHeader>
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Appels récents</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-4">
-                        {[
-                          { contact: 'John Smith', duration: '3:45', time: '14:20', type: 'outbound', status: 'completed' },
-                          { contact: 'Marie Durant', duration: '1:20', time: '11:30', type: 'inbound', status: 'completed' },
-                          { contact: 'Paul Martin', duration: '0:00', time: '10:15', type: 'outbound', status: 'missed' }
-                        ].map((call, index) => (
-                          <div key={index} className={`flex items-center space-x-3 p-3 border rounded-xl ${darkMode ? 'border-gray-700' : 'border-gray-100'}`}>
-                            <div className="flex-shrink-0">
-                              <PhoneCall className={`w-5 h-5 ${call.type === 'outbound' ? '' : 'text-green-500'}`} style={call.type === 'outbound' ? { color: accentColor } : {}} />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center justify-between">
-                                <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                  {call.contact}
-                                </p>
-                                <div className="flex items-center space-x-2">
-                                  <span className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>{call.time}</span>
-                                  {getStatusIcon(call.status)}
-                                </div>
-                              </div>
-                              <p className={`text-sm mt-1 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                                {call.type === 'outbound' ? 'Appel sortant' : 'Appel entrant'} • {call.duration}
-                              </p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Account */}
-          {activeTab === 'account' && (
-            <div className="p-6 h-full overflow-y-auto">
-              <div className="max-w-4xl mx-auto">
-                <div className="mb-8">
-                  <h2 className={`text-2xl font-bold font-plus-jakarta mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                    Mon Compte
-                  </h2>
-                  <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Gérez vos informations personnelles et préférences</p>
+                  <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>View all SMS and call activities</p>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
+                  <Card className={`lg:col-span-2 rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                     <CardHeader>
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Profil</CardTitle>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Recent Communications</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
-                        <div className="text-center">
-                          <div className="w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                            <User className="w-10 h-10 text-white" />
+                        {recentActivities.map(activity => (
+                          <div key={activity.id} className={`p-4 rounded-xl border ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center space-x-3">
+                                <div className="flex-shrink-0">
+                                  {activity.type === 'sms' && <Smartphone className="w-5 h-5" style={{ color: accentColor }} />}
+                                  {activity.type === 'email' && <Mail className="w-5 h-5" style={{ color: accentColor }} />}
+                                  {activity.type === 'call' && <PhoneCall className="w-5 h-5" style={{ color: accentColor }} />}
+                                </div>
+                                <div>
+                                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                    {activity.contact}
+                                  </p>
+                                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                                    {activity.message}
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="text-right">
+                                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{activity.time}</p>
+                                <div className="flex items-center space-x-1">
+                                  {getStatusIcon(activity.status)}
+                                  <span className={`text-xs ${getStatusColor(activity.status)}`}>{activity.status}</span>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                          <h3 className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Agent Immobilier</h3>
-                          <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>agent@marwyck.ai</p>
-                        </div>
-                        <Button variant="outline" className="w-full rounded-full">
-                          <Edit className="w-4 h-4 mr-2" />
-                          Modifier le profil
-                        </Button>
+                        ))}
                       </div>
                     </CardContent>
                   </Card>
 
                   <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                     <CardHeader>
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Préférences</CardTitle>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Quick Stats</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
                         <div className="flex items-center justify-between">
-                          <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Mode sombre</span>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => setDarkMode(!darkMode)}
-                            className="rounded-full"
-                          >
-                            {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-                          </Button>
+                          <div className="flex items-center space-x-2">
+                            <Smartphone className="w-4 h-4" style={{ color: accentColor }} />
+                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>SMS Sent</span>
+                          </div>
+                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>89</span>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Couleur principale</span>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => setShowColorPicker(true)}
-                            className="rounded-full"
-                          >
-                            <Palette className="w-4 h-4" />
-                          </Button>
+                          <div className="flex items-center space-x-2">
+                            <Mail className="w-4 h-4" style={{ color: accentColor }} />
+                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Emails</span>
+                          </div>
+                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>156</span>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Notifications</span>
-                          <Button variant="outline" size="sm" className="rounded-full">
-                            <Settings className="w-4 h-4" />
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                    <CardHeader>
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Statistiques</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-3">
-                        <div className="flex items-center justify-between">
-                          <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Dossiers actifs</span>
-                          <span className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>{dossiersList.length}</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Messages envoyés</span>
-                          <span className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>156</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Temps gagné</span>
-                          <span className="font-medium text-success">32.5h</span>
+                          <div className="flex items-center space-x-2">
+                            <PhoneCall className="w-4 h-4" style={{ color: accentColor }} />
+                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Calls</span>
+                          </div>
+                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>34</span>
                         </div>
                       </div>
                     </CardContent>
@@ -1906,6 +1737,118 @@ export default function MarwyckCopilot() {
           )}
         </div>
       </div>
+
+      {/* Event Details Modal */}
+      <Dialog open={showEventDetails} onOpenChange={setShowEventDetails}>
+        <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-md`}>
+          <DialogHeader>
+            <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
+              {selectedEvent?.title}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Time</label>
+                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{selectedEvent?.time}</p>
+              </div>
+              <div>
+                <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Client</label>
+                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{selectedEvent?.client}</p>
+              </div>
+            </div>
+            <div>
+              <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Description</label>
+              <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{selectedEvent?.description}</p>
+            </div>
+            <div>
+              <label className={`block text-sm font-medium mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Quick Actions</label>
+              <div className="grid grid-cols-2 gap-2">
+                {eventQuickActions.map(action => (
+                  <Button key={action.id} variant="outline" size="sm" className="rounded-full">
+                    <action.icon className="w-4 h-4 mr-2" />
+                    {action.name}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Edit Dossier Modal */}
+      <Dialog open={showEditDossier} onOpenChange={setShowEditDossier}>
+        <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-2xl`}>
+          <DialogHeader>
+            <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
+              Edit File - {editingDossier?.address}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Address</label>
+                <Input 
+                  value={editingDossier?.address || ''} 
+                  onChange={(e) => setEditingDossier(prev => ({ ...prev, address: e.target.value }))}
+                  className="rounded-xl" 
+                />
+              </div>
+              <div>
+                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Type</label>
+                <Select 
+                  value={editingDossier?.type || ''} 
+                  onValueChange={(value) => setEditingDossier(prev => ({ ...prev, type: value }))}
+                >
+                  <SelectTrigger className="rounded-xl">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="rounded-xl">
+                    <SelectItem value="sale">Sale</SelectItem>
+                    <SelectItem value="purchase">Purchase</SelectItem>
+                    <SelectItem value="rental">Rental</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            
+            <div>
+              <h4 className={`font-medium mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Documents</h4>
+              <div className="space-y-2 max-h-60 overflow-y-auto">
+                {editingDossier?.documents.map(doc => (
+                  <div key={doc.id} className="flex items-center justify-between p-3 border rounded-xl">
+                    <div className="flex items-center space-x-2">
+                      {getStatusIcon(doc.status)}
+                      <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{doc.name}</span>
+                    </div>
+                    <Select value={doc.status} onValueChange={(value) => updateDocumentStatus(doc.id, value)}>
+                      <SelectTrigger className="w-32 rounded-lg">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="rounded-xl">
+                        <SelectItem value="missing">Missing</SelectItem>
+                        <SelectItem value="received">Received</SelectItem>
+                        <SelectItem value="signed">Signed</SelectItem>
+                        <SelectItem value="pending">Pending</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div className="flex justify-end space-x-2">
+              <Button variant="outline" onClick={() => setShowEditDossier(false)} className="rounded-full">
+                Cancel
+              </Button>
+              <Button onClick={handleSaveDossier} className="text-white rounded-full" style={{ backgroundColor: accentColor }}>
+                <Save className="w-4 h-4 mr-2" />
+                Save Changes
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
