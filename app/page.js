@@ -73,7 +73,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 
-export default function MarwyckCopilot() {
+function MarwyckCopilot() {
   const [activeTab, setActiveTab] = useState('dashboard')
   const [activeDossier, setActiveDossier] = useState('123 Oak Street')
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
@@ -2063,4 +2063,3 @@ export default function MarwyckCopilot() {
       </Dialog>
     </div>
   )
-}
