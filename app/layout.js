@@ -1,4 +1,5 @@
 import { Inter, Plus_Jakarta_Sans, Space_Grotesk } from 'next/font/google'
+import { ThemeProvider } from 'next-themes'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
@@ -20,7 +21,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${plusJakarta.variable} ${spaceGrotesk.variable}`}>
       <body className="min-h-screen bg-background font-inter antialiased">
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )

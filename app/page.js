@@ -1,2066 +1,1390 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useTheme } from 'next-themes'
+import { ThemeLogo } from '@/components/ui/theme-logo'
 import { 
-  MessageCircle, 
-  Phone, 
-  Mail, 
-  Calendar,
-  FileText,
-  BarChart3,
-  Home,
-  Clock,
-  CheckCircle,
-  AlertCircle,
+  Home, 
+  MessageSquare, 
+  Calendar, 
+  FileText, 
+  Calculator,
+  User,
+  Settings,
+  Sun,
+  Moon,
   Send,
-  Upload,
-  Download,
   Plus,
   Search,
   Filter,
-  Settings,
-  User,
-  DollarSign,
-  TrendingUp,
-  Users,
-  Target,
-  Zap,
-  Smartphone,
-  Globe,
-  PaperclipIcon,
-  CalendarDays,
-  MapPin,
-  PhoneCall,
-  Eye,
+  MoreVertical,
   Edit,
   Trash2,
-  ChevronRight,
-  ChevronDown,
+  Download,
+  Upload,
+  Clock,
+  CheckCircle,
+  AlertCircle,
+  TrendingUp,
+  Users,
+  DollarSign,
+  Target,
   ChevronLeft,
-  Star,
-  CheckCircle2,
-  XCircle,
-  AlertTriangle,
-  Menu,
-  Code,
-  Building,
-  FolderOpen,
-  Calculator,
-  Paperclip,
-  Mic,
-  MicOff,
-  Sun,
-  Moon,
-  Navigation,
-  Sparkles,
-  FileUp,
-  MoreHorizontal,
-  Info,
-  UserCircle,
-  Palette,
+  ChevronRight,
   X,
-  Save,
-  Copy,
-  Lightbulb,
-  ClipboardList
+  Check,
+  Calendar as CalendarIcon,
+  MapPin,
+  Phone,
+  Mail,
+  Building,
+  Palette
 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { Progress } from '@/components/ui/progress'
+import { Separator } from '@/components/ui/separator'
+import { Switch } from '@/components/ui/switch'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog'
+import { Checkbox } from '@/components/ui/checkbox'
 
 export default function MarwyckCopilot() {
-  const [activeTab, setActiveTab] = useState('dashboard')
-  const [activeDossier, setActiveDossier] = useState('123 Oak Street')
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  const [activeSection, setActiveSection] = useState('dashboard')
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
-  const [currentWeek, setCurrentWeek] = useState(0)
-  const [selectedClient, setSelectedClient] = useState('general')
-  const [messages, setMessages] = useState({
-    general: [
-      {
-        id: 1,
-        role: 'assistant',
-        content: "Hello! I'm Marwyck, your AI assistant. How can I help you today?",
-        timestamp: new Date(Date.now() - 3600000)
-      }
-    ],
-    '1': [
-      {
-        id: 1,
-        role: 'assistant',
-        content: "Hello! I can help you with 123 Oak Street. What would you like to know about this property?",
-        timestamp: new Date(Date.now() - 3600000)
-      }
-    ],
-    '2': [
-      {
-        id: 1,
-        role: 'assistant',
-        content: "Hi! I'm here to assist with 456 Pine Avenue. How can I help you today?",
-        timestamp: new Date(Date.now() - 3600000)
-      }
-    ]
-  })
-  const [inputMessage, setInputMessage] = useState('')
-  const [isTyping, setIsTyping] = useState(false)
-  const [currentTime, setCurrentTime] = useState(new Date())
-  const [trafficStatus, setTrafficStatus] = useState('good')
-  const [darkMode, setDarkMode] = useState(false)
-  const [isRecording, setIsRecording] = useState(false)
-  const [showColorPicker, setShowColorPicker] = useState(false)
+  const [currentWeek, setCurrentWeek] = useState(new Date())
+  const [selectedClient, setSelectedClient] = useState('')
+  const [chatMessages, setChatMessages] = useState([
+    { id: 1, role: 'assistant', content: 'Hello! I\'m your Marwyck Copilot. How can I help you today? You can use commands like -follow, -docs, -plan, or -estimate.', timestamp: new Date() }
+  ])
+  const [newMessage, setNewMessage] = useState('')
   const [showAIHelp, setShowAIHelp] = useState(false)
-  const [accentColor, setAccentColor] = useState('#00C4FF')
-  const [showNewEventDialog, setShowNewEventDialog] = useState(false)
-  const [showProposeDialog, setShowProposeDialog] = useState(false)
-  const [showRescheduleDialog, setShowRescheduleDialog] = useState(false)
+  const [showCreateEvent, setShowCreateEvent] = useState(false)
+  const [showProposeSlots, setShowProposeSlots] = useState(false)
+  const [showReschedule, setShowReschedule] = useState(false)
   const [showEventDetails, setShowEventDetails] = useState(false)
   const [selectedEvent, setSelectedEvent] = useState(null)
+  const [showCreateDossier, setShowCreateDossier] = useState(false)
   const [showEditDossier, setShowEditDossier] = useState(false)
   const [selectedDossier, setSelectedDossier] = useState(null)
-  const [newEventData, setNewEventData] = useState({ title: '', date: '', time: '', details: '' })
-  const [editingDossier, setEditingDossier] = useState(null)
-  const [meetingChecklist, setMeetingChecklist] = useState([
-    { id: 1, text: "Prepare property keys", checked: false },
-    { id: 2, text: "Confirm time with client", checked: false },
-    { id: 3, text: "Gather all necessary documents", checked: false },
-    { id: 4, text: "Check route and travel time", checked: false }
+  const [customColor, setCustomColor] = useState('#00C4FF')
+
+  // Sample data
+  const [kpis, setKpis] = useState({
+    hoursGained: 28.5,
+    relancesSent: 142,
+    docsCompleted: 89,
+    rdvScheduled: 24
+  })
+
+  const [clients] = useState([
+    { id: 1, name: 'Jean Dupont', email: 'jean.dupont@email.com', phone: '+33 1 23 45 67 89' },
+    { id: 2, name: 'Marie Martin', email: 'marie.martin@email.com', phone: '+33 1 98 76 54 32' },
+    { id: 3, name: 'Pierre Durand', email: 'pierre.durand@email.com', phone: '+33 1 11 22 33 44' }
   ])
-  const messagesEndRef = useRef(null)
 
-  // Available accent colors
-  const accentColors = [
-    { name: 'Cyan', value: '#00C4FF' },
-    { name: 'Blue', value: '#3B82F6' },
-    { name: 'Purple', value: '#8B5CF6' },
-    { name: 'Pink', value: '#EC4899' },
-    { name: 'Green', value: '#10B981' },
-    { name: 'Orange', value: '#F59E0B' },
-    { name: 'Red', value: '#EF4444' },
-    { name: 'Emerald', value: '#059669' }
-  ]
-
-  // Update time every second
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date())
-    }, 1000)
-    return () => clearInterval(timer)
-  }, [])
-
-  // Simulate traffic status changes
-  useEffect(() => {
-    const trafficTimer = setInterval(() => {
-      const statuses = ['good', 'medium', 'heavy']
-      const randomStatus = statuses[Math.floor(Math.random() * statuses.length)]
-      setTrafficStatus(randomStatus)
-    }, 30000)
-    return () => clearInterval(trafficTimer)
-  }, [])
-
-  // Update CSS custom property when accent color changes
-  useEffect(() => {
-    document.documentElement.style.setProperty('--accent-cyan', accentColor)
-  }, [accentColor])
-
-  const getTrafficColor = () => {
-    switch (trafficStatus) {
-      case 'good': return 'text-green-500'
-      case 'medium': return 'text-orange-500'
-      case 'heavy': return 'text-red-500'
-      default: return 'text-gray-500'
-    }
-  }
-
-  const getTrafficText = () => {
-    switch (trafficStatus) {
-      case 'good': return 'Light'
-      case 'medium': return 'Moderate'
-      case 'heavy': return 'Heavy'
-      default: return 'Unknown'
-    }
-  }
-
-  // Mock data
-  const dossiers = [
-    { id: 1, address: '123 Oak Street', type: 'Sale', status: 'active', priority: 'high' },
-    { id: 2, address: '456 Pine Avenue', type: 'Purchase', status: 'pending', priority: 'medium' },
-    { id: 3, address: '789 Elm Drive', type: 'Rental', status: 'completed', priority: 'low' }
-  ]
-
-  const documentsTemplates = {
-    sale: [
-      { name: 'Sales agreement', required: true },
-      { name: 'Technical diagnostics', required: true },
-      { name: 'Insurance certificate', required: true },
-      { name: 'Energy certificate', required: false },
-      { name: 'Power of attorney', required: false }
-    ],
-    purchase: [
-      { name: 'Purchase offer', required: true },
-      { name: 'Income verification', required: true },
-      { name: 'Financing certificate', required: true },
-      { name: 'ID document', required: true }
-    ],
-    rental: [
-      { name: 'Rental agreement', required: true },
-      { name: 'Property inspection', required: true },
-      { name: 'Tenant file', required: true },
-      { name: 'Home insurance', required: true }
-    ]
-  }
-
-  const [dossiersList, setDossiersList] = useState([
+  const [events, setEvents] = useState([
     { 
       id: 1, 
-      address: '123 Oak Street', 
+      title: 'Visit - 123 Main St', 
+      client: 'Jean Dupont', 
+      date: '2024-01-15', 
+      time: '14:00', 
+      type: 'visit',
+      address: '123 Main Street, Paris',
+      notes: 'First visit for property evaluation'
+    },
+    { 
+      id: 2, 
+      title: 'Signing - 456 Oak Ave', 
+      client: 'Marie Martin', 
+      date: '2024-01-16', 
+      time: '10:30', 
+      type: 'signing',
+      address: '456 Oak Avenue, Lyon',
+      notes: 'Final contract signing'
+    },
+    { 
+      id: 3, 
+      title: 'Call - Follow-up', 
+      client: 'Pierre Durand', 
+      date: '2024-01-17', 
+      time: '16:00', 
+      type: 'call',
+      notes: 'Follow-up call for property interest'
+    }
+  ])
+
+  const [dossiers, setDossiers] = useState([
+    { 
+      id: 1, 
+      address: '123 Main Street, Paris', 
       type: 'sale', 
       status: 'active', 
       priority: 'high',
-      contacts: [
-        { id: 1, name: 'John Smith', email: 'john@email.com', phone: '+1234567890', role: 'Seller' }
-      ],
+      client: 'Jean Dupont',
+      createdAt: '2024-01-10',
       documents: [
-        { id: 1, name: 'Sales agreement', type: 'PDF', status: 'signed', required: true },
-        { id: 2, name: 'Technical diagnostics', type: 'PDF', status: 'received', required: true },
-        { id: 3, name: 'Insurance certificate', type: 'PDF', status: 'missing', required: true }
+        { id: 1, name: 'Property deed', type: 'legal', status: 'received', required: true },
+        { id: 2, name: 'Energy certificate', type: 'technical', status: 'pending', required: true },
+        { id: 3, name: 'Insurance', type: 'insurance', status: 'received', required: false }
       ]
     },
     { 
       id: 2, 
-      address: '456 Pine Avenue', 
-      type: 'purchase', 
-      status: 'pending', 
+      address: '456 Oak Avenue, Lyon', 
+      type: 'rental', 
+      status: 'active', 
       priority: 'medium',
-      contacts: [
-        { id: 2, name: 'Marie Durant', email: 'marie@email.com', phone: '+1234567891', role: 'Buyer' }
-      ],
+      client: 'Marie Martin',
+      createdAt: '2024-01-12',
       documents: [
-        { id: 4, name: 'Purchase offer', type: 'PDF', status: 'received', required: true },
-        { id: 5, name: 'Income verification', type: 'PDF', status: 'missing', required: true }
+        { id: 4, name: 'Rental agreement', type: 'legal', status: 'received', required: true },
+        { id: 5, name: 'Inventory', type: 'technical', status: 'received', required: true }
       ]
     }
   ])
-
-  const [calendarEvents, setCalendarEvents] = useState([
-    { id: 1, title: 'Visit 123 Oak Street', date: '2024-12-16', time: '14:00', type: 'visit', client: 'John Smith', description: 'Property visit with client' },
-    { id: 2, title: 'Notary signing', date: '2024-12-16', time: '16:30', type: 'signature', client: 'Marie Durant', description: 'Official document signing' },
-    { id: 3, title: 'Estimate 456 Pine Ave', date: '2024-12-17', time: '10:00', type: 'estimation', client: 'Paul Martin', description: 'Property valuation' }
-  ])
-
-  // Dynamic clients based on dossiers
-  const clients = [
-    { id: 'general', name: 'General' },
-    ...dossiersList.map(dossier => ({
-      id: dossier.id.toString(),
-      name: dossier.address
-    }))
-  ]
-
-  // Get current messages for selected client
-  const getCurrentMessages = () => {
-    return messages[selectedClient] || []
-  }
-
-  // Add message to current client
-  const addMessageToClient = (message) => {
-    setMessages(prev => ({
-      ...prev,
-      [selectedClient]: [...(prev[selectedClient] || []), message]
-    }))
-  }
-
-  // Get real week label based on current date and offset
-  const getWeekLabel = (weekOffset) => {
-    const today = new Date()
-    const currentWeekStart = new Date(today)
-    currentWeekStart.setDate(today.getDate() - today.getDay() + 1) // Monday of current week
-    
-    const targetWeekStart = new Date(currentWeekStart)
-    targetWeekStart.setDate(currentWeekStart.getDate() + (weekOffset * 7))
-    
-    const targetWeekEnd = new Date(targetWeekStart)
-    targetWeekEnd.setDate(targetWeekStart.getDate() + 6)
-    
-    const formatDate = (date) => {
-      const options = { month: 'short', day: 'numeric' }
-      return date.toLocaleDateString('en-US', options)
-    }
-    
-    const dateRange = `${formatDate(targetWeekStart)} - ${formatDate(targetWeekEnd)}`
-    
-    let label
-    if (weekOffset === 0) {
-      label = 'This week'
-    } else if (weekOffset === -1) {
-      label = 'Previous week'
-    } else if (weekOffset === 1) {
-      label = 'Next week'
-    } else if (weekOffset < 0) {
-      label = `${Math.abs(weekOffset)} weeks ago`
-    } else {
-      label = `In ${weekOffset} weeks`
-    }
-    
-    return { date: dateRange, label }
-  }
-
-  // Dynamic KPIs based on current week
-  const getKpisForWeek = (weekOffset) => {
-    const baseKpis = [
-      { 
-        title: 'Hours Saved', 
-        value: '32.5', 
-        previousValue: '28.5',
-        change: '+14%', 
-        icon: Clock, 
-        color: 'text-success',
-        trend: 'up'
-      },
-      { 
-        title: 'Follow-ups Sent', 
-        value: '156', 
-        previousValue: '142',
-        change: '+10%', 
-        icon: Send, 
-        color: 'text-accent-cyan',
-        trend: 'up'
-      },
-      { 
-        title: 'Docs Completed', 
-        value: '92%', 
-        previousValue: '89%',
-        change: '+3%', 
-        icon: FileText, 
-        color: 'text-success',
-        trend: 'up'
-      },
-      { 
-        title: 'Appointments Scheduled', 
-        value: '28', 
-        previousValue: '24',
-        change: '+17%', 
-        icon: Calendar, 
-        color: 'text-accent-cyan',
-        trend: 'up'
-      }
-    ]
-
-    if (weekOffset === -1) {
-      return [
-        { ...baseKpis[0], value: '28.5', previousValue: '31.2', change: '-9%', color: 'text-red-500', trend: 'down' },
-        { ...baseKpis[1], value: '142', previousValue: '158', change: '-10%', color: 'text-red-500', trend: 'down' },
-        { ...baseKpis[2], value: '89%', previousValue: '92%', change: '-3%', color: 'text-red-500', trend: 'down' },
-        { ...baseKpis[3], value: '24', previousValue: '29', change: '-17%', color: 'text-red-500', trend: 'down' }
-      ]
-    } else if (weekOffset === 0) {
-      return baseKpis
-    } else {
-      // Future weeks - projected data
-      return [
-        { ...baseKpis[0], value: '35.8', previousValue: '32.5', change: '+10%', color: 'text-success', trend: 'up' },
-        { ...baseKpis[1], value: '164', previousValue: '156', change: '+5%', color: 'text-success', trend: 'up' },
-        { ...baseKpis[2], value: '94%', previousValue: '92%', change: '+2%', color: 'text-success', trend: 'up' },
-        { ...baseKpis[3], value: '32', previousValue: '28', change: '+14%', color: 'text-success', trend: 'up' }
-      ]
-    }
-  }
-
-  const kpis = getKpisForWeek(currentWeek)
-
-  const recentActivities = [
-    { id: 1, type: 'sms', contact: 'John Smith', message: 'Visit reminder tomorrow 2pm', time: '10:30', status: 'sent' },
-    { id: 2, type: 'email', contact: 'Marie Durant', message: 'Signed documents received', time: '09:15', status: 'delivered' },
-    { id: 3, type: 'call', contact: 'Paul Martin', message: 'Follow-up call completed', time: '08:45', status: 'completed' }
-  ]
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }
 
   useEffect(() => {
-    scrollToBottom()
-  }, [messages, selectedClient])
+    setMounted(true)
+  }, [])
 
-  const handleSendMessage = async () => {
-    if (!inputMessage.trim()) return
-
-    const currentMessages = getCurrentMessages()
-    const userMessage = {
-      id: currentMessages.length + 1,
-      role: 'user',
-      content: inputMessage,
-      timestamp: new Date()
-    }
-
-    addMessageToClient(userMessage)
-    setInputMessage('')
-    setIsTyping(true)
-
-    setTimeout(() => {
-      const aiResponse = generateAIResponse(inputMessage, selectedClient)
-      addMessageToClient({
-        id: currentMessages.length + 2,
-        role: 'assistant',
-        content: aiResponse,
-        timestamp: new Date()
-      })
-      setIsTyping(false)
-    }, 1500)
-  }
-
-  const generateAIResponse = (message, clientId) => {
-    const lowerMessage = message.toLowerCase()
+  const getWeekDates = (date) => {
+    const week = []
+    const startDate = new Date(date)
+    const day = startDate.getDay()
+    const diff = startDate.getDate() - day + (day === 0 ? -6 : 1)
+    startDate.setDate(diff)
     
-    // Get specific dossier info if not general
-    const currentDossier = clientId !== 'general' ? dossiersList.find(d => d.id.toString() === clientId) : null
-    
-    if (lowerMessage.includes('/followup') || lowerMessage.includes('follow')) {
-      const clientName = currentDossier ? currentDossier.contacts[0]?.name || 'Client' : 'John Smith'
-      return `✅ Follow-up scheduled for ${currentDossier ? currentDossier.address : 'selected property'}!\n\n📧 Email sent to ${clientName}\n📱 SMS scheduled for tomorrow 9am\n📞 Follow-up call planned\n\nWould you like to see the follow-up details?`
+    for (let i = 0; i < 7; i++) {
+      const currentDate = new Date(startDate)
+      currentDate.setDate(startDate.getDate() + i)
+      week.push(currentDate)
     }
-    
-    if (lowerMessage.includes('/estimate') || lowerMessage.includes('estimate')) {
-      const address = currentDossier ? currentDossier.address : '123 Oak Street'
-      return `🏠 Estimate generated for ${address}!\n\n💰 Range: $420,000 - $450,000\n📊 Based on 8 recent comparables\n📄 PDF report available\n\nWould you like me to send the report to the client?`
-    }
-    
-    if (lowerMessage.includes('/appointment') || lowerMessage.includes('meeting')) {
-      return "📅 Available time slots found!\n\n🕐 Tomorrow 2:00pm - 3:00pm\n🕑 Thursday 10:30am - 11:30am\n🕒 Friday 4:00pm - 5:00pm\n\nWhich time slot should I confirm?"
-    }
-    
-    if (lowerMessage.includes('/docs') || lowerMessage.includes('documents')) {
-      const address = currentDossier ? currentDossier.address : '123 Oak Street'
-      const docs = currentDossier ? currentDossier.documents : []
-      let docStatus = `📋 Document status for ${address}:\n\n`
-      
-      if (docs.length > 0) {
-        docs.forEach(doc => {
-          const icon = doc.status === 'signed' || doc.status === 'received' ? '✅' : doc.status === 'missing' ? '❌' : '⏳'
-          docStatus += `${icon} ${doc.name} ${doc.status}\n`
-        })
-      } else {
-        docStatus += "✅ Sales agreement signed\n✅ Diagnostics received\n❌ Insurance certificate missing\n⏳ Energy certificate pending\n"
-      }
-      
-      docStatus += "\nSend reminders for missing documents?"
-      return docStatus
-    }
-    
-    const contextMessage = currentDossier 
-      ? `I can help you with ${currentDossier.address} (${currentDossier.type}):\n\n`
-      : "I can help you with:\n\n"
-    
-    return contextMessage + "📞 Schedule automatic follow-ups\n🏠 Estimate property values\n📅 Plan appointments\n📋 Check document status\n\nWhat would you like to do?"
-  }
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'signed':
-      case 'received':
-      case 'completed':
-      case 'sent':
-      case 'delivered':
-        return 'text-success'
-      case 'missing':
-      case 'failed':
-        return 'text-danger'
-      case 'pending':
-        return 'text-yellow-600'
-      default:
-        return 'text-gray-500'
-    }
-  }
-
-  const getStatusIcon = (status) => {
-    switch (status) {
-      case 'signed':
-      case 'received':
-      case 'completed':
-      case 'sent':
-      case 'delivered':
-        return <CheckCircle2 className="w-4 h-4 text-success" />
-      case 'missing':
-      case 'failed':
-        return <XCircle className="w-4 h-4 text-danger" />
-      case 'pending':
-        return <AlertTriangle className="w-4 h-4 text-yellow-600" />
-      default:
-        return <AlertCircle className="w-4 h-4 text-gray-500" />
-    }
-  }
-
-  const addNewDossier = (type) => {
-    const newDossier = {
-      id: Date.now(),
-      address: 'New address',
-      type: type,
-      status: 'active',
-      priority: 'medium',
-      contacts: [],
-      documents: documentsTemplates[type].map((doc, index) => ({
-        id: Date.now() + index,
-        name: doc.name,
-        type: 'PDF',
-        status: 'missing',
-        required: doc.required
-      }))
-    }
-    setDossiersList(prev => [...prev, newDossier])
-    
-    // Initialize messages for new dossier
-    setMessages(prev => ({
-      ...prev,
-      [newDossier.id.toString()]: [
-        {
-          id: 1,
-          role: 'assistant',
-          content: `Hello! I'm here to help you with ${newDossier.address}. What can I assist you with today?`,
-          timestamp: new Date()
-        }
-      ]
-    }))
-  }
-
-  const deleteDossier = (dossierId) => {
-    setDossiersList(prev => prev.filter(d => d.id !== dossierId))
-    // Remove messages for deleted dossier
-    setMessages(prev => {
-      const newMessages = { ...prev }
-      delete newMessages[dossierId.toString()]
-      return newMessages
-    })
-  }
-
-  const getSuggestedActions = (dossier) => {
-    const missingDocs = dossier.documents.filter(doc => doc.status === 'missing')
-    const actions = []
-    
-    if (missingDocs.length > 0) {
-      actions.push(`Send reminder for ${missingDocs.length} missing document(s)`)
-    }
-    
-    if (dossier.type === 'sale') {
-      actions.push('Schedule property visit')
-      actions.push('Send estimate')
-    } else if (dossier.type === 'purchase') {
-      actions.push('Check financing')
-      actions.push('Plan negotiation')
-    } else if (dossier.type === 'rental') {
-      actions.push('Check tenant file')
-      actions.push('Schedule property inspection')
-    }
-    
-    return actions
-  }
-
-  const handleFileUpload = () => {
-    console.log('File upload triggered')
-  }
-
-  const handleVoiceTranscription = () => {
-    setIsRecording(!isRecording)
-    if (!isRecording) {
-      console.log('Starting voice transcription...')
-      setTimeout(() => {
-        setInputMessage('Transcription: Hello, I would like to schedule a visit for tomorrow.')
-        setIsRecording(false)
-      }, 3000)
-    }
+    return week
   }
 
   const formatDate = (date) => {
-    const formatted = date.toLocaleDateString('en-US', {
-      weekday: 'long',
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
+    return date.toLocaleDateString('en-US', { 
+      weekday: 'short', 
+      month: 'short', 
+      day: 'numeric' 
     })
-    return formatted
   }
 
-  const eventQuickActions = [
-    { id: 'reschedule', name: 'Reschedule', icon: Calendar },
-    { id: 'cancel', name: 'Cancel', icon: X },
-    { id: 'edit', name: 'Edit', icon: Edit },
-    { id: 'duplicate', name: 'Duplicate', icon: Copy }
-  ]
+  const handleSendMessage = () => {
+    if (!newMessage.trim()) return
 
-  const toggleChecklistItem = (id) => {
-    setMeetingChecklist(prev => 
-      prev.map(item => 
-        item.id === id ? { ...item, checked: !item.checked } : item
-      )
-    )
-  }
-
-  const getTypeColor = (type) => {
-    switch (type) {
-      case 'visit': return 'bg-blue-100 text-blue-800 border-blue-200'
-      case 'signature': return 'bg-green-100 text-green-800 border-green-200'
-      case 'estimation': return 'bg-purple-100 text-purple-800 border-purple-200'
-      case 'meeting': return 'bg-orange-100 text-orange-800 border-orange-200'
-      default: return 'bg-gray-100 text-gray-800 border-gray-200'
+    const userMessage = {
+      id: Date.now(),
+      role: 'user',
+      content: newMessage,
+      timestamp: new Date()
     }
-  }
 
-  // Handle new event creation
-  const handleCreateEvent = () => {
-    if (newEventData.title && newEventData.time && newEventData.date) {
-      const newEvent = {
-        id: Date.now(),
-        title: newEventData.title,
-        date: newEventData.date,
-        time: newEventData.time,
-        type: 'meeting',
-        client: 'New client',
-        description: newEventData.details || 'New appointment'
+    setChatMessages(prev => [...prev, userMessage])
+
+    // Simulate AI response
+    setTimeout(() => {
+      let response = ''
+      if (newMessage.startsWith('-follow')) {
+        response = 'Follow-up campaign created! I\'ll send personalized messages via SMS, email, and schedule calls based on client preferences.'
+      } else if (newMessage.startsWith('-docs')) {
+        response = 'Document analysis complete. I found 3 missing documents in your active dossiers. Would you like me to send automatic reminders?'
+      } else if (newMessage.startsWith('-plan')) {
+        response = 'Your schedule has been optimized! I found 2 time slots that could be better utilized and suggested 3 new appointments based on client availability.'
+      } else if (newMessage.startsWith('-estimate')) {
+        response = 'Property estimation ready! Based on recent sales and market data, the estimated value is €420,000 - €450,000. Confidence level: 85%.'
+      } else {
+        response = 'I understand your request. How can I help you further? Use -follow for follow-ups, -docs for documents, -plan for planning, or -estimate for property valuations.'
       }
-      setCalendarEvents(prev => [...prev, newEvent])
-      setNewEventData({ title: '', date: '', time: '', details: '' })
-      setShowNewEventDialog(false)
-    }
+
+      const aiMessage = {
+        id: Date.now() + 1,
+        role: 'assistant',
+        content: response,
+        timestamp: new Date()
+      }
+
+      setChatMessages(prev => [...prev, aiMessage])
+    }, 1000)
+
+    setNewMessage('')
   }
 
-  // Handle event deletion
+  const handleCreateEvent = (eventData) => {
+    const newEvent = {
+      id: Date.now(),
+      ...eventData,
+      date: eventData.date || new Date().toISOString().split('T')[0],
+      time: eventData.time || '09:00'
+    }
+    setEvents(prev => [...prev, newEvent])
+    setShowCreateEvent(false)
+  }
+
   const handleDeleteEvent = (eventId) => {
-    setCalendarEvents(prev => prev.filter(event => event.id !== eventId))
+    setEvents(prev => prev.filter(event => event.id !== eventId))
     setShowEventDetails(false)
     setSelectedEvent(null)
   }
 
-  // Handle dossier editing
-  const handleEditDossier = (dossier) => {
-    setEditingDossier({ ...dossier })
-    setSelectedDossier(dossier)
-    setShowEditDossier(true)
-  }
-
-  const handleSaveDossier = () => {
-    if (editingDossier) {
-      setDossiersList(prev => 
-        prev.map(d => d.id === editingDossier.id ? editingDossier : d)
-      )
-      setShowEditDossier(false)
-      setEditingDossier(null)
-      setSelectedDossier(null)
+  const handleCreateDossier = (dossierData) => {
+    const newDossier = {
+      id: Date.now(),
+      ...dossierData,
+      status: 'active',
+      createdAt: new Date().toISOString().split('T')[0],
+      documents: []
     }
+    setDossiers(prev => [...prev, newDossier])
+    setShowCreateDossier(false)
   }
 
-  const updateDocumentStatus = (docId, newStatus) => {
-    if (editingDossier) {
-      setEditingDossier(prev => ({
-        ...prev,
-        documents: prev.documents.map(doc =>
-          doc.id === docId ? { ...doc, status: newStatus } : doc
-        )
-      }))
-    }
+  const handleEditDossier = (dossierData) => {
+    setDossiers(prev => prev.map(dossier => 
+      dossier.id === selectedDossier.id 
+        ? { ...dossier, ...dossierData }
+        : dossier
+    ))
+    setShowEditDossier(false)
+    setSelectedDossier(null)
   }
 
-  return (
-    <div className={`flex h-screen ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
-      {/* Color Picker Sidebar */}
-      {showColorPicker && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex">
-          <div className={`w-80 h-full ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-xl p-6 rounded-r-xl`}>
-            <div className="flex items-center justify-between mb-6">
-              <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                Colors
-              </h3>
-              <Button variant="ghost" size="sm" onClick={() => setShowColorPicker(false)} className="rounded-full">
-                <X className="w-4 h-4" />
-              </Button>
+  const handleDeleteDossier = (dossierId) => {
+    setDossiers(prev => prev.filter(dossier => dossier.id !== dossierId))
+  }
+
+  const toggleDocumentStatus = (dossierId, documentId) => {
+    setDossiers(prev => prev.map(dossier => {
+      if (dossier.id === dossierId) {
+        return {
+          ...dossier,
+          documents: dossier.documents.map(doc => {
+            if (doc.id === documentId) {
+              return {
+                ...doc,
+                status: doc.status === 'received' ? 'pending' : 'received'
+              }
+            }
+            return doc
+          })
+        }
+      }
+      return dossier
+    }))
+  }
+
+  if (!mounted) {
+    return null
+  }
+
+  const renderDashboard = () => (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+          <p className="text-muted-foreground">Welcome back! Here's your activity overview.</p>
+        </div>
+        <div className="flex items-center space-x-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentWeek(new Date(currentWeek.getTime() - 7 * 24 * 60 * 60 * 1000))}
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </Button>
+          <span className="text-sm font-medium">
+            Week of {currentWeek.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+          </span>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentWeek(new Date(currentWeek.getTime() + 7 * 24 * 60 * 60 * 1000))}
+          >
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card className="rounded-xl">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Hours Gained</CardTitle>
+            <Clock className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{kpis.hoursGained}h</div>
+            <p className="text-xs text-muted-foreground">+12% from last week</p>
+          </CardContent>
+        </Card>
+
+        <Card className="rounded-xl">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Follow-ups Sent</CardTitle>
+            <Send className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{kpis.relancesSent}</div>
+            <p className="text-xs text-muted-foreground">+8% from last week</p>
+          </CardContent>
+        </Card>
+
+        <Card className="rounded-xl">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Documents Completed</CardTitle>
+            <CheckCircle className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{kpis.docsCompleted}</div>
+            <p className="text-xs text-muted-foreground">+15% from last week</p>
+          </CardContent>
+        </Card>
+
+        <Card className="rounded-xl">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Appointments Scheduled</CardTitle>
+            <Calendar className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{kpis.rdvScheduled}</div>
+            <p className="text-xs text-muted-foreground">+5% from last week</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+        <Card className="col-span-4 rounded-xl">
+          <CardHeader>
+            <CardTitle>Recent Activity</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex items-center space-x-4">
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <div className="flex-1">
+                <p className="text-sm font-medium">Follow-up sent to Jean Dupont</p>
+                <p className="text-xs text-muted-foreground">2 minutes ago</p>
+              </div>
             </div>
-            
-            <div className="space-y-6">
-              <div>
-                <label className={`block text-sm font-medium mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                  Primary color
-                </label>
-                <div className="space-y-4">
-                  {accentColors.map(color => (
-                    <div key={color.value} className="flex items-center space-x-3">
-                      <button
-                        onClick={() => setAccentColor(color.value)}
-                        className={`w-8 h-8 rounded-full border-2 transition-all ${
-                          accentColor === color.value ? 'border-gray-400 scale-110' : 'border-gray-200'
-                        }`}
-                        style={{ backgroundColor: color.value }}
-                      />
-                      <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                        {color.name}
-                      </span>
-                      {accentColor === color.value && (
-                        <CheckCircle className="w-4 h-4 text-green-500" />
-                      )}
-                    </div>
-                  ))}
+            <div className="flex items-center space-x-4">
+              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <div className="flex-1">
+                <p className="text-sm font-medium">Document received for 123 Main St</p>
+                <p className="text-xs text-muted-foreground">15 minutes ago</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+              <div className="flex-1">
+                <p className="text-sm font-medium">Appointment scheduled with Marie Martin</p>
+                <p className="text-xs text-muted-foreground">1 hour ago</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="col-span-3 rounded-xl">
+          <CardHeader>
+            <CardTitle>Quick Actions</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <Button className="w-full justify-start rounded-lg" variant="outline">
+              <Plus className="mr-2 h-4 w-4" />
+              Create New Dossier
+            </Button>
+            <Button className="w-full justify-start rounded-lg" variant="outline">
+              <Calendar className="mr-2 h-4 w-4" />
+              Schedule Appointment
+            </Button>
+            <Button className="w-full justify-start rounded-lg" variant="outline">
+              <Send className="mr-2 h-4 w-4" />
+              Send Follow-up
+            </Button>
+            <Button className="w-full justify-start rounded-lg" variant="outline">
+              <Calculator className="mr-2 h-4 w-4" />
+              Property Estimation
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  )
+
+  const renderChat = () => (
+    <div className="flex flex-col h-full">
+      <div className="flex items-center justify-between p-4 border-b">
+        <div>
+          <h1 className="text-2xl font-bold">AI Assistant</h1>
+          <p className="text-sm text-muted-foreground">Your intelligent real estate copilot</p>
+        </div>
+        <div className="flex items-center space-x-2">
+          <Select value={selectedClient} onValueChange={setSelectedClient}>
+            <SelectTrigger className="w-48 rounded-lg">
+              <SelectValue placeholder="Select client context" />
+            </SelectTrigger>
+            <SelectContent className="rounded-lg">
+              <SelectItem value="">No specific client</SelectItem>
+              {clients.map(client => (
+                <SelectItem key={client.id} value={client.name}>{client.name}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Dialog open={showAIHelp} onOpenChange={setShowAIHelp}>
+            <DialogTrigger asChild>
+              <Button variant="outline" size="sm" className="rounded-lg">
+                <Settings className="h-4 w-4 mr-2" />
+                AI Help
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="rounded-xl">
+              <DialogHeader>
+                <DialogTitle>AI Assistant Commands</DialogTitle>
+                <DialogDescription>
+                  Use these commands to interact with your AI copilot:
+                </DialogDescription>
+              </DialogHeader>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-medium">-follow [client]</h4>
+                  <p className="text-sm text-muted-foreground">Create automated follow-up campaigns</p>
+                </div>
+                <div>
+                  <h4 className="font-medium">-docs [dossier]</h4>
+                  <p className="text-sm text-muted-foreground">Analyze and manage documents</p>
+                </div>
+                <div>
+                  <h4 className="font-medium">-plan [date]</h4>
+                  <p className="text-sm text-muted-foreground">Optimize your schedule and appointments</p>
+                </div>
+                <div>
+                  <h4 className="font-medium">-estimate [address]</h4>
+                  <p className="text-sm text-muted-foreground">Get property value estimations</p>
                 </div>
               </div>
-              
-              <div className="pt-4 border-t">
-                <Button 
-                  onClick={() => setShowColorPicker(false)}
-                  className="w-full rounded-full text-white"
-                  style={{ backgroundColor: accentColor }}
-                >
-                  <Save className="w-4 h-4 mr-2" />
-                  Apply
+            </DialogContent>
+          </Dialog>
+        </div>
+      </div>
+
+      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        {chatMessages.map(message => (
+          <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+            <div className={`max-w-[80%] rounded-xl p-3 ${
+              message.role === 'user' 
+                ? 'bg-primary text-primary-foreground' 
+                : 'bg-muted'
+            }`}>
+              <p className="text-sm">{message.content}</p>
+              <p className="text-xs opacity-70 mt-1">
+                {message.timestamp.toLocaleTimeString('en-US', { 
+                  hour: '2-digit', 
+                  minute: '2-digit' 
+                })}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="p-4 border-t">
+        <div className="flex space-x-2">
+          <Input
+            placeholder="Type your message or use commands like -follow, -docs, -plan..."
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+            className="flex-1 rounded-lg"
+          />
+          <Button onClick={handleSendMessage} className="rounded-lg">
+            <Send className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+
+  const renderPlanning = () => (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Planning</h1>
+          <p className="text-muted-foreground">Manage your appointments and schedule.</p>
+        </div>
+        <div className="flex items-center space-x-2">
+          <Button onClick={() => setShowCreateEvent(true)} className="rounded-lg">
+            <Plus className="mr-2 h-4 w-4" />
+            New Event
+          </Button>
+          <Button variant="outline" onClick={() => setShowProposeSlots(true)} className="rounded-lg">
+            <Calendar className="mr-2 h-4 w-4" />
+            Propose Slots
+          </Button>
+          <Button variant="outline" onClick={() => setShowReschedule(true)} className="rounded-lg">
+            <Clock className="mr-2 h-4 w-4" />
+            Reschedule
+          </Button>
+        </div>
+      </div>
+
+      {/* Week Navigation - Moved above week display */}
+      <div className="flex items-center justify-center space-x-4 mb-4">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setCurrentWeek(new Date(currentWeek.getTime() - 7 * 24 * 60 * 60 * 1000))}
+          className="rounded-lg"
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </Button>
+        <span className="text-lg font-medium">
+          {currentWeek.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })} - Week {Math.ceil(currentWeek.getDate() / 7)}
+        </span>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setCurrentWeek(new Date(currentWeek.getTime() + 7 * 24 * 60 * 60 * 1000))}
+          className="rounded-lg"
+        >
+          <ChevronRight className="h-4 w-4" />
+        </Button>
+      </div>
+
+      <div className="grid grid-cols-7 gap-4">
+        {getWeekDates(currentWeek).map((date, index) => (
+          <Card key={index} className="rounded-xl">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm text-center">
+                {formatDate(date)}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              {events
+                .filter(event => event.date === date.toISOString().split('T')[0])
+                .map(event => (
+                  <div 
+                    key={event.id} 
+                    className="p-2 bg-primary/10 rounded-lg cursor-pointer hover:bg-primary/20 transition-colors"
+                    onClick={() => {
+                      setSelectedEvent(event)
+                      setShowEventDetails(true)
+                    }}
+                  >
+                    <p className="text-xs font-medium">{event.time}</p>
+                    <p className="text-xs">{event.title}</p>
+                    <p className="text-xs text-muted-foreground">{event.client}</p>
+                  </div>
+                ))}
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Create Event Modal */}
+      <Dialog open={showCreateEvent} onOpenChange={setShowCreateEvent}>
+        <DialogContent className="rounded-xl border-0 shadow-lg">
+          <DialogHeader>
+            <DialogTitle>Create New Event</DialogTitle>
+            <DialogDescription>
+              Schedule a new appointment or event.
+            </DialogDescription>
+          </DialogHeader>
+          <form onSubmit={(e) => {
+            e.preventDefault()
+            const formData = new FormData(e.target)
+            handleCreateEvent({
+              title: formData.get('title'),
+              client: formData.get('client'),
+              date: formData.get('date'),
+              time: formData.get('time'),
+              type: formData.get('type'),
+              address: formData.get('address'),
+              notes: formData.get('notes')
+            })
+          }}>
+            <div className="space-y-4">
+              <div>
+                <label className="text-sm font-medium">Title</label>
+                <Input name="title" placeholder="Event title" required className="rounded-lg" />
+              </div>
+              <div>
+                <label className="text-sm font-medium">Client</label>
+                <Select name="client" required>
+                  <SelectTrigger className="rounded-lg">
+                    <SelectValue placeholder="Select client" />
+                  </SelectTrigger>
+                  <SelectContent className="rounded-lg">
+                    {clients.map(client => (
+                      <SelectItem key={client.id} value={client.name}>{client.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-sm font-medium">Date</label>
+                  <Input name="date" type="date" required className="rounded-lg" />
+                </div>
+                <div>
+                  <label className="text-sm font-medium">Time</label>
+                  <Input name="time" type="time" required className="rounded-lg" />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-medium">Type</label>
+                <Select name="type" required>
+                  <SelectTrigger className="rounded-lg">
+                    <SelectValue placeholder="Select type" />
+                  </SelectTrigger>
+                  <SelectContent className="rounded-lg">
+                    <SelectItem value="visit">Visit</SelectItem>
+                    <SelectItem value="signing">Signing</SelectItem>
+                    <SelectItem value="call">Call</SelectItem>
+                    <SelectItem value="meeting">Meeting</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <label className="text-sm font-medium">Address</label>
+                <Input name="address" placeholder="Property address" className="rounded-lg" />
+              </div>
+              <div>
+                <label className="text-sm font-medium">Notes</label>
+                <Textarea name="notes" placeholder="Additional notes" className="rounded-lg" />
+              </div>
+            </div>
+            <DialogFooter className="mt-6">
+              <Button type="button" variant="outline" onClick={() => setShowCreateEvent(false)} className="rounded-lg">
+                Cancel
+              </Button>
+              <Button type="submit" className="rounded-lg">Create Event</Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
+
+      {/* Propose Time Slots Modal */}
+      <Dialog open={showProposeSlots} onOpenChange={setShowProposeSlots}>
+        <DialogContent className="rounded-xl border-0 shadow-lg">
+          <DialogHeader>
+            <DialogTitle>Propose Time Slots</DialogTitle>
+            <DialogDescription>
+              Suggest available time slots to your client.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <label className="text-sm font-medium">Client</label>
+              <Select>
+                <SelectTrigger className="rounded-lg">
+                  <SelectValue placeholder="Select client" />
+                </SelectTrigger>
+                <SelectContent className="rounded-lg">
+                  {clients.map(client => (
+                    <SelectItem key={client.id} value={client.name}>{client.name}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <label className="text-sm font-medium">Proposed Slots</label>
+              <div className="space-y-2">
+                <div className="flex items-center space-x-2">
+                  <Input type="date" className="rounded-lg" />
+                  <Input type="time" className="rounded-lg" />
+                  <Button variant="outline" size="sm" className="rounded-lg">
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
+                <Button variant="outline" className="w-full rounded-lg">
+                  <Plus className="mr-2 h-4 w-4" />
+                  Add Another Slot
                 </Button>
               </div>
             </div>
-          </div>
-          <div className="flex-1" onClick={() => setShowColorPicker(false)} />
-        </div>
-      )}
-
-      {/* AI Help Floating Card */}
-      <Dialog open={showAIHelp} onOpenChange={setShowAIHelp}>
-        <DialogContent className="sm:max-w-md rounded-2xl">
-          <DialogHeader>
-            <DialogTitle>What I can do for you</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                <Phone className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Schedule follow-ups</p>
-                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Automatic SMS, email and call scheduling</p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                <Home className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Property estimates</p>
-                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Generate estimates based on comparables</p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                <Calendar className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Schedule appointments</p>
-                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Automatic calendar management</p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                <FileText className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Manage documents</p>
-                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Track missing documents and automatic reminders</p>
-              </div>
+            <div>
+              <label className="text-sm font-medium">Message</label>
+              <Textarea placeholder="Personal message to client..." className="rounded-lg" />
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
-
-      {/* Planning Modal - New Event */}
-      <Dialog open={showNewEventDialog} onOpenChange={setShowNewEventDialog}>
-        <DialogContent className="sm:max-w-md rounded-2xl">
-          <DialogHeader>
-            <DialogTitle>Create new appointment</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4">
-            <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Title</label>
-              <Input 
-                placeholder="Ex: Apartment visit" 
-                className="rounded-xl" 
-                value={newEventData.title}
-                onChange={(e) => setNewEventData({...newEventData, title: e.target.value})}
-              />
-            </div>
-            <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Date</label>
-              <Input 
-                type="date" 
-                className="rounded-xl" 
-                value={newEventData.date}
-                onChange={(e) => setNewEventData({...newEventData, date: e.target.value})}
-              />
-            </div>
-            <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Time</label>
-              <Input 
-                type="time" 
-                className="rounded-xl" 
-                value={newEventData.time}
-                onChange={(e) => setNewEventData({...newEventData, time: e.target.value})}
-              />
-            </div>
-            <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Additional information</label>
-              <Textarea 
-                placeholder="Appointment details..." 
-                className="rounded-xl" 
-                value={newEventData.details}
-                onChange={(e) => setNewEventData({...newEventData, details: e.target.value})}
-              />
-            </div>
-            <Button 
-              onClick={handleCreateEvent}
-              className="w-full text-white rounded-full" 
-              style={{ backgroundColor: accentColor }}
-            >
-              Create Appointment
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowProposeSlots(false)} className="rounded-lg">
+              Cancel
             </Button>
-          </div>
+            <Button className="rounded-lg">Send Proposals</Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
 
-      {/* Planning Modal - Propose Slots */}
-      <Dialog open={showProposeDialog} onOpenChange={setShowProposeDialog}>
-        <DialogContent className="sm:max-w-md rounded-2xl">
+      {/* Reschedule Modal */}
+      <Dialog open={showReschedule} onOpenChange={setShowReschedule}>
+        <DialogContent className="rounded-xl border-0 shadow-lg">
           <DialogHeader>
-            <DialogTitle>Propose time slots</DialogTitle>
+            <DialogTitle>Reschedule Appointment</DialogTitle>
+            <DialogDescription>
+              Move an existing appointment to a new time.
+            </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
             <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Client/File</label>
+              <label className="text-sm font-medium">Select Appointment</label>
               <Select>
-                <SelectTrigger className="rounded-xl">
-                  <SelectValue placeholder="Choose a file" />
+                <SelectTrigger className="rounded-lg">
+                  <SelectValue placeholder="Choose appointment to reschedule" />
                 </SelectTrigger>
-                <SelectContent className="rounded-xl">
-                  {dossiersList.map(dossier => (
-                    <SelectItem key={dossier.id} value={dossier.id.toString()}>
-                      {dossier.address}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Date range</label>
-              <div className="grid grid-cols-2 gap-2">
-                <Input type="date" className="rounded-xl" />
-                <Input type="date" className="rounded-xl" />
-              </div>
-            </div>
-            <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Slots to propose</label>
-              <Textarea placeholder="Ex: Monday 2pm-3pm, Tuesday 10:30am-11:30am..." className="rounded-xl" />
-            </div>
-            <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
-              <Sparkles className="w-4 h-4 mr-2" />
-              Let AI propose
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
-
-      {/* Planning Modal - Reschedule */}
-      <Dialog open={showRescheduleDialog} onOpenChange={setShowRescheduleDialog}>
-        <DialogContent className="sm:max-w-md rounded-2xl">
-          <DialogHeader>
-            <DialogTitle>Reschedule an appointment</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4">
-            <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Appointment to reschedule</label>
-              <Select>
-                <SelectTrigger className="rounded-xl">
-                  <SelectValue placeholder="Choose an appointment" />
-                </SelectTrigger>
-                <SelectContent className="rounded-xl">
-                  {calendarEvents.map(event => (
+                <SelectContent className="rounded-lg">
+                  {events.map(event => (
                     <SelectItem key={event.id} value={event.id.toString()}>
-                      {event.title} - {event.time}
+                      {event.title} - {event.date} {event.time}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
-            <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>New date</label>
-              <Input type="date" className="rounded-xl" />
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="text-sm font-medium">New Date</label>
+                <Input type="date" className="rounded-lg" />
+              </div>
+              <div>
+                <label className="text-sm font-medium">New Time</label>
+                <Input type="time" className="rounded-lg" />
+              </div>
             </div>
             <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>New time</label>
-              <Input type="time" className="rounded-xl" />
+              <label className="text-sm font-medium">Reason</label>
+              <Textarea placeholder="Reason for rescheduling..." className="rounded-lg" />
             </div>
-            <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
-              Reschedule
-            </Button>
           </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowReschedule(false)} className="rounded-lg">
+              Cancel
+            </Button>
+            <Button className="rounded-lg">Reschedule</Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
 
       {/* Event Details Modal */}
       <Dialog open={showEventDetails} onOpenChange={setShowEventDetails}>
-        <DialogContent className="sm:max-w-md rounded-2xl">
+        <DialogContent className="rounded-xl border-0 shadow-lg">
           <DialogHeader>
-            <DialogTitle>{selectedEvent?.title}</DialogTitle>
+            <DialogTitle>Event Details</DialogTitle>
+            <DialogDescription>
+              View and manage event information.
+            </DialogDescription>
           </DialogHeader>
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+          {selectedEvent && (
+            <div className="space-y-4">
               <div>
-                <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Date</label>
-                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{selectedEvent?.date}</p>
+                <h4 className="font-medium">{selectedEvent.title}</h4>
+                <p className="text-sm text-muted-foreground">{selectedEvent.client}</p>
               </div>
-              <div>
-                <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Time</label>
-                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{selectedEvent?.time}</p>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-sm font-medium">Date</label>
+                  <p className="text-sm">{selectedEvent.date}</p>
+                </div>
+                <div>
+                  <label className="text-sm font-medium">Time</label>
+                  <p className="text-sm">{selectedEvent.time}</p>
+                </div>
               </div>
-            </div>
-            <div>
-              <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Client</label>
-              <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{selectedEvent?.client}</p>
-            </div>
-            <div>
-              <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Description</label>
-              <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{selectedEvent?.description}</p>
-            </div>
-            <div>
-              <label className={`block text-sm font-medium mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Actions</label>
-              <div className="grid grid-cols-2 gap-2">
-                <Button variant="outline" size="sm" className="rounded-full">
-                  <Edit className="w-4 h-4 mr-2" />
-                  Edit
-                </Button>
-                <Button variant="outline" size="sm" className="rounded-full">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  Reschedule
-                </Button>
-                <Button variant="outline" size="sm" className="rounded-full">
-                  <Copy className="w-4 h-4 mr-2" />
-                  Duplicate
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="rounded-full text-red-600 hover:text-red-700 hover:bg-red-50"
-                  onClick={() => {
-                    if (selectedEvent) {
-                      handleDeleteEvent(selectedEvent.id)
-                    }
-                  }}
-                >
-                  <Trash2 className="w-4 h-4 mr-2" />
-                  Delete
-                </Button>
-              </div>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
-
-      {/* Sidebar */}
-      <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-300 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r flex flex-col`}>
-        <div className={`p-4 border-b flex items-center justify-between ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-          {!sidebarCollapsed && (
-            <div>
-              <div className="text-xl font-bold gradient-logo font-plus-jakarta tracking-tight">
-                MARWYCK
-              </div>
+              {selectedEvent.address && (
+                <div>
+                  <label className="text-sm font-medium">Address</label>
+                  <p className="text-sm">{selectedEvent.address}</p>
+                </div>
+              )}
+              {selectedEvent.notes && (
+                <div>
+                  <label className="text-sm font-medium">Notes</label>
+                  <p className="text-sm">{selectedEvent.notes}</p>
+                </div>
+              )}
             </div>
           )}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            className="p-2 rounded-full"
-          >
-            <Menu className="w-4 h-4" />
-          </Button>
-        </div>
-        
-        <nav className="flex-1 p-2">
-          <ul className="space-y-1">
-            {[
-              { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
-              { id: 'chat', label: 'Chat', icon: MessageCircle },
-              { id: 'planning', label: 'Planning', icon: Calendar },
-              { id: 'documents', label: 'Documents', icon: FileText },
-              { id: 'estimation', label: 'Estimation', icon: Calculator },
-              { id: 'communications', label: 'SMS & Calls', icon: Phone },
-              { id: 'account', label: 'Account', icon: UserCircle }
-            ].map(item => (
-              <li key={item.id}>
-                <button
-                  onClick={() => setActiveTab(item.id)}
-                  className={`w-full flex items-center px-3 py-2 text-sm font-medium transition-colors ${
-                    activeTab === item.id
-                      ? 'text-white rounded-xl'
-                      : `${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'} rounded-md`
-                  }`}
-                  style={activeTab === item.id ? { backgroundColor: accentColor } : {}}
-                  title={sidebarCollapsed ? item.label : ''}
-                >
-                  <item.icon className="w-4 h-4 mr-3" />
-                  {!sidebarCollapsed && item.label}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        {/* Bottom Section */}
-        <div className={`p-2 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-          <div className="space-y-1">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setDarkMode(!darkMode)}
-              className="w-full justify-start px-3 py-2 rounded-full"
-              title={sidebarCollapsed ? 'Toggle Theme' : ''}
+          <DialogFooter>
+            <Button 
+              variant="destructive" 
+              onClick={() => selectedEvent && handleDeleteEvent(selectedEvent.id)}
+              className="rounded-lg"
             >
-              {darkMode ? <Sun className="w-4 h-4 mr-3" /> : <Moon className="w-4 h-4 mr-3" />}
-              {!sidebarCollapsed && (darkMode ? 'Light Mode' : 'Dark Mode')}
+              <Trash2 className="mr-2 h-4 w-4" />
+              Delete
             </Button>
-            <button
-              onClick={() => setShowColorPicker(true)}
-              className={`w-full flex items-center px-3 py-2 rounded-full text-sm font-medium transition-colors ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'}`}
-              title={sidebarCollapsed ? 'Colors' : ''}
-            >
-              <Palette className="w-4 h-4 mr-3" />
-              {!sidebarCollapsed && 'Colors'}
-            </button>
-          </div>
+            <Button variant="outline" onClick={() => setShowEventDetails(false)} className="rounded-lg">
+              Close
+            </Button>
+            <Button className="rounded-lg">Edit</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
+  )
+
+  const renderDocuments = () => (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Documents</h1>
+          <p className="text-muted-foreground">Manage your property dossiers and documents.</p>
+        </div>
+        <div className="flex items-center space-x-2">
+          <Button onClick={() => setShowCreateDossier(true)} className="rounded-lg">
+            <Plus className="mr-2 h-4 w-4" />
+            New Dossier
+          </Button>
+          <Button variant="outline" className="rounded-lg">
+            <Upload className="mr-2 h-4 w-4" />
+            Upload
+          </Button>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col">
-        {/* Header */}
-        <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-6 py-4 flex items-center justify-between`}>
-          <div className="flex items-center space-x-4">
-            <h1 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-              {activeTab === 'dashboard' && 'Dashboard'}
-              {activeTab === 'chat' && 'Chat'}
-              {activeTab === 'planning' && 'Planning'}
-              {activeTab === 'documents' && 'Documents'}
-              {activeTab === 'estimation' && 'Estimation'}
-              {activeTab === 'communications' && 'SMS & Calls'}
-              {activeTab === 'account' && 'Account'}
-            </h1>
-          </div>
-          <div className="flex items-center space-x-6">
-            {/* Date */}
-            <div className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-              {formatDate(currentTime)}
-            </div>
-            
-            {/* Live Time */}
-            <div className={`flex items-center space-x-2 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-              <Clock className="w-4 h-4" />
-              <span>{currentTime.toLocaleTimeString()}</span>
-            </div>
-            
-            {/* Traffic Status */}
-            <div className="flex items-center space-x-2">
-              <Navigation className={`w-4 h-4 ${getTrafficColor()}`} />
-              <span className={`text-sm ${getTrafficColor()}`}>
-                Traffic nearby: {getTrafficText()}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Content Area */}
-        <div className="flex-1 overflow-hidden">
-          {/* Dashboard */}
-          {activeTab === 'dashboard' && (
-            <div className="p-6 h-full overflow-y-auto">
-              <div className="max-w-7xl mx-auto">
-                <div className="mb-8">
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                        {getWeekLabel(currentWeek).label}
-                      </h2>
-                      <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{getWeekLabel(currentWeek).date}</p>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setCurrentWeek(currentWeek - 1)}
-                        className="rounded-full"
-                      >
-                        <ChevronLeft className="w-4 h-4" />
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setCurrentWeek(currentWeek + 1)}
-                        className="rounded-full"
-                      >
-                        <ChevronRight className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                    Efficiency {kpis[0].change.startsWith('+') ? 'increased' : 'decreased'} by <span className={`font-medium ${kpis[0].change.startsWith('+') ? 'text-success' : 'text-red-500'}`}>{kpis[0].change}</span> from last week
-                  </p>
+      <div className="grid gap-6">
+        {dossiers.map(dossier => (
+          <Card key={dossier.id} className="rounded-xl">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="flex items-center space-x-2">
+                    <Building className="h-5 w-5" />
+                    <span>{dossier.address}</span>
+                  </CardTitle>
+                  <CardDescription>
+                    {dossier.client} • {dossier.type} • Created {dossier.createdAt}
+                  </CardDescription>
                 </div>
-
-                {/* KPIs */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                  {kpis.map((kpi, index) => (
-                    <Card key={index} className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className={`text-sm font-medium ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                          {kpi.title}
-                        </CardTitle>
-                        <kpi.icon className={`w-4 h-4 ${kpi.color === 'text-accent-cyan' ? '' : kpi.color}`} style={kpi.color === 'text-accent-cyan' ? { color: accentColor } : {}} />
-                      </CardHeader>
-                      <CardContent>
-                        <div className={`text-2xl font-bold font-space-grotesk mb-1 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                          {kpi.value}
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <p className={`text-xs ${kpi.change.startsWith('+') ? 'text-success' : 'text-red-500'}`}>{kpi.change}</p>
-                          <p className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>vs {kpi.previousValue}</p>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-
-                {/* Recent Activity */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
-                    <CardHeader>
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Recent Activity</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-4">
-                        {recentActivities.map(activity => (
-                          <div key={activity.id} className="flex items-center space-x-3">
-                            <div className="flex-shrink-0">
-                              {activity.type === 'sms' && <Smartphone className="w-5 h-5" style={{ color: accentColor }} />}
-                              {activity.type === 'email' && <Mail className="w-5 h-5" style={{ color: accentColor }} />}
-                              {activity.type === 'call' && <PhoneCall className="w-5 h-5" style={{ color: accentColor }} />}
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                {activity.contact}
-                              </p>
-                              <p className={`text-sm truncate ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                {activity.message}
-                              </p>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <span className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>{activity.time}</span>
-                              {getStatusIcon(activity.status)}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <div className="space-y-6">
-                    <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
-                      <CardHeader>
-                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Upcoming Appointments</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-4">
-                          {calendarEvents.slice(0, 3).map(event => (
-                            <div key={event.id} className="flex items-center space-x-3">
-                              <div className="flex-shrink-0">
-                                <Calendar className="w-5 h-5" style={{ color: accentColor }} />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                  {event.title}
-                                </p>
-                                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                  {event.client} • {event.time}
-                                </p>
-                              </div>
-                              <Badge 
-                                variant="outline" 
-                                className={`text-xs rounded-full border ${getTypeColor(event.type)}`}
-                              >
-                                {event.type}
-                              </Badge>
-                            </div>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
-                      <CardHeader>
-                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} flex items-center`}>
-                          <Lightbulb className="w-5 h-5 mr-2" style={{ color: accentColor }} />
-                          Meeting Preparation
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className={`text-sm mb-3 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                          For your visit tomorrow:
-                        </p>
-                        <div className="space-y-2">
-                          {meetingChecklist.map((item) => (
-                            <div key={item.id} className="flex items-center space-x-2">
-                              <button
-                                onClick={() => toggleChecklistItem(item.id)}
-                                className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-colors ${
-                                  item.checked 
-                                    ? 'bg-green-500 border-green-500' 
-                                    : `border-gray-300 ${darkMode ? 'border-gray-600' : ''}`
-                                }`}
-                              >
-                                {item.checked && <CheckCircle className="w-3 h-3 text-white" />}
-                              </button>
-                              <span className={`text-sm ${item.checked ? 'line-through opacity-75' : ''} ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                                📋 {item.text}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Account Tab */}
-          {activeTab === 'account' && (
-            <div className="p-6 h-full overflow-y-auto">
-              <div className="max-w-4xl mx-auto">
-                <div className="mb-8">
-                  <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                    Account Settings
-                  </h2>
-                  <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Manage your profile and preferences</p>
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  {/* Profile Section */}
-                  <Card className={`lg:col-span-2 ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                    <CardHeader>
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Profile Information</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-6">
-                        <div className="flex items-center space-x-4">
-                          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
-                            <User className="w-10 h-10 text-white" />
-                          </div>
-                          <div>
-                            <h3 className={`text-lg font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>John Doe</h3>
-                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Real Estate Agent</p>
-                          </div>
-                        </div>
-                        
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div>
-                            <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Full Name</label>
-                            <Input defaultValue="John Doe" className="rounded-xl" />
-                          </div>
-                          <div>
-                            <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Email</label>
-                            <Input defaultValue="john@marwyck.com" className="rounded-xl" />
-                          </div>
-                          <div>
-                            <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Phone</label>
-                            <Input defaultValue="+1 (555) 123-4567" className="rounded-xl" />
-                          </div>
-                          <div>
-                            <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Agency</label>
-                            <Input defaultValue="Marwyck Real Estate" className="rounded-xl" />
-                          </div>
-                        </div>
-                        
-                        <Button className="text-white rounded-full" style={{ backgroundColor: accentColor }}>
-                          <Save className="w-4 h-4 mr-2" />
-                          Update Profile
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  {/* Statistics */}
-                  <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
-                    <CardHeader>
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Your Stats</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2">
-                            <Clock className="w-4 h-4" style={{ color: accentColor }} />
-                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Total Hours Saved</span>
-                          </div>
-                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>847h</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2">
-                            <FileText className="w-4 h-4" style={{ color: accentColor }} />
-                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Files Processed</span>
-                          </div>
-                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>1,234</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2">
-                            <Calendar className="w-4 h-4" style={{ color: accentColor }} />
-                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Appointments</span>
-                          </div>
-                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>456</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2">
-                            <Send className="w-4 h-4" style={{ color: accentColor }} />
-                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Messages Sent</span>
-                          </div>
-                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>3,789</span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                {/* Preferences */}
-                <Card className={`mt-6 ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                  <CardHeader>
-                    <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Preferences</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <h4 className={`font-medium mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Notifications</h4>
-                        <div className="space-y-3">
-                          <div className="flex items-center justify-between">
-                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Email notifications</span>
-                            <input type="checkbox" defaultChecked className="rounded" />
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>SMS notifications</span>
-                            <input type="checkbox" defaultChecked className="rounded" />
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Push notifications</span>
-                            <input type="checkbox" className="rounded" />
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div>
-                        <h4 className={`font-medium mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Language & Region</h4>
-                        <div className="space-y-3">
-                          <div>
-                            <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Language</label>
-                            <Select defaultValue="en">
-                              <SelectTrigger className="rounded-xl">
-                                <SelectValue />
-                              </SelectTrigger>
-                              <SelectContent className="rounded-xl">
-                                <SelectItem value="en">English</SelectItem>
-                                <SelectItem value="fr">French</SelectItem>
-                                <SelectItem value="es">Spanish</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
-                          <div>
-                            <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Time Zone</label>
-                            <Select defaultValue="pst">
-                              <SelectTrigger className="rounded-xl">
-                                <SelectValue />
-                              </SelectTrigger>
-                              <SelectContent className="rounded-xl">
-                                <SelectItem value="pst">Pacific Time</SelectItem>
-                                <SelectItem value="est">Eastern Time</SelectItem>
-                                <SelectItem value="cst">Central Time</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          )}
-
-          {/* Chat */}
-          {activeTab === 'chat' && (
-            <div className="h-full flex flex-col">
-              <div className={`border-b p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className="flex-1">
-                      <Select value={selectedClient} onValueChange={setSelectedClient}>
-                        <SelectTrigger className={`w-64 rounded-full ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
-                          <SelectValue placeholder="Choose a file" />
-                        </SelectTrigger>
-                        <SelectContent className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
-                          {clients.map(client => (
-                            <SelectItem key={client.id} value={client.id} className="rounded-lg">
-                              {client.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    {selectedClient !== 'general' && (
-                      <Badge variant="outline" style={{ borderColor: accentColor, color: accentColor }} className="rounded-full">
-                        <FolderOpen className="w-3 h-3 mr-1" />
-                        {clients.find(c => c.id === selectedClient)?.name}
-                      </Badge>
-                    )}
-                  </div>
-                  
+                <div className="flex items-center space-x-2">
+                  <Badge variant={dossier.priority === 'high' ? 'destructive' : dossier.priority === 'medium' ? 'default' : 'secondary'}>
+                    {dossier.priority}
+                  </Badge>
+                  <Badge variant={dossier.status === 'active' ? 'default' : 'secondary'}>
+                    {dossier.status}
+                  </Badge>
                   <Button 
                     variant="outline" 
-                    size="sm" 
-                    className="rounded-full"
-                    onClick={() => setShowAIHelp(true)}
+                    size="sm"
+                    onClick={() => {
+                      setSelectedDossier(dossier)
+                      setShowEditDossier(true)
+                    }}
+                    className="rounded-lg"
                   >
-                    <Info className="w-4 h-4 mr-2" />
-                    AI Help
+                    <Edit className="h-4 w-4" />
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => handleDeleteDossier(dossier.id)}
+                    className="rounded-lg"
+                  >
+                    <Trash2 className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
-
-              <div className="flex-1 overflow-y-auto p-6">
-                <div className="max-w-4xl mx-auto">
-                  <div className="space-y-6">
-                    {getCurrentMessages().map(message => (
-                      <div
-                        key={message.id}
-                        className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                      >
-                        <div className="flex items-start space-x-3 max-w-2xl">
-                          {message.role === 'assistant' && (
-                            <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: accentColor }}>
-                              <Sparkles className="w-4 h-4 text-white" />
-                            </div>
-                          )}
-                          <div
-                            className={`px-4 py-3 rounded-2xl ${
-                              message.role === 'user'
-                                ? `${darkMode ? 'bg-gray-600 text-white' : 'bg-gray-100 text-gray-900'}`
-                                : `${darkMode ? 'bg-gray-800 border border-gray-700 text-white' : 'bg-white border border-gray-200 text-gray-900'} shadow-sm`
-                            }`}
-                          >
-                            <p className="text-sm whitespace-pre-wrap leading-relaxed">{message.content}</p>
-                            <p className={`text-xs mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                              {message.timestamp.toLocaleTimeString()}
-                            </p>
-                          </div>
-                          {message.role === 'user' && (
-                            <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0">
-                              <User className="w-4 h-4 text-gray-600" />
-                            </div>
-                          )}
-                        </div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                <h4 className="font-medium">Documents</h4>
+                {dossier.documents.map(doc => (
+                  <div key={doc.id} className="flex items-center justify-between p-3 border rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <Checkbox 
+                        checked={doc.status === 'received'}
+                        onCheckedChange={() => toggleDocumentStatus(dossier.id, doc.id)}
+                      />
+                      <div>
+                        <p className="font-medium">{doc.name}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {doc.type} • {doc.required ? 'Required' : 'Optional'}
+                        </p>
                       </div>
-                    ))}
-                    {isTyping && (
-                      <div className="flex justify-start">
-                        <div className="flex items-start space-x-3 max-w-2xl">
-                          <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: accentColor }}>
-                            <Sparkles className="w-4 h-4 text-white" />
-                          </div>
-                          <div className={`px-4 py-3 rounded-2xl ${darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'} shadow-sm`}>
-                            <div className="flex items-center space-x-2">
-                              <div className="flex space-x-1">
-                                <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: accentColor }}></div>
-                                <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: accentColor, animationDelay: '0.1s' }}></div>
-                                <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: accentColor, animationDelay: '0.2s' }}></div>
-                              </div>
-                              <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Marwyck is typing...</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                    <div ref={messagesEndRef} />
-                  </div>
-                </div>
-              </div>
-              
-              <div className={`border-t p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
-                <div className="max-w-4xl mx-auto">
-                  <div className="flex items-end space-x-2">
-                    <div className="flex-1">
-                      <div className={`flex items-center space-x-2 p-3 rounded-2xl ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={handleFileUpload}
-                          className="p-2 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-full"
-                        >
-                          <Paperclip className="w-4 h-4" />
-                        </Button>
-                        <Input
-                          value={inputMessage}
-                          onChange={(e) => setInputMessage(e.target.value)}
-                          onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                          placeholder="Type your message..."
-                          className="flex-1 border-0 bg-transparent focus:ring-0 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
-                        />
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={handleVoiceTranscription}
-                          className={`p-2 rounded-full ${isRecording ? 'text-red-500' : 'hover:bg-gray-200 dark:hover:bg-gray-600'}`}
-                        >
-                          {isRecording ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
-                        </Button>
-                      </div>
-                    </div>
-                    <Button 
-                      onClick={handleSendMessage}
-                      disabled={!inputMessage.trim()}
-                      className="text-white p-3 rounded-full"
-                      style={{ backgroundColor: accentColor }}
-                    >
-                      <Send className="w-4 h-4" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Documents */}
-          {activeTab === 'documents' && (
-            <div className="p-6 h-full overflow-y-auto">
-              <div className="max-w-6xl mx-auto">
-                <div className="mb-8">
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                        File Management
-                      </h2>
-                      <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Manage your files and documents</p>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <Button
-                        onClick={() => addNewDossier('sale')}
-                        size="sm"
-                        className="text-white rounded-full"
-                        style={{ backgroundColor: accentColor }}
-                      >
-                        <Plus className="w-4 h-4 mr-2" />
-                        Sale
-                      </Button>
-                      <Button
-                        onClick={() => addNewDossier('purchase')}
-                        size="sm"
-                        variant="outline"
-                        className="rounded-full"
-                      >
-                        <Plus className="w-4 h-4 mr-2" />
-                        Purchase
-                      </Button>
-                      <Button
-                        onClick={() => addNewDossier('rental')}
-                        size="sm"
-                        variant="outline"
-                        className="rounded-full"
-                      >
-                        <Plus className="w-4 h-4 mr-2" />
-                        Rental
+                      <Badge variant={doc.status === 'received' ? 'default' : 'secondary'}>
+                        {doc.status}
+                      </Badge>
+                      <Button variant="outline" size="sm" className="rounded-lg">
+                        <Download className="h-4 w-4" />
                       </Button>
                     </div>
                   </div>
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                  {dossiersList.map(dossier => (
-                    <Card key={dossier.id} className={`hover:shadow-lg transition-shadow rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                      <CardHeader>
-                        <div className="flex items-center justify-between">
-                          <div className="flex-1">
-                            <CardTitle className={`text-lg font-semibold flex items-center space-x-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                              <Building className="w-5 h-5" style={{ color: accentColor }} />
-                              <span>{dossier.address}</span>
-                            </CardTitle>
-                            <div className="flex items-center space-x-2 mt-2">
-                              <Badge variant="outline" className="text-xs rounded-full">
-                                {dossier.type}
-                              </Badge>
-                              <Badge 
-                                variant={dossier.status === 'active' ? 'default' : 'secondary'}
-                                className="text-xs rounded-full"
-                              >
-                                {dossier.status}
-                              </Badge>
-                            </div>
-                          </div>
-                          <div className="flex items-center space-x-1">
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => handleEditDossier(dossier)}
-                              className="p-2 rounded-full"
-                            >
-                              <Edit className="w-4 h-4" />
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => deleteDossier(dossier.id)}
-                              className="p-2 text-red-500 hover:text-red-700 rounded-full"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </Button>
-                          </div>
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-4">
-                          <div>
-                            <h4 className={`font-medium text-sm mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Documents</h4>
-                            <div className="space-y-2">
-                              {dossier.documents.map(doc => (
-                                <div key={doc.id} className="flex items-center justify-between">
-                                  <div className="flex items-center space-x-2">
-                                    {getStatusIcon(doc.status)}
-                                    <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{doc.name}</span>
-                                  </div>
-                                  {doc.status === 'missing' && (
-                                    <Button size="sm" variant="outline" className="text-xs rounded-full">
-                                      Remind
-                                    </Button>
-                                  )}
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                          
-                          <div>
-                            <h4 className={`font-medium text-sm mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Suggested actions</h4>
-                            <div className="space-y-1">
-                              {getSuggestedActions(dossier).map((action, index) => (
-                                <div key={index} className="flex items-center space-x-2">
-                                  <Target className="w-3 h-3" style={{ color: accentColor }} />
-                                  <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{action}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                          
-                          <div className="pt-2 border-t">
-                            <Button size="sm" className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
-                              Manage file
-                            </Button>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
+                ))}
+                <Button variant="outline" className="w-full rounded-lg">
+                  <Plus className="mr-2 h-4 w-4" />
+                  Add Document
+                </Button>
               </div>
-            </div>
-          )}
-
-          {/* Planning */}
-          {activeTab === 'planning' && (
-            <div className="p-6 h-full overflow-y-auto">
-              <div className="max-w-6xl mx-auto">
-                <div className="mb-8">
-                  <div className="mb-4">
-                    <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                      Planning
-                    </h2>
-                  </div>
-                  <div className="flex items-center justify-center space-x-2 mb-4">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setCurrentWeek(currentWeek - 1)}
-                      className="rounded-full"
-                    >
-                      <ChevronLeft className="w-4 h-4" />
-                      Previous
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setCurrentWeek(0)}
-                      disabled={currentWeek === 0}
-                      className="rounded-full"
-                    >
-                      Today
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setCurrentWeek(currentWeek + 1)}
-                      className="rounded-full"
-                    >
-                      Next
-                      <ChevronRight className="w-4 h-4" />
-                    </Button>
-                  </div>
-                  <div className="text-center">
-                    <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                      {getWeekLabel(currentWeek).label}
-                    </h3>
-                    <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{getWeekLabel(currentWeek).date}</p>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  <div className="lg:col-span-2">
-                    <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                      <CardHeader>
-                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Weekly Calendar</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-4">
-                          {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map((day, index) => (
-                            <div key={day} className={`border-b pb-4 ${darkMode ? 'border-gray-700' : 'border-gray-100'}`}>
-                              <h3 className={`font-medium mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{day}</h3>
-                              <div className="space-y-2">
-                                {calendarEvents
-                                  .filter(event => {
-                                    if (index === 0) return event.id === 1
-                                    if (index === 1) return event.id === 2
-                                    return false
-                                  })
-                                  .map(event => (
-                                    <div 
-                                      key={event.id}
-                                      className="bg-cyan-50 dark:bg-cyan-900/20 border border-cyan-200 dark:border-cyan-800 rounded-xl p-3 cursor-pointer hover:shadow-md transition-shadow"
-                                      onClick={() => {
-                                        setSelectedEvent(event)
-                                        setShowEventDetails(true)
-                                      }}
-                                    >
-                                      <div className="flex items-center justify-between">
-                                        <div>
-                                          <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                            {event.title}
-                                          </p>
-                                          <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{event.time}</p>
-                                        </div>
-                                        <Badge 
-                                          variant="outline" 
-                                          className={`text-xs rounded-full border ${getTypeColor(event.type)}`}
-                                        >
-                                          {event.type}
-                                        </Badge>
-                                      </div>
-                                    </div>
-                                  ))
-                                }
-                                {index > 1 && (
-                                  <p className={`text-sm italic ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>No appointments</p>
-                                )}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-
-                  <div>
-                    <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                      <CardHeader>
-                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Quick Actions</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-3">
-                          <Button 
-                            className="w-full text-white rounded-full" 
-                            style={{ backgroundColor: accentColor }}
-                            onClick={() => setShowNewEventDialog(true)}
-                          >
-                            <Plus className="w-4 h-4 mr-2" />
-                            New Appointment
-                          </Button>
-
-                          <Button 
-                            variant="outline" 
-                            className="w-full rounded-full"
-                            onClick={() => setShowProposeDialog(true)}
-                          >
-                            <Calendar className="w-4 h-4 mr-2" />
-                            Propose slots
-                          </Button>
-
-                          <Button 
-                            variant="outline" 
-                            className="w-full rounded-full"
-                            onClick={() => setShowRescheduleDialog(true)}
-                          >
-                            <Clock className="w-4 h-4 mr-2" />
-                            Reschedule
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Estimation */}
-          {activeTab === 'estimation' && (
-            <div className="p-6 h-full overflow-y-auto">
-              <div className="max-w-4xl mx-auto">
-                <div className="mb-8">
-                  <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                    Property Estimation
-                  </h2>
-                  <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Get instant property value estimates</p>
-                </div>
-
-                <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                  <CardHeader>
-                    <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Property Details</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Address</label>
-                        <Input placeholder="123 Main Street" className="rounded-xl" />
-                      </div>
-                      <div>
-                        <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>City</label>
-                        <Input placeholder="New York" className="rounded-xl" />
-                      </div>
-                      <div>
-                        <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Property Type</label>
-                        <Select>
-                          <SelectTrigger className="rounded-xl">
-                            <SelectValue placeholder="Choose type" />
-                          </SelectTrigger>
-                          <SelectContent className="rounded-xl">
-                            <SelectItem value="house">House</SelectItem>
-                            <SelectItem value="apartment">Apartment</SelectItem>
-                            <SelectItem value="condo">Condo</SelectItem>
-                            <SelectItem value="townhouse">Townhouse</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div>
-                        <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Square Feet</label>
-                        <Input type="number" placeholder="1500" className="rounded-xl" />
-                      </div>
-                      <div>
-                        <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Bedrooms</label>
-                        <Input type="number" placeholder="3" className="rounded-xl" />
-                      </div>
-                      <div>
-                        <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Bathrooms</label>
-                        <Input type="number" placeholder="2" className="rounded-xl" />
-                      </div>
-                    </div>
-                    
-                    <div className="mt-6">
-                      <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
-                        <Calculator className="w-4 h-4 mr-2" />
-                        Generate Estimate
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className={`mt-6 rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                  <CardHeader>
-                    <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Estimated Value</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-center py-8">
-                      <div className={`text-4xl font-bold font-space-grotesk mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`} style={{ color: accentColor }}>
-                        $485,000 - $515,000
-                      </div>
-                      <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                        Based on 12 comparable properties in the area
-                      </p>
-                      <div className="mt-6 flex justify-center space-x-4">
-                        <Button variant="outline" className="rounded-full">
-                          <Download className="w-4 h-4 mr-2" />
-                          Download Report
-                        </Button>
-                        <Button className="text-white rounded-full" style={{ backgroundColor: accentColor }}>
-                          <Mail className="w-4 h-4 mr-2" />
-                          Send to Client
-                        </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          )}
-
-          {/* Communications */}
-          {activeTab === 'communications' && (
-            <div className="p-6 h-full overflow-y-auto">
-              <div className="max-w-6xl mx-auto">
-                <div className="mb-8">
-                  <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                    Communications History
-                  </h2>
-                  <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>View all SMS and call activities</p>
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  <Card className={`lg:col-span-2 rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                    <CardHeader>
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Recent Communications</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-4">
-                        {recentActivities.map(activity => (
-                          <div key={activity.id} className={`p-4 rounded-xl border ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center space-x-3">
-                                <div className="flex-shrink-0">
-                                  {activity.type === 'sms' && <Smartphone className="w-5 h-5" style={{ color: accentColor }} />}
-                                  {activity.type === 'email' && <Mail className="w-5 h-5" style={{ color: accentColor }} />}
-                                  {activity.type === 'call' && <PhoneCall className="w-5 h-5" style={{ color: accentColor }} />}
-                                </div>
-                                <div>
-                                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                    {activity.contact}
-                                  </p>
-                                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                    {activity.message}
-                                  </p>
-                                </div>
-                              </div>
-                              <div className="text-right">
-                                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{activity.time}</p>
-                                <div className="flex items-center space-x-1">
-                                  {getStatusIcon(activity.status)}
-                                  <span className={`text-xs ${getStatusColor(activity.status)}`}>{activity.status}</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                    <CardHeader>
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Quick Stats</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2">
-                            <Smartphone className="w-4 h-4" style={{ color: accentColor }} />
-                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>SMS Sent</span>
-                          </div>
-                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>89</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2">
-                            <Mail className="w-4 h-4" style={{ color: accentColor }} />
-                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Emails</span>
-                          </div>
-                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>156</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2">
-                            <PhoneCall className="w-4 h-4" style={{ color: accentColor }} />
-                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Calls</span>
-                          </div>
-                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>34</span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
+            </CardContent>
+          </Card>
+        ))}
       </div>
 
-      {/* Edit Dossier Modal */}
-      <Dialog open={showEditDossier} onOpenChange={setShowEditDossier}>
-        <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-2xl`}>
+      {/* Create Dossier Modal */}
+      <Dialog open={showCreateDossier} onOpenChange={setShowCreateDossier}>
+        <DialogContent className="rounded-xl">
           <DialogHeader>
-            <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
-              Edit File - {editingDossier?.address}
-            </DialogTitle>
+            <DialogTitle>Create New Dossier</DialogTitle>
+            <DialogDescription>
+              Create a new property dossier to manage documents and information.
+            </DialogDescription>
           </DialogHeader>
-          <div className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <form onSubmit={(e) => {
+            e.preventDefault()
+            const formData = new FormData(e.target)
+            handleCreateDossier({
+              address: formData.get('address'),
+              type: formData.get('type'),
+              priority: formData.get('priority'),
+              client: formData.get('client')
+            })
+          }}>
+            <div className="space-y-4">
               <div>
-                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Address</label>
-                <Input 
-                  value={editingDossier?.address || ''} 
-                  onChange={(e) => setEditingDossier(prev => ({ ...prev, address: e.target.value }))}
-                  className="rounded-xl" 
-                />
+                <label className="text-sm font-medium">Property Address</label>
+                <Input name="address" placeholder="123 Main Street, City" required className="rounded-lg" />
               </div>
               <div>
-                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Type</label>
-                <Select 
-                  value={editingDossier?.type || ''} 
-                  onValueChange={(value) => setEditingDossier(prev => ({ ...prev, type: value }))}
-                >
-                  <SelectTrigger className="rounded-xl">
-                    <SelectValue />
+                <label className="text-sm font-medium">Type</label>
+                <Select name="type" required>
+                  <SelectTrigger className="rounded-lg">
+                    <SelectValue placeholder="Select type" />
                   </SelectTrigger>
-                  <SelectContent className="rounded-xl">
+                  <SelectContent className="rounded-lg">
                     <SelectItem value="sale">Sale</SelectItem>
-                    <SelectItem value="purchase">Purchase</SelectItem>
                     <SelectItem value="rental">Rental</SelectItem>
+                    <SelectItem value="purchase">Purchase</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <label className="text-sm font-medium">Client</label>
+                <Select name="client" required>
+                  <SelectTrigger className="rounded-lg">
+                    <SelectValue placeholder="Select client" />
+                  </SelectTrigger>
+                  <SelectContent className="rounded-lg">
+                    {clients.map(client => (
+                      <SelectItem key={client.id} value={client.name}>{client.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <label className="text-sm font-medium">Priority</label>
+                <Select name="priority" required>
+                  <SelectTrigger className="rounded-lg">
+                    <SelectValue placeholder="Select priority" />
+                  </SelectTrigger>
+                  <SelectContent className="rounded-lg">
+                    <SelectItem value="high">High</SelectItem>
+                    <SelectItem value="medium">Medium</SelectItem>
+                    <SelectItem value="low">Low</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
             </div>
-            
-            <div>
-              <h4 className={`font-medium mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Documents</h4>
-              <div className="space-y-2 max-h-60 overflow-y-auto">
-                {editingDossier?.documents.map(doc => (
-                  <div key={doc.id} className="flex items-center justify-between p-3 border rounded-xl">
-                    <div className="flex items-center space-x-2">
-                      {getStatusIcon(doc.status)}
-                      <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{doc.name}</span>
-                    </div>
-                    <Select value={doc.status} onValueChange={(value) => updateDocumentStatus(doc.id, value)}>
-                      <SelectTrigger className="w-32 rounded-lg">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent className="rounded-xl">
-                        <SelectItem value="missing">Missing</SelectItem>
-                        <SelectItem value="received">Received</SelectItem>
-                        <SelectItem value="signed">Signed</SelectItem>
-                        <SelectItem value="pending">Pending</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <div className="flex justify-end space-x-2">
-              <Button variant="outline" onClick={() => setShowEditDossier(false)} className="rounded-full">
+            <DialogFooter className="mt-6">
+              <Button type="button" variant="outline" onClick={() => setShowCreateDossier(false)} className="rounded-lg">
                 Cancel
               </Button>
-              <Button onClick={handleSaveDossier} className="text-white rounded-full" style={{ backgroundColor: accentColor }}>
-                <Save className="w-4 h-4 mr-2" />
-                Save Changes
-              </Button>
-            </div>
-          </div>
+              <Button type="submit" className="rounded-lg">Create Dossier</Button>
+            </DialogFooter>
+          </form>
         </DialogContent>
       </Dialog>
+
+      {/* Edit Dossier Modal */}
+      <Dialog open={showEditDossier} onOpenChange={setShowEditDossier}>
+        <DialogContent className="rounded-xl">
+          <DialogHeader>
+            <DialogTitle>Edit Dossier</DialogTitle>
+            <DialogDescription>
+              Update dossier information.
+            </DialogDescription>
+          </DialogHeader>
+          {selectedDossier && (
+            <form onSubmit={(e) => {
+              e.preventDefault()
+              const formData = new FormData(e.target)
+              handleEditDossier({
+                address: formData.get('address'),
+                type: formData.get('type'),
+                priority: formData.get('priority'),
+                client: formData.get('client')
+              })
+            }}>
+              <div className="space-y-4">
+                <div>
+                  <label className="text-sm font-medium">Property Address</label>
+                  <Input name="address" defaultValue={selectedDossier.address} required className="rounded-lg" />
+                </div>
+                <div>
+                  <label className="text-sm font-medium">Type</label>
+                  <Select name="type" defaultValue={selectedDossier.type} required>
+                    <SelectTrigger className="rounded-lg">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className="rounded-lg">
+                      <SelectItem value="sale">Sale</SelectItem>
+                      <SelectItem value="rental">Rental</SelectItem>
+                      <SelectItem value="purchase">Purchase</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <label className="text-sm font-medium">Client</label>
+                  <Select name="client" defaultValue={selectedDossier.client} required>
+                    <SelectTrigger className="rounded-lg">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className="rounded-lg">
+                      {clients.map(client => (
+                        <SelectItem key={client.id} value={client.name}>{client.name}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <label className="text-sm font-medium">Priority</label>
+                  <Select name="priority" defaultValue={selectedDossier.priority} required>
+                    <SelectTrigger className="rounded-lg">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className="rounded-lg">
+                      <SelectItem value="high">High</SelectItem>
+                      <SelectItem value="medium">Medium</SelectItem>
+                      <SelectItem value="low">Low</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <DialogFooter className="mt-6">
+                <Button type="button" variant="outline" onClick={() => setShowEditDossier(false)} className="rounded-lg">
+                  Cancel
+                </Button>
+                <Button type="submit" className="rounded-lg">Save Changes</Button>
+              </DialogFooter>
+            </form>
+          )}
+        </DialogContent>
+      </Dialog>
+    </div>
+  )
+
+  const renderEstimation = () => (
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">Property Estimation</h1>
+        <p className="text-muted-foreground">Get AI-powered property valuations and market analysis.</p>
+      </div>
+
+      <Card className="rounded-xl">
+        <CardHeader>
+          <CardTitle>New Estimation</CardTitle>
+          <CardDescription>Enter property details for valuation</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div>
+            <label className="text-sm font-medium">Property Address</label>
+            <Input placeholder="123 Main Street, City, Postal Code" className="rounded-lg" />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="text-sm font-medium">Property Type</label>
+              <Select>
+                <SelectTrigger className="rounded-lg">
+                  <SelectValue placeholder="Select type" />
+                </SelectTrigger>
+                <SelectContent className="rounded-lg">
+                  <SelectItem value="apartment">Apartment</SelectItem>
+                  <SelectItem value="house">House</SelectItem>
+                  <SelectItem value="commercial">Commercial</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <label className="text-sm font-medium">Surface Area (m²)</label>
+              <Input type="number" placeholder="120" className="rounded-lg" />
+            </div>
+          </div>
+          <div className="grid grid-cols-3 gap-4">
+            <div>
+              <label className="text-sm font-medium">Bedrooms</label>
+              <Input type="number" placeholder="3" className="rounded-lg" />
+            </div>
+            <div>
+              <label className="text-sm font-medium">Bathrooms</label>
+              <Input type="number" placeholder="2" className="rounded-lg" />
+            </div>
+            <div>
+              <label className="text-sm font-medium">Year Built</label>
+              <Input type="number" placeholder="2010" className="rounded-lg" />
+            </div>
+          </div>
+          <Button className="w-full rounded-lg">
+            <Calculator className="mr-2 h-4 w-4" />
+            Generate Estimation
+          </Button>
+        </CardContent>
+      </Card>
+
+      <Card className="rounded-xl">
+        <CardHeader>
+          <CardTitle>Recent Estimations</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div className="flex items-center justify-between p-4 border rounded-lg">
+              <div>
+                <h4 className="font-medium">123 Main Street, Paris</h4>
+                <p className="text-sm text-muted-foreground">Apartment • 85m² • 2 bedrooms</p>
+              </div>
+              <div className="text-right">
+                <p className="font-bold">€420,000 - €450,000</p>
+                <p className="text-sm text-muted-foreground">Confidence: 85%</p>
+              </div>
+            </div>
+            <div className="flex items-center justify-between p-4 border rounded-lg">
+              <div>
+                <h4 className="font-medium">456 Oak Avenue, Lyon</h4>
+                <p className="text-sm text-muted-foreground">House • 120m² • 3 bedrooms</p>
+              </div>
+              <div className="text-right">
+                <p className="font-bold">€380,000 - €410,000</p>
+                <p className="text-sm text-muted-foreground">Confidence: 78%</p>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  )
+
+  const renderAccount = () => (
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">Account Settings</h1>
+        <p className="text-muted-foreground">Manage your profile and application preferences.</p>
+      </div>
+
+      <div className="grid gap-6">
+        <Card className="rounded-xl">
+          <CardHeader>
+            <CardTitle>Profile Information</CardTitle>
+            <CardDescription>Update your personal details</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="text-sm font-medium">First Name</label>
+                <Input defaultValue="John" className="rounded-lg" />
+              </div>
+              <div>
+                <label className="text-sm font-medium">Last Name</label>
+                <Input defaultValue="Doe" className="rounded-lg" />
+              </div>
+            </div>
+            <div>
+              <label className="text-sm font-medium">Email</label>
+              <Input type="email" defaultValue="john.doe@example.com" className="rounded-lg" />
+            </div>
+            <div>
+              <label className="text-sm font-medium">Phone</label>
+              <Input type="tel" defaultValue="+33 1 23 45 67 89" className="rounded-lg" />
+            </div>
+            <div>
+              <label className="text-sm font-medium">Agency</label>
+              <Input defaultValue="Marwyck Real Estate" className="rounded-lg" />
+            </div>
+            <Button className="rounded-lg">Save Changes</Button>
+          </CardContent>
+        </Card>
+
+        <Card className="rounded-xl">
+          <CardHeader>
+            <CardTitle>Appearance</CardTitle>
+            <CardDescription>Customize the look and feel</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h4 className="font-medium">Theme</h4>
+                <p className="text-sm text-muted-foreground">Choose your preferred theme</p>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Button
+                  variant={theme === 'light' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setTheme('light')}
+                  className="rounded-lg"
+                >
+                  <Sun className="h-4 w-4 mr-2" />
+                  Light
+                </Button>
+                <Button
+                  variant={theme === 'dark' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setTheme('dark')}
+                  className="rounded-lg"
+                >
+                  <Moon className="h-4 w-4 mr-2" />
+                  Dark
+                </Button>
+              </div>
+            </div>
+            <Separator />
+            <div className="flex items-center justify-between">
+              <div>
+                <h4 className="font-medium">Custom Color</h4>
+                <p className="text-sm text-muted-foreground">Personalize your accent color</p>
+              </div>
+              <div className="flex items-center space-x-2">
+                <input
+                  type="color"
+                  value={customColor}
+                  onChange={(e) => setCustomColor(e.target.value)}
+                  className="w-8 h-8 rounded border"
+                />
+                <Button variant="outline" size="sm" className="rounded-lg">
+                  <Palette className="h-4 w-4 mr-2" />
+                  Apply
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="rounded-xl">
+          <CardHeader>
+            <CardTitle>Notifications</CardTitle>
+            <CardDescription>Configure your notification preferences</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h4 className="font-medium">Email Notifications</h4>
+                <p className="text-sm text-muted-foreground">Receive updates via email</p>
+              </div>
+              <Switch defaultChecked />
+            </div>
+            <div className="flex items-center justify-between">
+              <div>
+                <h4 className="font-medium">SMS Notifications</h4>
+                <p className="text-sm text-muted-foreground">Receive urgent updates via SMS</p>
+              </div>
+              <Switch />
+            </div>
+            <div className="flex items-center justify-between">
+              <div>
+                <h4 className="font-medium">Desktop Notifications</h4>
+                <p className="text-sm text-muted-foreground">Show browser notifications</p>
+              </div>
+              <Switch defaultChecked />
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  )
+
+  const renderContent = () => {
+    switch (activeSection) {
+      case 'dashboard':
+        return renderDashboard()
+      case 'chat':
+        return renderChat()
+      case 'planning':
+        return renderPlanning()
+      case 'documents':
+        return renderDocuments()
+      case 'estimation':
+        return renderEstimation()
+      case 'account':
+        return renderAccount()
+      default:
+        return renderDashboard()
+    }
+  }
+
+  return (
+    <div className="flex h-screen bg-background">
+      {/* Sidebar */}
+      <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-card border-r transition-all duration-300 flex flex-col`}>
+        {/* Logo */}
+        <div className="p-4 border-b">
+          {sidebarCollapsed ? (
+            <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
+              <span className="text-primary-foreground font-bold text-sm">M</span>
+            </div>
+          ) : (
+            <ThemeLogo width={140} height={32} className="h-8" />
+          )}
+        </div>
+
+        {/* Navigation */}
+        <nav className="flex-1 p-4">
+          <div className="space-y-2">
+            {[
+              { id: 'dashboard', icon: Home, label: 'Dashboard' },
+              { id: 'chat', icon: MessageSquare, label: 'Chat' },
+              { id: 'planning', icon: Calendar, label: 'Planning' },
+              { id: 'documents', icon: FileText, label: 'Documents' },
+              { id: 'estimation', icon: Calculator, label: 'Estimation' },
+              { id: 'account', icon: User, label: 'Account' }
+            ].map(item => (
+              <button
+                key={item.id}
+                onClick={() => setActiveSection(item.id)}
+                className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
+                  activeSection === item.id 
+                    ? 'bg-primary text-primary-foreground' 
+                    : 'hover:bg-accent hover:text-accent-foreground'
+                }`}
+              >
+                <item.icon className="h-5 w-5" />
+                {!sidebarCollapsed && <span>{item.label}</span>}
+              </button>
+            ))}
+          </div>
+        </nav>
+
+        {/* Theme Toggle & Collapse */}
+        <div className="p-4 border-t space-y-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            className={`${sidebarCollapsed ? 'w-8 h-8 p-0' : 'w-full'} rounded-lg`}
+          >
+            {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            {!sidebarCollapsed && <span className="ml-2">{theme === 'dark' ? 'Light' : 'Dark'}</span>}
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            className={`${sidebarCollapsed ? 'w-8 h-8 p-0' : 'w-full'} rounded-lg`}
+          >
+            <Settings className="h-4 w-4" />
+            {!sidebarCollapsed && <span className="ml-2">Collapse</span>}
+          </Button>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1 overflow-auto">
+        <div className="p-6">
+          {renderContent()}
+        </div>
+      </div>
     </div>
   )
 }

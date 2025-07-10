@@ -37,6 +37,7 @@ export function ThemeLogo({ className = "", width = 120, height = 40, alt = "Mar
       height={height}
       className={`object-contain ${className}`}
       priority
+      unoptimized
     />
   )
 }
