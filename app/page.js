@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import import { MessageCircle, Calendar, FileText, BarChart3, Settings, Send, Plus, ChevronLeft, ChevronRight, Search, Filter, Download, Upload, Edit, Trash2, Eye, Clock, User, Phone, Mail, MapPin, DollarSign, TrendingUp, Users, CheckCircle, AlertCircle, Home, Building, Calculator, Palette, Sun, Moon, Menu, X, Bot, HelpCircle, Lightbulb, Zap, Target, ArrowRight, Star, Award, TrendingDown, Activity, PieChart, BarChart, LineChart, Calendar as CalendarIcon, Clock as ClockIcon, UserCheck, PhoneCall, MailIcon, MessageSquare, CheckSquare, AlertTriangle, Info, Briefcase, FileCheck, UserPlus, CalendarPlus, Phone as PhonePlus, MailPlus, MessageCirclePlus, CheckCircle as CheckCirclePlus, AlertCircle as AlertCirclePlus, InfoIcon, BriefcaseIcon, FileCheckIcon, UserPlusIcon, CalendarPlusIcon, PlusIcon as PhonePlusIcon, MailPlusIcon, MessageCirclePlusIcon, CirclePlusIcon as CheckCirclePlusIcon, CirclePlusIcon as AlertCirclePlusIcon } from 'lucide-react'@/components/ui/slider'
 import { 
   MessageCircle, 
   Phone, 
@@ -61,11 +60,18 @@ import {
   Palette,
   X,
   Save,
-  ContactIcon as Contact,
   Copy,
   Lightbulb,
   ClipboardList
 } from 'lucide-react'
+
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Badge } from '@/components/ui/badge'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 
 export default function MarwyckCopilot() {
   const [activeTab, setActiveTab] = useState('dashboard')
@@ -1981,44 +1987,6 @@ export default function MarwyckCopilot() {
           )}
         </div>
       </div>
-
-      {/* Event Details Modal */}
-      <Dialog open={showEventDetails} onOpenChange={setShowEventDetails}>
-        <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-md`}>
-          <DialogHeader>
-            <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
-              {selectedEvent?.title}
-            </DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Time</label>
-                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{selectedEvent?.time}</p>
-              </div>
-              <div>
-                <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Client</label>
-                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{selectedEvent?.client}</p>
-              </div>
-            </div>
-            <div>
-              <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Description</label>
-              <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{selectedEvent?.description}</p>
-            </div>
-            <div>
-              <label className={`block text-sm font-medium mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Quick Actions</label>
-              <div className="grid grid-cols-2 gap-2">
-                {eventQuickActions.map(action => (
-                  <Button key={action.id} variant="outline" size="sm" className="rounded-full">
-                    <action.icon className="w-4 h-4 mr-2" />
-                    {action.name}
-                  </Button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
 
       {/* Edit Dossier Modal */}
       <Dialog open={showEditDossier} onOpenChange={setShowEditDossier}>
