@@ -19,7 +19,7 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${plusJakarta.variable} ${spaceGrotesk.variable}`}>
-      <body className="min-h-screen bg-gray-50 font-inter antialiased">
+      <body className="min-h-screen bg-background font-inter antialiased">
         {children}
       </body>
     </html>

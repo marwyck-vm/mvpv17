@@ -18,6 +18,33 @@ module.exports = {
     	},
     	extend: {
     		colors: {
+     			// Override default Tailwind colors that might have blue tints
+     			gray: {
+     				50: 'hsl(0, 0%, 98%)',
+     				100: 'hsl(0, 0%, 96%)',
+     				200: 'hsl(0, 0%, 90%)',
+     				300: 'hsl(0, 0%, 83%)',
+     				400: 'hsl(0, 0%, 64%)',
+     				500: 'hsl(0, 0%, 45%)',
+     				600: 'hsl(0, 0%, 32%)',
+     				700: 'hsl(0, 0%, 25%)',
+     				800: 'hsl(0, 0%, 15%)',
+     				900: 'hsl(0, 0%, 9%)',
+     				950: 'hsl(0, 0%, 4%)',
+     			},
+     			slate: {
+     				50: 'hsl(0, 0%, 98%)',
+     				100: 'hsl(0, 0%, 96%)',
+     				200: 'hsl(0, 0%, 90%)',
+     				300: 'hsl(0, 0%, 83%)',
+     				400: 'hsl(0, 0%, 64%)',
+     				500: 'hsl(0, 0%, 45%)',
+     				600: 'hsl(0, 0%, 32%)',
+     				700: 'hsl(0, 0%, 25%)',
+     				800: 'hsl(0, 0%, 15%)',
+     				900: 'hsl(0, 0%, 9%)',
+     				950: 'hsl(0, 0%, 4%)',
+     			},
     			border: 'hsl(var(--border))',
     			input: 'hsl(var(--input))',
     			ring: 'hsl(var(--ring))',

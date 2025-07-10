@@ -55,36 +55,78 @@
 
   /* Dark theme with true grays - ChatGPT/Google style - NO BLUE TINTS */
   .dark {
-    --background: 0 0% 8%;
-    --foreground: 0 0% 95%;
-    --card: 0 0% 10%;
-    --card-foreground: 0 0% 95%;
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 0 0% 95%;
-    --primary-foreground: 0 0% 8%;
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 95%;
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 60%;
-    --accent: 0 0% 12%;
-    --accent-foreground: 0 0% 95%;
+    --background: 0 0% 7%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 7%;
+    --secondary: 0 0% 11%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 11%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 0 0% 11%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 0 0% 80%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 0 0% 83%;
     
     /* Sidebar variables for dark theme */
-    --sidebar-background: 0 0% 10%;
-    --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 0 0% 95%;
-    --sidebar-primary-foreground: 0 0% 8%;
-    --sidebar-accent: 0 0% 12%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 0 0% 15%;
-    --sidebar-ring: 0 0% 80%;
+    --sidebar-background: 0 0% 9%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary-foreground: 0 0% 7%;
+    --sidebar-accent: 0 0% 11%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 0 0% 83%;
   }
+  
+  /* Force override any remaining blue tints */
+  .dark * {
+    color-scheme: dark;
+  }
+  
+  /* Override any hardcoded gray colors that might have blue tints */
+  .dark .bg-gray-50 { background-color: hsl(0, 0%, 98%) !important; }
+  .dark .bg-gray-100 { background-color: hsl(0, 0%, 96%) !important; }
+  .dark .bg-gray-200 { background-color: hsl(0, 0%, 90%) !important; }
+  .dark .bg-gray-300 { background-color: hsl(0, 0%, 83%) !important; }
+  .dark .bg-gray-400 { background-color: hsl(0, 0%, 64%) !important; }
+  .dark .bg-gray-500 { background-color: hsl(0, 0%, 45%) !important; }
+  .dark .bg-gray-600 { background-color: hsl(0, 0%, 32%) !important; }
+  .dark .bg-gray-700 { background-color: hsl(0, 0%, 25%) !important; }
+  .dark .bg-gray-800 { background-color: hsl(0, 0%, 15%) !important; }
+  .dark .bg-gray-900 { background-color: hsl(0, 0%, 9%) !important; }
+  .dark .bg-gray-950 { background-color: hsl(0, 0%, 4%) !important; }
+  
+  .dark .text-gray-50 { color: hsl(0, 0%, 98%) !important; }
+  .dark .text-gray-100 { color: hsl(0, 0%, 96%) !important; }
+  .dark .text-gray-200 { color: hsl(0, 0%, 90%) !important; }
+  .dark .text-gray-300 { color: hsl(0, 0%, 83%) !important; }
+  .dark .text-gray-400 { color: hsl(0, 0%, 64%) !important; }
+  .dark .text-gray-500 { color: hsl(0, 0%, 45%) !important; }
+  .dark .text-gray-600 { color: hsl(0, 0%, 32%) !important; }
+  .dark .text-gray-700 { color: hsl(0, 0%, 25%) !important; }
+  .dark .text-gray-800 { color: hsl(0, 0%, 15%) !important; }
+  .dark .text-gray-900 { color: hsl(0, 0%, 9%) !important; }
+  .dark .text-gray-950 { color: hsl(0, 0%, 4%) !important; }
+  
+  .dark .border-gray-50 { border-color: hsl(0, 0%, 98%) !important; }
+  .dark .border-gray-100 { border-color: hsl(0, 0%, 96%) !important; }
+  .dark .border-gray-200 { border-color: hsl(0, 0%, 90%) !important; }
+  .dark .border-gray-300 { border-color: hsl(0, 0%, 83%) !important; }
+  .dark .border-gray-400 { border-color: hsl(0, 0%, 64%) !important; }
+  .dark .border-gray-500 { border-color: hsl(0, 0%, 45%) !important; }
+  .dark .border-gray-600 { border-color: hsl(0, 0%, 32%) !important; }
+  .dark .border-gray-700 { border-color: hsl(0, 0%, 25%) !important; }
+  .dark .border-gray-800 { border-color: hsl(0, 0%, 15%) !important; }
+  .dark .border-gray-900 { border-color: hsl(0, 0%, 9%) !important; }
+  .dark .border-gray-950 { border-color: hsl(0, 0%, 4%) !important; }
 }
 
 @layer components {
