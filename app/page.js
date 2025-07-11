@@ -1411,69 +1411,6 @@ export default function MarwyckCopilot() {
             </div>
           )}
 
-                {/* Preferences */}
-                <Card className={`mt-6 ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                  <CardHeader>
-                    <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Preferences</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <h4 className={`font-medium mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Notifications</h4>
-                        <div className="space-y-3">
-                          <div className="flex items-center justify-between">
-                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Email notifications</span>
-                            <input type="checkbox" defaultChecked className="rounded" />
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>SMS notifications</span>
-                            <input type="checkbox" defaultChecked className="rounded" />
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Push notifications</span>
-                            <input type="checkbox" className="rounded" />
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div>
-                        <h4 className={`font-medium mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Language & Region</h4>
-                        <div className="space-y-3">
-                          <div>
-                            <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Language</label>
-                            <Select defaultValue="en">
-                              <SelectTrigger className="rounded-xl">
-                                <SelectValue />
-                              </SelectTrigger>
-                              <SelectContent className="rounded-xl">
-                                <SelectItem value="en">English</SelectItem>
-                                <SelectItem value="fr">French</SelectItem>
-                                <SelectItem value="es">Spanish</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
-                          <div>
-                            <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Time Zone</label>
-                            <Select defaultValue="pst">
-                              <SelectTrigger className="rounded-xl">
-                                <SelectValue />
-                              </SelectTrigger>
-                              <SelectContent className="rounded-xl">
-                                <SelectItem value="pst">Pacific Time</SelectItem>
-                                <SelectItem value="est">Eastern Time</SelectItem>
-                                <SelectItem value="cst">Central Time</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          )}
-
           {/* Chat */}
           {activeTab === 'chat' && (
             <div className="h-full flex flex-col">
