@@ -687,6 +687,39 @@ export default function MarwyckCopilot() {
     }
   }
 
+  // Team management functions
+  const handleAddTeamMember = () => {
+    if (newTeamMember.name && newTeamMember.role && newTeamMember.email) {
+      const newMember = {
+        id: Date.now(),
+        name: newTeamMember.name,
+        role: newTeamMember.role,
+        email: newTeamMember.email,
+        phone: newTeamMember.phone || '',
+        avatar: null,
+        status: 'active',
+        joinDate: new Date().toISOString().split('T')[0]
+      }
+      setTeamMembers(prev => [...prev, newMember])
+      setNewTeamMember({ name: '', role: '', email: '', phone: '' })
+      setShowAddTeamMember(false)
+    }
+  }
+
+  const handleRemoveTeamMember = (memberId) => {
+    setTeamMembers(prev => prev.filter(member => member.id !== memberId))
+  }
+
+  const toggleMemberStatus = (memberId) => {
+    setTeamMembers(prev =>
+      prev.map(member =>
+        member.id === memberId
+          ? { ...member, status: member.status === 'active' ? 'inactive' : 'active' }
+          : member
+      )
+    )
+  }
+
   return (
     <div className={`flex h-screen ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
       {/* Color Picker Sidebar */}
