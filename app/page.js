@@ -1077,7 +1077,7 @@ export default function MarwyckCopilot() {
         <div className={`p-4 border-b flex items-center justify-between ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
           <div>
             <img 
-              src={darkMode ? "/logo-light.png" : "/logo-dark.png"} 
+              src={darkMode ? "/logo-light.svg" : "/logo-dark.svg"} 
               alt="MARWYCK" 
               className="h-8 w-auto"
             />
