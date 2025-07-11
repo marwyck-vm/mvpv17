@@ -1107,7 +1107,7 @@ export default function MarwyckCopilot() {
               <li key={item.id}>
                 <button
                   onClick={() => setActiveTab(item.id)}
-                  className={`w-full flex items-center px-3 py-2 text-sm font-medium transition-colors ${
+                  className={`w-full flex items-center ${sidebarCollapsed ? 'justify-center px-2' : 'px-3'} py-2 text-sm font-medium transition-colors ${
                     activeTab === item.id
                       ? 'text-white rounded-xl'
                       : `${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'} rounded-md`
@@ -1115,7 +1115,7 @@ export default function MarwyckCopilot() {
                   style={activeTab === item.id ? { backgroundColor: accentColor } : {}}
                   title={sidebarCollapsed ? item.label : ''}
                 >
-                  <item.icon className="w-4 h-4 mr-3" />
+                  <item.icon className={`w-4 h-4 ${!sidebarCollapsed ? 'mr-3' : ''}`} />
                   {!sidebarCollapsed && item.label}
                 </button>
               </li>
