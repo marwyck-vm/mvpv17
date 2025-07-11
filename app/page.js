@@ -1460,14 +1460,14 @@ export default function MarwyckCopilot() {
                     <div className="space-y-4">
                       <div>
                         <label className={`block text-sm font-medium mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                          Primary Color
+                          Primary Color: <span className="capitalize" style={{ color: accentColor }}>{accentColors.find(c => c.value === accentColor)?.name.toLowerCase()}</span>
                         </label>
                         <div className="flex flex-wrap gap-3">
                           {accentColors.map(color => (
                             <button
                               key={color.value}
                               onClick={() => setAccentColor(color.value)}
-                              className={`group relative w-12 h-12 rounded-lg border-2 transition-all duration-200 ${
+                              className={`group relative w-12 h-12 rounded-full border-2 transition-all duration-200 ${
                                 accentColor === color.value 
                                   ? 'border-gray-400 scale-110 shadow-lg' 
                                   : 'border-gray-200 hover:border-gray-300 hover:scale-105'
@@ -1486,7 +1486,7 @@ export default function MarwyckCopilot() {
                       </div>
                       <div className="pt-2">
                         <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                          Selected: <span className="font-medium">{accentColors.find(c => c.value === accentColor)?.name}</span>
+                          Click on a color to change your interface theme
                         </p>
                       </div>
                     </div>
