@@ -1015,6 +1015,63 @@ export default function MarwyckCopilot() {
         </DialogContent>
       </Dialog>
 
+      {/* Add Team Member Modal */}
+      <Dialog open={showAddTeamMember} onOpenChange={setShowAddTeamMember}>
+        <DialogContent className="sm:max-w-md rounded-2xl">
+          <DialogHeader>
+            <DialogTitle>Add Team Member</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Name</label>
+              <Input 
+                placeholder="Full name" 
+                className="rounded-xl" 
+                value={newTeamMember.name}
+                onChange={(e) => setNewTeamMember({...newTeamMember, name: e.target.value})}
+              />
+            </div>
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Role</label>
+              <Input 
+                placeholder="e.g., Real Estate Agent" 
+                className="rounded-xl" 
+                value={newTeamMember.role}
+                onChange={(e) => setNewTeamMember({...newTeamMember, role: e.target.value})}
+              />
+            </div>
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Email</label>
+              <Input 
+                type="email" 
+                placeholder="email@example.com" 
+                className="rounded-xl" 
+                value={newTeamMember.email}
+                onChange={(e) => setNewTeamMember({...newTeamMember, email: e.target.value})}
+              />
+            </div>
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Phone</label>
+              <Input 
+                type="tel" 
+                placeholder="+33 6 12 34 56 78" 
+                className="rounded-xl" 
+                value={newTeamMember.phone}
+                onChange={(e) => setNewTeamMember({...newTeamMember, phone: e.target.value})}
+              />
+            </div>
+            <Button 
+              onClick={handleAddTeamMember}
+              className="w-full text-white rounded-full" 
+              style={{ backgroundColor: accentColor }}
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              Add Member
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
       {/* Sidebar */}
       <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-300 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r flex flex-col`}>
         <div className={`p-4 border-b flex items-center justify-between ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
