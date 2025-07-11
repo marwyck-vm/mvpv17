@@ -1130,18 +1130,18 @@ export default function MarwyckCopilot() {
               variant="ghost"
               size="sm"
               onClick={() => setDarkMode(!darkMode)}
-              className="w-full justify-start px-3 py-2 rounded-full"
+              className={`w-full ${sidebarCollapsed ? 'justify-center px-2' : 'justify-start px-3'} py-2 rounded-full`}
               title={sidebarCollapsed ? 'Toggle Theme' : ''}
             >
-              {darkMode ? <Sun className="w-4 h-4 mr-3" /> : <Moon className="w-4 h-4 mr-3" />}
+              {darkMode ? <Sun className={`w-4 h-4 ${!sidebarCollapsed ? 'mr-3' : ''}`} /> : <Moon className={`w-4 h-4 ${!sidebarCollapsed ? 'mr-3' : ''}`} />}
               {!sidebarCollapsed && (darkMode ? 'Light Mode' : 'Dark Mode')}
             </Button>
             <button
               onClick={() => setShowColorPicker(true)}
-              className={`w-full flex items-center px-3 py-2 rounded-full text-sm font-medium transition-colors ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'}`}
+              className={`w-full flex items-center ${sidebarCollapsed ? 'justify-center px-2' : 'px-3'} py-2 rounded-full text-sm font-medium transition-colors ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'}`}
               title={sidebarCollapsed ? 'Colors' : ''}
             >
-              <Palette className="w-4 h-4 mr-3" />
+              <Palette className={`w-4 h-4 ${!sidebarCollapsed ? 'mr-3' : ''}`} />
               {!sidebarCollapsed && 'Colors'}
             </button>
           </div>
