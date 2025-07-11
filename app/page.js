@@ -2103,6 +2103,116 @@ export default function MarwyckCopilot() {
               </div>
             </div>
           )}
+
+          {/* Team */}
+          {activeTab === 'team' && (
+            <div className="p-6 h-full overflow-y-auto">
+              <div className="max-w-6xl mx-auto">
+                <div className="mb-8 flex items-center justify-between">
+                  <div>
+                    <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                      Team Management
+                    </h2>
+                    <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Manage your team members and collaborators</p>
+                  </div>
+                  <Button
+                    onClick={() => setShowAddTeamMember(true)}
+                    className="text-white rounded-full"
+                    style={{ backgroundColor: accentColor }}
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add Member
+                  </Button>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {teamMembers.map(member => (
+                    <Card key={member.id} className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
+                      <CardContent className="p-6">
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                              <span className="text-white font-semibold text-lg">
+                                {member.name.split(' ').map(n => n[0]).join('')}
+                              </span>
+                            </div>
+                            <div>
+                              <h3 className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                {member.name}
+                              </h3>
+                              <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                                {member.role}
+                              </p>
+                            </div>
+                          </div>
+                          <Badge 
+                            variant="secondary" 
+                            className={`${member.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}
+                          >
+                            {member.status}
+                          </Badge>
+                        </div>
+                        
+                        <div className="space-y-2 mb-4">
+                          <div className="flex items-center space-x-2">
+                            <Mail className="w-4 h-4 text-gray-500" />
+                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                              {member.email}
+                            </span>
+                          </div>
+                          {member.phone && (
+                            <div className="flex items-center space-x-2">
+                              <Phone className="w-4 h-4 text-gray-500" />
+                              <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                                {member.phone}
+                              </span>
+                            </div>
+                          )}
+                          <div className="flex items-center space-x-2">
+                            <Calendar className="w-4 h-4 text-gray-500" />
+                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                              Joined {new Date(member.joinDate).toLocaleDateString()}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="flex space-x-2">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => toggleMemberStatus(member.id)}
+                            className="flex-1 rounded-full"
+                          >
+                            {member.status === 'active' ? 'Deactivate' : 'Activate'}
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleRemoveTeamMember(member.id)}
+                            className="rounded-full text-red-600 hover:text-red-700 hover:bg-red-50"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+
+                {teamMembers.length === 0 && (
+                  <div className="text-center py-12">
+                    <Users className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                    <h3 className={`text-lg font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                      No team members yet
+                    </h3>
+                    <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                      Start by adding your first team member
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
