@@ -1011,6 +1011,7 @@ export default function MarwyckCopilot() {
               { id: 'documents', label: 'Documents', icon: FileText },
               { id: 'estimation', label: 'Estimation', icon: Calculator },
               { id: 'communications', label: 'SMS & Calls', icon: Phone },
+              { id: 'team', label: 'Team', icon: Users },
               { id: 'account', label: 'Account', icon: UserCircle }
             ].map(item => (
               <li key={item.id}>
