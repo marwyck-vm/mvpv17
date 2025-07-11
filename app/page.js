@@ -1070,6 +1070,7 @@ export default function MarwyckCopilot() {
               {activeTab === 'documents' && 'Documents'}
               {activeTab === 'estimation' && 'Estimation'}
               {activeTab === 'communications' && 'SMS & Calls'}
+              {activeTab === 'team' && 'Team'}
               {activeTab === 'account' && 'Account'}
             </h1>
           </div>
