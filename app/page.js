@@ -1075,18 +1075,20 @@ export default function MarwyckCopilot() {
       {/* Sidebar */}
       <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-300 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r flex flex-col`}>
         <div className={`p-4 border-b flex items-center justify-between ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-          <div>
-            <img 
-              src={darkMode ? "/logo-white.svg" : "/logo-black.svg"} 
-              alt="MARWYCK" 
-              className="h-10 w-auto max-w-[200px]"
-            />
-          </div>
+          {!sidebarCollapsed && (
+            <div>
+              <img 
+                src={darkMode ? "/logo-white.svg" : "/logo-black.svg"} 
+                alt="MARWYCK" 
+                className="h-10 w-auto max-w-[200px]"
+              />
+            </div>
+          )}
           <Button
             variant="ghost"
             size="sm"
             onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            className="p-2 rounded-full"
+            className={`p-2 rounded-full ${sidebarCollapsed ? 'mx-auto' : ''}`}
           >
             <Menu className="w-4 h-4" />
           </Button>
