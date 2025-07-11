@@ -1362,36 +1362,132 @@ export default function MarwyckCopilot() {
                   <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                     Account Settings
                   </h2>
-                  <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Customize your interface colors</p>
+                  <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Manage your profile and preferences</p>
                 </div>
 
-                <Card className={`${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                  {/* Profile Section */}
+                  <Card className={`lg:col-span-2 ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
+                    <CardHeader>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Profile Information</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-6">
+                        <div className="flex items-center space-x-4">
+                          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+                            <User className="w-10 h-10 text-white" />
+                          </div>
+                          <div>
+                            <h3 className={`text-lg font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>John Doe</h3>
+                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Real Estate Agent</p>
+                          </div>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Full Name</label>
+                            <Input defaultValue="John Doe" className="rounded-xl" />
+                          </div>
+                          <div>
+                            <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Email</label>
+                            <Input defaultValue="john@marwyck.com" className="rounded-xl" />
+                          </div>
+                          <div>
+                            <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Phone</label>
+                            <Input defaultValue="+1 (555) 123-4567" className="rounded-xl" />
+                          </div>
+                          <div>
+                            <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Agency</label>
+                            <Input defaultValue="Marwyck Real Estate" className="rounded-xl" />
+                          </div>
+                        </div>
+                        
+                        <Button className="text-white rounded-full" style={{ backgroundColor: accentColor }}>
+                          <Save className="w-4 h-4 mr-2" />
+                          Update Profile
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Statistics */}
+                  <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
+                    <CardHeader>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Your Stats</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            <Clock className="w-4 h-4" style={{ color: accentColor }} />
+                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Total Hours Saved</span>
+                          </div>
+                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>847h</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            <FileText className="w-4 h-4" style={{ color: accentColor }} />
+                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Files Processed</span>
+                          </div>
+                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>1,234</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            <Calendar className="w-4 h-4" style={{ color: accentColor }} />
+                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Appointments</span>
+                          </div>
+                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>456</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            <Send className="w-4 h-4" style={{ color: accentColor }} />
+                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Messages Sent</span>
+                          </div>
+                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>3,789</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Colors Section */}
+                <Card className={`mt-6 ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                   <CardHeader>
-                    <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Colors</CardTitle>
+                    <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Interface Colors</CardTitle>
+                    <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Customize your interface primary color</p>
                   </CardHeader>
                   <CardContent>
-                    <div>
-                      <label className={`block text-sm font-medium mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                        Primary color
-                      </label>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {accentColors.map(color => (
-                          <div key={color.value} className="flex flex-col items-center space-y-2">
+                    <div className="space-y-4">
+                      <div>
+                        <label className={`block text-sm font-medium mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                          Primary Color
+                        </label>
+                        <div className="flex flex-wrap gap-3">
+                          {accentColors.map(color => (
                             <button
+                              key={color.value}
                               onClick={() => setAccentColor(color.value)}
-                              className={`w-12 h-12 rounded-full border-2 transition-all ${
-                                accentColor === color.value ? 'border-gray-400 scale-110' : 'border-gray-200'
+                              className={`group relative w-12 h-12 rounded-lg border-2 transition-all duration-200 ${
+                                accentColor === color.value 
+                                  ? 'border-gray-400 scale-110 shadow-lg' 
+                                  : 'border-gray-200 hover:border-gray-300 hover:scale-105'
                               }`}
                               style={{ backgroundColor: color.value }}
-                            />
-                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                              {color.name}
-                            </span>
-                            {accentColor === color.value && (
-                              <CheckCircle className="w-4 h-4 text-green-500" />
-                            )}
-                          </div>
-                        ))}
+                              title={color.name}
+                            >
+                              {accentColor === color.value && (
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <CheckCircle className="w-6 h-6 text-white drop-shadow-lg" />
+                                </div>
+                              )}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="pt-2">
+                        <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                          Selected: <span className="font-medium">{accentColors.find(c => c.value === accentColor)?.name}</span>
+                        </p>
                       </div>
                     </div>
                   </CardContent>
