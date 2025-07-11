@@ -1077,9 +1077,20 @@ export default function MarwyckCopilot() {
         <div className={`p-4 border-b flex items-center justify-between ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
           {!sidebarCollapsed && (
             <div>
-              <div className="text-xl font-bold gradient-logo font-plus-jakarta tracking-tight">
-                MARWYCK
-              </div>
+              <img 
+                src={darkMode ? "/logo-white.png" : "/logo-black.png"} 
+                alt="MARWYCK" 
+                className="h-6 w-auto font-plus-jakarta tracking-tight"
+              />
+            </div>
+          )}
+          {sidebarCollapsed && (
+            <div>
+              <img 
+                src={darkMode ? "/logo-white.png" : "/logo-black.png"} 
+                alt="MARWYCK" 
+                className="h-6 w-auto"
+              />
             </div>
           )}
           <Button
