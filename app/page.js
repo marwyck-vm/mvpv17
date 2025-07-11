@@ -129,6 +129,32 @@ export default function MarwyckCopilot() {
     { id: 3, text: "Gather all necessary documents", checked: false },
     { id: 4, text: "Check route and travel time", checked: false }
   ])
+  
+  // Team management state
+  const [teamMembers, setTeamMembers] = useState([
+    { 
+      id: 1, 
+      name: 'Marie Dubois', 
+      role: 'Real Estate Agent', 
+      email: 'marie.dubois@marwyck.com',
+      phone: '+33 6 12 34 56 78',
+      avatar: null,
+      status: 'active',
+      joinDate: '2024-01-15'
+    },
+    { 
+      id: 2, 
+      name: 'Jean Martin', 
+      role: 'Property Manager', 
+      email: 'jean.martin@marwyck.com',
+      phone: '+33 6 87 65 43 21',
+      avatar: null,
+      status: 'active',
+      joinDate: '2024-02-20'
+    }
+  ])
+  const [showAddTeamMember, setShowAddTeamMember] = useState(false)
+  const [newTeamMember, setNewTeamMember] = useState({ name: '', role: '', email: '', phone: '' })
   const messagesEndRef = useRef(null)
 
   // Available accent colors
