@@ -820,6 +820,7 @@ export default function MarwyckCopilot() {
                 </div>
               </div>
             </div>
+          </div>
         </DialogContent>
       </Dialog>
 
