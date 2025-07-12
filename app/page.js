@@ -1074,7 +1074,7 @@ export default function MarwyckCopilot() {
 
       {/* Sidebar */}
       <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-300 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r flex flex-col`}>
-        <div className={`p-4 border-b flex items-center justify-between ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+        <div className={`p-4 flex items-center justify-between`}>
           {!sidebarCollapsed && (
             <div>
               <img 
