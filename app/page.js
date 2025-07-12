@@ -1513,7 +1513,8 @@ export default function MarwyckCopilot() {
                             <SelectItem 
                               key={client.id} 
                               value={client.id} 
-                              className={`!rounded-lg transition-colors ${darkMode ? 'text-gray-100 hover:!bg-gray-600 hover:!rounded-lg' : 'text-gray-900 hover:!bg-gray-100 hover:!rounded-lg'}`}
+                              className={`!rounded-lg transition-colors ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}
+                              style={{ borderRadius: '0.5rem' }}
                             >
                               {client.name}
                             </SelectItem>
