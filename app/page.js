@@ -1516,7 +1516,7 @@ export default function MarwyckCopilot() {
                               className={`transition-colors m-1 ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}
                               style={{ 
                                 borderRadius: '8px',
-                                margin: '4px 8px',
+                                margin: '4px 8px 4px 8px',
                                 padding: '8px 12px'
                               }}
                             >
