@@ -797,41 +797,42 @@ export default function MarwyckCopilot() {
                 </Button>
               </div>
             </DialogHeader>
-          <div className="space-y-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                <Phone className="w-5 h-5 text-white" />
+            <div className="space-y-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                  <FolderOpen className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Navigate your files</p>
+                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Browse and manage your documents</p>
+                </div>
               </div>
-              <div>
-                <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Schedule follow-ups</p>
-                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Automatic SMS, email and call scheduling</p>
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                  <MessageCircle className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Get answers to any questions</p>
+                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Ask anything about your real estate business</p>
+                </div>
               </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                <Home className="w-5 h-5 text-white" />
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                  <FileText className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Track your files</p>
+                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Monitor document status and progress</p>
+                </div>
               </div>
-              <div>
-                <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Property estimates</p>
-                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Generate estimates based on comparables</p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                <Calendar className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Schedule appointments</p>
-                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Automatic calendar management</p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
-                <FileText className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Manage documents</p>
-                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Track missing documents and automatic reminders</p>
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                  <Calendar className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Navigate your upcoming appointments</p>
+                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>View and manage your schedule</p>
+                </div>
               </div>
             </div>
           </div>
