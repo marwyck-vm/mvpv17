@@ -377,20 +377,20 @@ export default function MarwyckCopilot() {
 
     if (weekOffset === -1) {
       return [
-        { ...baseKpis[0], value: '28.5', previousValue: '31.2', change: '-9%', color: 'text-red-500', trend: 'down' },
-        { ...baseKpis[1], value: '142', previousValue: '158', change: '-10%', color: 'text-red-500', trend: 'down' },
-        { ...baseKpis[2], value: '89%', previousValue: '92%', change: '-3%', color: 'text-red-500', trend: 'down' },
-        { ...baseKpis[3], value: '24', previousValue: '29', change: '-17%', color: 'text-red-500', trend: 'down' }
+        { ...baseKpis[0], value: '28.5', previousValue: '31.2', change: '-9%', color: 'text-accent-cyan', trend: 'down' },
+        { ...baseKpis[1], value: '142', previousValue: '158', change: '-10%', color: 'text-accent-cyan', trend: 'down' },
+        { ...baseKpis[2], value: '89%', previousValue: '92%', change: '-3%', color: 'text-accent-cyan', trend: 'down' },
+        { ...baseKpis[3], value: '24', previousValue: '29', change: '-17%', color: 'text-accent-cyan', trend: 'down' }
       ]
     } else if (weekOffset === 0) {
       return baseKpis
     } else {
       // Future weeks - projected data
       return [
-        { ...baseKpis[0], value: '35.8', previousValue: '32.5', change: '+10%', color: 'text-success', trend: 'up' },
-        { ...baseKpis[1], value: '164', previousValue: '156', change: '+5%', color: 'text-success', trend: 'up' },
-        { ...baseKpis[2], value: '94%', previousValue: '92%', change: '+2%', color: 'text-success', trend: 'up' },
-        { ...baseKpis[3], value: '32', previousValue: '28', change: '+14%', color: 'text-success', trend: 'up' }
+        { ...baseKpis[0], value: '35.8', previousValue: '32.5', change: '+10%', color: 'text-accent-cyan', trend: 'up' },
+        { ...baseKpis[1], value: '164', previousValue: '156', change: '+5%', color: 'text-accent-cyan', trend: 'up' },
+        { ...baseKpis[2], value: '94%', previousValue: '92%', change: '+2%', color: 'text-accent-cyan', trend: 'up' },
+        { ...baseKpis[3], value: '32', previousValue: '28', change: '+14%', color: 'text-accent-cyan', trend: 'up' }
       ]
     }
   }
