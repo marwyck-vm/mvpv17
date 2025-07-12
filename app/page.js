@@ -1643,7 +1643,7 @@ export default function MarwyckCopilot() {
                           variant="ghost"
                           size="sm"
                           onClick={handleFileUpload}
-                          className="p-2 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-full"
+                          className={`p-2 rounded-full ${darkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-200'}`}
                         >
                           <Paperclip className="w-4 h-4" />
                         </Button>
@@ -1658,7 +1658,7 @@ export default function MarwyckCopilot() {
                           variant="ghost"
                           size="sm"
                           onClick={handleVoiceTranscription}
-                          className={`p-2 rounded-full ${isRecording ? 'text-red-500' : 'hover:bg-gray-200 dark:hover:bg-gray-600'}`}
+                          className={`p-2 rounded-full ${isRecording ? 'text-red-500' : `${darkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-200'}`}`}
                         >
                           {isRecording ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
                         </Button>
