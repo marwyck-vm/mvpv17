@@ -1525,7 +1525,7 @@ export default function MarwyckCopilot() {
                         </SelectTrigger>
                         <SelectContent className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
                           {clients.map(client => (
-                            <SelectItem key={client.id} value={client.id} className="rounded-lg">
+                            <SelectItem key={client.id} value={client.id} className={`rounded-lg ${darkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-100'}`}>
                               {client.name}
                             </SelectItem>
                           ))}
