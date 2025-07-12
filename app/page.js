@@ -1861,9 +1861,9 @@ export default function MarwyckCopilot() {
                   <div className="lg:col-span-3">
                     <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                       <CardContent className="p-0">
-                        {/* Calendar container with scroll */}
-                        <div className="h-96 overflow-y-auto">
-                          <div className="flex">
+                        {/* Calendar container with scroll and rounded corners */}
+                        <div className="h-[500px] overflow-y-auto rounded-xl">
+                          <div className="flex rounded-xl overflow-hidden">
                             {/* Hours column */}
                             <div className="w-16 border-r border-gray-200 dark:border-gray-700 sticky left-0 bg-white dark:bg-gray-800 z-10">
                               <div className="h-12 border-b border-gray-200 dark:border-gray-700"></div>
@@ -1904,7 +1904,7 @@ export default function MarwyckCopilot() {
                                       >
                                         {hasEvent && (
                                           <div 
-                                            className="w-full h-12 rounded-lg p-1 text-xs cursor-pointer hover:shadow-md transition-shadow"
+                                            className="w-full h-12 rounded-xl p-1 text-xs cursor-pointer hover:shadow-md transition-shadow"
                                             style={{ backgroundColor: accentColor, opacity: 0.8 }}
                                             onClick={(e) => {
                                               e.stopPropagation();
