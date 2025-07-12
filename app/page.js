@@ -1526,16 +1526,40 @@ export default function MarwyckCopilot() {
                       </Badge>
                     )}
                   </div>
-                  
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className="rounded-full"
-                    onClick={() => setShowAIHelp(true)}
-                  >
-                    <Info className="w-4 h-4 mr-2" />
-                    AI Help
-                  </Button>
+                  <div className="flex items-center space-x-2">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="rounded-full"
+                      onClick={() => {
+                        // Reset messages for current client
+                        if (selectedClient !== 'general') {
+                          setMessages(prev => ({
+                            ...prev,
+                            [selectedClient]: []
+                          }))
+                        } else {
+                          setMessages(prev => ({
+                            ...prev,
+                            general: []
+                          }))
+                        }
+                      }}
+                      title="Reset conversation"
+                    >
+                      <RotateCcw className="w-4 h-4" />
+                    </Button>
+                    
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="rounded-full"
+                      onClick={() => setShowAIHelp(true)}
+                    >
+                      <Info className="w-4 h-4 mr-2" />
+                      AI Help
+                    </Button>
+                  </div>
                 </div>
               </div>
 
