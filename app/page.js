@@ -780,11 +780,22 @@ export default function MarwyckCopilot() {
       )}
 
       {/* AI Help Floating Card */}
-      <Dialog open={showAIHelp} onOpenChange={setShowAIHelp}>
-        <DialogContent className="sm:max-w-md rounded-2xl">
-          <DialogHeader>
-            <DialogTitle>What I can do for you</DialogTitle>
-          </DialogHeader>
+      <Dialog open={showAIHelp} onOpenChange={setShowAIHelp} modal={false}>
+        <DialogContent className="sm:max-w-md rounded-2xl shadow-xl border-0" style={{ background: 'transparent' }}>
+          <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} rounded-2xl border p-6`}>
+            <DialogHeader>
+              <div className="flex items-center justify-between">
+                <DialogTitle>What I can do for you</DialogTitle>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowAIHelp(false)}
+                  className="rounded-full p-2"
+                >
+                  <X className="w-4 h-4" />
+                </Button>
+              </div>
+            </DialogHeader>
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
