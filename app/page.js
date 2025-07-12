@@ -13,6 +13,7 @@ import {
   CheckCircle,
   AlertCircle,
   Send,
+  ArrowUp,
   Upload,
   Download,
   Plus,
