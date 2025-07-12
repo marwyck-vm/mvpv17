@@ -15,6 +15,7 @@ import {
   Send,
   ArrowUp,
   RotateCcw,
+  X,
   Upload,
   Download,
   Plus,
