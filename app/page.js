@@ -1652,14 +1652,16 @@ export default function MarwyckCopilot() {
                         </Button>
                       </div>
                     </div>
+                  <div className="flex items-center space-x-2">
                     <Button 
                       onClick={handleSendMessage}
                       disabled={!inputMessage.trim()}
-                      className="text-white p-3 rounded-full"
+                      className="text-white p-3 rounded-full self-center"
                       style={{ backgroundColor: accentColor }}
                     >
                       <ArrowUp className="w-4 h-4" />
                     </Button>
+                  </div>
                   </div>
                 </div>
               </div>
