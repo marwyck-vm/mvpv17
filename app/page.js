@@ -14,6 +14,7 @@ import {
   AlertCircle,
   Send,
   ArrowUp,
+  RotateCcw,
   Upload,
   Download,
   Plus,
