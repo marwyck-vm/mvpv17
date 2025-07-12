@@ -1860,53 +1860,72 @@ export default function MarwyckCopilot() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   <div className="lg:col-span-2">
                     <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                      <CardHeader>
-                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Weekly Calendar</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-4">
-                          {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map((day, index) => (
-                            <div key={day} className={`border-b pb-4 ${darkMode ? 'border-gray-700' : 'border-gray-100'}`}>
-                              <h3 className={`font-medium mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{day}</h3>
-                              <div className="space-y-2">
-                                {calendarEvents
-                                  .filter(event => {
-                                    if (index === 0) return event.id === 1
-                                    if (index === 1) return event.id === 2
-                                    return false
-                                  })
-                                  .map(event => (
+                      <CardContent className="p-0">
+                        {/* Hours column and days grid */}
+                        <div className="flex">
+                          {/* Hours column */}
+                          <div className="w-16 border-r border-gray-200 dark:border-gray-700">
+                            <div className="h-12 border-b border-gray-200 dark:border-gray-700"></div>
+                            {Array.from({ length: 12 }, (_, i) => i + 8).map(hour => (
+                              <div key={hour} className="h-16 border-b border-gray-200 dark:border-gray-700 flex items-start justify-center pt-1">
+                                <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                                  {hour}:00
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                          
+                          {/* Days columns */}
+                          <div className="flex-1 grid grid-cols-7">
+                            {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, dayIndex) => (
+                              <div key={day} className="border-r border-gray-200 dark:border-gray-700 last:border-r-0">
+                                {/* Day header */}
+                                <div className="h-12 border-b border-gray-200 dark:border-gray-700 flex items-center justify-center">
+                                  <span className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                    {day}
+                                  </span>
+                                </div>
+                                
+                                {/* Hour slots */}
+                                {Array.from({ length: 12 }, (_, hourIndex) => {
+                                  const hour = hourIndex + 8;
+                                  const hasEvent = calendarEvents.find(event => 
+                                    event.id === dayIndex + 1 && parseInt(event.time.split(':')[0]) === hour
+                                  );
+                                  
+                                  return (
                                     <div 
-                                      key={event.id}
-                                      className="bg-cyan-50 dark:bg-cyan-900/20 border border-cyan-200 dark:border-cyan-800 rounded-xl p-3 cursor-pointer hover:shadow-md transition-shadow"
+                                      key={`${day}-${hour}`} 
+                                      className="h-16 border-b border-gray-200 dark:border-gray-700 p-1 hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer relative"
                                       onClick={() => {
-                                        setSelectedEvent(event)
-                                        setShowEventDetails(true)
+                                        // Handle click to create new event
+                                        setShowNewEventDialog(true);
                                       }}
                                     >
-                                      <div className="flex items-center justify-between">
-                                        <div>
-                                          <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                            {event.title}
-                                          </p>
-                                          <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{event.time}</p>
-                                        </div>
-                                        <Badge 
-                                          variant="outline" 
-                                          className={`text-xs rounded-full border ${getTypeColor(event.type)}`}
+                                      {hasEvent && (
+                                        <div 
+                                          className="w-full h-12 rounded-md p-1 text-xs cursor-pointer hover:shadow-md transition-shadow"
+                                          style={{ backgroundColor: accentColor, opacity: 0.8 }}
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            setSelectedEvent(hasEvent);
+                                            setShowEventDetails(true);
+                                          }}
                                         >
-                                          {event.type}
-                                        </Badge>
-                                      </div>
+                                          <p className="text-white font-medium text-xs leading-tight">
+                                            {hasEvent.title}
+                                          </p>
+                                          <p className="text-white/80 text-xs">
+                                            {hasEvent.time}
+                                          </p>
+                                        </div>
+                                      )}
                                     </div>
-                                  ))
-                                }
-                                {index > 1 && (
-                                  <p className={`text-sm italic ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>No appointments</p>
-                                )}
+                                  );
+                                })}
                               </div>
-                            </div>
-                          ))}
+                            ))}
+                          </div>
                         </div>
                       </CardContent>
                     </Card>
