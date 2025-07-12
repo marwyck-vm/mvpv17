@@ -1862,69 +1862,78 @@ export default function MarwyckCopilot() {
                     <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                       <CardContent className="p-0">
                         {/* Calendar container with scroll and rounded corners */}
-                        <div className="h-[500px] overflow-y-auto rounded-xl">
-                          <div className="flex rounded-xl overflow-hidden">
-                            {/* Hours column */}
-                            <div className="w-16 border-r border-gray-200 dark:border-gray-700 sticky left-0 bg-white dark:bg-gray-800 z-10">
-                              <div className="h-12 border-b border-gray-200 dark:border-gray-700"></div>
-                              {Array.from({ length: 24 }, (_, i) => i).map(hour => (
-                                <div key={hour} className="h-16 border-b border-gray-200 dark:border-gray-700 flex items-start justify-center pt-1">
-                                  <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                    {hour.toString().padStart(2, '0')}:00
+                        <div className="rounded-xl overflow-hidden">
+                          {/* Day headers - fixed */}
+                          <div className="flex bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-20">
+                            <div className="w-16 border-r border-gray-200 dark:border-gray-700"></div>
+                            <div className="flex-1 grid grid-cols-7">
+                              {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
+                                <div key={day} className="h-12 border-r border-gray-200 dark:border-gray-700 last:border-r-0 flex items-center justify-center">
+                                  <span className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                    {day}
                                   </span>
                                 </div>
                               ))}
                             </div>
-                            
-                            {/* Days columns */}
-                            <div className="flex-1 grid grid-cols-7">
-                              {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, dayIndex) => (
-                                <div key={day} className="border-r border-gray-200 dark:border-gray-700 last:border-r-0">
-                                  {/* Day header */}
-                                  <div className="h-12 border-b border-gray-200 dark:border-gray-700 flex items-center justify-center sticky top-0 bg-white dark:bg-gray-800 z-10">
-                                    <span className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                      {day}
+                          </div>
+                          
+                          {/* Scrollable hours and events area */}
+                          <div className="h-[450px] overflow-y-auto">
+                            <div className="flex">
+                              {/* Hours column - fixed when scrolling horizontally */}
+                              <div className="w-16 border-r border-gray-200 dark:border-gray-700 sticky left-0 bg-white dark:bg-gray-800 z-10">
+                                {Array.from({ length: 24 }, (_, i) => i).map(hour => (
+                                  <div key={hour} className="h-16 border-b border-gray-200 dark:border-gray-700 flex items-start justify-center pt-1">
+                                    <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                                      {hour === 0 ? '12 AM' : hour < 12 ? `${hour} AM` : hour === 12 ? '12 PM' : `${hour - 12} PM`}
                                     </span>
                                   </div>
-                                  
-                                  {/* Hour slots */}
-                                  {Array.from({ length: 24 }, (_, hourIndex) => {
-                                    const hour = hourIndex;
-                                    const hasEvent = calendarEvents.find(event => 
-                                      event.id === dayIndex + 1 && parseInt(event.time.split(':')[0]) === hour
-                                    );
-                                    
-                                    return (
-                                      <div 
-                                        key={`${day}-${hour}`} 
-                                        className="h-16 border-b border-gray-200 dark:border-gray-700 p-1 hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer relative"
-                                        onClick={() => {
-                                          setShowNewEventDialog(true);
-                                        }}
-                                      >
-                                        {hasEvent && (
-                                          <div 
-                                            className="w-full h-12 rounded-xl p-1 text-xs cursor-pointer hover:shadow-md transition-shadow"
-                                            style={{ backgroundColor: accentColor, opacity: 0.8 }}
-                                            onClick={(e) => {
-                                              e.stopPropagation();
-                                              setSelectedEvent(hasEvent);
-                                              setShowEventDetails(true);
-                                            }}
-                                          >
-                                            <p className="text-white font-medium text-xs leading-tight">
-                                              {hasEvent.title}
-                                            </p>
-                                            <p className="text-white/80 text-xs">
-                                              {hasEvent.time}
-                                            </p>
-                                          </div>
-                                        )}
-                                      </div>
-                                    );
-                                  })}
-                                </div>
-                              ))}
+                                ))}
+                              </div>
+                              
+                              {/* Days columns */}
+                              <div className="flex-1 grid grid-cols-7">
+                                {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, dayIndex) => (
+                                  <div key={day} className="border-r border-gray-200 dark:border-gray-700 last:border-r-0">
+                                    {/* Hour slots */}
+                                    {Array.from({ length: 24 }, (_, hourIndex) => {
+                                      const hour = hourIndex;
+                                      const hasEvent = calendarEvents.find(event => 
+                                        event.id === dayIndex + 1 && parseInt(event.time.split(':')[0]) === hour
+                                      );
+                                      
+                                      return (
+                                        <div 
+                                          key={`${day}-${hour}`} 
+                                          className="h-16 border-b border-gray-200 dark:border-gray-700 p-1 hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer relative"
+                                          onClick={() => {
+                                            setShowNewEventDialog(true);
+                                          }}
+                                        >
+                                          {hasEvent && (
+                                            <div 
+                                              className="w-full h-12 rounded-xl p-1 text-xs cursor-pointer hover:shadow-md transition-shadow"
+                                              style={{ backgroundColor: accentColor, opacity: 0.8 }}
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                setSelectedEvent(hasEvent);
+                                                setShowEventDetails(true);
+                                              }}
+                                            >
+                                              <p className="text-white font-medium text-xs leading-tight">
+                                                {hasEvent.title}
+                                              </p>
+                                              <p className="text-white/80 text-xs">
+                                                {hasEvent.time}
+                                              </p>
+                                            </div>
+                                          )}
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+                                ))}
+                              </div>
                             </div>
                           </div>
                         </div>
