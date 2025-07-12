@@ -1543,7 +1543,7 @@ export default function MarwyckCopilot() {
                     <Button 
                       variant="outline" 
                       size="sm" 
-                      className="rounded-full"
+                      className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
                       onClick={() => {
                         // Reset messages for current client
                         if (selectedClient !== 'general') {
@@ -1566,7 +1566,7 @@ export default function MarwyckCopilot() {
                     <Button 
                       variant="outline" 
                       size="sm" 
-                      className="rounded-full"
+                      className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
                       onClick={() => setShowAIHelp(true)}
                     >
                       <Info className="w-4 h-4 mr-2" />
