@@ -1818,6 +1818,7 @@ export default function MarwyckCopilot() {
                     <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                       Planning
                     </h2>
+                    <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Manage your appointments and schedule</p>
                   </div>
                   <div className="flex items-center justify-center space-x-2 mb-4">
                     <Button
