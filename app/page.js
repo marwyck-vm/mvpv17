@@ -1504,12 +1504,16 @@ export default function MarwyckCopilot() {
                   <div className="flex items-center space-x-4">
                     <div className="flex-1">
                       <Select value={selectedClient} onValueChange={setSelectedClient}>
-                        <SelectTrigger className={`w-64 rounded-full ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
+                        <SelectTrigger className={`w-64 rounded-full ${darkMode ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-white border-gray-200 text-gray-900'}`}>
                           <SelectValue placeholder="Choose a file" />
                         </SelectTrigger>
                         <SelectContent className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
                           {clients.map(client => (
-                            <SelectItem key={client.id} value={client.id} className={`rounded-lg ${darkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-100'}`}>
+                            <SelectItem 
+                              key={client.id} 
+                              value={client.id} 
+                              className={`rounded-lg transition-colors ${darkMode ? 'text-gray-100 hover:bg-gray-600 data-[state=checked]:bg-gray-600 data-[state=checked]:text-white' : 'text-gray-900 hover:bg-gray-100 data-[state=checked]:bg-gray-100 data-[state=checked]:text-gray-900'}`}
+                            >
                               {client.name}
                             </SelectItem>
                           ))}
