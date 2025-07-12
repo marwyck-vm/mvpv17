@@ -1865,7 +1865,7 @@ export default function MarwyckCopilot() {
                         <div className="rounded-xl overflow-hidden">
                           {/* Day headers - fixed */}
                           <div className="flex bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-20">
-                            <div className="w-16 border-r border-gray-200 dark:border-gray-700"></div>
+                            <div className="w-16 border-r border-gray-200 dark:border-gray-700 flex-shrink-0"></div>
                             <div className="flex-1 grid grid-cols-7">
                               {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
                                 <div key={day} className="h-12 border-r border-gray-200 dark:border-gray-700 last:border-r-0 flex items-center justify-center">
@@ -1881,11 +1881,14 @@ export default function MarwyckCopilot() {
                           <div className="h-[450px] overflow-y-auto">
                             <div className="flex">
                               {/* Hours column - fixed when scrolling horizontally */}
-                              <div className="w-16 border-r border-gray-200 dark:border-gray-700 sticky left-0 bg-white dark:bg-gray-800 z-10">
+                              <div className="w-16 border-r border-gray-200 dark:border-gray-700 sticky left-0 bg-white dark:bg-gray-800 z-10 flex-shrink-0">
                                 {Array.from({ length: 24 }, (_, i) => i).map(hour => (
                                   <div key={hour} className="h-16 border-b border-gray-200 dark:border-gray-700 flex items-start justify-center pt-1">
                                     <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                      {hour === 0 ? '12 AM' : hour < 12 ? `${hour} AM` : hour === 12 ? '12 PM' : `${hour - 12} PM`}
+                                      {hour === 0 ? '12 AM' : 
+                                       hour === 12 ? '12 PM' : 
+                                       hour < 12 ? `${hour} AM` : 
+                                       `${hour - 12} PM`}
                                     </span>
                                   </div>
                                 ))}
@@ -1912,18 +1915,21 @@ export default function MarwyckCopilot() {
                                         >
                                           {hasEvent && (
                                             <div 
-                                              className="w-full h-12 rounded-xl p-1 text-xs cursor-pointer hover:shadow-md transition-shadow"
-                                              style={{ backgroundColor: accentColor, opacity: 0.8 }}
+                                              className="w-full h-12 rounded-lg p-1 text-xs cursor-pointer hover:shadow-md transition-shadow border-2"
+                                              style={{ 
+                                                backgroundColor: `${accentColor}40`,
+                                                borderColor: accentColor
+                                              }}
                                               onClick={(e) => {
                                                 e.stopPropagation();
                                                 setSelectedEvent(hasEvent);
                                                 setShowEventDetails(true);
                                               }}
                                             >
-                                              <p className="text-white font-medium text-xs leading-tight">
+                                              <p className={`font-medium text-xs leading-tight ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                                                 {hasEvent.title}
                                               </p>
-                                              <p className="text-white/80 text-xs">
+                                              <p className={`text-xs ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                                                 {hasEvent.time}
                                               </p>
                                             </div>
