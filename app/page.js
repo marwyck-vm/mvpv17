@@ -1090,7 +1090,7 @@ export default function MarwyckCopilot() {
             onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
             className={`p-2 rounded-full ${sidebarCollapsed ? 'mx-auto' : ''}`}
           >
-            <Menu className="w-4 h-4" />
+            <Menu className={`w-4 h-4 ${darkMode ? 'text-gray-100' : 'text-gray-700'}`} />
           </Button>
         </div>
         
