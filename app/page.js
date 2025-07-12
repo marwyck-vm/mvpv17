@@ -1131,7 +1131,7 @@ export default function MarwyckCopilot() {
               variant="ghost"
               size="sm"
               onClick={() => setDarkMode(!darkMode)}
-              className={`w-full ${sidebarCollapsed ? 'justify-center px-2' : 'justify-start px-3'} py-2 rounded-full`}
+              className={`w-full ${sidebarCollapsed ? 'justify-center px-2' : 'justify-start px-3'} py-2 text-sm font-medium transition-colors ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'} rounded-xl`}
               title={sidebarCollapsed ? 'Toggle Theme' : ''}
             >
               {darkMode ? <Sun className={`w-4 h-4 ${!sidebarCollapsed ? 'mr-3' : ''}`} /> : <Moon className={`w-4 h-4 ${!sidebarCollapsed ? 'mr-3' : ''}`} />}
