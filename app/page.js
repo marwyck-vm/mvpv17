@@ -1825,7 +1825,7 @@ export default function MarwyckCopilot() {
                       variant="outline"
                       size="sm"
                       onClick={() => setCurrentWeek(currentWeek - 1)}
-                      className="rounded-full"
+                      className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
                     >
                       <ChevronLeft className="w-4 h-4" />
                       Previous
@@ -1835,7 +1835,7 @@ export default function MarwyckCopilot() {
                       size="sm"
                       onClick={() => setCurrentWeek(0)}
                       disabled={currentWeek === 0}
-                      className="rounded-full"
+                      className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
                     >
                       Today
                     </Button>
@@ -1843,7 +1843,7 @@ export default function MarwyckCopilot() {
                       variant="outline"
                       size="sm"
                       onClick={() => setCurrentWeek(currentWeek + 1)}
-                      className="rounded-full"
+                      className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
                     >
                       Next
                       <ChevronRight className="w-4 h-4" />
