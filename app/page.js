@@ -1111,7 +1111,7 @@ export default function MarwyckCopilot() {
                   className={`w-full flex items-center ${sidebarCollapsed ? 'justify-center px-2' : 'px-3'} py-2 text-sm font-medium transition-colors ${
                     activeTab === item.id
                       ? 'text-white rounded-xl'
-                      : `${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'} rounded-xl`
+                      : `${darkMode ? 'text-gray-100 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'} rounded-xl`
                   }`}
                   style={activeTab === item.id ? { backgroundColor: accentColor } : {}}
                   title={sidebarCollapsed ? item.label : ''}
