@@ -1508,13 +1508,17 @@ export default function MarwyckCopilot() {
                         <SelectTrigger className={`w-64 rounded-full ${darkMode ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-white border-gray-200 text-gray-900'}`}>
                           <SelectValue placeholder="Choose a file" />
                         </SelectTrigger>
-                        <SelectContent className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`} style={{ borderRadius: '0.75rem' }}>
+                        <SelectContent className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
                           {clients.map(client => (
                             <SelectItem 
                               key={client.id} 
                               value={client.id} 
-                              className={`transition-colors ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}
-                              style={{ borderRadius: '0.5rem !important', margin: '2px' }}
+                              className={`transition-colors m-1 ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}
+                              style={{ 
+                                borderRadius: '8px',
+                                margin: '4px 8px',
+                                padding: '8px 12px'
+                              }}
                             >
                               {client.name}
                             </SelectItem>
