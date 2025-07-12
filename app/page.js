@@ -1632,7 +1632,7 @@ export default function MarwyckCopilot() {
                       className="text-white p-3 rounded-full"
                       style={{ backgroundColor: accentColor }}
                     >
-                      <Send className="w-4 h-4" />
+                      <ArrowUp className="w-4 h-4" />
                     </Button>
                   </div>
                 </div>
