@@ -641,18 +641,27 @@ export default function MarwyckCopilot() {
 
   // Handle new event creation
   const handleCreateEvent = () => {
-    if (newEventData.title && newEventData.time && newEventData.date) {
+    const errors = {
+      title: !newEventData.title,
+      date: !newEventData.date,
+      time: !newEventData.time
+    }
+    
+    setEventValidationErrors(errors)
+    
+    if (!errors.title && !errors.date && !errors.time) {
       const newEvent = {
         id: Date.now(),
         title: newEventData.title,
         date: newEventData.date,
         time: newEventData.time,
         type: 'meeting',
-        client: 'New client',
+        client: newEventData.clientFile || 'New client',
         description: newEventData.details || 'New appointment'
       }
       setCalendarEvents(prev => [...prev, newEvent])
-      setNewEventData({ title: '', date: '', time: '', details: '' })
+      setNewEventData({ title: '', date: '', time: '', details: '', clientFile: '' })
+      setEventValidationErrors({ title: false, date: false, time: false })
       setShowNewEventDialog(false)
     }
   }
