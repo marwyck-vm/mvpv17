@@ -876,10 +876,10 @@ export default function MarwyckCopilot() {
       </Dialog>
 
       {/* Planning Modal - New Event */}
-      <Dialog open={showNewEventDialog} onOpenChange={setShowNewEventDialog} modal={false}>
+      <Dialog open={showNewEventDialog} onOpenChange={handleNewEventClose} modal={false}>
         <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <DialogHeader>
-            <DialogTitle>Create new appointment</DialogTitle>
+            <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>Create new appointment</DialogTitle>
             <p className={`text-sm mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Create a new event in your planning</p>
           </DialogHeader>
           <div className="space-y-4">
@@ -890,7 +890,7 @@ export default function MarwyckCopilot() {
               </label>
               <Input 
                 placeholder="Ex: Apartment visit" 
-                className="rounded-xl" 
+                className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-white border-gray-300'}`}
                 value={newEventData.title}
                 onChange={(e) => {
                   setNewEventData({...newEventData, title: e.target.value})
@@ -907,7 +907,7 @@ export default function MarwyckCopilot() {
               </label>
               <Input 
                 type="date" 
-                className="rounded-xl" 
+                className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
                 value={newEventData.date}
                 onChange={(e) => {
                   setNewEventData({...newEventData, date: e.target.value})
@@ -924,7 +924,7 @@ export default function MarwyckCopilot() {
               </label>
               <Input 
                 type="time" 
-                className="rounded-xl" 
+                className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
                 value={newEventData.time}
                 onChange={(e) => {
                   setNewEventData({...newEventData, time: e.target.value})
@@ -937,7 +937,7 @@ export default function MarwyckCopilot() {
             <div>
               <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Client File (Optional)</label>
               <Select value={newEventData.clientFile} onValueChange={(value) => setNewEventData({...newEventData, clientFile: value})}>
-                <SelectTrigger className="rounded-xl">
+                <SelectTrigger className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}>
                   <SelectValue placeholder="Choose a client file" />
                 </SelectTrigger>
                 <SelectContent className="rounded-xl">
@@ -953,7 +953,7 @@ export default function MarwyckCopilot() {
               <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Additional information</label>
               <Textarea 
                 placeholder="Appointment details..." 
-                className="rounded-xl" 
+                className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-white border-gray-300'}`}
                 value={newEventData.details}
                 onChange={(e) => setNewEventData({...newEventData, details: e.target.value})}
               />
