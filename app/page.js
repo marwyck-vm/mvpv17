@@ -1227,10 +1227,10 @@ export default function MarwyckCopilot() {
       </Dialog>
 
       {/* Event Details Modal */}
-      <Dialog open={showEventDetails} onOpenChange={setShowEventDetails}>
-        <DialogContent className="sm:max-w-md rounded-2xl">
+      <Dialog open={showEventDetails} onOpenChange={setShowEventDetails} modal={false}>
+        <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <DialogHeader>
-            <DialogTitle>{selectedEvent?.title}</DialogTitle>
+            <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>{selectedEvent?.title}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
@@ -1254,22 +1254,22 @@ export default function MarwyckCopilot() {
             <div>
               <label className={`block text-sm font-medium mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Actions</label>
               <div className="grid grid-cols-2 gap-2">
-                <Button variant="outline" size="sm" className="rounded-full">
-                  <Edit className="w-4 h-4 mr-2" />
-                  Edit
-                </Button>
-                <Button variant="outline" size="sm" className="rounded-full">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                  onClick={() => {
+                    setShowEventDetails(false)
+                    setShowRescheduleDialog(true)
+                  }}
+                >
                   <Calendar className="w-4 h-4 mr-2" />
                   Reschedule
-                </Button>
-                <Button variant="outline" size="sm" className="rounded-full">
-                  <Copy className="w-4 h-4 mr-2" />
-                  Duplicate
                 </Button>
                 <Button 
                   variant="outline" 
                   size="sm" 
-                  className="rounded-full text-red-600 hover:text-red-700 hover:bg-red-50"
+                  className="rounded-full text-red-600 hover:text-red-700 hover:bg-red-50 border-red-300"
                   onClick={() => {
                     if (selectedEvent) {
                       handleDeleteEvent(selectedEvent.id)
