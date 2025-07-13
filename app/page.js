@@ -749,8 +749,27 @@ export default function MarwyckCopilot() {
     setRescheduleValidationErrors(errors)
     
     if (!errors.currentAppointment && !errors.newDate && !errors.newTime) {
-      // Simulate reschedule success
-      console.log('Reschedule:', rescheduleData)
+      // Find and update the event
+      const eventId = parseInt(rescheduleData.currentAppointment)
+      
+      // Calculate new day of week
+      const newEventDate = new Date(rescheduleData.newDate)
+      const newDayOfWeek = newEventDate.getDay() === 0 ? 6 : newEventDate.getDay() - 1
+      
+      setCalendarEventsByWeek(prev => ({
+        ...prev,
+        [currentWeek]: (prev[currentWeek] || []).map(event => 
+          event.id === eventId 
+            ? { 
+                ...event, 
+                date: rescheduleData.newDate, 
+                time: rescheduleData.newTime,
+                dayOfWeek: newDayOfWeek
+              }
+            : event
+        )
+      }))
+      
       setRescheduleData({ currentAppointment: '', newDate: '', newTime: '' })
       setRescheduleValidationErrors({ currentAppointment: false, newDate: false, newTime: false })
       setShowRescheduleDialog(false)
