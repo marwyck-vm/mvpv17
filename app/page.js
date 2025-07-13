@@ -675,10 +675,18 @@ export default function MarwyckCopilot() {
         time: newEventData.time,
         type: 'meeting',
         client: newEventData.clientFile || 'New client',
-        description: newEventData.details || 'New appointment'
+        description: newEventData.details || 'New appointment',
+        clientFile: newEventData.clientFile,
+        teamMember: newEventData.teamMember
       }
-      setCalendarEvents(prev => [...prev, newEvent])
-      setNewEventData({ title: '', date: '', time: '', details: '', clientFile: '' })
+      
+      // Add to current week
+      setCalendarEventsByWeek(prev => ({
+        ...prev,
+        [currentWeek]: [...(prev[currentWeek] || []), newEvent]
+      }))
+      
+      setNewEventData({ title: '', date: '', time: '', details: '', clientFile: '', teamMember: '' })
       setEventValidationErrors({ title: false, date: false, time: false })
       setShowNewEventDialog(false)
     }
