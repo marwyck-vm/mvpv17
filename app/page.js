@@ -881,8 +881,8 @@ export default function MarwyckCopilot() {
       </Dialog>
 
       {/* Planning Modal - Propose Slots */}
-      <Dialog open={showProposeDialog} onOpenChange={setShowProposeDialog}>
-        <DialogContent className="sm:max-w-md rounded-2xl">
+      <Dialog open={showProposeDialog} onOpenChange={setShowProposeDialog} modal={false}>
+        <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <DialogHeader>
             <DialogTitle>Propose time slots</DialogTitle>
           </DialogHeader>
