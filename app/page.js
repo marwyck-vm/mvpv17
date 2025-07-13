@@ -1823,6 +1823,12 @@ export default function MarwyckCopilot() {
                     </h2>
                     <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Manage your appointments and schedule</p>
                   </div>
+                  <div className="text-center mb-4">
+                    <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                      {getWeekLabel(currentWeek).label}
+                    </h3>
+                    <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{getWeekLabel(currentWeek).date}</p>
+                  </div>
                   <div className="flex items-center justify-center space-x-2 mb-4">
                     <Button
                       variant="outline"
@@ -1851,12 +1857,6 @@ export default function MarwyckCopilot() {
                       Next
                       <ChevronRight className="w-4 h-4" />
                     </Button>
-                  </div>
-                  <div className="text-center">
-                    <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                      {getWeekLabel(currentWeek).label}
-                    </h3>
-                    <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{getWeekLabel(currentWeek).date}</p>
                   </div>
                 </div>
 
@@ -1918,7 +1918,7 @@ export default function MarwyckCopilot() {
                                         >
                                           {hasEvent && (
                                             <div 
-                                              className="w-full h-12 rounded-lg p-1 text-xs cursor-pointer hover:shadow-md transition-shadow border-2"
+                                              className="w-full h-12 rounded-xl p-1 text-xs cursor-pointer hover:shadow-md transition-shadow border-2"
                                               style={{ 
                                                 backgroundColor: `${accentColor}40`,
                                                 borderColor: accentColor
@@ -1950,7 +1950,7 @@ export default function MarwyckCopilot() {
                     </Card>
                   </div>
 
-                  <div>
+                  <div className="space-y-6">
                     <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                       <CardHeader>
                         <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Quick Actions</CardTitle>
@@ -1983,6 +1983,43 @@ export default function MarwyckCopilot() {
                             <Clock className="w-4 h-4 mr-2" />
                             Reschedule
                           </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
+                      <CardHeader>
+                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Team Planning</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-3">
+                          {teamMembers.map(member => (
+                            <div key={member.id} className="flex items-center space-x-3">
+                              <input
+                                type="checkbox"
+                                id={`team-${member.id}`}
+                                checked={selectedTeamMembers.includes(member.id)}
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setSelectedTeamMembers(prev => [...prev, member.id])
+                                  } else {
+                                    setSelectedTeamMembers(prev => prev.filter(id => id !== member.id))
+                                  }
+                                }}
+                                className="w-4 h-4 rounded"
+                              />
+                              <div 
+                                className="w-4 h-4 rounded-full"
+                                style={{ backgroundColor: member.color }}
+                              ></div>
+                              <label 
+                                htmlFor={`team-${member.id}`}
+                                className={`text-sm cursor-pointer flex-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
+                              >
+                                {member.name}
+                              </label>
+                            </div>
+                          ))}
                         </div>
                       </CardContent>
                     </Card>
