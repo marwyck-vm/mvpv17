@@ -760,7 +760,10 @@ export default function MarwyckCopilot() {
 
   // Handle event deletion
   const handleDeleteEvent = (eventId) => {
-    setCalendarEvents(prev => prev.filter(event => event.id !== eventId))
+    setCalendarEventsByWeek(prev => ({
+      ...prev,
+      [currentWeek]: (prev[currentWeek] || []).filter(event => event.id !== eventId)
+    }))
     setShowEventDetails(false)
     setSelectedEvent(null)
   }
