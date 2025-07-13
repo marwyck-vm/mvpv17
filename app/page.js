@@ -1133,17 +1133,26 @@ export default function MarwyckCopilot() {
       </Dialog>
 
       {/* Planning Modal - Reschedule */}
-      <Dialog open={showRescheduleDialog} onOpenChange={setShowRescheduleDialog} modal={false}>
+      <Dialog open={showRescheduleDialog} onOpenChange={handleRescheduleClose} modal={false}>
         <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <DialogHeader>
-            <DialogTitle>Reschedule an appointment</DialogTitle>
+            <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>Reschedule appointment</DialogTitle>
+            <p className={`text-sm mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Change the date and time of an existing appointment</p>
           </DialogHeader>
           <div className="space-y-4">
             <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Appointment to reschedule</label>
-              <Select>
-                <SelectTrigger className="rounded-xl">
-                  <SelectValue placeholder="Choose an appointment" />
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'} flex items-center`}>
+                Current appointment
+                {rescheduleValidationErrors.currentAppointment && <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />}
+              </label>
+              <Select value={rescheduleData.currentAppointment} onValueChange={(value) => {
+                setRescheduleData({...rescheduleData, currentAppointment: value})
+                if (value) {
+                  setRescheduleValidationErrors(prev => ({...prev, currentAppointment: false}))
+                }
+              }}>
+                <SelectTrigger className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}>
+                  <SelectValue placeholder="Choose appointment" />
                 </SelectTrigger>
                 <SelectContent className="rounded-xl">
                   {calendarEvents.map(event => (
@@ -1155,14 +1164,44 @@ export default function MarwyckCopilot() {
               </Select>
             </div>
             <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>New date</label>
-              <Input type="date" className="rounded-xl" />
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'} flex items-center`}>
+                New date
+                {rescheduleValidationErrors.newDate && <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />}
+              </label>
+              <Input 
+                type="date" 
+                className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
+                value={rescheduleData.newDate}
+                onChange={(e) => {
+                  setRescheduleData({...rescheduleData, newDate: e.target.value})
+                  if (e.target.value) {
+                    setRescheduleValidationErrors(prev => ({...prev, newDate: false}))
+                  }
+                }}
+              />
             </div>
             <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>New time</label>
-              <Input type="time" className="rounded-xl" />
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'} flex items-center`}>
+                New time
+                {rescheduleValidationErrors.newTime && <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />}
+              </label>
+              <Input 
+                type="time" 
+                className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
+                value={rescheduleData.newTime}
+                onChange={(e) => {
+                  setRescheduleData({...rescheduleData, newTime: e.target.value})
+                  if (e.target.value) {
+                    setRescheduleValidationErrors(prev => ({...prev, newTime: false}))
+                  }
+                }}
+              />
             </div>
-            <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
+            <Button 
+              onClick={handleReschedule}
+              className="w-full text-white rounded-full" 
+              style={{ backgroundColor: accentColor }}
+            >
               Reschedule
             </Button>
           </div>
