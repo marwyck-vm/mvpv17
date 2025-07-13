@@ -2254,7 +2254,7 @@ export default function MarwyckCopilot() {
                                     const hour = hourIndex;
                                     const currentWeekEvents = getCurrentWeekEvents();
                                     const hasEvent = currentWeekEvents.find(event => 
-                                      event.id === dayIndex + 1 && parseInt(event.time.split(':')[0]) === hour
+                                      event.dayOfWeek === dayIndex && parseInt(event.time.split(':')[0]) === hour
                                     );
                                     
                                     return (
