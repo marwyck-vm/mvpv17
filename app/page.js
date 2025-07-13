@@ -2202,34 +2202,32 @@ export default function MarwyckCopilot() {
                       <CardContent className="p-0">
                         {/* Calendar container with scroll and rounded corners */}
                         <div className="rounded-xl overflow-hidden">
-                          {/* Combined layout for perfect alignment */}
-                          <div className="grid" style={{ gridTemplateColumns: '4rem 1fr' }}>
-                            {/* Time column header */}
-                            <div className="h-16 border-r border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 flex items-center justify-center">
+                          {/* Day headers with CSS table for perfect alignment */}
+                          <div className="flex bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                            <div className="w-20 border-r border-gray-200 dark:border-gray-700 flex items-center justify-center">
                               <span className={`text-xs font-medium ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Time</span>
                             </div>
-                            
-                            {/* Days headers with exact grid alignment */}
-                            <div className="grid grid-cols-7 border-b border-gray-200 dark:border-gray-700">
-                              {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, index) => {
-                                const weekDates = getCurrentWeekDates()
-                                const dayDate = weekDates[index]
-                                return (
-                                  <div key={day} className={`h-16 flex flex-col items-center justify-center bg-white dark:bg-gray-800 ${index < 6 ? 'border-r border-gray-200 dark:border-gray-700' : ''}`}>
-                                    <span className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                      {day}
-                                    </span>
-                                    <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                      {dayDate.getDate()}
-                                    </span>
-                                  </div>
-                                )
-                              })}
-                            </div>
-                            
-                            {/* Time column content */}
-                            <div className="border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-                              <div className="h-[450px] overflow-y-auto">
+                            {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, index) => {
+                              const weekDates = getCurrentWeekDates()
+                              const dayDate = weekDates[index]
+                              return (
+                                <div key={day} className={`flex-1 h-16 flex flex-col items-center justify-center ${index < 6 ? 'border-r border-gray-200 dark:border-gray-700' : ''}`}>
+                                  <span className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                    {day}
+                                  </span>
+                                  <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                                    {dayDate.getDate()}
+                                  </span>
+                                </div>
+                              )
+                            })}
+                          </div>
+                          
+                          {/* Scrollable hours and events area */}
+                          <div className="h-[450px] overflow-y-auto">
+                            <div className="flex">
+                              {/* Hours column */}
+                              <div className="w-20 border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
                                 {Array.from({ length: 24 }, (_, i) => i).map(hour => (
                                   <div key={hour} className="h-16 border-b border-gray-200 dark:border-gray-700 flex items-start justify-center pt-1">
                                     <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
@@ -2241,74 +2239,21 @@ export default function MarwyckCopilot() {
                                   </div>
                                 ))}
                               </div>
-                            </div>
-                            
-                            {/* Events area with exact matching grid */}
-                            <div className="grid grid-cols-7">
-                              <div className="h-[450px] overflow-y-auto">
-                                {Array.from({ length: 24 }, (_, hourIndex) => (
-                                  <div key={hourIndex} className="h-16 border-b border-gray-200 dark:border-gray-700"></div>
-                                ))}
-                              </div>
-                              {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].slice(1).map((day, adjustedDayIndex) => {
-                                const dayIndex = adjustedDayIndex + 1;
-                                return (
-                                  <div key={day} className={`${dayIndex < 6 ? 'border-r border-gray-200 dark:border-gray-700' : ''}`}>
-                                    <div className="h-[450px] overflow-y-auto">
-                                      {Array.from({ length: 24 }, (_, hourIndex) => {
-                                        const hour = hourIndex;
-                                        const currentWeekEvents = getCurrentWeekEvents();
-                                        const hasEvent = currentWeekEvents.find(event => 
-                                          event.id === dayIndex + 1 && parseInt(event.time.split(':')[0]) === hour
-                                        );
-                                        
-                                        return (
-                                          <div 
-                                            key={`${day}-${hour}`} 
-                                            className="h-16 border-b border-gray-200 dark:border-gray-700 p-1 hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer relative"
-                                            onClick={() => {
-                                              setShowNewEventDialog(true);
-                                            }}
-                                          >
-                                            {hasEvent && (
-                                              <div 
-                                                className="w-full h-12 rounded-xl p-2 text-xs cursor-pointer hover:shadow-md transition-shadow border-2 flex items-center justify-center"
-                                                style={{ 
-                                                  backgroundColor: `${accentColor}40`,
-                                                  borderColor: accentColor
-                                                }}
-                                                onClick={(e) => {
-                                                  e.stopPropagation();
-                                                  setSelectedEvent(hasEvent);
-                                                  setShowEventDetails(true);
-                                                }}
-                                              >
-                                                <p className={`font-medium text-xs text-center leading-tight ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                                  {hasEvent.title}
-                                                </p>
-                                              </div>
-                                            )}
-                                          </div>
-                                        );
-                                      })}
-                                    </div>
-                                  </div>
-                                )
-                              })}
                               
-                              {/* First column for Monday events */}
-                              <div className="border-r border-gray-200 dark:border-gray-700" style={{ gridColumn: '1' }}>
-                                <div className="h-[450px] overflow-y-auto">
+                              {/* Days columns - using exact flex-1 like headers */}
+                              {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, dayIndex) => (
+                                <div key={day} className={`flex-1 ${dayIndex < 6 ? 'border-r border-gray-200 dark:border-gray-700' : ''}`}>
+                                  {/* Hour slots */}
                                   {Array.from({ length: 24 }, (_, hourIndex) => {
                                     const hour = hourIndex;
                                     const currentWeekEvents = getCurrentWeekEvents();
                                     const hasEvent = currentWeekEvents.find(event => 
-                                      event.id === 1 && parseInt(event.time.split(':')[0]) === hour
+                                      event.id === dayIndex + 1 && parseInt(event.time.split(':')[0]) === hour
                                     );
                                     
                                     return (
                                       <div 
-                                        key={`Monday-${hour}`} 
+                                        key={`${day}-${hour}`} 
                                         className="h-16 border-b border-gray-200 dark:border-gray-700 p-1 hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer relative"
                                         onClick={() => {
                                           setShowNewEventDialog(true);
@@ -2336,7 +2281,7 @@ export default function MarwyckCopilot() {
                                     );
                                   })}
                                 </div>
-                              </div>
+                              ))}
                             </div>
                           </div>
                         </div>
