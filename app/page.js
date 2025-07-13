@@ -673,6 +673,7 @@ export default function MarwyckCopilot() {
   // Handle propose time slots
   const handleProposeSlots = () => {
     const errors = {
+      title: !proposeData.title,
       clientFile: !proposeData.clientFile,
       date: !proposeData.date,
       time: !proposeData.time,
@@ -682,11 +683,11 @@ export default function MarwyckCopilot() {
     
     setProposeValidationErrors(errors)
     
-    if (!errors.clientFile && !errors.date && !errors.time && !errors.contactMode && !errors.infos) {
+    if (!errors.title && !errors.clientFile && !errors.date && !errors.time && !errors.contactMode && !errors.infos) {
       // Simulate propose slots success
       console.log('Propose slots:', proposeData)
-      setProposeData({ clientFile: '', date: '', time: '', contactMode: '', infos: '' })
-      setProposeValidationErrors({ clientFile: false, date: false, time: false, contactMode: false, infos: false })
+      setProposeData({ title: '', clientFile: '', date: '', time: '', contactMode: '', infos: '' })
+      setProposeValidationErrors({ title: false, clientFile: false, date: false, time: false, contactMode: false, infos: false })
       setShowProposeDialog(false)
     }
   }
