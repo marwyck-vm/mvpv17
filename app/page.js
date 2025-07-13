@@ -2120,7 +2120,7 @@ export default function MarwyckCopilot() {
                           <div className="flex bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-20">
                             <div className="w-16 border-r border-gray-200 dark:border-gray-700 flex-shrink-0"></div>
                             <div className="flex-1 grid grid-cols-7">
-                              {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
+                              {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => (
                                 <div key={day} className="h-12 border-r border-gray-200 dark:border-gray-700 last:border-r-0 flex items-center justify-center">
                                   <span className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                                     {day}
