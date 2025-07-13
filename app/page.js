@@ -676,17 +676,37 @@ export default function MarwyckCopilot() {
       clientFile: !proposeData.clientFile,
       date: !proposeData.date,
       time: !proposeData.time,
-      contactMode: !proposeData.contactMode
+      contactMode: !proposeData.contactMode,
+      infos: !proposeData.infos
     }
     
     setProposeValidationErrors(errors)
     
-    if (!errors.clientFile && !errors.date && !errors.time && !errors.contactMode) {
+    if (!errors.clientFile && !errors.date && !errors.time && !errors.contactMode && !errors.infos) {
       // Simulate propose slots success
       console.log('Propose slots:', proposeData)
       setProposeData({ clientFile: '', date: '', time: '', contactMode: '', infos: '' })
-      setProposeValidationErrors({ clientFile: false, date: false, time: false, contactMode: false })
+      setProposeValidationErrors({ clientFile: false, date: false, time: false, contactMode: false, infos: false })
       setShowProposeDialog(false)
+    }
+  }
+
+  // Handle reschedule appointment
+  const handleReschedule = () => {
+    const errors = {
+      currentAppointment: !rescheduleData.currentAppointment,
+      newDate: !rescheduleData.newDate,
+      newTime: !rescheduleData.newTime
+    }
+    
+    setRescheduleValidationErrors(errors)
+    
+    if (!errors.currentAppointment && !errors.newDate && !errors.newTime) {
+      // Simulate reschedule success
+      console.log('Reschedule:', rescheduleData)
+      setRescheduleData({ currentAppointment: '', newDate: '', newTime: '' })
+      setRescheduleValidationErrors({ currentAppointment: false, newDate: false, newTime: false })
+      setShowRescheduleDialog(false)
     }
   }
 
@@ -703,7 +723,15 @@ export default function MarwyckCopilot() {
     setShowProposeDialog(open)
     if (!open) {
       setProposeData({ clientFile: '', date: '', time: '', contactMode: '', infos: '' })
-      setProposeValidationErrors({ clientFile: false, date: false, time: false, contactMode: false })
+      setProposeValidationErrors({ clientFile: false, date: false, time: false, contactMode: false, infos: false })
+    }
+  }
+
+  const handleRescheduleClose = (open) => {
+    setShowRescheduleDialog(open)
+    if (!open) {
+      setRescheduleData({ currentAppointment: '', newDate: '', newTime: '' })
+      setRescheduleValidationErrors({ currentAppointment: false, newDate: false, newTime: false })
     }
   }
 
