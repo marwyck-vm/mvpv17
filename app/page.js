@@ -1616,33 +1616,33 @@ export default function MarwyckCopilot() {
                   ))}
                 </div>
 
-                {/* Recent Activity */}
+                {/* Dashboard Bottom Section - Appointments and Activity */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
                     <CardHeader>
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Recent Activity</CardTitle>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Upcoming Appointments</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
-                        {recentActivities.map(activity => (
-                          <div key={activity.id} className="flex items-center space-x-3">
+                        {getCurrentWeekEvents().slice(0, 3).map(event => (
+                          <div key={event.id} className="flex items-center space-x-3">
                             <div className="flex-shrink-0">
-                              {activity.type === 'sms' && <Smartphone className="w-5 h-5" style={{ color: accentColor }} />}
-                              {activity.type === 'email' && <Mail className="w-5 h-5" style={{ color: accentColor }} />}
-                              {activity.type === 'call' && <PhoneCall className="w-5 h-5" style={{ color: accentColor }} />}
+                              <Calendar className="w-5 h-5" style={{ color: accentColor }} />
                             </div>
                             <div className="flex-1 min-w-0">
                               <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                {activity.contact}
+                                {event.title}
                               </p>
-                              <p className={`text-sm truncate ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                {activity.message}
+                              <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                                {event.client} • {event.time}
                               </p>
                             </div>
-                            <div className="flex items-center space-x-2">
-                              <span className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>{activity.time}</span>
-                              {getStatusIcon(activity.status)}
-                            </div>
+                            <Badge 
+                              variant="outline" 
+                              className={`text-xs rounded-full border ${getTypeColor(event.type)}`}
+                            >
+                              {event.type}
+                            </Badge>
                           </div>
                         ))}
                       </div>
@@ -1652,29 +1652,29 @@ export default function MarwyckCopilot() {
                   <div className="space-y-6">
                     <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
                       <CardHeader>
-                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Upcoming Appointments</CardTitle>
+                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Recent Activity</CardTitle>
                       </CardHeader>
                       <CardContent>
                         <div className="space-y-4">
-                          {getCurrentWeekEvents().slice(0, 3).map(event => (
-                            <div key={event.id} className="flex items-center space-x-3">
+                          {recentActivities.slice(-3).reverse().map(activity => (
+                            <div key={activity.id} className="flex items-center space-x-3">
                               <div className="flex-shrink-0">
-                                <Calendar className="w-5 h-5" style={{ color: accentColor }} />
+                                {activity.type === 'sms' && <Smartphone className="w-5 h-5" style={{ color: accentColor }} />}
+                                {activity.type === 'email' && <Mail className="w-5 h-5" style={{ color: accentColor }} />}
+                                {activity.type === 'call' && <PhoneCall className="w-5 h-5" style={{ color: accentColor }} />}
                               </div>
                               <div className="flex-1 min-w-0">
                                 <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                  {event.title}
+                                  {activity.contact}
                                 </p>
-                                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                  {event.client} • {event.time}
+                                <p className={`text-sm truncate ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                                  {activity.message}
                                 </p>
                               </div>
-                              <Badge 
-                                variant="outline" 
-                                className={`text-xs rounded-full border ${getTypeColor(event.type)}`}
-                              >
-                                {event.type}
-                              </Badge>
+                              <div className="flex items-center space-x-2">
+                                <span className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>{activity.time}</span>
+                                {getStatusIcon(activity.status)}
+                              </div>
                             </div>
                           ))}
                         </div>
