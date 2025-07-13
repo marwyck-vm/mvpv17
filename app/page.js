@@ -126,7 +126,9 @@ export default function MarwyckCopilot() {
   const [newEventData, setNewEventData] = useState({ title: '', date: '', time: '', details: '', clientFile: '' })
   const [eventValidationErrors, setEventValidationErrors] = useState({ title: false, date: false, time: false })
   const [proposeData, setProposeData] = useState({ clientFile: '', date: '', time: '', contactMode: '', infos: '' })
-  const [proposeValidationErrors, setProposeValidationErrors] = useState({ clientFile: false, date: false, time: false, contactMode: false })
+  const [proposeValidationErrors, setProposeValidationErrors] = useState({ clientFile: false, date: false, time: false, contactMode: false, infos: false })
+  const [rescheduleData, setRescheduleData] = useState({ currentAppointment: '', newDate: '', newTime: '' })
+  const [rescheduleValidationErrors, setRescheduleValidationErrors] = useState({ currentAppointment: false, newDate: false, newTime: false })
   const [editingDossier, setEditingDossier] = useState(null)
   const [meetingChecklist, setMeetingChecklist] = useState([
     { id: 1, text: "Prepare property keys", checked: false },
