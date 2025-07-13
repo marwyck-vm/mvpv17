@@ -2212,7 +2212,8 @@ export default function MarwyckCopilot() {
                                     {/* Hour slots */}
                                     {Array.from({ length: 24 }, (_, hourIndex) => {
                                       const hour = hourIndex;
-                                      const hasEvent = calendarEvents.find(event => 
+                                      const currentWeekEvents = getCurrentWeekEvents();
+                                      const hasEvent = currentWeekEvents.find(event => 
                                         event.id === dayIndex + 1 && parseInt(event.time.split(':')[0]) === hour
                                       );
                                       
@@ -2226,7 +2227,7 @@ export default function MarwyckCopilot() {
                                         >
                                           {hasEvent && (
                                             <div 
-                                              className="w-full h-12 rounded-xl p-1 text-xs cursor-pointer hover:shadow-md transition-shadow border-2"
+                                              className="w-full h-12 rounded-xl p-2 text-xs cursor-pointer hover:shadow-md transition-shadow border-2 flex items-center justify-center"
                                               style={{ 
                                                 backgroundColor: `${accentColor}40`,
                                                 borderColor: accentColor
@@ -2237,11 +2238,8 @@ export default function MarwyckCopilot() {
                                                 setShowEventDetails(true);
                                               }}
                                             >
-                                              <p className={`font-medium text-xs leading-tight ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                              <p className={`font-medium text-xs text-center leading-tight ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                                                 {hasEvent.title}
-                                              </p>
-                                              <p className={`text-xs ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                                                {hasEvent.time}
                                               </p>
                                             </div>
                                           )}
