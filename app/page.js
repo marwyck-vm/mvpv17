@@ -827,8 +827,8 @@ export default function MarwyckCopilot() {
       </Dialog>
 
       {/* Planning Modal - New Event */}
-      <Dialog open={showNewEventDialog} onOpenChange={setShowNewEventDialog}>
-        <DialogContent className="sm:max-w-md rounded-2xl">
+      <Dialog open={showNewEventDialog} onOpenChange={setShowNewEventDialog} modal={false}>
+        <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <DialogHeader>
             <DialogTitle>Create new appointment</DialogTitle>
           </DialogHeader>
