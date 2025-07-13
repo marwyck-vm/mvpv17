@@ -737,7 +737,7 @@ export default function MarwyckCopilot() {
   const handleNewEventClose = (open) => {
     setShowNewEventDialog(open)
     if (!open) {
-      setNewEventData({ title: '', date: '', time: '', details: '', clientFile: '' })
+      setNewEventData({ title: '', date: '', time: '', details: '', clientFile: '', teamMember: '' })
       setEventValidationErrors({ title: false, date: false, time: false })
     }
   }
