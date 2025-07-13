@@ -1309,7 +1309,7 @@ export default function MarwyckCopilot() {
             )}
             {selectedEvent?.teamMember && (
               <div>
-                <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Team Member</label>
+                <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Invited Team Member</label>
                 <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{selectedEvent?.teamMember}</p>
               </div>
             )}
@@ -1320,7 +1320,7 @@ export default function MarwyckCopilot() {
               </div>
             )}
             <div>
-              <label className={`block text-sm font-medium mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Actions</label>
+              <label className={`block text-sm font-medium mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Options</label>
               <div className="grid grid-cols-2 gap-2">
                 <Button 
                   variant="outline" 
