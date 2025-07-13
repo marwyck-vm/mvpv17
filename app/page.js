@@ -1004,7 +1004,7 @@ export default function MarwyckCopilot() {
         <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <DialogHeader>
             <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>Propose time slots</DialogTitle>
-            <p className={`text-sm mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Propose available time slots to your clients</p>
+            <p className={`text-sm mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Let Marwyck contact the client for you</p>
           </DialogHeader>
           <div className="space-y-4">
             <div>
@@ -1105,12 +1105,20 @@ export default function MarwyckCopilot() {
               </div>
             </div>
             <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Infos (Optional)</label>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'} flex items-center`}>
+                More Details
+                {proposeValidationErrors.infos && <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />}
+              </label>
               <Textarea 
                 placeholder="Additional information about the appointment..." 
                 className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-white border-gray-300'}`}
                 value={proposeData.infos}
-                onChange={(e) => setProposeData({...proposeData, infos: e.target.value})}
+                onChange={(e) => {
+                  setProposeData({...proposeData, infos: e.target.value})
+                  if (e.target.value) {
+                    setProposeValidationErrors(prev => ({...prev, infos: false}))
+                  }
+                }}
               />
             </div>
             <Button 
@@ -1118,7 +1126,7 @@ export default function MarwyckCopilot() {
               className="w-full text-white rounded-full" 
               style={{ backgroundColor: accentColor }}
             >
-              Generate Proposals
+              Contacter le client
             </Button>
           </div>
         </DialogContent>
