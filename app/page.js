@@ -142,7 +142,8 @@ export default function MarwyckCopilot() {
       phone: '+33 6 12 34 56 78',
       avatar: null,
       status: 'active',
-      joinDate: '2024-01-15'
+      joinDate: '2024-01-15',
+      color: '#10B981'
     },
     { 
       id: 2, 
@@ -152,9 +153,11 @@ export default function MarwyckCopilot() {
       phone: '+33 6 87 65 43 21',
       avatar: null,
       status: 'active',
-      joinDate: '2024-02-20'
+      joinDate: '2024-02-20',
+      color: '#8B5CF6'
     }
   ])
+  const [selectedTeamMembers, setSelectedTeamMembers] = useState([])
   const [showAddTeamMember, setShowAddTeamMember] = useState(false)
   const [newTeamMember, setNewTeamMember] = useState({ name: '', role: '', email: '', phone: '' })
   const messagesEndRef = useRef(null)
