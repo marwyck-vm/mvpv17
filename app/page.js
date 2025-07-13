@@ -841,34 +841,74 @@ export default function MarwyckCopilot() {
         <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <DialogHeader>
             <DialogTitle>Create new appointment</DialogTitle>
+            <p className={`text-sm mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Create a new event in your planning</p>
           </DialogHeader>
           <div className="space-y-4">
             <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Title</label>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'} flex items-center`}>
+                Title
+                {eventValidationErrors.title && <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />}
+              </label>
               <Input 
                 placeholder="Ex: Apartment visit" 
                 className="rounded-xl" 
                 value={newEventData.title}
-                onChange={(e) => setNewEventData({...newEventData, title: e.target.value})}
+                onChange={(e) => {
+                  setNewEventData({...newEventData, title: e.target.value})
+                  if (e.target.value) {
+                    setEventValidationErrors(prev => ({...prev, title: false}))
+                  }
+                }}
               />
             </div>
             <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Date</label>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'} flex items-center`}>
+                Date
+                {eventValidationErrors.date && <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />}
+              </label>
               <Input 
                 type="date" 
                 className="rounded-xl" 
                 value={newEventData.date}
-                onChange={(e) => setNewEventData({...newEventData, date: e.target.value})}
+                onChange={(e) => {
+                  setNewEventData({...newEventData, date: e.target.value})
+                  if (e.target.value) {
+                    setEventValidationErrors(prev => ({...prev, date: false}))
+                  }
+                }}
               />
             </div>
             <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Time</label>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'} flex items-center`}>
+                Time
+                {eventValidationErrors.time && <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />}
+              </label>
               <Input 
                 type="time" 
                 className="rounded-xl" 
                 value={newEventData.time}
-                onChange={(e) => setNewEventData({...newEventData, time: e.target.value})}
+                onChange={(e) => {
+                  setNewEventData({...newEventData, time: e.target.value})
+                  if (e.target.value) {
+                    setEventValidationErrors(prev => ({...prev, time: false}))
+                  }
+                }}
               />
+            </div>
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Client File (Optional)</label>
+              <Select value={newEventData.clientFile} onValueChange={(value) => setNewEventData({...newEventData, clientFile: value})}>
+                <SelectTrigger className="rounded-xl">
+                  <SelectValue placeholder="Choose a client file" />
+                </SelectTrigger>
+                <SelectContent className="rounded-xl">
+                  {dossiersList.map(dossier => (
+                    <SelectItem key={dossier.id} value={dossier.address}>
+                      {dossier.address}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
             <div>
               <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Additional information</label>
