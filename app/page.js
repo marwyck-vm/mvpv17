@@ -1006,6 +1006,21 @@ export default function MarwyckCopilot() {
               </Select>
             </div>
             <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Team Member (Optional)</label>
+              <Select value={newEventData.teamMember} onValueChange={(value) => setNewEventData({...newEventData, teamMember: value})}>
+                <SelectTrigger className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}>
+                  <SelectValue placeholder="Invite a team member" />
+                </SelectTrigger>
+                <SelectContent className="rounded-xl">
+                  {teamMembers.map(member => (
+                    <SelectItem key={member.id} value={member.name}>
+                      {member.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
               <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Additional information</label>
               <Textarea 
                 placeholder="Appointment details..." 
