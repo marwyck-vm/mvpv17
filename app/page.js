@@ -123,7 +123,7 @@ export default function MarwyckCopilot() {
   const [selectedEvent, setSelectedEvent] = useState(null)
   const [showEditDossier, setShowEditDossier] = useState(false)
   const [selectedDossier, setSelectedDossier] = useState(null)
-  const [newEventData, setNewEventData] = useState({ title: '', date: '', time: '', details: '', clientFile: '' })
+  const [newEventData, setNewEventData] = useState({ title: '', date: '', time: '', details: '', clientFile: '', teamMember: '' })
   const [eventValidationErrors, setEventValidationErrors] = useState({ title: false, date: false, time: false })
   const [proposeData, setProposeData] = useState({ title: '', clientFile: '', date: '', time: '', contactMode: '', infos: '' })
   const [proposeValidationErrors, setProposeValidationErrors] = useState({ title: false, clientFile: false, date: false, time: false, contactMode: false, infos: false })
