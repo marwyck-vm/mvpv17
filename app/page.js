@@ -686,11 +686,17 @@ export default function MarwyckCopilot() {
     setEventValidationErrors(errors)
     
     if (!errors.title && !errors.date && !errors.time) {
+      // Calculate day of week from date
+      const eventDate = new Date(newEventData.date)
+      const dayOfWeek = eventDate.getDay() // 0 = Sunday, 1 = Monday, etc.
+      const mondayBasedDay = dayOfWeek === 0 ? 6 : dayOfWeek - 1 // Convert to Monday = 0, Sunday = 6
+      
       const newEvent = {
         id: Date.now(),
         title: newEventData.title,
         date: newEventData.date,
         time: newEventData.time,
+        dayOfWeek: mondayBasedDay, // Add this to help with mapping
         type: 'meeting',
         client: newEventData.clientFile || 'New client',
         description: newEventData.details || 'New appointment',
