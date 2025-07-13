@@ -301,6 +301,24 @@ export default function MarwyckCopilot() {
     return calendarEventsByWeek[currentWeek] || []
   }
 
+  // Get dates for current week
+  const getCurrentWeekDates = () => {
+    const today = new Date()
+    const currentDay = today.getDay() // 0 = Sunday, 1 = Monday, etc.
+    const mondayOffset = currentDay === 0 ? -6 : -(currentDay - 1) // Get Monday of current week
+    
+    const monday = new Date(today)
+    monday.setDate(today.getDate() + mondayOffset + (currentWeek * 7))
+    
+    const dates = []
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(monday)
+      date.setDate(monday.getDate() + i)
+      dates.push(date)
+    }
+    return dates
+  }
+
   // Dynamic clients based on dossiers
   const clients = [
     { id: 'general', name: 'General' },
