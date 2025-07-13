@@ -2186,10 +2186,12 @@ export default function MarwyckCopilot() {
                         <div className="rounded-xl overflow-hidden">
                           {/* Day headers - fixed */}
                           <div className="flex bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-20">
-                            <div className="w-16 border-r border-gray-200 dark:border-gray-700 flex-shrink-0"></div>
+                            <div className="w-16 border-r border-gray-200 dark:border-gray-700 flex-shrink-0 flex items-center justify-center">
+                              <span className={`text-xs font-medium ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Time</span>
+                            </div>
                             <div className="flex-1 grid grid-cols-7 gap-0">
                               {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, index) => (
-                                <div key={day} className={`h-12 flex items-center justify-center ${index < 6 ? 'border-r border-gray-200 dark:border-gray-700' : ''}`}>
+                                <div key={day} className={`h-16 flex items-center justify-center ${index < 6 ? 'border-r border-gray-200 dark:border-gray-700' : ''}`}>
                                   <span className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                                     {day}
                                   </span>
