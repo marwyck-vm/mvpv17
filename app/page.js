@@ -1010,6 +1010,23 @@ export default function MarwyckCopilot() {
           <div className="space-y-4">
             <div>
               <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'} flex items-center`}>
+                Title
+                {proposeValidationErrors.title && <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />}
+              </label>
+              <Input 
+                placeholder="Ex: Property viewing" 
+                className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-white border-gray-300'}`}
+                value={proposeData.title}
+                onChange={(e) => {
+                  setProposeData({...proposeData, title: e.target.value})
+                  if (e.target.value) {
+                    setProposeValidationErrors(prev => ({...prev, title: false}))
+                  }
+                }}
+              />
+            </div>
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'} flex items-center`}>
                 Client/File
                 {proposeValidationErrors.clientFile && <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />}
               </label>
