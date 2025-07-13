@@ -2243,7 +2243,7 @@ export default function MarwyckCopilot() {
                               </div>
                               
                               {/* Days columns */}
-                              <div className="flex-1 grid grid-cols-7 gap-0">
+                              <div className="flex-1 grid grid-cols-7">
                                 {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, dayIndex) => (
                                   <div key={day} className={`${dayIndex < 6 ? 'border-r border-gray-200 dark:border-gray-700' : ''}`}>
                                     {/* Hour slots */}
