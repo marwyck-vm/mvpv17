@@ -723,8 +723,8 @@ export default function MarwyckCopilot() {
   const handleProposeClose = (open) => {
     setShowProposeDialog(open)
     if (!open) {
-      setProposeData({ clientFile: '', date: '', time: '', contactMode: '', infos: '' })
-      setProposeValidationErrors({ clientFile: false, date: false, time: false, contactMode: false, infos: false })
+      setProposeData({ title: '', clientFile: '', date: '', time: '', contactMode: '', infos: '' })
+      setProposeValidationErrors({ title: false, clientFile: false, date: false, time: false, contactMode: false, infos: false })
     }
   }
 
