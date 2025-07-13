@@ -2134,25 +2134,14 @@ export default function MarwyckCopilot() {
                       <CardContent className="p-0">
                         {/* Calendar container with scroll and rounded corners */}
                         <div className="rounded-xl overflow-hidden">
-                          {/* Day headers - fixed */}
-                          <div className="flex bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-20">
-                            <div className="w-16 border-r border-gray-200 dark:border-gray-700 flex-shrink-0"></div>
-                            <div className="flex-1 grid grid-cols-7">
-                              {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => (
-                                <div key={day} className="h-12 border-r border-gray-200 dark:border-gray-700 last:border-r-0 flex items-center justify-center">
-                                  <span className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                    {day}
-                                  </span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                          
-                          {/* Scrollable hours and events area */}
-                          <div className="h-[450px] overflow-y-auto">
-                            <div className="flex">
-                              {/* Hours column - fixed when scrolling horizontally */}
-                              <div className="w-16 border-r border-gray-200 dark:border-gray-700 sticky left-0 bg-white dark:bg-gray-800 z-10 flex-shrink-0">
+                          {/* Combined header and content structure for perfect alignment */}
+                          <div className="flex">
+                            {/* Hours column header and content */}
+                            <div className="w-16 flex-shrink-0">
+                              {/* Empty header space for hours column */}
+                              <div className="h-12 border-b border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"></div>
+                              {/* Hours content */}
+                              <div className="h-[450px] overflow-y-auto border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
                                 {Array.from({ length: 24 }, (_, i) => i).map(hour => (
                                   <div key={hour} className="h-16 border-b border-gray-200 dark:border-gray-700 flex items-start justify-center pt-1">
                                     <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
@@ -2164,52 +2153,68 @@ export default function MarwyckCopilot() {
                                   </div>
                                 ))}
                               </div>
-                              
-                              {/* Days columns */}
-                              <div className="flex-1 grid grid-cols-7">
-                                {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, dayIndex) => (
-                                  <div key={day} className="border-r border-gray-200 dark:border-gray-700 last:border-r-0">
-                                    {/* Hour slots */}
-                                    {Array.from({ length: 24 }, (_, hourIndex) => {
-                                      const hour = hourIndex;
-                                      const hasEvent = calendarEvents.find(event => 
-                                        event.id === dayIndex + 1 && parseInt(event.time.split(':')[0]) === hour
-                                      );
-                                      
-                                      return (
-                                        <div 
-                                          key={`${day}-${hour}`} 
-                                          className="h-16 border-b border-gray-200 dark:border-gray-700 p-1 hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer relative"
-                                          onClick={() => {
-                                            setShowNewEventDialog(true);
-                                          }}
-                                        >
-                                          {hasEvent && (
-                                            <div 
-                                              className="w-full h-12 rounded-xl p-1 text-xs cursor-pointer hover:shadow-md transition-shadow border-2"
-                                              style={{ 
-                                                backgroundColor: `${accentColor}40`,
-                                                borderColor: accentColor
-                                              }}
-                                              onClick={(e) => {
-                                                e.stopPropagation();
-                                                setSelectedEvent(hasEvent);
-                                                setShowEventDetails(true);
-                                              }}
-                                            >
-                                              <p className={`font-medium text-xs leading-tight ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                                {hasEvent.title}
-                                              </p>
-                                              <p className={`text-xs ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                                                {hasEvent.time}
-                                              </p>
-                                            </div>
-                                          )}
-                                        </div>
-                                      );
-                                    })}
+                            </div>
+                            
+                            {/* Days columns with headers */}
+                            <div className="flex-1">
+                              {/* Day headers */}
+                              <div className="grid grid-cols-7 border-b border-gray-200 dark:border-gray-700">
+                                {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, index) => (
+                                  <div key={day} className={`h-12 border-r border-gray-200 dark:border-gray-700 ${index === 6 ? 'border-r-0' : ''} flex items-center justify-center bg-white dark:bg-gray-800`}>
+                                    <span className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                      {day}
+                                    </span>
                                   </div>
                                 ))}
+                              </div>
+                              
+                              {/* Events area */}
+                              <div className="h-[450px] overflow-y-auto">
+                                <div className="grid grid-cols-7">
+                                  {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, dayIndex) => (
+                                    <div key={day} className={`border-r border-gray-200 dark:border-gray-700 ${dayIndex === 6 ? 'border-r-0' : ''}`}>
+                                      {/* Hour slots */}
+                                      {Array.from({ length: 24 }, (_, hourIndex) => {
+                                        const hour = hourIndex;
+                                        const hasEvent = calendarEvents.find(event => 
+                                          event.id === dayIndex + 1 && parseInt(event.time.split(':')[0]) === hour
+                                        );
+                                        
+                                        return (
+                                          <div 
+                                            key={`${day}-${hour}`} 
+                                            className="h-16 border-b border-gray-200 dark:border-gray-700 p-1 hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer relative"
+                                            onClick={() => {
+                                              setShowNewEventDialog(true);
+                                            }}
+                                          >
+                                            {hasEvent && (
+                                              <div 
+                                                className="w-full h-12 rounded-xl p-1 text-xs cursor-pointer hover:shadow-md transition-shadow border-2"
+                                                style={{ 
+                                                  backgroundColor: `${accentColor}40`,
+                                                  borderColor: accentColor
+                                                }}
+                                                onClick={(e) => {
+                                                  e.stopPropagation();
+                                                  setSelectedEvent(hasEvent);
+                                                  setShowEventDetails(true);
+                                                }}
+                                              >
+                                                <p className={`font-medium text-xs leading-tight ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                                  {hasEvent.title}
+                                                </p>
+                                                <p className={`text-xs ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                                                  {hasEvent.time}
+                                                </p>
+                                              </div>
+                                            )}
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                  ))}
+                                </div>
                               </div>
                             </div>
                           </div>
