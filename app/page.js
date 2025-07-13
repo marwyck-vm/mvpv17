@@ -1126,7 +1126,7 @@ export default function MarwyckCopilot() {
               className="w-full text-white rounded-full" 
               style={{ backgroundColor: accentColor }}
             >
-              Contacter le client
+              Contact Client
             </Button>
           </div>
         </DialogContent>
