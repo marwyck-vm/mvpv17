@@ -2217,7 +2217,7 @@ export default function MarwyckCopilot() {
                                       {day}
                                     </span>
                                     <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                      {dayDate.getDate()}/{dayDate.getMonth() + 1}
+                                      {dayDate.getDate()}
                                     </span>
                                   </div>
                                 )
