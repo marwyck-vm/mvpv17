@@ -1213,7 +1213,7 @@ export default function MarwyckCopilot() {
                   <SelectValue placeholder="Choose appointment" />
                 </SelectTrigger>
                 <SelectContent className="rounded-xl">
-                  {calendarEvents.map(event => (
+                  {getCurrentWeekEvents().map(event => (
                     <SelectItem key={event.id} value={event.id.toString()}>
                       {event.title} - {event.time}
                     </SelectItem>
