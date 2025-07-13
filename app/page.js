@@ -970,21 +970,30 @@ export default function MarwyckCopilot() {
       </Dialog>
 
       {/* Planning Modal - Propose Slots */}
-      <Dialog open={showProposeDialog} onOpenChange={setShowProposeDialog} modal={false}>
+      <Dialog open={showProposeDialog} onOpenChange={handleProposeClose} modal={false}>
         <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <DialogHeader>
-            <DialogTitle>Propose time slots</DialogTitle>
+            <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>Propose time slots</DialogTitle>
+            <p className={`text-sm mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Propose available time slots to your clients</p>
           </DialogHeader>
           <div className="space-y-4">
             <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Client/File</label>
-              <Select>
-                <SelectTrigger className="rounded-xl">
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'} flex items-center`}>
+                Client/File
+                {proposeValidationErrors.clientFile && <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />}
+              </label>
+              <Select value={proposeData.clientFile} onValueChange={(value) => {
+                setProposeData({...proposeData, clientFile: value})
+                if (value) {
+                  setProposeValidationErrors(prev => ({...prev, clientFile: false}))
+                }
+              }}>
+                <SelectTrigger className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}>
                   <SelectValue placeholder="Choose a file" />
                 </SelectTrigger>
                 <SelectContent className="rounded-xl">
                   {dossiersList.map(dossier => (
-                    <SelectItem key={dossier.id} value={dossier.id.toString()}>
+                    <SelectItem key={dossier.id} value={dossier.address}>
                       {dossier.address}
                     </SelectItem>
                   ))}
@@ -992,19 +1001,94 @@ export default function MarwyckCopilot() {
               </Select>
             </div>
             <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Date range</label>
-              <div className="grid grid-cols-2 gap-2">
-                <Input type="date" className="rounded-xl" />
-                <Input type="date" className="rounded-xl" />
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'} flex items-center`}>
+                Date
+                {proposeValidationErrors.date && <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />}
+              </label>
+              <Input 
+                type="date" 
+                className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
+                value={proposeData.date}
+                onChange={(e) => {
+                  setProposeData({...proposeData, date: e.target.value})
+                  if (e.target.value) {
+                    setProposeValidationErrors(prev => ({...prev, date: false}))
+                  }
+                }}
+              />
+            </div>
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'} flex items-center`}>
+                Time
+                {proposeValidationErrors.time && <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />}
+              </label>
+              <Input 
+                type="time" 
+                className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
+                value={proposeData.time}
+                onChange={(e) => {
+                  setProposeData({...proposeData, time: e.target.value})
+                  if (e.target.value) {
+                    setProposeValidationErrors(prev => ({...prev, time: false}))
+                  }
+                }}
+              />
+            </div>
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'} flex items-center`}>
+                Contact Mode
+                {proposeValidationErrors.contactMode && <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />}
+              </label>
+              <div className="flex space-x-4">
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="contactMode"
+                    value="sms"
+                    checked={proposeData.contactMode === 'sms'}
+                    onChange={(e) => {
+                      setProposeData({...proposeData, contactMode: e.target.value})
+                      if (e.target.value) {
+                        setProposeValidationErrors(prev => ({...prev, contactMode: false}))
+                      }
+                    }}
+                    className="mr-2"
+                  />
+                  <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>SMS</span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="contactMode"
+                    value="call"
+                    checked={proposeData.contactMode === 'call'}
+                    onChange={(e) => {
+                      setProposeData({...proposeData, contactMode: e.target.value})
+                      if (e.target.value) {
+                        setProposeValidationErrors(prev => ({...prev, contactMode: false}))
+                      }
+                    }}
+                    className="mr-2"
+                  />
+                  <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Call</span>
+                </label>
               </div>
             </div>
             <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Slots to propose</label>
-              <Textarea placeholder="Ex: Monday 2pm-3pm, Tuesday 10:30am-11:30am..." className="rounded-xl" />
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Infos (Optional)</label>
+              <Textarea 
+                placeholder="Additional information about the appointment..." 
+                className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-white border-gray-300'}`}
+                value={proposeData.infos}
+                onChange={(e) => setProposeData({...proposeData, infos: e.target.value})}
+              />
             </div>
-            <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
-              <Sparkles className="w-4 h-4 mr-2" />
-              Let AI propose
+            <Button 
+              onClick={handleProposeSlots}
+              className="w-full text-white rounded-full" 
+              style={{ backgroundColor: accentColor }}
+            >
+              Generate Proposals
             </Button>
           </div>
         </DialogContent>
