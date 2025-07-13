@@ -1613,7 +1613,7 @@ export default function MarwyckCopilot() {
                       </CardHeader>
                       <CardContent>
                         <div className="space-y-4">
-                          {calendarEvents.slice(0, 3).map(event => (
+                          {getCurrentWeekEvents().slice(0, 3).map(event => (
                             <div key={event.id} className="flex items-center space-x-3">
                               <div className="flex-shrink-0">
                                 <Calendar className="w-5 h-5" style={{ color: accentColor }} />
