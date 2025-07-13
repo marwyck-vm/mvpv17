@@ -668,6 +668,43 @@ export default function MarwyckCopilot() {
     }
   }
 
+  // Handle propose time slots
+  const handleProposeSlots = () => {
+    const errors = {
+      clientFile: !proposeData.clientFile,
+      date: !proposeData.date,
+      time: !proposeData.time,
+      contactMode: !proposeData.contactMode
+    }
+    
+    setProposeValidationErrors(errors)
+    
+    if (!errors.clientFile && !errors.date && !errors.time && !errors.contactMode) {
+      // Simulate propose slots success
+      console.log('Propose slots:', proposeData)
+      setProposeData({ clientFile: '', date: '', time: '', contactMode: '', infos: '' })
+      setProposeValidationErrors({ clientFile: false, date: false, time: false, contactMode: false })
+      setShowProposeDialog(false)
+    }
+  }
+
+  // Reset modals when they close
+  const handleNewEventClose = (open) => {
+    setShowNewEventDialog(open)
+    if (!open) {
+      setNewEventData({ title: '', date: '', time: '', details: '', clientFile: '' })
+      setEventValidationErrors({ title: false, date: false, time: false })
+    }
+  }
+
+  const handleProposeClose = (open) => {
+    setShowProposeDialog(open)
+    if (!open) {
+      setProposeData({ clientFile: '', date: '', time: '', contactMode: '', infos: '' })
+      setProposeValidationErrors({ clientFile: false, date: false, time: false, contactMode: false })
+    }
+  }
+
   // Handle event deletion
   const handleDeleteEvent = (eventId) => {
     setCalendarEvents(prev => prev.filter(event => event.id !== eventId))
