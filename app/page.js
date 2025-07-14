@@ -258,7 +258,6 @@ export default function MarwyckCopilot() {
   }
 
   const [dossiersList, setDossiersList] = useState([])
-  const [selectedDossier, setSelectedDossier] = useState(null)
 
   // Calendar events organized by week (week offset from current week)
   const [calendarEventsByWeek, setCalendarEventsByWeek] = useState({
