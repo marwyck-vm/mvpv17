@@ -186,4 +186,27 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+  
+  /* Custom Select dropdown styles for dark mode */
+  .dark [data-radix-select-content] {
+    background-color: rgb(55, 65, 81) !important;
+    border-color: rgb(75, 85, 99) !important;
+    color: white !important;
+  }
+  
+  .dark [data-radix-select-item] {
+    color: white !important;
+    border-radius: 0.5rem !important;
+    margin: 2px 4px !important;
+  }
+  
+  .dark [data-radix-select-item][data-highlighted] {
+    background-color: rgb(75, 85, 99) !important;
+    color: white !important;
+  }
+  
+  .dark [data-radix-select-item]:hover {
+    background-color: rgb(75, 85, 99) !important;
+    color: white !important;
+  }
 }
