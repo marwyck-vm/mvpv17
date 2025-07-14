@@ -1615,10 +1615,10 @@ export default function MarwyckCopilot() {
                 <SelectTrigger className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}>
                   <SelectValue placeholder="Select client file" />
                 </SelectTrigger>
-                <SelectContent className="rounded-xl">
+                <SelectContent className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}>
                   {dossiersList.map(dossier => (
-                    <SelectItem key={dossier.id} value={dossier.id.toString()}>
-                      {dossier.address} ({dossier.type})
+                    <SelectItem key={dossier.id} value={dossier.id.toString()} className={`${darkMode ? 'text-white hover:bg-gray-600' : 'text-gray-900 hover:bg-gray-100'}`}>
+                      {dossier.title} ({dossier.type})
                     </SelectItem>
                   ))}
                 </SelectContent>
