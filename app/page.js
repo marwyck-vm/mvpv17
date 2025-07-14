@@ -529,6 +529,9 @@ export default function MarwyckCopilot() {
 
   const getStatusColor = (status) => {
     switch (status) {
+      case 'active': return 'bg-green-100 text-green-800 border-green-200'
+      case 'pending': return 'bg-orange-100 text-orange-800 border-orange-200'
+      case 'inactive': return 'bg-red-100 text-red-800 border-red-200'
       case 'signed':
       case 'received':
       case 'completed':
@@ -538,8 +541,6 @@ export default function MarwyckCopilot() {
       case 'missing':
       case 'failed':
         return 'text-danger'
-      case 'pending':
-        return 'text-yellow-600'
       default:
         return 'text-gray-500'
     }
