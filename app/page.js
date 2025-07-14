@@ -283,16 +283,16 @@ export default function MarwyckCopilot() {
 
   // Calendar events organized by week (week offset from current week)
   const [calendarEventsByWeek, setCalendarEventsByWeek] = useState({
-    0: [ // Current week
+    0: [ // Current week (Jul 14 - Jul 20, 2024)
       { id: 1, title: 'Visit 123 Oak Street', date: '2024-07-15', time: '14:00', dayOfWeek: 0, type: 'visit', client: 'John Smith', description: 'Property visit with client', clientFile: '123 Oak Street', teamMember: 'Marie Dubois' },
       { id: 2, title: 'Notary signing', date: '2024-07-16', time: '16:30', dayOfWeek: 1, type: 'signature', client: 'Marie Durant', description: 'Official document signing', clientFile: '456 Pine Avenue', teamMember: '' },
       { id: 3, title: 'Estimate 456 Pine Ave', date: '2024-07-17', time: '10:00', dayOfWeek: 2, type: 'estimation', client: 'Paul Martin', description: 'Property valuation', clientFile: '456 Pine Avenue', teamMember: 'Jean Martin' }
     ],
-    1: [ // Next week
-      { id: 4, title: 'Client Meeting', date: '2024-07-23', time: '15:00', dayOfWeek: 1, type: 'meeting', client: 'Sophie Miller', description: 'Initial consultation', clientFile: '789 Maple Drive', teamMember: 'Marie Dubois' }
+    1: [ // Next week (Jul 21 - Jul 27, 2024)
+      { id: 4, title: 'Client Meeting', date: '2024-07-22', time: '15:00', dayOfWeek: 0, type: 'meeting', client: 'Sophie Miller', description: 'Initial consultation', clientFile: '789 Maple Drive', teamMember: 'Marie Dubois' }
     ],
-    '-1': [ // Previous week
-      { id: 5, title: 'Property Tour', date: '2024-07-09', time: '11:00', dayOfWeek: 1, type: 'visit', client: 'Thomas Wilson', description: 'Guided property tour', clientFile: '123 Oak Street', teamMember: '' }
+    '-1': [ // Previous week (Jul 7 - Jul 13, 2024)
+      { id: 5, title: 'Property Tour', date: '2024-07-08', time: '11:00', dayOfWeek: 0, type: 'visit', client: 'Thomas Wilson', description: 'Guided property tour', clientFile: '123 Oak Street', teamMember: '' }
     ]
   })
 
