@@ -341,6 +341,16 @@ export default function MarwyckCopilot() {
         { id: 2, name: 'Sophie Martin', email: 'sophie.martin@email.com', phone: '+1-555-0127' }
       ],
       documents: []
+    },
+    {
+      id: 4,
+      title: '321 Maple Court',
+      address: '321 Maple Court',
+      type: 'sale',
+      status: 'active',
+      priority: 'medium',
+      contacts: [], // Dossier sans contacts pour tester
+      documents: []
     }
   ])
 
