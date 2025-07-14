@@ -1626,7 +1626,7 @@ export default function MarwyckCopilot() {
                   <SelectValue placeholder="Select client file" />
                 </SelectTrigger>
                 <SelectContent 
-                  className={`rounded-xl !bg-gray-700 !border-gray-600 ${darkMode ? 'dark' : ''}`}
+                  className={`rounded-xl ${darkMode ? 'dark' : ''}`}
                   style={{
                     backgroundColor: darkMode ? 'rgb(55, 65, 81)' : 'white',
                     borderColor: darkMode ? 'rgb(75, 85, 99)' : 'rgb(209, 213, 219)',
@@ -1638,7 +1638,7 @@ export default function MarwyckCopilot() {
                     <SelectItem 
                       key={dossier.id} 
                       value={dossier.id.toString()} 
-                      className={`!rounded-lg mx-1 ${darkMode ? '!text-white hover:!bg-gray-600 focus:!bg-gray-600 data-[highlighted]:!bg-gray-600' : '!text-gray-900 hover:!bg-gray-100 focus:!bg-gray-100 data-[highlighted]:!bg-gray-100'}`}
+                      className={`rounded-lg mx-1 ${darkMode ? 'text-white data-[highlighted]:bg-gray-600 hover:bg-gray-600' : 'text-gray-900 data-[highlighted]:bg-gray-100 hover:bg-gray-100'}`}
                       style={{
                         color: darkMode ? 'white' : 'rgb(17, 24, 39)',
                         borderRadius: '0.5rem',
