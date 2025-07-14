@@ -2281,6 +2281,21 @@ export default function MarwyckCopilot() {
                                         key={`${day}-${hour}`} 
                                         className="h-16 border-b border-gray-200 dark:border-gray-700 p-1 hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer relative"
                                         onClick={() => {
+                                          // Calculate the date for this slot
+                                          const weekDates = getCurrentWeekDates();
+                                          const slotDate = weekDates[dayIndex];
+                                          const dateString = slotDate.toISOString().split('T')[0];
+                                          const timeString = hour.toString().padStart(2, '0') + ':00';
+                                          
+                                          // Pre-fill the new event data
+                                          setNewEventData({
+                                            title: '',
+                                            date: dateString,
+                                            time: timeString,
+                                            details: '',
+                                            clientFile: '',
+                                            teamMember: ''
+                                          });
                                           setShowNewEventDialog(true);
                                         }}
                                       >
