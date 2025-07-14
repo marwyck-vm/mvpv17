@@ -1639,29 +1639,35 @@ export default function MarwyckCopilot() {
                   Contacts to Send
                   {sendToClientValidationErrors.selectedContacts && <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />}
                 </label>
-                <div className="space-y-2">
-                  {getContactsForSelectedDossier().map(contact => (
-                    <div key={contact.id} className={`flex items-center justify-between p-3 border rounded-lg ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
-                      <div className="flex-1">
-                        <div className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>{contact.name}</div>
-                        <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{contact.email}</div>
-                        <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{contact.phone}</div>
+                {getContactsForSelectedDossier().length === 0 ? (
+                  <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'} italic p-3 border rounded-lg ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
+                    No contacts available for this client file
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    {getContactsForSelectedDossier().map(contact => (
+                      <div key={contact.id} className={`flex items-center justify-between p-3 border rounded-xl ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
+                        <div className="flex-1">
+                          <div className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>{contact.name}</div>
+                          <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{contact.email}</div>
+                          <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{contact.phone}</div>
+                        </div>
+                        <input
+                          type="checkbox"
+                          id={`contact-${contact.id}`}
+                          checked={sendToClientData.selectedContacts.includes(contact.id)}
+                          onChange={() => {
+                            toggleContactSelection(contact.id)
+                            if (sendToClientData.selectedContacts.length > 0) {
+                              setSendToClientValidationErrors(prev => ({ ...prev, selectedContacts: false }))
+                            }
+                          }}
+                          className="ml-3"
+                        />
                       </div>
-                      <input
-                        type="checkbox"
-                        id={`contact-${contact.id}`}
-                        checked={sendToClientData.selectedContacts.includes(contact.id)}
-                        onChange={() => {
-                          toggleContactSelection(contact.id)
-                          if (sendToClientData.selectedContacts.length > 0) {
-                            setSendToClientValidationErrors(prev => ({ ...prev, selectedContacts: false }))
-                          }
-                        }}
-                        className="ml-3"
-                      />
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
             
