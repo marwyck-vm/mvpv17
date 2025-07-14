@@ -2166,7 +2166,12 @@ export default function MarwyckCopilot() {
                           </div>
                           
                           <div className="pt-2 border-t">
-                            <Button size="sm" className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
+                            <Button 
+                              size="sm" 
+                              onClick={() => handleEditDossier(dossier)}
+                              className="w-full text-white rounded-full" 
+                              style={{ backgroundColor: accentColor }}
+                            >
                               Manage file
                             </Button>
                           </div>
