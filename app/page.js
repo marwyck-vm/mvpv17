@@ -64,7 +64,9 @@ import {
   Save,
   Copy,
   Lightbulb,
-  ClipboardList
+  ClipboardList,
+  Lock,
+  Unlock
 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
