@@ -826,10 +826,14 @@ export default function MarwyckCopilot() {
   const handleSaveDossier = () => {
     if (editingDossier) {
       // Validation: Title is required
-      if (!editingDossier.title || editingDossier.title.trim() === '') {
-        alert('Title is required to save the file.')
+      const errors = { title: !editingDossier.title || editingDossier.title.trim() === '' }
+      setDossierValidationErrors(errors)
+      
+      if (errors.title) {
         return
       }
+      
+      setDossierValidationErrors({ title: false })
       
       setDossiersList(prev => 
         prev.map(d => d.id === editingDossier.id ? editingDossier : d)
