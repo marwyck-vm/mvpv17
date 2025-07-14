@@ -173,6 +173,18 @@ export default function MarwyckCopilot() {
   const [selectedTeamMembers, setSelectedTeamMembers] = useState([])
   const [showAddTeamMember, setShowAddTeamMember] = useState(false)
   const [newTeamMember, setNewTeamMember] = useState({ name: '', role: '', email: '', phone: '' })
+  
+  // Send to Client states
+  const [showSendToClientDialog, setShowSendToClientDialog] = useState(false)
+  const [sendToClientData, setSendToClientData] = useState({ 
+    selectedDossier: '', 
+    selectedContacts: [] 
+  })
+  const [sendToClientValidationErrors, setSendToClientValidationErrors] = useState({ 
+    selectedDossier: false, 
+    selectedContacts: false 
+  })
+  
   const messagesEndRef = useRef(null)
 
   // Available accent colors
