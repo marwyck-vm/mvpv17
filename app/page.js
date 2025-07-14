@@ -2197,15 +2197,15 @@ export default function MarwyckCopilot() {
                               className="p-2 rounded-full"
                             >
                               {lockedDossiers[dossier.id] ? (
-                                <Lock className="w-4 h-4 text-red-500" />
+                                <Lock className="w-4 h-4 text-red-500" strokeWidth={1.5} />
                               ) : (
-                                <Unlock className="w-4 h-4 text-green-500" />
+                                <Unlock className="w-4 h-4 text-green-500" strokeWidth={1.5} />
                               )}
                             </Button>
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => deleteDossier(dossier.id)}
+                              onClick={() => showDeleteConfirmation(dossier.id)}
                               className="p-2 text-red-500 hover:text-red-700 rounded-full"
                             >
                               <Trash2 className="w-4 h-4" />
