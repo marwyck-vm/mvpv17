@@ -2864,7 +2864,7 @@ export default function MarwyckCopilot() {
             
             <div>
               <h4 className={`font-medium mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Documents</h4>
-              <div className="space-y-2 max-h-60 overflow-y-auto">
+              <div className={`space-y-2 max-h-60 overflow-y-auto ${darkMode ? 'scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 scrollbar-thumb-rounded-full scrollbar-track-rounded-full' : 'scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full'}`}>
                 {editingDossier?.documents.map(doc => (
                   <div key={doc.id} className={`flex items-center justify-between p-3 border rounded-xl ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
                     <div className="flex items-center space-x-2">
