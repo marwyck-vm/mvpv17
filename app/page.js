@@ -2934,6 +2934,54 @@ export default function MarwyckCopilot() {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Unlock Confirmation Dialog */}
+      <Dialog open={showUnlockConfirm} onOpenChange={setShowUnlockConfirm} modal={false}>
+        <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
+          <DialogHeader>
+            <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
+              Unlock File
+            </DialogTitle>
+          </DialogHeader>
+          <div className="py-4">
+            <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+              This file will be available for team members to access and edit.
+            </p>
+          </div>
+          <div className="flex justify-end space-x-2">
+            <Button variant="outline" onClick={() => setShowUnlockConfirm(false)} className="rounded-full">
+              Cancel
+            </Button>
+            <Button onClick={confirmUnlock} className="text-white rounded-full" style={{ backgroundColor: accentColor }}>
+              Confirm
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={showDeleteConfirm} onOpenChange={setShowDeleteConfirm} modal={false}>
+        <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
+          <DialogHeader>
+            <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
+              Delete File
+            </DialogTitle>
+          </DialogHeader>
+          <div className="py-4">
+            <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+              Are you sure you want to delete this file permanently? This action cannot be undone.
+            </p>
+          </div>
+          <div className="flex justify-end space-x-2">
+            <Button variant="outline" onClick={() => setShowDeleteConfirm(false)} className="rounded-full">
+              Cancel
+            </Button>
+            <Button onClick={confirmDelete} className="text-white bg-red-500 hover:bg-red-600 rounded-full">
+              Delete
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
