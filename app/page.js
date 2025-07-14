@@ -2130,8 +2130,8 @@ export default function MarwyckCopilot() {
                       <Button
                         onClick={() => addNewDossier('sale')}
                         size="sm"
-                        className="text-white rounded-full"
-                        style={{ backgroundColor: accentColor }}
+                        className={`text-white rounded-full ${darkMode ? 'bg-blue-600 hover:bg-blue-700' : ''}`}
+                        style={{ backgroundColor: darkMode ? undefined : accentColor }}
                       >
                         <Plus className="w-4 h-4 mr-2" />
                         Sale
