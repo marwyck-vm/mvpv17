@@ -890,6 +890,15 @@ export default function MarwyckCopilot() {
     }
   }
 
+  // Function to remove contact
+  const removeContact = (contactIndex) => {
+    if (editingDossier) {
+      const newContacts = [...(editingDossier.contacts || [])];
+      newContacts.splice(contactIndex, 1);
+      setEditingDossier(prev => ({ ...prev, contacts: newContacts }));
+    }
+  }
+
   // Team management functions
   const handleAddTeamMember = () => {
     if (newTeamMember.name && newTeamMember.role && newTeamMember.email) {
