@@ -877,10 +877,44 @@ export default function MarwyckCopilot() {
 
   // Function to toggle dossier lock
   const toggleDossierLock = (dossierId) => {
-    setLockedDossiers(prev => ({
-      ...prev,
-      [dossierId]: !prev[dossierId]
-    }))
+    // If currently locked, show unlock confirmation popup
+    if (lockedDossiers[dossierId]) {
+      setPendingUnlockDossier(dossierId)
+      setShowUnlockConfirm(true)
+    } else {
+      // If unlocked, lock it directly
+      setLockedDossiers(prev => ({
+        ...prev,
+        [dossierId]: true
+      }))
+    }
+  }
+
+  // Function to confirm unlock
+  const confirmUnlock = () => {
+    if (pendingUnlockDossier) {
+      setLockedDossiers(prev => ({
+        ...prev,
+        [pendingUnlockDossier]: false
+      }))
+    }
+    setShowUnlockConfirm(false)
+    setPendingUnlockDossier(null)
+  }
+
+  // Function to show delete confirmation
+  const showDeleteConfirmation = (dossierId) => {
+    setPendingDeleteDossier(dossierId)
+    setShowDeleteConfirm(true)
+  }
+
+  // Function to confirm delete
+  const confirmDelete = () => {
+    if (pendingDeleteDossier) {
+      setDossiersList(prev => prev.filter(d => d.id !== pendingDeleteDossier))
+    }
+    setShowDeleteConfirm(false)
+    setPendingDeleteDossier(null)
   }
 
   // Team management functions
