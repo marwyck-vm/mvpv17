@@ -1631,9 +1631,14 @@ export default function MarwyckCopilot() {
                   Contacts to Send
                   {sendToClientValidationErrors.selectedContacts && <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />}
                 </label>
-                <div className="space-y-2 max-h-40 overflow-y-auto">
+                <div className="space-y-2">
                   {getContactsForSelectedDossier().map(contact => (
-                    <div key={contact.id} className={`flex items-center p-3 border rounded-lg ${darkMode ? 'border-gray-600 bg-gray-700' : 'border-gray-200 bg-gray-50'}`}>
+                    <div key={contact.id} className={`flex items-center justify-between p-3 border rounded-lg ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
+                      <div className="flex-1">
+                        <div className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>{contact.name}</div>
+                        <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{contact.email}</div>
+                        <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{contact.phone}</div>
+                      </div>
                       <input
                         type="checkbox"
                         id={`contact-${contact.id}`}
@@ -1644,13 +1649,8 @@ export default function MarwyckCopilot() {
                             setSendToClientValidationErrors(prev => ({ ...prev, selectedContacts: false }))
                           }
                         }}
-                        className="mr-3"
+                        className="ml-3"
                       />
-                      <label htmlFor={`contact-${contact.id}`} className={`flex-1 cursor-pointer ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                        <div className="font-medium">{contact.name}</div>
-                        <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{contact.email}</div>
-                        <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{contact.phone}</div>
-                      </label>
                     </div>
                   ))}
                 </div>
