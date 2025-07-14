@@ -2250,9 +2250,9 @@ export default function MarwyckCopilot() {
                         <div className="space-y-4">
                           <div>
                             <h4 className={`font-medium text-sm mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Documents</h4>
-                            <div className={`space-y-2 max-h-32 overflow-y-auto ${darkMode ? 'scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800' : 'scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100'}`}>
+                            <div className={`space-y-2 max-h-32 overflow-y-auto border rounded-lg p-2 ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-gray-50 border-gray-200'}`} style={{scrollbarWidth: 'thin'}}>
                               {dossier.documents.map(doc => (
-                                <div key={doc.id} className={`flex items-center justify-between p-2 rounded-lg ${darkMode ? 'bg-gray-700/50' : 'bg-gray-50'}`}>
+                                <div key={doc.id} className={`flex items-center justify-between p-2 rounded-lg ${darkMode ? 'bg-gray-700/50 hover:bg-gray-700' : 'bg-white hover:bg-gray-50'} transition-colors`}>
                                   <div className="flex items-center space-x-2">
                                     {getStatusIcon(doc.status)}
                                     <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{doc.name}</span>
