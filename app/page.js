@@ -2184,10 +2184,14 @@ export default function MarwyckCopilot() {
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => handleEditDossier(dossier)}
+                              onClick={() => toggleDossierLock(dossier.id)}
                               className="p-2 rounded-full"
                             >
-                              <Edit className="w-4 h-4" />
+                              {lockedDossiers[dossier.id] ? (
+                                <Lock className="w-4 h-4 text-red-500" />
+                              ) : (
+                                <Unlock className="w-4 h-4 text-green-500" />
+                              )}
                             </Button>
                             <Button
                               variant="ghost"
