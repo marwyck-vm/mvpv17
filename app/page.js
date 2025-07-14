@@ -252,6 +252,7 @@ export default function MarwyckCopilot() {
   const [dossiersList, setDossiersList] = useState([
     { 
       id: 1, 
+      title: 'Oak Street Sale',
       address: '123 Oak Street', 
       type: 'sale', 
       status: 'active', 
@@ -267,6 +268,7 @@ export default function MarwyckCopilot() {
     },
     { 
       id: 2, 
+      title: 'Pine Avenue Purchase',
       address: '456 Pine Avenue', 
       type: 'purchase', 
       status: 'pending', 
