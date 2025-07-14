@@ -564,6 +564,7 @@ export default function MarwyckCopilot() {
   const addNewDossier = (type) => {
     const newDossier = {
       id: Date.now(),
+      title: 'New File',
       address: 'New address',
       type: type,
       status: 'active',
@@ -586,7 +587,7 @@ export default function MarwyckCopilot() {
         {
           id: 1,
           role: 'assistant',
-          content: `Hello! I'm here to help you with ${newDossier.address}. What can I assist you with today?`,
+          content: `Hello! I'm here to help you with ${newDossier.title}. What can I assist you with today?`,
           timestamp: new Date()
         }
       ]
