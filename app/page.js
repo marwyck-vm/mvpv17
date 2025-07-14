@@ -1352,6 +1352,12 @@ export default function MarwyckCopilot() {
                   size="sm" 
                   className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
                   onClick={() => {
+                    // Pre-fill reschedule data with current event
+                    setRescheduleData({
+                      currentAppointment: selectedEvent?.id.toString() || '',
+                      newDate: selectedEvent?.date || '',
+                      newTime: selectedEvent?.time || ''
+                    });
                     setShowEventDetails(false)
                     setShowRescheduleDialog(true)
                   }}
