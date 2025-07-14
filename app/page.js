@@ -2224,7 +2224,11 @@ export default function MarwyckCopilot() {
                                     <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{doc.name}</span>
                                   </div>
                                   {doc.status === 'missing' && (
-                                    <Button size="sm" variant="outline" className="text-xs rounded-full">
+                                    <Button 
+                                      size="sm" 
+                                      variant="outline" 
+                                      className={`text-xs rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                                    >
                                       Remind
                                     </Button>
                                   )}
