@@ -1615,9 +1615,17 @@ export default function MarwyckCopilot() {
                 <SelectTrigger className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}>
                   <SelectValue placeholder="Select client file" />
                 </SelectTrigger>
-                <SelectContent className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}>
+                <SelectContent 
+                  className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}
+                  style={darkMode ? { backgroundColor: 'rgb(55, 65, 81)', borderColor: 'rgb(75, 85, 99)', color: 'white' } : {}}
+                >
                   {dossiersList.map(dossier => (
-                    <SelectItem key={dossier.id} value={dossier.id.toString()} className={`${darkMode ? 'text-white hover:bg-gray-600' : 'text-gray-900 hover:bg-gray-100'}`}>
+                    <SelectItem 
+                      key={dossier.id} 
+                      value={dossier.id.toString()} 
+                      className={`${darkMode ? 'text-white hover:bg-gray-600 focus:bg-gray-600' : 'text-gray-900 hover:bg-gray-100 focus:bg-gray-100'}`}
+                      style={darkMode ? { color: 'white' } : {}}
+                    >
                       {dossier.title} ({dossier.type})
                     </SelectItem>
                   ))}
