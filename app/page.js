@@ -1626,15 +1626,24 @@ export default function MarwyckCopilot() {
                   <SelectValue placeholder="Select client file" />
                 </SelectTrigger>
                 <SelectContent 
-                  className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}
-                  style={darkMode ? { backgroundColor: 'rgb(55, 65, 81)', borderColor: 'rgb(75, 85, 99)', color: 'white' } : {}}
+                  className={`rounded-xl !bg-gray-700 !border-gray-600 ${darkMode ? 'dark' : ''}`}
+                  style={{
+                    backgroundColor: darkMode ? 'rgb(55, 65, 81)' : 'white',
+                    borderColor: darkMode ? 'rgb(75, 85, 99)' : 'rgb(209, 213, 219)',
+                    color: darkMode ? 'white' : 'rgb(17, 24, 39)',
+                    borderRadius: '0.75rem'
+                  }}
                 >
                   {dossiersList.map(dossier => (
                     <SelectItem 
                       key={dossier.id} 
                       value={dossier.id.toString()} 
-                      className={`rounded-lg ${darkMode ? 'text-white hover:bg-gray-600 focus:bg-gray-600' : 'text-gray-900 hover:bg-gray-100 focus:bg-gray-100'}`}
-                      style={darkMode ? { color: 'white' } : {}}
+                      className={`!rounded-lg mx-1 ${darkMode ? '!text-white hover:!bg-gray-600 focus:!bg-gray-600 data-[highlighted]:!bg-gray-600' : '!text-gray-900 hover:!bg-gray-100 focus:!bg-gray-100 data-[highlighted]:!bg-gray-100'}`}
+                      style={{
+                        color: darkMode ? 'white' : 'rgb(17, 24, 39)',
+                        borderRadius: '0.5rem',
+                        margin: '2px 4px'
+                      }}
                     >
                       {dossier.title} ({dossier.type})
                     </SelectItem>
