@@ -2196,9 +2196,9 @@ export default function MarwyckCopilot() {
                               className="p-2 rounded-full"
                             >
                               {lockedDossiers[dossier.id] ? (
-                                <Lock className="w-4 h-4 text-red-500" strokeWidth={1.5} />
+                                <Unlock className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-black'}`} strokeWidth={1.5} />
                               ) : (
-                                <Unlock className="w-4 h-4 text-green-500" strokeWidth={1.5} />
+                                <Lock className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-black'}`} strokeWidth={1.5} />
                               )}
                             </Button>
                             <Button
