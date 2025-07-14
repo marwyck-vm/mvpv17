@@ -1593,6 +1593,83 @@ export default function MarwyckCopilot() {
         </DialogContent>
       </Dialog>
 
+      {/* Send to Client Modal */}
+      <Dialog open={showSendToClientDialog} onOpenChange={handleSendToClientClose} modal={false}>
+        <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
+          <DialogHeader>
+            <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>Send Estimation to Client</DialogTitle>
+            <p className={`text-sm mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Choose client file and contacts to send the estimation report</p>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'} flex items-center`}>
+                Client File
+                {sendToClientValidationErrors.selectedDossier && <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />}
+              </label>
+              <Select value={sendToClientData.selectedDossier} onValueChange={(value) => {
+                setSendToClientData(prev => ({ ...prev, selectedDossier: value, selectedContacts: [] }))
+                if (value) {
+                  setSendToClientValidationErrors(prev => ({ ...prev, selectedDossier: false }))
+                }
+              }}>
+                <SelectTrigger className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}>
+                  <SelectValue placeholder="Select client file" />
+                </SelectTrigger>
+                <SelectContent className="rounded-xl">
+                  {dossiersList.map(dossier => (
+                    <SelectItem key={dossier.id} value={dossier.id.toString()}>
+                      {dossier.address} ({dossier.type})
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            
+            {sendToClientData.selectedDossier && (
+              <div>
+                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'} flex items-center`}>
+                  Contacts to Send
+                  {sendToClientValidationErrors.selectedContacts && <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />}
+                </label>
+                <div className="space-y-2 max-h-40 overflow-y-auto">
+                  {getContactsForSelectedDossier().map(contact => (
+                    <div key={contact.id} className={`flex items-center p-3 border rounded-lg ${darkMode ? 'border-gray-600 bg-gray-700' : 'border-gray-200 bg-gray-50'}`}>
+                      <input
+                        type="checkbox"
+                        id={`contact-${contact.id}`}
+                        checked={sendToClientData.selectedContacts.includes(contact.id)}
+                        onChange={() => {
+                          toggleContactSelection(contact.id)
+                          if (sendToClientData.selectedContacts.length > 0) {
+                            setSendToClientValidationErrors(prev => ({ ...prev, selectedContacts: false }))
+                          }
+                        }}
+                        className="mr-3"
+                      />
+                      <label htmlFor={`contact-${contact.id}`} className={`flex-1 cursor-pointer ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                        <div className="font-medium">{contact.name}</div>
+                        <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{contact.email}</div>
+                        <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{contact.phone}</div>
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            <Button 
+              onClick={handleSendToClient}
+              className="w-full text-white rounded-full" 
+              style={{ backgroundColor: accentColor }}
+              disabled={!sendToClientData.selectedDossier || sendToClientData.selectedContacts.length === 0}
+            >
+              <Mail className="w-4 h-4 mr-2" />
+              Send Email
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
       {/* Add Team Member Modal */}
       <Dialog open={showAddTeamMember} onOpenChange={setShowAddTeamMember}>
         <DialogContent className="sm:max-w-md rounded-2xl">
