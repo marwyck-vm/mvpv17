@@ -2165,7 +2165,7 @@ export default function MarwyckCopilot() {
                               </Badge>
                               <Badge 
                                 onClick={() => toggleDossierStatus(dossier.id)}
-                                className={`text-xs rounded-full cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-md ${getStatusColor(dossier.status)}`}
+                                className={`text-xs rounded-full cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-md hover:opacity-100 ${getStatusColor(dossier.status)}`}
                               >
                                 {getStatusText(dossier.status)}
                               </Badge>
