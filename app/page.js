@@ -2151,18 +2151,18 @@ export default function MarwyckCopilot() {
                         <div className="flex items-center justify-between">
                           <div className="flex-1">
                             <CardTitle className={`text-lg font-semibold flex items-center space-x-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                              <Building className="w-5 h-5" style={{ color: accentColor }} />
-                              <span>{dossier.address}</span>
+                              {getTypeIcon(dossier.type)}
+                              <span>{dossier.title || dossier.address}</span>
                             </CardTitle>
                             <div className="flex items-center space-x-2 mt-2">
                               <Badge variant="outline" className="text-xs rounded-full">
                                 {dossier.type}
                               </Badge>
                               <Badge 
-                                variant={dossier.status === 'active' ? 'default' : 'secondary'}
-                                className="text-xs rounded-full"
+                                onClick={() => toggleDossierStatus(dossier.id)}
+                                className={`text-xs rounded-full cursor-pointer transition-colors hover:opacity-80 ${getStatusColor(dossier.status)}`}
                               >
-                                {dossier.status}
+                                {getStatusText(dossier.status)}
                               </Badge>
                             </div>
                           </div>
