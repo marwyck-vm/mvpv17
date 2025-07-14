@@ -2138,8 +2138,8 @@ export default function MarwyckCopilot() {
                       <Button
                         onClick={() => addNewDossier('sale')}
                         size="sm"
-                        className={`text-white rounded-full ${darkMode ? 'bg-blue-600 hover:bg-blue-700' : ''}`}
-                        style={{ backgroundColor: darkMode ? undefined : accentColor }}
+                        className="text-white rounded-full"
+                        style={{ backgroundColor: accentColor }}
                       >
                         <Plus className="w-4 h-4 mr-2" />
                         Sale
@@ -2147,8 +2147,8 @@ export default function MarwyckCopilot() {
                       <Button
                         onClick={() => addNewDossier('purchase')}
                         size="sm"
-                        className={`text-white rounded-full ${darkMode ? 'bg-blue-600 hover:bg-blue-700' : ''}`}
-                        style={{ backgroundColor: darkMode ? undefined : accentColor }}
+                        className="text-white rounded-full"
+                        style={{ backgroundColor: accentColor }}
                       >
                         <Plus className="w-4 h-4 mr-2" />
                         Purchase
@@ -2156,8 +2156,8 @@ export default function MarwyckCopilot() {
                       <Button
                         onClick={() => addNewDossier('rental')}
                         size="sm"
-                        className={`text-white rounded-full ${darkMode ? 'bg-blue-600 hover:bg-blue-700' : ''}`}
-                        style={{ backgroundColor: darkMode ? undefined : accentColor }}
+                        className="text-white rounded-full"
+                        style={{ backgroundColor: accentColor }}
                       >
                         <Plus className="w-4 h-4 mr-2" />
                         Rental
