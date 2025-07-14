@@ -2778,11 +2778,17 @@ export default function MarwyckCopilot() {
           <div className="space-y-6">
             <div className="grid grid-cols-1 gap-4">
               <div>
-                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Title</label>
+                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'} flex items-center`}>
+                  Title
+                  {dossierValidationErrors.title && <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />}
+                </label>
                 <Input 
                   value={editingDossier?.title || ''} 
-                  onChange={(e) => setEditingDossier(prev => ({ ...prev, title: e.target.value }))}
-                  className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
+                  onChange={(e) => {
+                    setEditingDossier(prev => ({ ...prev, title: e.target.value }))
+                    setDossierValidationErrors(prev => ({...prev, title: false}))
+                  }}
+                  className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'} ${dossierValidationErrors.title ? 'border-red-500' : ''}`}
                   placeholder="Enter file title"
                 />
               </div>
