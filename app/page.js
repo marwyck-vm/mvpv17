@@ -2228,10 +2228,11 @@ export default function MarwyckCopilot() {
                             <Button 
                               size="sm" 
                               onClick={() => handleEditDossier(dossier)}
-                              className="w-full text-white rounded-full" 
+                              className="w-full text-white rounded-full flex items-center" 
                               style={{ backgroundColor: accentColor }}
                             >
-                              Manage file
+                              <Edit className="w-4 h-4 mr-2" />
+                              Edit file
                             </Button>
                           </div>
                         </div>
