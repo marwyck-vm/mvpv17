@@ -304,6 +304,18 @@ frontend:
       - agent: "testing"
       - comment: "MISSING FEATURE IDENTIFIED: Calendar slot clicking functionality not implemented. Users cannot click on empty calendar time slots to create events with pre-filled date and time. This was specifically requested as 'amélioration #1' - when clicking on a calendar slot (e.g., Tuesday 2 PM), it should open the New Appointment modal with Date='2024-07-16' and Time='14:00' pre-filled. Currently, only the 'New Appointment' button works for event creation."
 
+  - task: "Test Send to Client functionality improvements"
+    implemented: true
+    working: false
+    file: "/app/app/page.js"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+      - agent: "testing"
+      - comment: "SEND TO CLIENT TESTING COMPLETED: ✅ Client File dropdown shows title + type format (e.g., '123 Oak Street (sale)') ✅ Contacts appear with no gray background (transparent) ✅ Checkbox positioned on the right side of contact information ✅ No scroll bar for contacts section (max-h-40 overflow-y-auto removed) ❌ CRITICAL ISSUE: Dark mode support for Client File dropdown is NOT working - dropdown shows white background (rgb(255, 255, 255)) instead of dark gray in dark mode. The dropdown should have dark gray background like bg-gray-700 (rgb(55, 65, 81)) when in dark mode. All other requirements are properly implemented."
+
 metadata:
   created_by: "main_agent"
   version: "1.0"
