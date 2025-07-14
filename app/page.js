@@ -1659,7 +1659,7 @@ export default function MarwyckCopilot() {
                   {sendToClientValidationErrors.selectedContacts && <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />}
                 </label>
                 {getContactsForSelectedDossier().length === 0 ? (
-                  <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'} italic p-3 border rounded-lg ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
+                  <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'} italic p-3 border rounded-xl ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
                     No contacts available for this client file
                   </div>
                 ) : (
