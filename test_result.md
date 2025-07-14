@@ -288,6 +288,21 @@ frontend:
       - working: true
       - agent: "testing"
       - comment: "COMPREHENSIVE TESTING COMPLETED: ✅ Week navigation (Previous/Today/Next) functional ✅ Quick Actions visible (New Appointment, Propose slots, Reschedule) ✅ Team Planning visible (Marie Dubois, Jean Martin) ✅ Calendar columns properly aligned ✅ New Appointment modal working with all required fields ✅ Event creation functional ✅ Events appear in calendar ✅ Event details modal working ✅ Reschedule functionality working ✅ Delete functionality working ✅ Propose slots modal working. Minor issue: New Appointment form validation not showing red icons for empty fields, but core functionality works perfectly. All major Planning page features are fully functional."
+      - working: true
+      - agent: "testing"
+      - comment: "DETAILED PLANNING FUNCTIONALITY TEST COMPLETED: ✅ Navigation arrows correctly positioned above week display ✅ Day numbers (14,15,16,17,18,19,20) display under day names ✅ New Appointment modal creates events successfully ✅ Event details modal with Reschedule/Delete buttons works ✅ Reschedule modal opens with proper fields ✅ Event deletion works perfectly ✅ Propose slots modal functional ✅ Week navigation works ✅ Events appear in correct time slots ✅ Team Planning section visible ✅ All text in English ✅ Professional UI layout. CRITICAL ISSUE: Calendar slot clicking to pre-fill date/time (amélioration #1) NOT implemented - clicking empty calendar slots doesn't open modal with pre-filled date/time. This is the main missing feature from the requested improvements."
+
+  - task: "Implement calendar slot clicking for event creation with pre-filled date/time"
+    implemented: false
+    working: false
+    file: "/app/app/page.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: false
+      - agent: "testing"
+      - comment: "MISSING FEATURE IDENTIFIED: Calendar slot clicking functionality not implemented. Users cannot click on empty calendar time slots to create events with pre-filled date and time. This was specifically requested as 'amélioration #1' - when clicking on a calendar slot (e.g., Tuesday 2 PM), it should open the New Appointment modal with Date='2024-07-16' and Time='14:00' pre-filled. Currently, only the 'New Appointment' button works for event creation."
 
 metadata:
   created_by: "main_agent"
