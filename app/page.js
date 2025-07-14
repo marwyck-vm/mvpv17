@@ -900,6 +900,14 @@ export default function MarwyckCopilot() {
     }
   }
 
+  // Function to toggle dossier lock
+  const toggleDossierLock = (dossierId) => {
+    setLockedDossiers(prev => ({
+      ...prev,
+      [dossierId]: !prev[dossierId]
+    }))
+  }
+
   // Team management functions
   const handleAddTeamMember = () => {
     if (newTeamMember.name && newTeamMember.role && newTeamMember.email) {
