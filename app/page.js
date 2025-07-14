@@ -866,6 +866,54 @@ export default function MarwyckCopilot() {
     }
   }
 
+  // Handle send to client
+  const handleSendToClient = () => {
+    const errors = {
+      selectedDossier: !sendToClientData.selectedDossier,
+      selectedContacts: sendToClientData.selectedContacts.length === 0
+    }
+    
+    setSendToClientValidationErrors(errors)
+    
+    if (!errors.selectedDossier && !errors.selectedContacts) {
+      // Simulate sending email
+      console.log('Sending email to:', sendToClientData.selectedContacts, 'for dossier:', sendToClientData.selectedDossier)
+      setSendToClientData({ selectedDossier: '', selectedContacts: [] })
+      setSendToClientValidationErrors({ selectedDossier: false, selectedContacts: false })
+      setShowSendToClientDialog(false)
+      // You could show a success message here
+    }
+  }
+
+  // Handle send to client modal close
+  const handleSendToClientClose = (open) => {
+    setShowSendToClientDialog(open)
+    if (!open) {
+      setSendToClientData({ selectedDossier: '', selectedContacts: [] })
+      setSendToClientValidationErrors({ selectedDossier: false, selectedContacts: false })
+    }
+  }
+
+  // Toggle contact selection
+  const toggleContactSelection = (contactId) => {
+    setSendToClientData(prev => ({
+      ...prev,
+      selectedContacts: prev.selectedContacts.includes(contactId)
+        ? prev.selectedContacts.filter(id => id !== contactId)
+        : [...prev.selectedContacts, contactId]
+    }))
+    if (sendToClientData.selectedContacts.length > 0) {
+      setSendToClientValidationErrors(prev => ({ ...prev, selectedContacts: false }))
+    }
+  }
+
+  // Get contacts for selected dossier
+  const getContactsForSelectedDossier = () => {
+    if (!sendToClientData.selectedDossier) return []
+    const dossier = dossiersList.find(d => d.id.toString() === sendToClientData.selectedDossier)
+    return dossier ? dossier.contacts : []
+  }
+
   // Handle event deletion
   const handleDeleteEvent = (eventId) => {
     setCalendarEventsByWeek(prev => ({
