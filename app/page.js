@@ -2250,7 +2250,7 @@ export default function MarwyckCopilot() {
                         <div className="space-y-4">
                           <div>
                             <h4 className={`font-medium text-sm mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Documents</h4>
-                            <div className={`space-y-2 max-h-40 overflow-y-auto`} style={{scrollbarWidth: 'thin'}}>
+                            <div className={`space-y-2 max-h-40 overflow-y-auto ${darkMode ? 'scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 scrollbar-thumb-rounded-full scrollbar-track-rounded-full' : 'scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full'}`} style={{scrollbarWidth: 'thin'}}>
                               {dossier.documents.map(doc => (
                                 <div key={doc.id} className={`flex items-center justify-between p-2 rounded-lg transition-colors ${darkMode ? 'hover:bg-gray-800/30' : 'hover:bg-gray-100/30'}`}>
                                   <div className="flex items-center space-x-2">
@@ -2261,7 +2261,7 @@ export default function MarwyckCopilot() {
                                     <Button 
                                       size="sm" 
                                       variant="outline" 
-                                      className={`text-xs rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                                      className={`text-xs rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
                                     >
                                       Remind
                                     </Button>
