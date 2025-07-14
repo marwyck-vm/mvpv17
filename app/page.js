@@ -2833,20 +2833,7 @@ export default function MarwyckCopilot() {
               <div className="space-y-3">
                 {editingDossier?.contacts?.slice(0, 2).map((contact, index) => (
                   <div key={index} className={`p-3 border rounded-xl ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
-                    <div className="flex items-center justify-between mb-3">
-                      <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                        Contact {index + 1}
-                      </span>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => removeContact(index)}
-                        className="p-1 text-red-500 hover:text-red-700 rounded-full"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-3 items-center">
                       <div>
                         <Input 
                           value={contact.name || ''} 
@@ -2882,6 +2869,16 @@ export default function MarwyckCopilot() {
                           className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
                           placeholder="Email"
                         />
+                      </div>
+                      <div className="flex justify-center">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => removeContact(index)}
+                          className="p-1 text-red-500 hover:text-red-700 rounded-full"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
                       </div>
                     </div>
                   </div>
