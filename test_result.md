@@ -306,9 +306,9 @@ frontend:
 
   - task: "Test Send to Client functionality improvements"
     implemented: true
-    working: true
+    working: false
     file: "/app/app/page.js"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
     needs_retesting: false
     status_history:
@@ -318,6 +318,9 @@ frontend:
       - working: true
       - agent: "testing"
       - comment: "COMPREHENSIVE SEND TO CLIENT FUNCTIONALITY TEST COMPLETED: ✅ Modal opens with rounded borders in both light and dark modes ✅ Client File dropdown shows correct 'Title (Type)' format (e.g., '123 Oak Street (sale)', '456 Pine Avenue (purchase)', '789 Elm Drive (rental)') ✅ Dark mode dropdown background FIXED - now shows correct dark gray background (rgb(55, 65, 81)) ✅ Light mode dropdown shows correct white background ✅ Contacts section appears properly after selecting client file ✅ Contacts have transparent/white background (no gray background) ✅ Checkboxes positioned on the right side of contact information ✅ No scroll bar for contacts section ✅ Send Email button works correctly and modal closes after sending ✅ All functionality tested in both light and dark modes. ALL REQUIREMENTS SUCCESSFULLY IMPLEMENTED AND WORKING."
+      - working: false
+      - agent: "testing"
+      - comment: "DETAILED SEND TO CLIENT IMPROVEMENTS TESTING COMPLETED: ✅ Send to Client modal opens successfully with rounded borders ✅ Modal shows 'Send Estimation to Client' title and proper layout ✅ Client File dropdown shows 4 client files in correct format ✅ Light mode dropdown shows correct white background (rgb(255, 255, 255)) ✅ Send Email functionality works ❌ CRITICAL ISSUE 1: Dark mode dropdown background is WHITE (rgb(255, 255, 255)) instead of expected dark gray (rgb(55, 65, 81)) - dark mode styling NOT working ❌ CRITICAL ISSUE 2: Dropdown items have NO rounded borders on hover (0px border radius) - should have rounded borders ❌ ISSUE 3: Could not fully test contact cards rounded borders and no contacts message due to dropdown interaction issues. The specific improvements requested are NOT fully implemented - dark mode colors and rounded hover borders are missing."
 
 metadata:
   created_by: "main_agent"
