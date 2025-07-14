@@ -847,6 +847,51 @@ export default function MarwyckCopilot() {
     }
   }
 
+  // Function to toggle dossier status
+  const toggleDossierStatus = (dossierId) => {
+    setDossiersList(prev =>
+      prev.map(dossier => {
+        if (dossier.id === dossierId) {
+          const statusOptions = ['active', 'pending', 'inactive']
+          const currentIndex = statusOptions.indexOf(dossier.status)
+          const nextIndex = (currentIndex + 1) % statusOptions.length
+          return { ...dossier, status: statusOptions[nextIndex] }
+        }
+        return dossier
+      })
+    )
+  }
+
+  // Function to get status color
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'active': return 'bg-green-100 text-green-800 border-green-200'
+      case 'pending': return 'bg-orange-100 text-orange-800 border-orange-200'
+      case 'inactive': return 'bg-red-100 text-red-800 border-red-200'
+      default: return 'bg-gray-100 text-gray-800 border-gray-200'
+    }
+  }
+
+  // Function to get status text in English
+  const getStatusText = (status) => {
+    switch (status) {
+      case 'active': return 'Active'
+      case 'pending': return 'Pending'
+      case 'inactive': return 'Inactive'
+      default: return status
+    }
+  }
+
+  // Function to get icon by dossier type
+  const getTypeIcon = (type) => {
+    switch (type) {
+      case 'sale': return <Home className="w-5 h-5" style={{ color: accentColor }} />
+      case 'purchase': return <DollarSign className="w-5 h-5" style={{ color: accentColor }} />
+      case 'rental': return <Building className="w-5 h-5" style={{ color: accentColor }} />
+      default: return <Building className="w-5 h-5" style={{ color: accentColor }} />
+    }
+  }
+
   // Team management functions
   const handleAddTeamMember = () => {
     if (newTeamMember.name && newTeamMember.role && newTeamMember.email) {
