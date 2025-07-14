@@ -1623,7 +1623,7 @@ export default function MarwyckCopilot() {
                     <SelectItem 
                       key={dossier.id} 
                       value={dossier.id.toString()} 
-                      className={`${darkMode ? 'text-white hover:bg-gray-600 focus:bg-gray-600' : 'text-gray-900 hover:bg-gray-100 focus:bg-gray-100'}`}
+                      className={`rounded-lg ${darkMode ? 'text-white hover:bg-gray-600 focus:bg-gray-600' : 'text-gray-900 hover:bg-gray-100 focus:bg-gray-100'}`}
                       style={darkMode ? { color: 'white' } : {}}
                     >
                       {dossier.title} ({dossier.type})
