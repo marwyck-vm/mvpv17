@@ -2703,38 +2703,32 @@ export default function MarwyckCopilot() {
       </div>
 
       {/* Edit Dossier Modal */}
-      <Dialog open={showEditDossier} onOpenChange={setShowEditDossier}>
-        <DialogContent className={`rounded-2xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} max-w-2xl`}>
+      <Dialog open={showEditDossier} onOpenChange={setShowEditDossier} modal={false}>
+        <DialogContent className={`sm:max-w-2xl !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <DialogHeader>
             <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
               Edit File - {editingDossier?.address}
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4">
+              <div>
+                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Title</label>
+                <Input 
+                  value={editingDossier?.title || ''} 
+                  onChange={(e) => setEditingDossier(prev => ({ ...prev, title: e.target.value }))}
+                  className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
+                  placeholder="Enter file title"
+                />
+              </div>
               <div>
                 <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Address</label>
                 <Input 
                   value={editingDossier?.address || ''} 
                   onChange={(e) => setEditingDossier(prev => ({ ...prev, address: e.target.value }))}
-                  className="rounded-xl" 
+                  className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
+                  placeholder="Enter property address"
                 />
-              </div>
-              <div>
-                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Type</label>
-                <Select 
-                  value={editingDossier?.type || ''} 
-                  onValueChange={(value) => setEditingDossier(prev => ({ ...prev, type: value }))}
-                >
-                  <SelectTrigger className="rounded-xl">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent className="rounded-xl">
-                    <SelectItem value="sale">Sale</SelectItem>
-                    <SelectItem value="purchase">Purchase</SelectItem>
-                    <SelectItem value="rental">Rental</SelectItem>
-                  </SelectContent>
-                </Select>
               </div>
             </div>
             
@@ -2742,13 +2736,13 @@ export default function MarwyckCopilot() {
               <h4 className={`font-medium mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Documents</h4>
               <div className="space-y-2 max-h-60 overflow-y-auto">
                 {editingDossier?.documents.map(doc => (
-                  <div key={doc.id} className="flex items-center justify-between p-3 border rounded-xl">
+                  <div key={doc.id} className={`flex items-center justify-between p-3 border rounded-xl ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
                     <div className="flex items-center space-x-2">
                       {getStatusIcon(doc.status)}
                       <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{doc.name}</span>
                     </div>
                     <Select value={doc.status} onValueChange={(value) => updateDocumentStatus(doc.id, value)}>
-                      <SelectTrigger className="w-32 rounded-lg">
+                      <SelectTrigger className={`w-32 rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent className="rounded-xl">
@@ -2760,6 +2754,68 @@ export default function MarwyckCopilot() {
                     </Select>
                   </div>
                 ))}
+              </div>
+            </div>
+            
+            <div>
+              <h4 className={`font-medium mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Contacts (Maximum 2)</h4>
+              <div className="space-y-3">
+                {editingDossier?.contacts?.slice(0, 2).map((contact, index) => (
+                  <div key={index} className={`p-3 border rounded-xl ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                      <div>
+                        <Input 
+                          value={contact.name || ''} 
+                          onChange={(e) => {
+                            const newContacts = [...(editingDossier?.contacts || [])];
+                            newContacts[index] = { ...newContacts[index], name: e.target.value };
+                            setEditingDossier(prev => ({ ...prev, contacts: newContacts }));
+                          }}
+                          className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
+                          placeholder="Name"
+                        />
+                      </div>
+                      <div>
+                        <Input 
+                          value={contact.phone || ''} 
+                          onChange={(e) => {
+                            const newContacts = [...(editingDossier?.contacts || [])];
+                            newContacts[index] = { ...newContacts[index], phone: e.target.value };
+                            setEditingDossier(prev => ({ ...prev, contacts: newContacts }));
+                          }}
+                          className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
+                          placeholder="Phone"
+                        />
+                      </div>
+                      <div>
+                        <Input 
+                          value={contact.email || ''} 
+                          onChange={(e) => {
+                            const newContacts = [...(editingDossier?.contacts || [])];
+                            newContacts[index] = { ...newContacts[index], email: e.target.value };
+                            setEditingDossier(prev => ({ ...prev, contacts: newContacts }));
+                          }}
+                          className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
+                          placeholder="Email"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                {(!editingDossier?.contacts || editingDossier.contacts.length < 2) && (
+                  <Button 
+                    variant="outline" 
+                    onClick={() => {
+                      const newContacts = [...(editingDossier?.contacts || [])];
+                      newContacts.push({ name: '', phone: '', email: '' });
+                      setEditingDossier(prev => ({ ...prev, contacts: newContacts }));
+                    }}
+                    className="w-full rounded-xl"
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add Contact
+                  </Button>
+                )}
               </div>
             </div>
             
