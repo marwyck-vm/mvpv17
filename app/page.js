@@ -237,23 +237,57 @@ export default function MarwyckCopilot() {
 
   const documentsTemplates = {
     sale: [
-      { name: 'Sales agreement', required: true },
-      { name: 'Technical diagnostics', required: true },
-      { name: 'Insurance certificate', required: true },
-      { name: 'Energy certificate', required: false },
-      { name: 'Power of attorney', required: false }
+      { name: 'Listing Agreement', required: true },
+      { name: 'Property Disclosure Forms', required: true },
+      { name: 'Comparative Market Analysis (CMA)', required: true },
+      { name: 'Preliminary Title Report', required: true },
+      { name: 'Homeowners Association (HOA) Documents', required: false },
+      { name: 'Marketing Authorization', required: true },
+      { name: 'Inspection Reports', required: true },
+      { name: 'Repair Estimates', required: false },
+      { name: 'Proof of Ownership (Title Deed)', required: true },
+      { name: 'Utility Bills & Property Tax Records', required: true },
+      { name: 'Purchase Agreement (accepted offer)', required: true },
+      { name: 'Counter Offer(s)', required: false },
+      { name: 'Contingency Removal Forms', required: true },
+      { name: 'Appraisal Report', required: true },
+      { name: 'Final Walkthrough Form', required: true },
+      { name: 'Closing Disclosure (CD)', required: true },
+      { name: 'Deed (Transfer of Title)', required: true },
+      { name: 'Settlement Statement / HUD-1', required: true },
+      { name: 'Commission Agreement / Invoice', required: true }
     ],
     purchase: [
-      { name: 'Purchase offer', required: true },
-      { name: 'Income verification', required: true },
-      { name: 'Financing certificate', required: true },
-      { name: 'ID document', required: true }
+      { name: 'Buyer Representation Agreement', required: true },
+      { name: 'Mortgage Pre-Approval Letter', required: true },
+      { name: 'Proof of Funds', required: true },
+      { name: 'Purchase Offer / Sales Contract', required: true },
+      { name: 'Earnest Money Receipt', required: true },
+      { name: 'Inspection Reports', required: true },
+      { name: 'Contingency Forms', required: true },
+      { name: 'Appraisal Report', required: true },
+      { name: 'Title Report', required: true },
+      { name: 'Title Insurance', required: true },
+      { name: 'Closing Disclosure (CD)', required: true },
+      { name: 'Loan Documents', required: true },
+      { name: 'Homeowners Insurance Policy', required: true },
+      { name: 'Settlement Statement (HUD-1)', required: true },
+      { name: 'Final Walkthrough Acknowledgement', required: true },
+      { name: 'Deed (received at closing)', required: true }
     ],
     rental: [
-      { name: 'Rental agreement', required: true },
-      { name: 'Property inspection', required: true },
-      { name: 'Tenant file', required: true },
-      { name: 'Home insurance', required: true }
+      { name: 'Listing Agreement', required: true },
+      { name: 'Property Condition Report', required: true },
+      { name: 'Rental Application Form', required: true },
+      { name: 'Credit Report & Background Check Consent', required: true },
+      { name: 'Lease Agreement / Rental Contract', required: true },
+      { name: 'Lead-Based Paint Disclosure', required: true },
+      { name: 'Security Deposit Receipt', required: true },
+      { name: 'Pet Agreement', required: false },
+      { name: 'Move-in Checklist / Condition Report', required: true },
+      { name: 'Rent Payment Receipts', required: false },
+      { name: 'Maintenance Request Forms', required: false },
+      { name: 'Lease Renewal or Termination Notices', required: false }
     ]
   }
 
