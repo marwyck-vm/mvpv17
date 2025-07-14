@@ -876,15 +876,15 @@ export default function MarwyckCopilot() {
 
   // Function to toggle dossier lock
   const toggleDossierLock = (dossierId) => {
-    // If currently locked, show unlock confirmation popup
-    if (lockedDossiers[dossierId]) {
+    // If currently unlocked, show unlock confirmation popup
+    if (!lockedDossiers[dossierId]) {
       setPendingUnlockDossier(dossierId)
       setShowUnlockConfirm(true)
     } else {
-      // If unlocked, lock it directly
+      // If locked, unlock it directly
       setLockedDossiers(prev => ({
         ...prev,
-        [dossierId]: true
+        [dossierId]: false
       }))
     }
   }
@@ -894,7 +894,7 @@ export default function MarwyckCopilot() {
     if (pendingUnlockDossier) {
       setLockedDossiers(prev => ({
         ...prev,
-        [pendingUnlockDossier]: false
+        [pendingUnlockDossier]: true
       }))
     }
     setShowUnlockConfirm(false)
