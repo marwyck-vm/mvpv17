@@ -998,7 +998,8 @@ export default function MarwyckCopilot() {
 
   // Handle dossier editing
   const handleEditDossier = (dossier) => {
-    setEditingDossier({ ...dossier })
+    // Copy dossier without any default documents
+    setEditingDossier({ ...dossier, documents: [] })
     setSelectedDossier(dossier)
     setShowEditDossier(true)
   }
