@@ -1238,6 +1238,41 @@ export default function MarwyckCopilot() {
         </DialogContent>
       </Dialog>
 
+      {/* SMS & Calls AI Help Floating Card */}
+      <Dialog open={showSMSAIHelp} onOpenChange={setShowSMSAIHelp} modal={false}>
+        <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
+          <div className="space-y-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                  <Phone className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Demander à l'IA de faire des relances téléphoniques et SMS</p>
+                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Automatisez vos communications clients</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                  <PhoneCall className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Marwyck peut programmer des appels</p>
+                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Planifiez et organisez vos appels automatiquement</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                  <Clock className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Optimisez votre temps avec Marwyck</p>
+                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Gagnez du temps sur vos tâches de communication</p>
+                </div>
+              </div>
+            </div>
+        </DialogContent>
+      </Dialog>
+
       {/* Planning Modal - New Event */}
       <Dialog open={showNewEventDialog} onOpenChange={handleNewEventClose} modal={false}>
         <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
