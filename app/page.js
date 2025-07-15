@@ -1626,13 +1626,8 @@ export default function MarwyckCopilot() {
                   <SelectValue placeholder="Select client file" />
                 </SelectTrigger>
                 <SelectContent 
-                  className={`rounded-xl ${darkMode ? 'dark' : ''}`}
+                  className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}
                   style={{
-                    backgroundColor: darkMode ? 'rgb(55, 65, 81)' : 'white',
-                    borderColor: darkMode ? 'rgb(75, 85, 99)' : 'rgb(209, 213, 219)',
-                    color: darkMode ? 'white' : 'rgb(17, 24, 39)',
-                    borderRadius: '0.75rem',
-                    padding: '4px',
                     width: 'var(--radix-select-trigger-width)',
                     maxWidth: 'var(--radix-select-trigger-width)',
                     minWidth: 'var(--radix-select-trigger-width)'
@@ -1642,19 +1637,7 @@ export default function MarwyckCopilot() {
                     <SelectItem 
                       key={dossier.id} 
                       value={dossier.id.toString()} 
-                      className={`rounded-lg ${darkMode ? 'text-white data-[highlighted]:bg-gray-600 hover:bg-gray-600' : 'text-gray-900 data-[highlighted]:bg-gray-100 hover:bg-gray-100'}`}
-                      style={{
-                        backgroundColor: 'transparent',
-                        color: darkMode ? 'white' : 'rgb(17, 24, 39)',
-                        borderRadius: '0.5rem',
-                        margin: '2px 4px',
-                        padding: '8px 12px',
-                        width: 'calc(100% - 8px)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'flex-start',
-                        textAlign: 'left'
-                      }}
+                      className={`transition-colors ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}
                     >
                       {dossier.title} ({dossier.type})
                     </SelectItem>
