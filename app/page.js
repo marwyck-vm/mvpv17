@@ -1638,6 +1638,13 @@ export default function MarwyckCopilot() {
                       key={dossier.id} 
                       value={dossier.id.toString()} 
                       className={`transition-colors ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}
+                      style={{ 
+                        borderRadius: '8px',
+                        margin: '4px 8px 4px 8px',
+                        padding: '8px 12px',
+                        width: 'calc(100% - 16px)',
+                        maxWidth: 'calc(100% - 16px)'
+                      }}
                     >
                       {dossier.title} ({dossier.type})
                     </SelectItem>
