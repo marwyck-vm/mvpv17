@@ -186,13 +186,4 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  
-  /* Hover gris clair en mode clair - plus visible et spécifique */
-  body:not(.dark) [data-radix-select-item]:hover,
-  html:not(.dark) [data-radix-select-item]:hover,
-  :not(.dark) [data-radix-select-item]:hover,
-  :not(.dark) [data-radix-select-item][data-highlighted] {
-    background-color: rgb(229, 231, 235) !important;
-    color: rgb(17, 24, 39) !important;
-  }
 }
