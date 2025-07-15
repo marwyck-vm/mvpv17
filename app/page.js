@@ -2996,7 +2996,7 @@ export default function MarwyckCopilot() {
                     </div>
                     
                     {/* Message Input Area */}
-                    <div className={`border-t p-4 ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'}`}>
+                    <div className={`border-t p-4 rounded-b-2xl ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'}`}>
                       <div className="flex items-center space-x-3">
                         <Input
                           value={smsMessage}
