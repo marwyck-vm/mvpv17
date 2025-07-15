@@ -308,6 +308,24 @@
     background-color: rgb(243, 244, 246) !important;
   }
   
+  /* Force light mode hover with maximum specificity */
+  body:not(.dark) [data-radix-select-item]:hover,
+  body:not(.dark) [data-radix-select-item][data-highlighted],
+  body:not(.dark) [data-radix-select-item]:focus,
+  body:not(.dark) [data-radix-select-item]:focus-visible {
+    background-color: rgb(243, 244, 246) !important;
+    color: rgb(17, 24, 39) !important;
+    border-radius: 0.5rem !important;
+  }
+  
+  /* Light mode root level override */
+  html:not(.dark) [data-radix-select-item]:hover,
+  html:not(.dark) [data-radix-select-item][data-highlighted] {
+    background-color: rgb(243, 244, 246) !important;
+    color: rgb(17, 24, 39) !important;
+    border-radius: 0.5rem !important;
+  }
+  
   /* Additional overrides to ensure no blue colors and proper sizing */
   .dark [data-radix-select-content] * {
     background-color: inherit !important;
