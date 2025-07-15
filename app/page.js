@@ -1247,8 +1247,8 @@ export default function MarwyckCopilot() {
                   <Phone className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Demander à l'IA de faire des relances téléphoniques et SMS</p>
-                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Automatisez vos communications clients</p>
+                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>AI phone and SMS follow-ups</p>
+                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Automate your client communications</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
@@ -1256,8 +1256,8 @@ export default function MarwyckCopilot() {
                   <PhoneCall className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Marwyck peut programmer des appels</p>
-                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Planifiez et organisez vos appels automatiquement</p>
+                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Marwyck can schedule calls</p>
+                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Plan and organize your calls automatically</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
@@ -1265,8 +1265,8 @@ export default function MarwyckCopilot() {
                   <Clock className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Optimisez votre temps avec Marwyck</p>
-                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Gagnez du temps sur vos tâches de communication</p>
+                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>Optimize your time with Marwyck</p>
+                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Save time on your communication tasks</p>
                 </div>
               </div>
             </div>
