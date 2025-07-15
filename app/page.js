@@ -924,6 +924,25 @@ export default function MarwyckCopilot() {
     return dossier ? dossier.contacts : []
   }
 
+  // Chat interface states for SMS & Calls page
+  const [smsSelectedClient, setSmsSelectedClient] = useState('general')
+  const [smsMessage, setSmsMessage] = useState('')
+  
+  // Handle SMS chat reset
+  const handleSmsReset = () => {
+    setSmsMessage('')
+    // Reset conversation logic could be added here
+  }
+  
+  // Handle SMS message send
+  const handleSmsSend = () => {
+    if (smsMessage.trim()) {
+      // Send message logic would go here
+      console.log('Sending SMS:', smsMessage, 'to client:', smsSelectedClient)
+      setSmsMessage('')
+    }
+  }
+
   // Handle event deletion
   const handleDeleteEvent = (eventId) => {
     setCalendarEventsByWeek(prev => ({
