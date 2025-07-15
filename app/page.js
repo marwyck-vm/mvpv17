@@ -1982,10 +1982,7 @@ export default function MarwyckCopilot() {
         <div className="flex-1 overflow-hidden">
           {/* Dashboard */}
           {activeTab === 'dashboard' && (
-            <div className="p-6 h-full overflow-y-auto" style={{
-              scrollbarWidth: 'auto',
-              scrollbarColor: darkMode ? 'rgba(107, 114, 128, 0.6) transparent' : 'rgba(156, 163, 175, 0.6) transparent'
-            }}>
+            <div className="p-6 h-full overflow-y-auto">
               <div className="max-w-7xl mx-auto">
                 <div className="mb-8">
                   <div className="flex items-center justify-between mb-4">
