@@ -1941,18 +1941,18 @@ export default function MarwyckCopilot() {
           </div>
           <div className="flex items-center space-x-6">
             {/* Date */}
-            <div className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            <div className={`text-sm w-48 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
               {formatDate(currentTime)}
             </div>
             
             {/* Live Time */}
-            <div className={`flex items-center space-x-2 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            <div className={`flex items-center space-x-2 text-sm w-24 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
               <Clock className="w-4 h-4" />
               <span>{currentTime.toLocaleTimeString()}</span>
             </div>
             
             {/* Traffic Status */}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 w-32">
               <Navigation className={`w-4 h-4 ${getTrafficColor()}`} />
               <span className={`text-sm ${getTrafficColor()}`}>
                 Traffic nearby: {getTrafficText()}
