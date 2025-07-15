@@ -1990,7 +1990,7 @@ export default function MarwyckCopilot() {
                       <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                         {getWeekLabel(currentWeek).label}
                       </h2>
-                      <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{getWeekLabel(currentWeek).date}</p>
+                      <p className={`font-inter ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{getWeekLabel(currentWeek).date}</p>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Button
