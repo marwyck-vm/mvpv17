@@ -263,6 +263,14 @@
     border-radius: 0.5rem !important;
   }
   
+  /* Force light mode hover with higher specificity */
+  body:not(.dark) [data-radix-select-item]:hover,
+  body:not(.dark) [data-radix-select-item][data-highlighted] {
+    background-color: rgb(243, 244, 246) !important;
+    color: rgb(17, 24, 39) !important;
+    border-radius: 0.5rem !important;
+  }
+  
   /* Force override any blue colors from Radix */
   .dark [data-radix-select-content],
   .dark [data-radix-select-viewport] {
