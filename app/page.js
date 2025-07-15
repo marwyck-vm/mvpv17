@@ -1956,23 +1956,23 @@ export default function MarwyckCopilot() {
               {activeTab === 'account' && 'Account'}
             </h1>
           </div>
-          <div className="flex items-center space-x-8">
-            {/* Date */}
-            <div className={`text-sm min-w-48 flex-shrink-0 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+          <div className="flex items-center">
+            {/* Date - Fixed width container */}
+            <div className={`text-sm w-64 flex-shrink-0 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
               {formatDate(currentTime)}
             </div>
             
-            {/* Live Time */}
-            <div className={`flex items-center space-x-2 text-sm min-w-24 flex-shrink-0 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            {/* Live Time - Fixed width container with icon */}
+            <div className={`flex items-center space-x-2 text-sm w-32 flex-shrink-0 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
               <Clock className="w-4 h-4" />
-              <span>{currentTime.toLocaleTimeString()}</span>
+              <span className="font-mono">{currentTime.toLocaleTimeString()}</span>
             </div>
             
-            {/* Traffic Status */}
-            <div className="flex items-center space-x-2 min-w-32 flex-shrink-0">
+            {/* Traffic Status - Fixed width container with icon */}
+            <div className="flex items-center space-x-2 w-44 flex-shrink-0">
               <Navigation className={`w-4 h-4 ${getTrafficColor()}`} />
-              <span className={`text-sm ${getTrafficColor()}`}>
-                Traffic nearby: {getTrafficText()}
+              <span className={`text-sm font-medium ${getTrafficColor()}`}>
+                Traffic nearby: <span className="font-semibold">{getTrafficText()}</span>
               </span>
             </div>
           </div>
