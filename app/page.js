@@ -397,7 +397,7 @@ export default function MarwyckCopilot() {
     { id: 'general', name: 'General' },
     ...dossiersList.map(dossier => ({
       id: dossier.id.toString(),
-      name: dossier.address
+      name: dossier.title
     }))
   ]
 
