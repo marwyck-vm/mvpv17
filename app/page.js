@@ -1948,7 +1948,12 @@ export default function MarwyckCopilot() {
           <div className="flex items-center space-x-4">
             <h1 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
               {activeTab === 'dashboard' && 'Dashboard'}
-              {activeTab === 'chat' && 'Chat'}
+              {activeTab === 'chat' && (
+                <span className="flex items-center">
+                  <MessageCircle className="w-5 h-5 mr-2 inline-block" style={{ color: accentColor }} />
+                  Chat
+                </span>
+              )}
               {activeTab === 'planning' && 'Planning'}
               {activeTab === 'documents' && 'Documents'}
               {activeTab === 'estimation' && 'Estimation'}
