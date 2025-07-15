@@ -2875,62 +2875,63 @@ export default function MarwyckCopilot() {
                     <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Quick Communication</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-4">
+                    {/* Single line with all elements */}
+                    <div className="flex items-center space-x-3">
                       {/* Client File Selector */}
-                      <div className="flex items-center space-x-4">
-                        <div className="flex-1">
-                          <Select value={smsSelectedClient} onValueChange={setSmsSelectedClient}>
-                            <SelectTrigger className={`w-full rounded-full ${darkMode ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-white border-gray-200 text-gray-900'}`}>
-                              <SelectValue placeholder="Choose a file" />
-                            </SelectTrigger>
-                            <SelectContent className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
-                              {clients.map(client => (
-                                <SelectItem 
-                                  key={client.id} 
-                                  value={client.id} 
-                                  className={`transition-colors ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}
-                                  style={{ 
-                                    borderRadius: '8px',
-                                    margin: '4px 8px 4px 8px',
-                                    padding: '8px 12px',
-                                    width: 'calc(100% - 16px)',
-                                    maxWidth: 'calc(100% - 16px)'
-                                  }}
-                                >
-                                  {client.name}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        </div>
-                        <Button 
-                          onClick={handleSmsReset}
-                          variant="outline"
-                          className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
-                        >
-                          <RotateCcw className="w-4 h-4 mr-2" />
-                          Reset
-                        </Button>
+                      <div className="w-64">
+                        <Select value={smsSelectedClient} onValueChange={setSmsSelectedClient}>
+                          <SelectTrigger className={`w-full rounded-full ${darkMode ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-white border-gray-200 text-gray-900'}`}>
+                            <SelectValue placeholder="Choose a file" />
+                          </SelectTrigger>
+                          <SelectContent className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
+                            {clients.map(client => (
+                              <SelectItem 
+                                key={client.id} 
+                                value={client.id} 
+                                className={`transition-colors ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}
+                                style={{ 
+                                  borderRadius: '8px',
+                                  margin: '4px 8px 4px 8px',
+                                  padding: '8px 12px',
+                                  width: 'calc(100% - 16px)',
+                                  maxWidth: 'calc(100% - 16px)'
+                                }}
+                              >
+                                {client.name}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </div>
                       
-                      {/* Message Input and Send Button */}
-                      <div className="flex items-center space-x-3">
-                        <Input
-                          value={smsMessage}
-                          onChange={(e) => setSmsMessage(e.target.value)}
-                          placeholder="Type your message..."
-                          className={`flex-1 rounded-full ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
-                          onKeyPress={(e) => e.key === 'Enter' && handleSmsSend()}
-                        />
-                        <Button
-                          onClick={handleSmsSend}
-                          disabled={!smsMessage.trim()}
-                          className="text-white rounded-full"
-                          style={{ backgroundColor: accentColor }}
-                        >
-                          <Send className="w-4 h-4" />
-                        </Button>
-                      </div>
+                      {/* Reset Button */}
+                      <Button 
+                        onClick={handleSmsReset}
+                        variant="outline"
+                        className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                      >
+                        <RotateCcw className="w-4 h-4 mr-2" />
+                        Reset
+                      </Button>
+                      
+                      {/* Message Input */}
+                      <Input
+                        value={smsMessage}
+                        onChange={(e) => setSmsMessage(e.target.value)}
+                        placeholder="Type your message..."
+                        className={`flex-1 rounded-full ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                        onKeyPress={(e) => e.key === 'Enter' && handleSmsSend()}
+                      />
+                      
+                      {/* Send Button */}
+                      <Button
+                        onClick={handleSmsSend}
+                        disabled={!smsMessage.trim()}
+                        className="text-white rounded-full"
+                        style={{ backgroundColor: accentColor }}
+                      >
+                        <Send className="w-4 h-4" />
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
