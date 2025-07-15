@@ -3364,7 +3364,7 @@ export default function MarwyckCopilot() {
                       newContacts.push({ name: '', phone: '', email: '' });
                       setEditingDossier(prev => ({ ...prev, contacts: newContacts }));
                     }}
-                    className={`w-full rounded-xl ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                    className={`w-full rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-gray-100 hover:bg-gray-600' : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-100'} border`}
                   >
                     <Plus className="w-4 h-4 mr-2" />
                     Add Contact
