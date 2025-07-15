@@ -199,6 +199,12 @@
     color: white !important;
     border-radius: 0.5rem !important;
     margin: 2px 4px !important;
+    padding: 8px 12px !important;
+    text-align: left !important;
+    width: calc(100% - 8px) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
   }
   
   .dark [data-radix-select-item][data-highlighted] {
@@ -225,6 +231,12 @@
     color: rgb(17, 24, 39) !important;
     border-radius: 0.5rem !important;
     margin: 2px 4px !important;
+    padding: 8px 12px !important;
+    text-align: left !important;
+    width: calc(100% - 8px) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
   }
   
   [data-radix-select-item][data-highlighted] {
@@ -237,5 +249,32 @@
     background-color: rgb(243, 244, 246) !important;
     color: rgb(17, 24, 39) !important;
     border-radius: 0.5rem !important;
+  }
+  
+  /* Force override any blue colors from Radix */
+  .dark [data-radix-select-content],
+  .dark [data-radix-select-viewport] {
+    background-color: rgb(55, 65, 81) !important;
+    color: white !important;
+  }
+  
+  [data-radix-select-content],
+  [data-radix-select-viewport] {
+    background-color: white !important;
+    color: rgb(17, 24, 39) !important;
+  }
+  
+  /* Remove any blue focus states */
+  [data-radix-select-item]:focus,
+  [data-radix-select-item]:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  
+  .dark [data-radix-select-item]:focus,
+  .dark [data-radix-select-item]:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: rgb(75, 85, 99) !important;
   }
 }
