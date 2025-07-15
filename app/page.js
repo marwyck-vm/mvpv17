@@ -3245,7 +3245,7 @@ export default function MarwyckCopilot() {
         <DialogContent className={`sm:max-w-2xl !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <DialogHeader>
             <DialogTitle className={darkMode ? 'text-white' : 'text-gray-900'}>
-              Edit File - {editingDossier?.address}
+              Edit File
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-6">
