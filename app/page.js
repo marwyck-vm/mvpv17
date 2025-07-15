@@ -2327,23 +2327,11 @@ export default function MarwyckCopilot() {
                       variant="outline" 
                       size="sm" 
                       className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
-                      onClick={() => {
-                        // Reset messages for current client
-                        if (selectedClient !== 'general') {
-                          setMessages(prev => ({
-                            ...prev,
-                            [selectedClient]: []
-                          }))
-                        } else {
-                          setMessages(prev => ({
-                            ...prev,
-                            general: []
-                          }))
-                        }
-                      }}
+                      onClick={handleChatReset}
                       title="Reset conversation"
                     >
-                      <RotateCcw className="w-4 h-4" />
+                      <RotateCcw className="w-4 h-4 mr-1" />
+                      Reset
                     </Button>
                     
                     <Button 
