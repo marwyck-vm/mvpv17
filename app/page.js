@@ -927,20 +927,45 @@ export default function MarwyckCopilot() {
   // Chat interface states for SMS & Calls page
   const [smsSelectedClient, setSmsSelectedClient] = useState('general')
   const [smsMessage, setSmsMessage] = useState('')
+  const [smsMessages, setSmsMessages] = useState([])
   
   // Handle SMS chat reset
   const handleSmsReset = () => {
     setSmsMessage('')
-    // Reset conversation logic could be added here
+    setSmsMessages([])
+    console.log('SMS conversation reset for client:', smsSelectedClient)
   }
   
   // Handle SMS message send
   const handleSmsSend = () => {
     if (smsMessage.trim()) {
-      // Send message logic would go here
-      console.log('Sending SMS:', smsMessage, 'to client:', smsSelectedClient)
+      const newMessage = {
+        id: Date.now(),
+        text: smsMessage,
+        sender: 'user',
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        clientId: smsSelectedClient
+      }
+      setSmsMessages(prev => [...prev, newMessage])
       setSmsMessage('')
+      
+      // Simulate AI response after a delay
+      setTimeout(() => {
+        const aiResponse = {
+          id: Date.now() + 1,
+          text: `Message sent to ${clients.find(c => c.id === smsSelectedClient)?.name || 'client'}. SMS delivered successfully.`,
+          sender: 'ai',
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          clientId: smsSelectedClient
+        }
+        setSmsMessages(prev => [...prev, aiResponse])
+      }, 1000)
     }
+  }
+  
+  // Get filtered messages for selected client
+  const getFilteredSmsMessages = () => {
+    return smsMessages.filter(msg => msg.clientId === smsSelectedClient)
   }
 
   // Handle event deletion
