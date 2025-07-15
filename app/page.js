@@ -3278,7 +3278,10 @@ export default function MarwyckCopilot() {
             
             <div>
               <h4 className={`font-medium mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Documents</h4>
-              <div className={`space-y-2 max-h-60 overflow-y-auto scrollbar-thin scrollbar-thumb-rounded-full ${darkMode ? 'scrollbar-thumb-gray-500/50 scrollbar-track-transparent' : 'scrollbar-thumb-gray-400/50 scrollbar-track-transparent'}`} style={{scrollbarWidth: 'thin', scrollbarColor: darkMode ? 'rgba(107, 114, 128, 0.5) transparent' : 'rgba(156, 163, 175, 0.5) transparent'}}>
+              <div className="space-y-2 max-h-60 overflow-y-auto" style={{
+                scrollbarWidth: 'thin',
+                scrollbarColor: darkMode ? 'rgba(107, 114, 128, 0.6) transparent' : 'rgba(156, 163, 175, 0.6) transparent'
+              }}>
                 {editingDossier?.documents.map(doc => (
                   <div key={doc.id} className={`flex items-center justify-between p-3 border rounded-xl ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
                     <div className="flex items-center space-x-2">
