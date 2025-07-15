@@ -2895,7 +2895,7 @@ export default function MarwyckCopilot() {
                 </div>
 
                 {/* Professional Chat Interface */}
-                <Card className={`rounded-xl mb-6 ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
+                <Card className={`rounded-2xl mb-6 ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                   <CardHeader className={`border-b ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
                     <div className="flex items-center justify-between">
                       <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -2929,6 +2929,16 @@ export default function MarwyckCopilot() {
                             </SelectContent>
                           </Select>
                         </div>
+                        
+                        {/* AI Help Button */}
+                        <Button 
+                          variant="outline"
+                          size="sm"
+                          className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                        >
+                          <Zap className="w-4 h-4 mr-1" />
+                          AI Help
+                        </Button>
                         
                         {/* Reset Button */}
                         <Button 
