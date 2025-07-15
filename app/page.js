@@ -940,15 +940,24 @@ export default function MarwyckCopilot() {
   // Handle Chat reset
   const handleChatReset = () => {
     setInputMessage('')
+    
+    // Create initial AI message
+    const initialMessage = {
+      id: Date.now(),
+      role: 'assistant',
+      content: 'Hello! I\'m your Marwyck assistant. How can I help you today?',
+      timestamp: new Date()
+    }
+    
     if (selectedClient !== 'general') {
       setMessages(prev => ({
         ...prev,
-        [selectedClient]: []
+        [selectedClient]: [initialMessage]
       }))
     } else {
       setMessages(prev => ({
         ...prev,
-        general: []
+        general: [initialMessage]
       }))
     }
     console.log('Chat conversation reset for client:', selectedClient)
