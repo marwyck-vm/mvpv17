@@ -186,4 +186,9 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+  
+  /* Hover gris clair en mode clair pour les dossiers Client File */
+  :not(.dark) [data-radix-select-item]:hover {
+    background-color: rgb(243, 244, 246) !important;
+  }
 }
