@@ -306,9 +306,9 @@ frontend:
 
   - task: "Test Send to Client functionality improvements"
     implemented: true
-    working: true
+    working: false
     file: "/app/app/page.js"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
     needs_retesting: false
     status_history:
@@ -327,6 +327,9 @@ frontend:
       - working: true
       - agent: "testing"
       - comment: "FINAL DROPDOWN CORRECTIONS TESTING COMPLETED: ✅ ISSUE 1 FIXED: Dark mode dropdown background now correctly shows gray (rgb(55, 65, 81)) instead of blue ✅ ISSUE 2 FIXED: Light mode hover effect now working properly with gray background (rgb(243, 244, 246)) ✅ ISSUE 3 FIXED: Dark mode hover effect working with proper gray background (rgb(75, 85, 99)) ✅ ALIGNMENT CONFIRMED: Items are properly left-aligned with justify-content: flex-start ✅ ALL 4 CLIENT FILES DISPLAY CORRECTLY: '123 Oak Street (sale)', '456 Pine Avenue (purchase)', '789 Elm Drive (rental)', '321 Maple Court (sale)' ✅ ROUNDED BORDERS: All dropdown items have proper rounded borders (border-radius: 0.5rem) ✅ CURSOR: Proper pointer cursor on hover. ALL REQUESTED CORRECTIONS HAVE BEEN SUCCESSFULLY IMPLEMENTED AND TESTED."
+      - working: false
+      - agent: "testing"
+      - comment: "SPECIFIC DROPDOWN CORRECTIONS TESTING COMPLETED: ✅ Successfully accessed Send to Client modal from Estimation page ✅ Client File dropdown opens and displays all 4 expected items: '123 Oak Street (sale)', '456 Pine Avenue (purchase)', '789 Elm Drive (rental)', '321 Maple Court (sale)' ✅ Dark mode functionality works - application switches to dark theme correctly ❌ CRITICAL ISSUE 1: Light mode hover effect NOT working - dropdown items show transparent background (rgba(0, 0, 0, 0)) instead of expected light gray (rgb(243, 244, 246)) on hover ❌ ISSUE 2: Could not complete dark mode dropdown background testing due to DOM element detachment during theme switching ✅ ISSUE 3: Dropdown size and alignment appears correct from visual inspection - no obvious overflow or misalignment. MAIN PROBLEM: Light mode hover effect is broken and needs to be fixed to show proper gray background on hover."
 
 metadata:
   created_by: "main_agent"
