@@ -3290,10 +3290,10 @@ export default function MarwyckCopilot() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
-                        <SelectItem value="missing" className={`transition-colors ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}>Missing</SelectItem>
-                        <SelectItem value="received" className={`transition-colors ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}>Received</SelectItem>
-                        <SelectItem value="signed" className={`transition-colors ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}>Signed</SelectItem>
-                        <SelectItem value="pending" className={`transition-colors ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}>Pending</SelectItem>
+                        <SelectItem value="missing" className={`transition-colors rounded-lg ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}>Missing</SelectItem>
+                        <SelectItem value="received" className={`transition-colors rounded-lg ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}>Received</SelectItem>
+                        <SelectItem value="signed" className={`transition-colors rounded-lg ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}>Signed</SelectItem>
+                        <SelectItem value="pending" className={`transition-colors rounded-lg ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}>Pending</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
