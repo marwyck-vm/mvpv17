@@ -1632,7 +1632,10 @@ export default function MarwyckCopilot() {
                     borderColor: darkMode ? 'rgb(75, 85, 99)' : 'rgb(209, 213, 219)',
                     color: darkMode ? 'white' : 'rgb(17, 24, 39)',
                     borderRadius: '0.75rem',
-                    padding: '4px'
+                    padding: '4px',
+                    width: 'var(--radix-select-trigger-width)',
+                    maxWidth: 'var(--radix-select-trigger-width)',
+                    minWidth: 'var(--radix-select-trigger-width)'
                   }}
                 >
                   {dossiersList.map(dossier => (
