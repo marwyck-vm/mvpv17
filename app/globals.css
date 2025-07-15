@@ -186,11 +186,4 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  
-  /* Correction taille du dropdown Client File - plus petite */
-  [data-radix-select-content] {
-    width: calc(var(--radix-select-trigger-width) - 20px) !important;
-    max-width: calc(var(--radix-select-trigger-width) - 20px) !important;
-    min-width: calc(var(--radix-select-trigger-width) - 20px) !important;
-  }
 }
