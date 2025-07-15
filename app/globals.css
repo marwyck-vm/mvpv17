@@ -187,39 +187,66 @@
     background-clip: text;
   }
   
-  /* CORRECTIONS SPÉCIFIQUES POUR DROPDOWN CLIENT FILE */
+  /* CORRECTION SPÉCIFIQUE POUR LE FOND BLEU DU DROPDOWN */
   
-  /* 1. Mode clair - Hover sur les éléments */
-  :not(.dark) [data-radix-select-content] [data-radix-select-item]:hover {
-    background-color: rgb(243, 244, 246) !important;
-    border-radius: 0.5rem !important;
-  }
-  
-  /* 2. Mode sombre - Fond gris de la liste déroulante */
-  .dark [data-radix-select-content] {
+  /* Force le fond gris en mode sombre avec sélecteurs très spécifiques */
+  .dark [data-radix-select-content],
+  .dark [data-radix-select-viewport],
+  .dark [data-radix-popper-content],
+  html.dark [data-radix-select-content],
+  html.dark [data-radix-select-viewport],
+  html.dark [data-radix-popper-content] {
     background-color: rgb(55, 65, 81) !important;
+    background: rgb(55, 65, 81) !important;
     border: 1px solid rgb(75, 85, 99) !important;
     border-radius: 0.75rem !important;
+    color: white !important;
   }
   
-  /* 3. Taille de la liste - Même largeur que le bouton */
-  [data-radix-select-content] {
+  /* Force tous les éléments enfants du dropdown à avoir le bon fond */
+  .dark [data-radix-select-content] *,
+  .dark [data-radix-select-viewport] *,
+  html.dark [data-radix-select-content] *,
+  html.dark [data-radix-select-viewport] * {
+    background-color: transparent !important;
+    color: white !important;
+  }
+  
+  /* Hover pour mode sombre */
+  .dark [data-radix-select-content] [data-radix-select-item]:hover,
+  .dark [data-radix-select-item]:hover,
+  html.dark [data-radix-select-content] [data-radix-select-item]:hover,
+  html.dark [data-radix-select-item]:hover {
+    background-color: rgb(75, 85, 99) !important;
+    border-radius: 0.5rem !important;
+    color: white !important;
+  }
+  
+  /* Force la largeur du dropdown */
+  [data-radix-select-content],
+  [data-radix-popper-content] {
     width: var(--radix-select-trigger-width) !important;
     max-width: var(--radix-select-trigger-width) !important;
     min-width: var(--radix-select-trigger-width) !important;
   }
   
-  /* Mode sombre - Hover sur les éléments */
-  .dark [data-radix-select-content] [data-radix-select-item]:hover {
-    background-color: rgb(75, 85, 99) !important;
+  /* Mode clair - Hover sur les éléments */
+  :not(.dark) [data-radix-select-content] [data-radix-select-item]:hover,
+  :not(.dark) [data-radix-select-item]:hover {
+    background-color: rgb(243, 244, 246) !important;
     border-radius: 0.5rem !important;
+    color: rgb(17, 24, 39) !important;
   }
   
-  /* Mode clair - Fond blanc de la liste */
-  :not(.dark) [data-radix-select-content] {
+  /* Mode clair - Fond blanc */
+  :not(.dark) [data-radix-select-content],
+  :not(.dark) [data-radix-select-viewport],
+  :not(.dark) [data-radix-popper-content] {
     background-color: white !important;
+    background: white !important;
     border: 1px solid rgb(209, 213, 219) !important;
     border-radius: 0.75rem !important;
+    color: rgb(17, 24, 39) !important;
   }
   
   /* Styles de base pour tous les éléments */
@@ -229,14 +256,5 @@
     border-radius: 0.5rem !important;
     cursor: pointer !important;
     transition: background-color 0.2s ease !important;
-  }
-  
-  /* Force les couleurs de texte */
-  .dark [data-radix-select-item] {
-    color: white !important;
-  }
-  
-  :not(.dark) [data-radix-select-item] {
-    color: rgb(17, 24, 39) !important;
   }
 }
