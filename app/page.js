@@ -933,7 +933,8 @@ export default function MarwyckCopilot() {
   // Handle SMS chat reset
   const handleSmsReset = () => {
     setSmsMessage('')
-    setSmsMessages([])
+    // Remove only messages for selected client
+    setSmsMessages(prev => prev.filter(msg => msg.clientId !== smsSelectedClient))
     console.log('SMS conversation reset for client:', smsSelectedClient)
   }
   
