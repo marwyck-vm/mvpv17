@@ -187,10 +187,10 @@
     background-clip: text;
   }
   
-  /* Correction taille du dropdown Client File */
+  /* Correction taille du dropdown Client File - plus petite */
   [data-radix-select-content] {
-    width: var(--radix-select-trigger-width) !important;
-    max-width: var(--radix-select-trigger-width) !important;
-    min-width: var(--radix-select-trigger-width) !important;
+    width: calc(var(--radix-select-trigger-width) - 20px) !important;
+    max-width: calc(var(--radix-select-trigger-width) - 20px) !important;
+    min-width: calc(var(--radix-select-trigger-width) - 20px) !important;
   }
 }
