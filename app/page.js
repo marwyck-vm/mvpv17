@@ -1631,18 +1631,26 @@ export default function MarwyckCopilot() {
                     backgroundColor: darkMode ? 'rgb(55, 65, 81)' : 'white',
                     borderColor: darkMode ? 'rgb(75, 85, 99)' : 'rgb(209, 213, 219)',
                     color: darkMode ? 'white' : 'rgb(17, 24, 39)',
-                    borderRadius: '0.75rem'
+                    borderRadius: '0.75rem',
+                    padding: '4px'
                   }}
                 >
                   {dossiersList.map(dossier => (
                     <SelectItem 
                       key={dossier.id} 
                       value={dossier.id.toString()} 
-                      className={`rounded-lg mx-1 ${darkMode ? 'text-white data-[highlighted]:bg-gray-600 hover:bg-gray-600' : 'text-gray-900 data-[highlighted]:bg-gray-100 hover:bg-gray-100'}`}
+                      className={`rounded-lg ${darkMode ? 'text-white data-[highlighted]:bg-gray-600 hover:bg-gray-600' : 'text-gray-900 data-[highlighted]:bg-gray-100 hover:bg-gray-100'}`}
                       style={{
+                        backgroundColor: 'transparent',
                         color: darkMode ? 'white' : 'rgb(17, 24, 39)',
                         borderRadius: '0.5rem',
-                        margin: '2px 4px'
+                        margin: '2px 4px',
+                        padding: '8px 12px',
+                        width: 'calc(100% - 8px)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'flex-start',
+                        textAlign: 'left'
                       }}
                     >
                       {dossier.title} ({dossier.type})
