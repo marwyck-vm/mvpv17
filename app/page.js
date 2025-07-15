@@ -2894,69 +2894,116 @@ export default function MarwyckCopilot() {
                   <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>View all SMS and call activities</p>
                 </div>
 
-                {/* Chat Interface Box */}
+                {/* Professional Chat Interface */}
                 <Card className={`rounded-xl mb-6 ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                  <CardHeader>
-                    <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Quick Communication</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    {/* Single line with all elements */}
-                    <div className="flex items-center space-x-3">
-                      {/* Client File Selector */}
-                      <div className="w-64">
-                        <Select value={smsSelectedClient} onValueChange={setSmsSelectedClient}>
-                          <SelectTrigger className={`w-full rounded-full ${darkMode ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-white border-gray-200 text-gray-900'}`}>
-                            <SelectValue placeholder="Choose a file" />
-                          </SelectTrigger>
-                          <SelectContent className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
-                            {clients.map(client => (
-                              <SelectItem 
-                                key={client.id} 
-                                value={client.id} 
-                                className={`transition-colors ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}
-                                style={{ 
-                                  borderRadius: '8px',
-                                  margin: '4px 8px 4px 8px',
-                                  padding: '8px 12px',
-                                  width: 'calc(100% - 16px)',
-                                  maxWidth: 'calc(100% - 16px)'
-                                }}
-                              >
-                                {client.name}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
+                  <CardHeader className={`border-b ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                    <div className="flex items-center justify-between">
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                        <MessageCircle className="w-5 h-5 mr-2 inline-block" style={{ color: accentColor }} />
+                        Quick Communication
+                      </CardTitle>
+                      <div className="flex items-center space-x-3">
+                        {/* Client File Selector */}
+                        <div className="w-56">
+                          <Select value={smsSelectedClient} onValueChange={setSmsSelectedClient}>
+                            <SelectTrigger className={`w-full rounded-full text-sm ${darkMode ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-white border-gray-200 text-gray-900'}`}>
+                              <SelectValue placeholder="Choose a file" />
+                            </SelectTrigger>
+                            <SelectContent className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
+                              {clients.map(client => (
+                                <SelectItem 
+                                  key={client.id} 
+                                  value={client.id} 
+                                  className={`transition-colors ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}
+                                  style={{ 
+                                    borderRadius: '8px',
+                                    margin: '4px 8px 4px 8px',
+                                    padding: '8px 12px',
+                                    width: 'calc(100% - 16px)',
+                                    maxWidth: 'calc(100% - 16px)'
+                                  }}
+                                >
+                                  {client.name}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        
+                        {/* Reset Button */}
+                        <Button 
+                          onClick={handleSmsReset}
+                          variant="outline"
+                          size="sm"
+                          className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                        >
+                          <RotateCcw className="w-4 h-4 mr-1" />
+                          Reset
+                        </Button>
                       </div>
-                      
-                      {/* Reset Button */}
-                      <Button 
-                        onClick={handleSmsReset}
-                        variant="outline"
-                        className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
-                      >
-                        <RotateCcw className="w-4 h-4 mr-2" />
-                        Reset
-                      </Button>
-                      
-                      {/* Message Input */}
-                      <Input
-                        value={smsMessage}
-                        onChange={(e) => setSmsMessage(e.target.value)}
-                        placeholder="Type your message..."
-                        className={`flex-1 rounded-full ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
-                        onKeyPress={(e) => e.key === 'Enter' && handleSmsSend()}
-                      />
-                      
-                      {/* Send Button */}
-                      <Button
-                        onClick={handleSmsSend}
-                        disabled={!smsMessage.trim()}
-                        className="text-white rounded-full"
-                        style={{ backgroundColor: accentColor }}
-                      >
-                        <Send className="w-4 h-4" />
-                      </Button>
+                    </div>
+                  </CardHeader>
+                  
+                  <CardContent className="p-0">
+                    {/* Messages Display Area */}
+                    <div className={`h-64 overflow-y-auto p-4 ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}>
+                      {getFilteredSmsMessages().length === 0 ? (
+                        <div className="flex items-center justify-center h-full">
+                          <div className="text-center">
+                            <MessageCircle className={`w-12 h-12 mx-auto mb-3 ${darkMode ? 'text-gray-600' : 'text-gray-400'}`} />
+                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                              No messages yet. Start a conversation with{' '}
+                              <span className="font-medium">
+                                {clients.find(c => c.id === smsSelectedClient)?.name || 'General'}
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="space-y-4">
+                          {getFilteredSmsMessages().map((message) => (
+                            <div
+                              key={message.id}
+                              className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                            >
+                              <div
+                                className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl ${
+                                  message.sender === 'user'
+                                    ? 'text-white rounded-br-sm'
+                                    : `${darkMode ? 'bg-gray-700 text-white' : 'bg-white text-gray-900'} border ${darkMode ? 'border-gray-600' : 'border-gray-200'} rounded-bl-sm`
+                                }`}
+                                style={message.sender === 'user' ? { backgroundColor: accentColor } : {}}
+                              >
+                                <p className="text-sm break-words">{message.text}</p>
+                                <div className={`text-xs mt-1 ${message.sender === 'user' ? 'text-white/80' : darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                                  {message.timestamp}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    
+                    {/* Message Input Area */}
+                    <div className={`border-t p-4 ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'}`}>
+                      <div className="flex items-center space-x-3">
+                        <Input
+                          value={smsMessage}
+                          onChange={(e) => setSmsMessage(e.target.value)}
+                          placeholder={`Message ${clients.find(c => c.id === smsSelectedClient)?.name || 'General'}...`}
+                          className={`flex-1 rounded-full ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                          onKeyPress={(e) => e.key === 'Enter' && handleSmsSend()}
+                        />
+                        <Button
+                          onClick={handleSmsSend}
+                          disabled={!smsMessage.trim()}
+                          className="text-white rounded-full px-4 py-2"
+                          style={{ backgroundColor: accentColor }}
+                        >
+                          <Send className="w-4 h-4" />
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
