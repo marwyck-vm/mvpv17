@@ -1994,18 +1994,16 @@ export default function MarwyckCopilot() {
                     </div>
                     <div className="flex items-center space-x-2">
                       <Button
-                        variant="outline"
                         size="sm"
                         onClick={() => setCurrentWeek(currentWeek - 1)}
-                        className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                        className={`rounded-full ${darkMode ? 'bg-gray-700 border-gray-600 text-gray-100 hover:bg-gray-600' : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-100'} border`}
                       >
                         <ChevronLeft className="w-4 h-4" />
                       </Button>
                       <Button
-                        variant="outline"
                         size="sm"
                         onClick={() => setCurrentWeek(currentWeek + 1)}
-                        className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                        className={`rounded-full ${darkMode ? 'bg-gray-700 border-gray-600 text-gray-100 hover:bg-gray-600' : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-100'} border`}
                       >
                         <ChevronRight className="w-4 h-4" />
                       </Button>
