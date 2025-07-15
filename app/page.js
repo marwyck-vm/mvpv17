@@ -937,6 +937,23 @@ export default function MarwyckCopilot() {
     console.log('SMS conversation reset for client:', smsSelectedClient)
   }
   
+  // Handle Chat reset
+  const handleChatReset = () => {
+    setInputMessage('')
+    if (selectedClient !== 'general') {
+      setMessages(prev => ({
+        ...prev,
+        [selectedClient]: []
+      }))
+    } else {
+      setMessages(prev => ({
+        ...prev,
+        general: []
+      }))
+    }
+    console.log('Chat conversation reset for client:', selectedClient)
+  }
+  
   // Handle SMS message send
   const handleSmsSend = () => {
     if (smsMessage.trim()) {
