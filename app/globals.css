@@ -186,4 +186,9 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+  
+  /* Angles arrondis sur le hover pour Client File */
+  [data-radix-select-item]:hover {
+    border-radius: 0.5rem !important;
+  }
 }
