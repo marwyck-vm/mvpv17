@@ -197,6 +197,7 @@
   
   .dark [data-radix-select-item] {
     color: white !important;
+    background-color: transparent !important;
     border-radius: 0.5rem !important;
     margin: 2px 4px !important;
     padding: 8px 12px !important;
@@ -205,6 +206,7 @@
     display: flex !important;
     align-items: center !important;
     justify-content: flex-start !important;
+    cursor: pointer !important;
   }
   
   .dark [data-radix-select-item][data-highlighted] {
