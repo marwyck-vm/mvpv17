@@ -1957,19 +1957,54 @@ export default function MarwyckCopilot() {
         <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-8 py-4 flex items-center justify-between`}>
           <div className="flex items-center space-x-4">
             <h1 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-              {activeTab === 'dashboard' && 'Dashboard'}
+              {activeTab === 'dashboard' && (
+                <span className="flex items-center">
+                  <BarChart3 className="w-5 h-5 mr-2 inline-block" style={{ color: accentColor }} />
+                  Dashboard
+                </span>
+              )}
               {activeTab === 'chat' && (
                 <span className="flex items-center">
                   <MessageCircle className="w-5 h-5 mr-2 inline-block" style={{ color: accentColor }} />
                   Chat
                 </span>
               )}
-              {activeTab === 'planning' && 'Planning'}
-              {activeTab === 'documents' && 'Documents'}
-              {activeTab === 'estimation' && 'Estimation'}
-              {activeTab === 'communications' && 'SMS & Calls'}
-              {activeTab === 'team' && 'Team'}
-              {activeTab === 'account' && 'Account'}
+              {activeTab === 'planning' && (
+                <span className="flex items-center">
+                  <Calendar className="w-5 h-5 mr-2 inline-block" style={{ color: accentColor }} />
+                  Planning
+                </span>
+              )}
+              {activeTab === 'documents' && (
+                <span className="flex items-center">
+                  <FileText className="w-5 h-5 mr-2 inline-block" style={{ color: accentColor }} />
+                  Documents
+                </span>
+              )}
+              {activeTab === 'estimation' && (
+                <span className="flex items-center">
+                  <Calculator className="w-5 h-5 mr-2 inline-block" style={{ color: accentColor }} />
+                  Estimation
+                </span>
+              )}
+              {activeTab === 'communications' && (
+                <span className="flex items-center">
+                  <Phone className="w-5 h-5 mr-2 inline-block" style={{ color: accentColor }} />
+                  SMS & Calls
+                </span>
+              )}
+              {activeTab === 'team' && (
+                <span className="flex items-center">
+                  <Users className="w-5 h-5 mr-2 inline-block" style={{ color: accentColor }} />
+                  Team
+                </span>
+              )}
+              {activeTab === 'account' && (
+                <span className="flex items-center">
+                  <User className="w-5 h-5 mr-2 inline-block" style={{ color: accentColor }} />
+                  Account
+                </span>
+              )}
             </h1>
           </div>
           <div className="flex items-center gap-6 ml-4">
