@@ -304,57 +304,8 @@ export default function MarwyckCopilot() {
     ]
   }
 
-  const [dossiersList, setDossiersList] = useState([
-    {
-      id: 1,
-      title: '123 Oak Street',
-      address: '123 Oak Street',
-      type: 'sale',
-      status: 'active',
-      priority: 'high',
-      contacts: [
-        { id: 1, name: 'John Smith', email: 'john.smith@email.com', phone: '+1-555-0123' },
-        { id: 2, name: 'Sarah Smith', email: 'sarah.smith@email.com', phone: '+1-555-0124' }
-      ],
-      documents: []
-    },
-    {
-      id: 2,
-      title: '456 Pine Avenue',
-      address: '456 Pine Avenue',
-      type: 'purchase',
-      status: 'pending',
-      priority: 'medium',
-      contacts: [
-        { id: 1, name: 'Marie Durant', email: 'marie.durant@email.com', phone: '+1-555-0125' }
-      ],
-      documents: []
-    },
-    {
-      id: 3,
-      title: '789 Elm Drive',
-      address: '789 Elm Drive',
-      type: 'rental',
-      status: 'completed',
-      priority: 'low',
-      contacts: [
-        { id: 1, name: 'Paul Martin', email: 'paul.martin@email.com', phone: '+1-555-0126' },
-        { id: 2, name: 'Sophie Martin', email: 'sophie.martin@email.com', phone: '+1-555-0127' }
-      ],
-      documents: []
-    },
-    {
-      id: 4,
-      title: '321 Maple Court',
-      address: '321 Maple Court',
-      type: 'sale',
-      status: 'active',
-      priority: 'medium',
-      contacts: [], // Dossier sans contacts pour tester
-      documents: []
-    }
-  ])
-
+  const [dossiersList, setDossiersList] = useState([])
+  
   // Calendar events organized by week (week offset from current week)
   const [calendarEventsByWeek, setCalendarEventsByWeek] = useState({
     0: [ // Current week (Jul 14 - Jul 20, 2024)
