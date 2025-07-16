@@ -959,8 +959,19 @@ export default function MarwyckCopilot() {
 
   // Handle dossier editing
   const handleEditDossier = (dossier) => {
-    // Copy dossier without any default documents
-    setEditingDossier({ ...dossier, documents: [] })
+    // Generate default documents based on dossier type if none exist
+    let documents = dossier.documents || []
+    
+    if (documents.length === 0 && requiredDocuments[dossier.type]) {
+      documents = requiredDocuments[dossier.type].map((doc, index) => ({
+        id: index + 1,
+        name: doc.name,
+        status: 'missing',
+        required: doc.required
+      }))
+    }
+    
+    setEditingDossier({ ...dossier, documents })
     setSelectedDossier(dossier)
     setShowEditDossier(true)
   }
