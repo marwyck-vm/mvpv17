@@ -2277,10 +2277,10 @@ export default function MarwyckCopilot() {
                           <div
                             key={clientId}
                             onClick={() => setSelectedClient(clientId)}
-                            className={`p-3 rounded-lg cursor-pointer transition-colors ${
+                            className={`p-3 rounded-xl cursor-pointer transition-colors ${
                               selectedClient === clientId 
-                                ? `${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} border`
-                                : `${darkMode ? 'hover:bg-gray-800' : 'hover:bg-white'}`
+                                ? `${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} border rounded-xl`
+                                : `${darkMode ? 'hover:bg-gray-800 hover:rounded-xl' : 'hover:bg-white hover:rounded-xl'}`
                             }`}
                           >
                             <div className="flex items-center space-x-2 mb-1">
