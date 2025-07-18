@@ -1896,7 +1896,7 @@ export default function MarwyckCopilot() {
               )}
               {activeTab === 'account' && (
                 <span className="flex items-center">
-                  Account
+                  Settings
                 </span>
               )}
             </h1>
