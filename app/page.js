@@ -2527,7 +2527,7 @@ export default function MarwyckCopilot() {
                             <div className="space-y-1">
                               {getSuggestedActions(dossier).map((action, index) => (
                                 <div key={index} className="flex items-center space-x-2">
-                                  <Target className="w-3 h-3" style={{ color: accentColor }} />
+                                  <Target className="w-3 h-3" style={{ color: '#000000' }} />
                                   <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{action}</span>
                                 </div>
                               ))}
