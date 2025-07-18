@@ -1122,60 +1122,7 @@ export default function MarwyckCopilot() {
 
   return (
     <div className={`flex h-screen ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
-      {/* Color Picker Sidebar */}
-      {showColorPicker && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex">
-          <div className={`w-80 h-full ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-xl p-6 rounded-r-xl`}>
-            <div className="flex items-center justify-between mb-6">
-              <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                Colors
-              </h3>
-              <Button variant="ghost" size="sm" onClick={() => setShowColorPicker(false)} className="rounded-full">
-                <X className="w-4 h-4" />
-              </Button>
-            </div>
-            
-            <div className="space-y-6">
-              <div>
-                <label className={`block text-sm font-medium mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                  Primary color
-                </label>
-                <div className="space-y-4">
-                  {accentColors.map(color => (
-                    <div key={color.value} className="flex items-center space-x-3">
-                      <button
-                        onClick={() => setAccentColor(color.value)}
-                        className={`w-8 h-8 rounded-full border-2 transition-all ${
-                          accentColor === color.value ? 'border-gray-400 scale-110' : 'border-gray-200'
-                        }`}
-                        style={{ backgroundColor: color.value }}
-                      />
-                      <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                        {color.name}
-                      </span>
-                      {accentColor === color.value && (
-                        <CheckCircle className="w-4 h-4 text-green-500" />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-              
-              <div className="pt-4 border-t">
-                <Button 
-                  onClick={() => setShowColorPicker(false)}
-                  className="w-full rounded-full text-white"
-                  style={{ backgroundColor: '#000000' }}
-                >
-                  <Save className="w-4 h-4 mr-2" />
-                  Apply
-                </Button>
-              </div>
-            </div>
-          </div>
-          <div className="flex-1" onClick={() => setShowColorPicker(false)} />
-        </div>
-      )}
+      {/* Color Picker Sidebar - Removed for Harvey AI style */}
 
       {/* AI Help Floating Card */}
       <Dialog open={showAIHelp} onOpenChange={setShowAIHelp} modal={false}>
