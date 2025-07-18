@@ -2857,7 +2857,7 @@ export default function MarwyckCopilot() {
                   </CardHeader>
                   <CardContent>
                     <div className="text-center py-8">
-                      <div className={`text-4xl font-bold font-space-grotesk mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`} style={{ color: accentColor }}>
+                      <div className={`text-4xl font-bold font-space-grotesk mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`} style={{ color: '#000000' }}>
                         $485,000 - $515,000
                       </div>
                       <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
