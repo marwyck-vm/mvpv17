@@ -1842,7 +1842,6 @@ export default function MarwyckCopilot() {
                   ? `${darkMode ? 'text-gray-100 bg-gray-700' : 'text-gray-700 bg-gray-100'} rounded-xl`
                   : `${darkMode ? 'text-gray-100 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'} rounded-xl`
               }`}
-              style={}
               title={sidebarCollapsed ? 'Settings' : ''}
             >
               <Settings className={`w-4 h-4 ${!sidebarCollapsed ? 'mr-3' : ''}`} />
