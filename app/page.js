@@ -892,6 +892,42 @@ export default function MarwyckCopilot() {
   }
   
   // Handle Chat reset
+  const toggleFolder = (folderId) => {
+    setExpandedFolders(prev => ({
+      ...prev,
+      [folderId]: !prev[folderId]
+    }))
+  }
+
+  const createNewFolder = () => {
+    if (newFolderName.trim()) {
+      const folderId = newFolderName.toLowerCase().replace(/\s+/g, '-')
+      setChatFolders(prev => ({
+        ...prev,
+        [folderId]: { name: newFolderName.trim(), chats: [] }
+      }))
+      setNewFolderName('')
+      setShowNewFolderInput(false)
+    }
+  }
+
+  const createNewChat = () => {
+    const chatId = `chat-${Date.now()}`
+    setUnorganizedChats(prev => [...prev, chatId])
+    setMessages(prev => ({
+      ...prev,
+      [chatId]: [
+        {
+          id: 1,
+          role: 'assistant',
+          content: 'Hello! I\'m Marwyck, your AI assistant. How can I help you today?',
+          timestamp: new Date()
+        }
+      ]
+    }))
+    setSelectedClient(chatId)
+  }
+
   const handleChatReset = () => {
     setInputMessage('')
     
