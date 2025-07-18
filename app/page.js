@@ -447,10 +447,10 @@ export default function MarwyckCopilot() {
     } else {
       // Future weeks - projected data
       return [
-        { ...baseKpis[0], value: '35.8', previousValue: '32.5', change: '+10%', color: 'text-accent-cyan', trend: 'up' },
-        { ...baseKpis[1], value: '164', previousValue: '156', change: '+5%', color: 'text-accent-cyan', trend: 'up' },
-        { ...baseKpis[2], value: '94%', previousValue: '92%', change: '+2%', color: 'text-accent-cyan', trend: 'up' },
-        { ...baseKpis[3], value: '32', previousValue: '28', change: '+14%', color: 'text-accent-cyan', trend: 'up' }
+        { ...baseKpis[0], value: '35.8', previousValue: '32.5', change: '+10%', color: 'text-black', trend: 'up' },
+        { ...baseKpis[1], value: '164', previousValue: '156', change: '+5%', color: 'text-black', trend: 'up' },
+        { ...baseKpis[2], value: '94%', previousValue: '92%', change: '+2%', color: 'text-black', trend: 'up' },
+        { ...baseKpis[3], value: '32', previousValue: '28', change: '+14%', color: 'text-black', trend: 'up' }
       ]
     }
   }
