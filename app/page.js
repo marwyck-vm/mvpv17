@@ -1357,7 +1357,7 @@ export default function MarwyckCopilot() {
             <Button 
               onClick={handleCreateEvent}
               className="w-full text-white rounded-full" 
-              style={{ backgroundColor: accentColor }}
+              style={{ backgroundColor: '#000000' }}
             >
               Create Appointment
             </Button>
