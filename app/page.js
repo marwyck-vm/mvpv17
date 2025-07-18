@@ -412,7 +412,7 @@ export default function MarwyckCopilot() {
         previousValue: '142',
         change: '+10%', 
         icon: Send, 
-        color: 'text-accent-cyan',
+        color: 'text-black',
         trend: 'up'
       },
       { 
