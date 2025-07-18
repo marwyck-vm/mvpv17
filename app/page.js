@@ -1583,7 +1583,7 @@ export default function MarwyckCopilot() {
             <Button 
               onClick={handleReschedule}
               className="w-full text-white rounded-full" 
-              style={{ backgroundColor: accentColor }}
+              style={{ backgroundColor: '#000000' }}
             >
               Reschedule
             </Button>
