@@ -2046,7 +2046,7 @@ export default function MarwyckCopilot() {
                         {getCurrentWeekEvents().slice(0, 3).map(event => (
                           <div key={event.id} className="flex items-center space-x-3">
                             <div className="flex-shrink-0">
-                              <Calendar className="w-5 h-5" style={{ color: accentColor }} />
+                              <Calendar className="w-5 h-5" style={{ color: '#000000' }} />
                             </div>
                             <div className="flex-1 min-w-0">
                               <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
