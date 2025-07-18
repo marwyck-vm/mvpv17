@@ -2337,7 +2337,7 @@ export default function MarwyckCopilot() {
                     {isTyping && (
                       <div className="flex justify-start">
                         <div className="flex items-start space-x-3 max-w-2xl">
-                          <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: accentColor }}>
+                          <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#000000' }}>
                             <Sparkles className="w-4 h-4 text-white" />
                           </div>
                           <div className={`px-4 py-3 rounded-2xl ${darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'} shadow-sm`}>
