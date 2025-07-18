@@ -894,7 +894,7 @@ export default function MarwyckCopilot() {
       })
     }
     setSelectedClient('general')
-    setShowDeleteConfirm(false)
+    setShowChatDeleteConfirm(false)
   }
 
   const handleChatReset = () => {
