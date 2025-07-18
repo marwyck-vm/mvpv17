@@ -437,10 +437,10 @@ export default function MarwyckCopilot() {
 
     if (weekOffset === -1) {
       return [
-        { ...baseKpis[0], value: '28.5', previousValue: '31.2', change: '-9%', color: 'text-accent-cyan', trend: 'down' },
-        { ...baseKpis[1], value: '142', previousValue: '158', change: '-10%', color: 'text-accent-cyan', trend: 'down' },
-        { ...baseKpis[2], value: '89%', previousValue: '92%', change: '-3%', color: 'text-accent-cyan', trend: 'down' },
-        { ...baseKpis[3], value: '24', previousValue: '29', change: '-17%', color: 'text-accent-cyan', trend: 'down' }
+        { ...baseKpis[0], value: '28.5', previousValue: '31.2', change: '-9%', color: 'text-black', trend: 'down' },
+        { ...baseKpis[1], value: '142', previousValue: '158', change: '-10%', color: 'text-black', trend: 'down' },
+        { ...baseKpis[2], value: '89%', previousValue: '92%', change: '-3%', color: 'text-black', trend: 'down' },
+        { ...baseKpis[3], value: '24', previousValue: '29', change: '-17%', color: 'text-black', trend: 'down' }
       ]
     } else if (weekOffset === 0) {
       return baseKpis
