@@ -1829,12 +1829,12 @@ export default function MarwyckCopilot() {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => setDarkMode(!darkMode)}
+              onClick={() => {/* Add help center functionality here */}}
               className={`w-full ${sidebarCollapsed ? 'justify-center px-2' : 'justify-start px-3'} py-2 text-sm font-medium transition-colors ${darkMode ? 'text-gray-100 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'} rounded-xl`}
-              title={sidebarCollapsed ? 'Toggle Theme' : ''}
+              title={sidebarCollapsed ? 'Help Center' : ''}
             >
-              {darkMode ? <Sun className={`w-4 h-4 ${!sidebarCollapsed ? 'mr-3' : ''}`} /> : <Moon className={`w-4 h-4 ${!sidebarCollapsed ? 'mr-3' : ''}`} />}
-              {!sidebarCollapsed && (darkMode ? 'Light Mode' : 'Dark Mode')}
+              <Info className={`w-4 h-4 ${!sidebarCollapsed ? 'mr-3' : ''}`} />
+              {!sidebarCollapsed && 'Help Center'}
             </Button>
             <button
               onClick={() => setActiveTab('account')}
