@@ -3005,7 +3005,7 @@ export default function MarwyckCopilot() {
                           onClick={handleSmsSend}
                           disabled={!smsMessage.trim()}
                           className="text-white rounded-full px-4 py-2"
-                          style={{ backgroundColor: accentColor }}
+                          style={{ backgroundColor: '#000000' }}
                         >
                           <Send className="w-4 h-4" />
                         </Button>
