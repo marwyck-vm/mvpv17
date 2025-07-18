@@ -1789,21 +1789,25 @@ export default function MarwyckCopilot() {
             onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
             className={`p-2 rounded-full ${sidebarCollapsed ? 'mx-auto' : ''}`}
           >
-            {/* Custom menu icon with chevron arrow */}
+            {/* Custom menu icon - chevron position changes */}
             <div className={`w-4 h-4 ${darkMode ? 'text-gray-100' : 'text-gray-700'}`}>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* 3 horizontal bars */}
-                <rect x="1" y="2" width="9" height="1.5" rx="0.75" fill="currentColor" />
-                <rect x="1" y="7" width="9" height="1.5" rx="0.75" fill="currentColor" />
-                <rect x="1" y="12" width="9" height="1.5" rx="0.75" fill="currentColor" />
-                
-                {/* Chevron arrow - changes direction based on sidebar state */}
                 {sidebarCollapsed ? (
-                  // Chevron pointing right (to open) >
-                  <path d="M11 4L14 7.5L11 11V9L12.5 7.5L11 6V4Z" fill="currentColor" />
+                  // OUVRIR: 3 barres + chevron à droite (———>)
+                  <>
+                    <rect x="1" y="2" width="9" height="1.5" rx="0.75" fill="currentColor" />
+                    <rect x="1" y="7.25" width="9" height="1.5" rx="0.75" fill="currentColor" />
+                    <rect x="1" y="12.5" width="9" height="1.5" rx="0.75" fill="currentColor" />
+                    <path d="M11 5L14 8L11 11V9.5L12.5 8L11 6.5V5Z" fill="currentColor" />
+                  </>
                 ) : (
-                  // Chevron pointing left (to close) <
-                  <path d="M14 4L11 7.5L14 11V9L12.5 7.5L14 6V4Z" fill="currentColor" />
+                  // FERMER: chevron à gauche + 3 barres (<———)
+                  <>
+                    <path d="M5 5L2 8L5 11V9.5L3.5 8L5 6.5V5Z" fill="currentColor" />
+                    <rect x="6" y="2" width="9" height="1.5" rx="0.75" fill="currentColor" />
+                    <rect x="6" y="7.25" width="9" height="1.5" rx="0.75" fill="currentColor" />
+                    <rect x="6" y="12.5" width="9" height="1.5" rx="0.75" fill="currentColor" />
+                  </>
                 )}
               </svg>
             </div>
