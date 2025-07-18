@@ -884,6 +884,18 @@ export default function MarwyckCopilot() {
   }
   
   // Handle Chat reset
+  const handleDeleteChat = () => {
+    if (selectedClient !== 'general') {
+      setMessages(prev => {
+        const newMessages = { ...prev }
+        delete newMessages[selectedClient]
+        return newMessages
+      })
+    }
+    setSelectedClient('general')
+    setShowDeleteConfirm(false)
+  }
+
   const handleChatReset = () => {
     setInputMessage('')
     
