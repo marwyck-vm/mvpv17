@@ -1757,7 +1757,7 @@ export default function MarwyckCopilot() {
             <Button 
               onClick={handleSendToClient}
               className="w-full text-white rounded-full" 
-              style={{ backgroundColor: accentColor }}
+              style={{ backgroundColor: '#000000' }}
               disabled={!sendToClientData.selectedDossier || sendToClientData.selectedContacts.length === 0}
             >
               <Mail className="w-4 h-4 mr-2" />
