@@ -2014,7 +2014,7 @@ export default function MarwyckCopilot() {
                   </Card>
 
                   <div className="space-y-6">
-                    <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
+                    <Card className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                       <CardHeader>
                         <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Recent Activity</CardTitle>
                       </CardHeader>
