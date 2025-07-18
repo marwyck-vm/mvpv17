@@ -1507,7 +1507,7 @@ export default function MarwyckCopilot() {
             <Button 
               onClick={handleProposeSlots}
               className="w-full text-white rounded-full" 
-              style={{ backgroundColor: accentColor }}
+              style={{ backgroundColor: '#000000' }}
             >
               Contact Client
             </Button>
