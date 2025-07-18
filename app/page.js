@@ -2271,7 +2271,7 @@ export default function MarwyckCopilot() {
                       </Select>
                     </div>
                     {selectedClient !== 'general' && (
-                      <Badge variant="outline" style={{ borderColor: accentColor, color: accentColor }} className="rounded-full">
+                      <Badge variant="outline" style={{ borderColor: '#000000', color: '#000000' }} className="rounded-full">
                         <FolderOpen className="w-3 h-3 mr-1" />
                         {clients.find(c => c.id === selectedClient)?.name}
                       </Badge>
