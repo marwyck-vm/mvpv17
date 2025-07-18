@@ -2402,11 +2402,11 @@ export default function MarwyckCopilot() {
                 </div>
                 
                 {/* Zone de saisie */}
-                <div className={`border-t p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                <div className={`border-t border-gray-300 p-4 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
                   <div className="max-w-4xl mx-auto">
                     <div className="flex items-end space-x-3">
                       <div className="flex-1">
-                        <div className={`flex items-center space-x-2 p-3 rounded-2xl ${darkMode ? 'bg-gray-700 border border-gray-600' : 'bg-gray-50 border border-gray-300'}`}>
+                        <div className={`flex items-center space-x-2 p-4 rounded-3xl ${darkMode ? 'bg-gray-700' : 'bg-gray-100'} shadow-sm`}>
                           <Button
                             variant="ghost"
                             size="sm"
@@ -2435,7 +2435,7 @@ export default function MarwyckCopilot() {
                       <Button 
                         onClick={handleSendMessage}
                         disabled={!inputMessage.trim()}
-                        className="text-white p-3 rounded-full"
+                        className="text-white p-3 rounded-full shadow-md"
                         style={{ backgroundColor: inputMessage.trim() ? '#000000' : '#666666' }}
                       >
                         <ArrowUp className="w-4 h-4" />
