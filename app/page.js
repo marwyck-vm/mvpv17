@@ -2843,7 +2843,7 @@ export default function MarwyckCopilot() {
                     </div>
                     
                     <div className="mt-6">
-                      <Button className="w-full text-white rounded-full" style={{ backgroundColor: accentColor }}>
+                      <Button className="w-full text-white rounded-full" style={{ backgroundColor: '#000000' }}>
                         <Calculator className="w-4 h-4 mr-2" />
                         Generate Estimate
                       </Button>
