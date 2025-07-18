@@ -2978,7 +2978,7 @@ export default function MarwyckCopilot() {
                                     ? 'text-white rounded-br-sm'
                                     : `${darkMode ? 'bg-gray-700 text-white' : 'bg-white text-gray-900'} border ${darkMode ? 'border-gray-600' : 'border-gray-200'} rounded-bl-sm`
                                 }`}
-                                style={message.sender === 'user' ? { backgroundColor: accentColor } : {}}
+                                style={message.sender === 'user' ? { backgroundColor: '#000000' } : {}}
                               >
                                 <p className="text-sm break-words">{message.text}</p>
                                 <div className={`text-xs mt-1 ${message.sender === 'user' ? 'text-white/80' : darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
