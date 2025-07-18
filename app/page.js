@@ -2249,48 +2249,7 @@ export default function MarwyckCopilot() {
                   </Card>
                 </div>
 
-                {/* Colors Section */}
-                <Card className={`mt-6 ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                  <CardHeader>
-                    <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Interface Colors</CardTitle>
-                    <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Customize your interface primary color</p>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      <div>
-                        <label className={`block text-sm font-medium mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                          Primary Color: <span className="capitalize" style={{ color: accentColor }}>{accentColors.find(c => c.value === accentColor)?.name.toLowerCase()}</span>
-                        </label>
-                        <div className="flex flex-wrap gap-3">
-                          {accentColors.map(color => (
-                            <button
-                              key={color.value}
-                              onClick={() => setAccentColor(color.value)}
-                              className={`group relative w-12 h-12 rounded-full border-2 transition-all duration-200 ${
-                                accentColor === color.value 
-                                  ? 'border-gray-400 scale-110 shadow-lg' 
-                                  : 'border-gray-200 hover:border-gray-300 hover:scale-105'
-                              }`}
-                              style={{ backgroundColor: color.value }}
-                              title={color.name}
-                            >
-                              {accentColor === color.value && (
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                  <CheckCircle className="w-6 h-6 text-white drop-shadow-lg" />
-                                </div>
-                              )}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="pt-2">
-                        <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                          Click on a color to change your interface theme
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+
               </div>
             </div>
           )}
