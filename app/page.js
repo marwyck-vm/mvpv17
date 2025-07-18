@@ -2539,7 +2539,7 @@ export default function MarwyckCopilot() {
                               size="sm" 
                               onClick={() => handleEditDossier(dossier)}
                               className="w-full text-white rounded-full flex items-center" 
-                              style={{ backgroundColor: accentColor }}
+                              style={{ backgroundColor: '#000000' }}
                             >
                               <Edit className="w-4 h-4 mr-2" />
                               Edit file
