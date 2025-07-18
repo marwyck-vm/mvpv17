@@ -83,15 +83,6 @@ export default function MarwyckCopilot() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [currentWeek, setCurrentWeek] = useState(0)
   const [selectedClient, setSelectedClient] = useState('general')
-  const [expandedFolders, setExpandedFolders] = useState({})
-  const [chatFolders, setChatFolders] = useState({
-    'clients': { name: 'Clients', chats: ['general'] },
-    'estimations': { name: 'Estimations', chats: [] },
-    'contracts': { name: 'Contracts', chats: [] }
-  })
-  const [unorganizedChats, setUnorganizedChats] = useState([])
-  const [showNewFolderInput, setShowNewFolderInput] = useState(false)
-  const [newFolderName, setNewFolderName] = useState('')
   const [messages, setMessages] = useState({
     general: [
       {
