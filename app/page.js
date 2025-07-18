@@ -1799,7 +1799,7 @@ export default function MarwyckCopilot() {
               { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
               { id: 'chat', label: 'Chat', icon: MessageCircle },
               { id: 'planning', label: 'Planning', icon: Calendar },
-              { id: 'documents', label: 'Documents', icon: FileText },
+              { id: 'documents', label: 'Vault', icon: FolderOpen },
               { id: 'estimation', label: 'Estimation', icon: Calculator },
               { id: 'communications', label: 'SMS & Calls', icon: Phone },
               { id: 'team', label: 'Team', icon: Users }
