@@ -2426,9 +2426,9 @@ export default function MarwyckCopilot() {
                           Marwyck AI Assistant
                         </h2>
                         <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                          {selectedClient !== 'general' ? 
-                            `Working on: ${clients.find(c => c.id === selectedClient)?.name}` : 
-                            'General conversation'
+                          {selectedClient === 'general' ? 'General Chat' : 
+                           selectedClient.startsWith('chat-') ? `Chat ${selectedClient.split('-')[1]?.substring(0, 4) || ''}` :
+                           `Working on: ${clients.find(c => c.id === selectedClient)?.name || selectedClient}`
                           }
                         </p>
                       </div>
