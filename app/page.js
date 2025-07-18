@@ -1165,7 +1165,7 @@ export default function MarwyckCopilot() {
                 <Button 
                   onClick={() => setShowColorPicker(false)}
                   className="w-full rounded-full text-white"
-                  style={{ backgroundColor: accentColor }}
+                  style={{ backgroundColor: '#000000' }}
                 >
                   <Save className="w-4 h-4 mr-2" />
                   Apply
