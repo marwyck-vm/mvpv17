@@ -2078,9 +2078,9 @@ export default function MarwyckCopilot() {
                           {recentActivities.slice(-3).reverse().map(activity => (
                             <div key={activity.id} className="flex items-center space-x-3">
                               <div className="flex-shrink-0">
-                                {activity.type === 'sms' && <Smartphone className="w-5 h-5" style={{ color: accentColor }} />}
-                                {activity.type === 'email' && <Mail className="w-5 h-5" style={{ color: accentColor }} />}
-                                {activity.type === 'call' && <PhoneCall className="w-5 h-5" style={{ color: accentColor }} />}
+                                {activity.type === 'sms' && <Smartphone className="w-5 h-5" style={{ color: '#000000' }} />}
+                                {activity.type === 'email' && <Mail className="w-5 h-5" style={{ color: '#000000' }} />}
+                                {activity.type === 'call' && <PhoneCall className="w-5 h-5" style={{ color: '#000000' }} />}
                               </div>
                               <div className="flex-1 min-w-0">
                                 <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
