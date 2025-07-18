@@ -2325,10 +2325,10 @@ export default function MarwyckCopilot() {
                       <Button 
                         size="sm" 
                         variant="ghost"
-                        onClick={handleChatReset}
+                        onClick={() => setShowDeleteConfirm(true)}
                         className={`rounded-full ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-600 hover:bg-gray-100'}`}
                       >
-                        <RotateCcw className="w-4 h-4" />
+                        <Trash2 className="w-4 h-4" />
                       </Button>
                       <Button 
                         size="sm" 
