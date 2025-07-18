@@ -3026,9 +3026,9 @@ export default function MarwyckCopilot() {
                             <div className="flex items-center justify-between">
                               <div className="flex items-center space-x-3">
                                 <div className="flex-shrink-0">
-                                  {activity.type === 'sms' && <Smartphone className="w-5 h-5" style={{ color: accentColor }} />}
-                                  {activity.type === 'email' && <Mail className="w-5 h-5" style={{ color: accentColor }} />}
-                                  {activity.type === 'call' && <PhoneCall className="w-5 h-5" style={{ color: accentColor }} />}
+                                  {activity.type === 'sms' && <Smartphone className="w-5 h-5" style={{ color: '#000000' }} />}
+                                  {activity.type === 'email' && <Mail className="w-5 h-5" style={{ color: '#000000' }} />}
+                                  {activity.type === 'call' && <PhoneCall className="w-5 h-5" style={{ color: '#000000' }} />}
                                 </div>
                                 <div>
                                   <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
