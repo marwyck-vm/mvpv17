@@ -188,16 +188,9 @@ export default function MarwyckCopilot() {
   
   const messagesEndRef = useRef(null)
 
-  // Available accent colors
+  // Available accent colors - Harvey AI style: black and white only
   const accentColors = [
-    { name: 'Cyan', value: '#00C4FF' },
-    { name: 'Blue', value: '#3B82F6' },
-    { name: 'Purple', value: '#8B5CF6' },
-    { name: 'Pink', value: '#EC4899' },
-    { name: 'Green', value: '#10B981' },
-    { name: 'Orange', value: '#F59E0B' },
-    { name: 'Red', value: '#EF4444' },
-    { name: 'Emerald', value: '#059669' }
+    { name: 'Black', value: '#000000' }
   ]
 
   // Update time every second
