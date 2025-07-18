@@ -2219,9 +2219,9 @@ export default function MarwyckCopilot() {
               {/* Sidebar des conversations */}
               <div className={`w-80 ${darkMode ? 'bg-gray-900 border-gray-700' : 'bg-gray-50 border-gray-200'} border-r flex flex-col`}>
                 {/* Header avec bouton New Chat */}
-                <div className="p-4 border-b border-gray-700">
+                <div className="p-4 border-b border-gray-300">
                   <Button 
-                    className={`w-full rounded-lg ${darkMode ? 'bg-gray-800 hover:bg-gray-700 text-white' : 'bg-white hover:bg-gray-100 text-gray-900'} border ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}
+                    className={`w-full rounded-xl hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 hover:bg-gray-700 text-white' : 'bg-white hover:bg-gray-100 text-gray-900'} border ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}
                     onClick={() => {
                       setSelectedClient('general');
                       handleChatReset();
@@ -2233,15 +2233,15 @@ export default function MarwyckCopilot() {
                 </div>
 
                 {/* Sélecteur de dossier Vault */}
-                <div className="p-4 border-b border-gray-700">
+                <div className="p-4 border-b border-gray-300">
                   <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                     Vault Files
                   </label>
                   <Select value={selectedClient} onValueChange={setSelectedClient}>
-                    <SelectTrigger className={`w-full rounded-lg ${darkMode ? 'bg-gray-800 border-gray-600 text-gray-100' : 'bg-white border-gray-200 text-gray-900'}`}>
+                    <SelectTrigger className={`w-full rounded-xl ${darkMode ? 'bg-gray-800 border-gray-600 text-gray-100' : 'bg-white border-gray-200 text-gray-900'}`}>
                       <SelectValue placeholder="Select a file" />
                     </SelectTrigger>
-                    <SelectContent className={`rounded-lg ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'}`}>
+                    <SelectContent className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'}`}>
                       {clients.map(client => (
                         <SelectItem 
                           key={client.id} 
@@ -2259,38 +2259,43 @@ export default function MarwyckCopilot() {
                 </div>
 
                 {/* Liste des conversations récentes */}
-                <div className="flex-1 overflow-y-auto p-4">
-                  <div className="space-y-2">
+                <div className="flex-1 overflow-hidden p-4">
+                  <div className="h-full flex flex-col">
                     <div className={`text-xs font-medium ${darkMode ? 'text-gray-400' : 'text-gray-500'} mb-3`}>
                       Recent Chats
                     </div>
-                    {Object.keys(messages).map(clientId => {
-                      const client = clients.find(c => c.id === clientId);
-                      const lastMessage = messages[clientId]?.slice(-1)[0];
-                      if (!lastMessage) return null;
-                      
-                      return (
-                        <div
-                          key={clientId}
-                          onClick={() => setSelectedClient(clientId)}
-                          className={`p-3 rounded-lg cursor-pointer transition-colors ${
-                            selectedClient === clientId 
-                              ? `${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} border`
-                              : `${darkMode ? 'hover:bg-gray-800' : 'hover:bg-white'}`
-                          }`}
-                        >
-                          <div className="flex items-center space-x-2 mb-1">
-                            <MessageCircle className="w-4 h-4 text-gray-400" />
-                            <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
-                              {client?.name || 'General'}
-                            </span>
+                    <div className="flex-1 overflow-y-auto space-y-2 pr-2" style={{
+                      scrollbarWidth: 'thin',
+                      scrollbarColor: darkMode ? 'rgba(107, 114, 128, 0.6) transparent' : 'rgba(156, 163, 175, 0.6) transparent'
+                    }}>
+                      {Object.keys(messages).map(clientId => {
+                        const client = clients.find(c => c.id === clientId);
+                        const lastMessage = messages[clientId]?.slice(-1)[0];
+                        if (!lastMessage) return null;
+                        
+                        return (
+                          <div
+                            key={clientId}
+                            onClick={() => setSelectedClient(clientId)}
+                            className={`p-3 rounded-lg cursor-pointer transition-colors ${
+                              selectedClient === clientId 
+                                ? `${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} border`
+                                : `${darkMode ? 'hover:bg-gray-800' : 'hover:bg-white'}`
+                            }`}
+                          >
+                            <div className="flex items-center space-x-2 mb-1">
+                              <MessageCircle className="w-4 h-4 text-gray-400" />
+                              <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+                                {client?.name || 'General'}
+                              </span>
+                            </div>
+                            <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'} line-clamp-2`}>
+                              {lastMessage.content.substring(0, 50)}...
+                            </p>
                           </div>
-                          <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'} line-clamp-2`}>
-                            {lastMessage.content.substring(0, 50)}...
-                          </p>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               </div>
