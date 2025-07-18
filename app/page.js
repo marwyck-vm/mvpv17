@@ -2896,7 +2896,7 @@ export default function MarwyckCopilot() {
                   <CardHeader className={`border-b ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
                     <div className="flex items-center justify-between">
                       <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                        <MessageCircle className="w-5 h-5 mr-2 inline-block" style={{ color: accentColor }} />
+                        <MessageCircle className="w-5 h-5 mr-2 inline-block" style={{ color: '#000000' }} />
                         Quick Communication
                       </CardTitle>
                       <div className="flex items-center space-x-3">
