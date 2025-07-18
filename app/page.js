@@ -118,7 +118,7 @@ export default function MarwyckCopilot() {
   const [showColorPicker, setShowColorPicker] = useState(false)
   const [showAIHelp, setShowAIHelp] = useState(false)
   const [showSMSAIHelp, setShowSMSAIHelp] = useState(false)
-  const [accentColor, setAccentColor] = useState('#00C4FF')
+  const [accentColor, setAccentColor] = useState('#000000')
   const [showNewEventDialog, setShowNewEventDialog] = useState(false)
   const [showProposeDialog, setShowProposeDialog] = useState(false)
   const [showRescheduleDialog, setShowRescheduleDialog] = useState(false)
