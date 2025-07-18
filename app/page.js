@@ -1789,21 +1789,21 @@ export default function MarwyckCopilot() {
             onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
             className={`p-2 rounded-full ${sidebarCollapsed ? 'mx-auto' : ''}`}
           >
-            {/* Custom menu icon with arrow */}
+            {/* Custom menu icon with chevron arrow */}
             <div className={`w-4 h-4 ${darkMode ? 'text-gray-100' : 'text-gray-700'}`}>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 {/* 3 horizontal bars */}
-                <rect x="2" y="3" width="8" height="1" fill="currentColor" />
-                <rect x="2" y="7" width="8" height="1" fill="currentColor" />
-                <rect x="2" y="11" width="8" height="1" fill="currentColor" />
+                <rect x="1" y="2" width="9" height="1.5" rx="0.75" fill="currentColor" />
+                <rect x="1" y="7" width="9" height="1.5" rx="0.75" fill="currentColor" />
+                <rect x="1" y="12" width="9" height="1.5" rx="0.75" fill="currentColor" />
                 
-                {/* Arrow - changes direction based on sidebar state */}
+                {/* Chevron arrow - changes direction based on sidebar state */}
                 {sidebarCollapsed ? (
-                  // Arrow pointing right (to open)
-                  <path d="M12 7.5L14 8L12 8.5V7.5Z" fill="currentColor" />
+                  // Chevron pointing right (to open) >
+                  <path d="M11 4L14 7.5L11 11V9L12.5 7.5L11 6V4Z" fill="currentColor" />
                 ) : (
-                  // Arrow pointing left (to close)
-                  <path d="M12 7.5L10 8L12 8.5V7.5Z" fill="currentColor" />
+                  // Chevron pointing left (to close) <
+                  <path d="M14 4L11 7.5L14 11V9L12.5 7.5L14 6V4Z" fill="currentColor" />
                 )}
               </svg>
             </div>
