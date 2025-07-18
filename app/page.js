@@ -2091,7 +2091,7 @@ export default function MarwyckCopilot() {
               <div className="max-w-4xl mx-auto">
                 <div className="mb-8">
                   <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                    Account Settings
+                    Settings
                   </h2>
                   <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Manage your profile and preferences</p>
                 </div>
