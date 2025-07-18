@@ -2868,7 +2868,7 @@ export default function MarwyckCopilot() {
                           <Download className="w-4 h-4 mr-2" />
                           Download Report
                         </Button>
-                        <Button className="text-white rounded-full" style={{ backgroundColor: accentColor }} onClick={() => setShowSendToClientDialog(true)}>
+                        <Button className="text-white rounded-full" style={{ backgroundColor: '#000000' }} onClick={() => setShowSendToClientDialog(true)}>
                           <Mail className="w-4 h-4 mr-2" />
                           Send to Client
                         </Button>
