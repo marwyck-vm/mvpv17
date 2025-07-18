@@ -1789,7 +1789,24 @@ export default function MarwyckCopilot() {
             onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
             className={`p-2 rounded-full ${sidebarCollapsed ? 'mx-auto' : ''}`}
           >
-            <Menu className={`w-4 h-4 ${darkMode ? 'text-gray-100' : 'text-gray-700'}`} />
+            {/* Custom menu icon with arrow */}
+            <div className={`w-4 h-4 ${darkMode ? 'text-gray-100' : 'text-gray-700'}`}>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* 3 horizontal bars */}
+                <rect x="2" y="3" width="8" height="1" fill="currentColor" />
+                <rect x="2" y="7" width="8" height="1" fill="currentColor" />
+                <rect x="2" y="11" width="8" height="1" fill="currentColor" />
+                
+                {/* Arrow - changes direction based on sidebar state */}
+                {sidebarCollapsed ? (
+                  // Arrow pointing right (to open)
+                  <path d="M12 7.5L14 8L12 8.5V7.5Z" fill="currentColor" />
+                ) : (
+                  // Arrow pointing left (to close)
+                  <path d="M12 7.5L10 8L12 8.5V7.5Z" fill="currentColor" />
+                )}
+              </svg>
+            </div>
           </Button>
         </div>
         
