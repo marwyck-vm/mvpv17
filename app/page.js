@@ -2310,7 +2310,7 @@ export default function MarwyckCopilot() {
                       >
                         <div className="flex items-start space-x-3 max-w-2xl">
                           {message.role === 'assistant' && (
-                            <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: accentColor }}>
+                            <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#000000' }}>
                               <Sparkles className="w-4 h-4 text-white" />
                             </div>
                           )}
