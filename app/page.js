@@ -2222,148 +2222,76 @@ export default function MarwyckCopilot() {
                 <div className="p-4 border-b border-gray-700">
                   <Button 
                     className={`w-full rounded-lg ${darkMode ? 'bg-gray-800 hover:bg-gray-700 text-white' : 'bg-white hover:bg-gray-100 text-gray-900'} border ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}
-                    onClick={createNewChat}
+                    onClick={() => {
+                      setSelectedClient('general');
+                      handleChatReset();
+                    }}
                   >
                     <Plus className="w-4 h-4 mr-2" />
                     New Chat
                   </Button>
                 </div>
 
-                {/* Liste des dossiers et chats */}
-                <div className="flex-1 overflow-y-auto p-4 space-y-2">
-                  {/* Dossiers organisés */}
-                  {Object.entries(chatFolders).map(([folderId, folder]) => (
-                    <div key={folderId} className="space-y-1">
-                      <div
-                        onClick={() => toggleFolder(folderId)}
-                        className={`flex items-center justify-between p-2 rounded-lg cursor-pointer transition-colors ${
-                          darkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-200'
-                        }`}
-                      >
-                        <div className="flex items-center space-x-2">
-                          <FolderOpen className="w-4 h-4 text-gray-400" />
-                          <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                            {folder.name}
-                          </span>
-                          <span className={`text-xs px-2 py-1 rounded-full ${darkMode ? 'bg-gray-700 text-gray-400' : 'bg-gray-200 text-gray-500'}`}>
-                            {folder.chats.length}
-                          </span>
-                        </div>
-                        <ChevronRight 
-                          className={`w-4 h-4 transition-transform ${
-                            expandedFolders[folderId] ? 'rotate-90' : ''
-                          } ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}
-                        />
-                      </div>
+                {/* Sélecteur de dossier Vault */}
+                <div className="p-4 border-b border-gray-700">
+                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    Vault Files
+                  </label>
+                  <Select value={selectedClient} onValueChange={setSelectedClient}>
+                    <SelectTrigger className={`w-full rounded-lg ${darkMode ? 'bg-gray-800 border-gray-600 text-gray-100' : 'bg-white border-gray-200 text-gray-900'}`}>
+                      <SelectValue placeholder="Select a file" />
+                    </SelectTrigger>
+                    <SelectContent className={`rounded-lg ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'}`}>
+                      {clients.map(client => (
+                        <SelectItem 
+                          key={client.id} 
+                          value={client.id} 
+                          className={`transition-colors ${darkMode ? 'text-gray-100 hover:!bg-gray-700' : 'text-gray-900 hover:!bg-gray-100'}`}
+                        >
+                          <div className="flex items-center">
+                            <FolderOpen className="w-4 h-4 mr-2" />
+                            {client.name}
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Liste des conversations récentes */}
+                <div className="flex-1 overflow-y-auto p-4">
+                  <div className="space-y-2">
+                    <div className={`text-xs font-medium ${darkMode ? 'text-gray-400' : 'text-gray-500'} mb-3`}>
+                      Recent Chats
+                    </div>
+                    {Object.keys(messages).map(clientId => {
+                      const client = clients.find(c => c.id === clientId);
+                      const lastMessage = messages[clientId]?.slice(-1)[0];
+                      if (!lastMessage) return null;
                       
-                      {expandedFolders[folderId] && (
-                        <div className="ml-6 space-y-1">
-                          {folder.chats.map(chatId => {
-                            const chatMessages = messages[chatId] || [];
-                            const lastMessage = chatMessages[chatMessages.length - 1];
-                            const chatName = chatId === 'general' ? 'General Chat' : `Chat ${chatId.split('-')[1]?.substring(0, 4) || ''}`;
-                            
-                            return (
-                              <div
-                                key={chatId}
-                                onClick={() => setSelectedClient(chatId)}
-                                className={`p-2 rounded-lg cursor-pointer transition-colors ${
-                                  selectedClient === chatId 
-                                    ? `${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} border`
-                                    : `${darkMode ? 'hover:bg-gray-800' : 'hover:bg-white'}`
-                                }`}
-                              >
-                                <div className="flex items-center space-x-2 mb-1">
-                                  <MessageCircle className="w-3 h-3 text-gray-400" />
-                                  <span className={`text-xs font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                                    {chatName}
-                                  </span>
-                                </div>
-                                {lastMessage && (
-                                  <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'} line-clamp-1`}>
-                                    {lastMessage.content.substring(0, 40)}...
-                                  </p>
-                                )}
-                              </div>
-                            );
-                          })}
+                      return (
+                        <div
+                          key={clientId}
+                          onClick={() => setSelectedClient(clientId)}
+                          className={`p-3 rounded-lg cursor-pointer transition-colors ${
+                            selectedClient === clientId 
+                              ? `${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} border`
+                              : `${darkMode ? 'hover:bg-gray-800' : 'hover:bg-white'}`
+                          }`}
+                        >
+                          <div className="flex items-center space-x-2 mb-1">
+                            <MessageCircle className="w-4 h-4 text-gray-400" />
+                            <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+                              {client?.name || 'General'}
+                            </span>
+                          </div>
+                          <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'} line-clamp-2`}>
+                            {lastMessage.content.substring(0, 50)}...
+                          </p>
                         </div>
-                      )}
-                    </div>
-                  ))}
-
-                  {/* Bouton pour créer un nouveau dossier */}
-                  <div className="pt-2">
-                    {showNewFolderInput ? (
-                      <div className="space-y-2">
-                        <Input
-                          value={newFolderName}
-                          onChange={(e) => setNewFolderName(e.target.value)}
-                          placeholder="Folder name..."
-                          className={`text-sm ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'}`}
-                          onKeyPress={(e) => e.key === 'Enter' && createNewFolder()}
-                        />
-                        <div className="flex space-x-2">
-                          <Button size="sm" onClick={createNewFolder} className="text-xs">
-                            Create
-                          </Button>
-                          <Button size="sm" variant="ghost" onClick={() => setShowNewFolderInput(false)} className="text-xs">
-                            Cancel
-                          </Button>
-                        </div>
-                      </div>
-                    ) : (
-                      <Button 
-                        variant="ghost" 
-                        size="sm" 
-                        onClick={() => setShowNewFolderInput(true)}
-                        className={`w-full justify-start ${darkMode ? 'text-gray-400 hover:text-gray-300' : 'text-gray-500 hover:text-gray-700'}`}
-                      >
-                        <Plus className="w-3 h-3 mr-2" />
-                        New Folder
-                      </Button>
-                    )}
+                      );
+                    })}
                   </div>
-
-                  {/* Chats non organisés */}
-                  {unorganizedChats.length > 0 && (
-                    <div className="pt-4 border-t border-gray-700">
-                      <div className={`text-xs font-medium ${darkMode ? 'text-gray-400' : 'text-gray-500'} mb-2`}>
-                        Unorganized Chats
-                      </div>
-                      <div className="space-y-1">
-                        {unorganizedChats.map(chatId => {
-                          const chatMessages = messages[chatId] || [];
-                          const lastMessage = chatMessages[chatMessages.length - 1];
-                          const chatName = `Chat ${chatId.split('-')[1]?.substring(0, 4) || ''}`;
-                          
-                          return (
-                            <div
-                              key={chatId}
-                              onClick={() => setSelectedClient(chatId)}
-                              className={`p-2 rounded-lg cursor-pointer transition-colors ${
-                                selectedClient === chatId 
-                                  ? `${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} border`
-                                  : `${darkMode ? 'hover:bg-gray-800' : 'hover:bg-white'}`
-                              }`}
-                            >
-                              <div className="flex items-center space-x-2 mb-1">
-                                <MessageCircle className="w-3 h-3 text-gray-400" />
-                                <span className={`text-xs font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                                  {chatName}
-                                </span>
-                              </div>
-                              {lastMessage && (
-                                <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'} line-clamp-1`}>
-                                  {lastMessage.content.substring(0, 40)}...
-                                </p>
-                              )}
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
 
