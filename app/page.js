@@ -2181,6 +2181,35 @@ export default function MarwyckCopilot() {
                   </Card>
                 </div>
 
+                {/* Theme Settings */}
+                <Card className={`mt-6 ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
+                  <CardHeader>
+                    <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Theme Settings</CardTitle>
+                    <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Choose your preferred theme</p>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="flex items-center space-x-4">
+                        <Button
+                          variant={!darkMode ? "default" : "outline"}
+                          onClick={() => setDarkMode(false)}
+                          className={`rounded-full ${!darkMode ? 'bg-black text-white' : 'hover:bg-gray-100'}`}
+                        >
+                          <Sun className="w-4 h-4 mr-2" />
+                          Light Theme
+                        </Button>
+                        <Button
+                          variant={darkMode ? "default" : "outline"}
+                          onClick={() => setDarkMode(true)}
+                          className={`rounded-full ${darkMode ? 'bg-black text-white' : 'hover:bg-gray-100'}`}
+                        >
+                          <Moon className="w-4 h-4 mr-2" />
+                          Dark Theme
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
 
               </div>
             </div>
