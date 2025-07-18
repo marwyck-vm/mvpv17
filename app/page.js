@@ -2045,7 +2045,7 @@ export default function MarwyckCopilot() {
                       </CardContent>
                     </Card>
 
-                    <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
+                    <Card className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                       <CardHeader>
                         <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} flex items-center`}>
                           <Lightbulb className="w-5 h-5 mr-2" style={{ color: '#000000' }} />
