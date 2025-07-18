@@ -2186,7 +2186,7 @@ export default function MarwyckCopilot() {
                           </div>
                         </div>
                         
-                        <Button className="text-white rounded-full" style={{ backgroundColor: accentColor }}>
+                        <Button className="text-white rounded-full" style={{ backgroundColor: '#000000' }}>
                           <Save className="w-4 h-4 mr-2" />
                           Update Profile
                         </Button>
