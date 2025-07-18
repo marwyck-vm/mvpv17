@@ -2393,7 +2393,7 @@ export default function MarwyckCopilot() {
                       onClick={handleSendMessage}
                       disabled={!inputMessage.trim()}
                       className="text-white p-3 rounded-full self-center"
-                      style={{ backgroundColor: accentColor }}
+                      style={{ backgroundColor: '#000000' }}
                     >
                       <ArrowUp className="w-4 h-4" />
                     </Button>
