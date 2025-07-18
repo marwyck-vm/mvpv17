@@ -2215,163 +2215,227 @@ export default function MarwyckCopilot() {
 
           {/* Chat */}
           {activeTab === 'chat' && (
-            <div className="h-full flex flex-col">
-              <div className={`border-b p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className="flex-1">
-                      <Select value={selectedClient} onValueChange={setSelectedClient}>
-                        <SelectTrigger className={`w-64 rounded-full ${darkMode ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-white border-gray-200 text-gray-900'}`}>
-                          <SelectValue placeholder="Choose a file" />
-                        </SelectTrigger>
-                        <SelectContent className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
-                          {clients.map(client => (
-                            <SelectItem 
-                              key={client.id} 
-                              value={client.id} 
-                              className={`transition-colors ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}
-                              style={{ 
-                                borderRadius: '8px',
-                                margin: '4px 8px 4px 8px',
-                                padding: '8px 12px',
-                                width: 'calc(100% - 16px)',
-                                maxWidth: 'calc(100% - 16px)'
-                              }}
-                            >
-                              {client.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+            <div className="h-full flex">
+              {/* Sidebar des conversations */}
+              <div className={`w-80 ${darkMode ? 'bg-gray-900 border-gray-700' : 'bg-gray-50 border-gray-200'} border-r flex flex-col`}>
+                {/* Header avec bouton New Chat */}
+                <div className="p-4 border-b border-gray-700">
+                  <Button 
+                    className={`w-full rounded-lg ${darkMode ? 'bg-gray-800 hover:bg-gray-700 text-white' : 'bg-white hover:bg-gray-100 text-gray-900'} border ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}
+                    onClick={() => {
+                      setSelectedClient('general');
+                      handleChatReset();
+                    }}
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    New Chat
+                  </Button>
+                </div>
+
+                {/* Sélecteur de dossier Vault */}
+                <div className="p-4 border-b border-gray-700">
+                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    Vault Files
+                  </label>
+                  <Select value={selectedClient} onValueChange={setSelectedClient}>
+                    <SelectTrigger className={`w-full rounded-lg ${darkMode ? 'bg-gray-800 border-gray-600 text-gray-100' : 'bg-white border-gray-200 text-gray-900'}`}>
+                      <SelectValue placeholder="Select a file" />
+                    </SelectTrigger>
+                    <SelectContent className={`rounded-lg ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'}`}>
+                      {clients.map(client => (
+                        <SelectItem 
+                          key={client.id} 
+                          value={client.id} 
+                          className={`transition-colors ${darkMode ? 'text-gray-100 hover:!bg-gray-700' : 'text-gray-900 hover:!bg-gray-100'}`}
+                        >
+                          <div className="flex items-center">
+                            <FolderOpen className="w-4 h-4 mr-2" />
+                            {client.name}
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Liste des conversations récentes */}
+                <div className="flex-1 overflow-y-auto p-4">
+                  <div className="space-y-2">
+                    <div className={`text-xs font-medium ${darkMode ? 'text-gray-400' : 'text-gray-500'} mb-3`}>
+                      Recent Chats
                     </div>
-                    {selectedClient !== 'general' && (
-                      <Badge variant="outline" style={{ borderColor: '#000000', color: '#000000' }} className="rounded-full">
-                        <FolderOpen className="w-3 h-3 mr-1" />
-                        {clients.find(c => c.id === selectedClient)?.name}
-                      </Badge>
-                    )}
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Button 
-                      size="sm" 
-                      className={`rounded-full ${darkMode ? 'bg-gray-700 border-gray-600 text-gray-100 hover:bg-gray-600' : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-100'} border`}
-                      onClick={handleChatReset}
-                      title="Reset conversation"
-                    >
-                      <RotateCcw className="w-4 h-4 mr-1" />
-                      Reset
-                    </Button>
-                    
-                    <Button 
-                      size="sm" 
-                      className={`rounded-full ${darkMode ? 'bg-gray-700 border-gray-600 text-gray-100 hover:bg-gray-600' : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-100'} border`}
-                      onClick={() => setShowAIHelp(true)}
-                    >
-                      <Info className="w-4 h-4 mr-2" />
-                      AI Help
-                    </Button>
+                    {Object.keys(messages).map(clientId => {
+                      const client = clients.find(c => c.id === clientId);
+                      const lastMessage = messages[clientId]?.slice(-1)[0];
+                      if (!lastMessage) return null;
+                      
+                      return (
+                        <div
+                          key={clientId}
+                          onClick={() => setSelectedClient(clientId)}
+                          className={`p-3 rounded-lg cursor-pointer transition-colors ${
+                            selectedClient === clientId 
+                              ? `${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} border`
+                              : `${darkMode ? 'hover:bg-gray-800' : 'hover:bg-white'}`
+                          }`}
+                        >
+                          <div className="flex items-center space-x-2 mb-1">
+                            <MessageCircle className="w-4 h-4 text-gray-400" />
+                            <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+                              {client?.name || 'General'}
+                            </span>
+                          </div>
+                          <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'} line-clamp-2`}>
+                            {lastMessage.content.substring(0, 50)}...
+                          </p>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
 
-              <div className="flex-1 overflow-y-auto p-6">
-                <div className="max-w-4xl mx-auto">
-                  <div className="space-y-6">
-                    {getCurrentMessages().map(message => (
-                      <div
-                        key={message.id}
-                        className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              {/* Zone de chat principale */}
+              <div className="flex-1 flex flex-col">
+                {/* Header du chat */}
+                <div className={`border-b p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: '#000000' }}>
+                        <Sparkles className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <h2 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                          Marwyck AI Assistant
+                        </h2>
+                        <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                          {selectedClient !== 'general' ? 
+                            `Working on: ${clients.find(c => c.id === selectedClient)?.name}` : 
+                            'General conversation'
+                          }
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Button 
+                        size="sm" 
+                        variant="ghost"
+                        onClick={handleChatReset}
+                        className={`rounded-full ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-600 hover:bg-gray-100'}`}
                       >
-                        <div className="flex items-start space-x-3 max-w-2xl">
-                          {message.role === 'assistant' && (
+                        <RotateCcw className="w-4 h-4" />
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        variant="ghost"
+                        onClick={() => setShowAIHelp(true)}
+                        className={`rounded-full ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-600 hover:bg-gray-100'}`}
+                      >
+                        <Info className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Messages */}
+                <div className="flex-1 overflow-y-auto p-6" style={{ backgroundColor: darkMode ? '#1a1a1a' : '#f9f9f9' }}>
+                  <div className="max-w-4xl mx-auto">
+                    <div className="space-y-6">
+                      {getCurrentMessages().map(message => (
+                        <div
+                          key={message.id}
+                          className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                        >
+                          <div className="flex items-start space-x-3 max-w-2xl">
+                            {message.role === 'assistant' && (
+                              <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#000000' }}>
+                                <Sparkles className="w-4 h-4 text-white" />
+                              </div>
+                            )}
+                            <div
+                              className={`px-4 py-3 rounded-2xl ${
+                                message.role === 'user'
+                                  ? `${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-200 text-gray-900'}`
+                                  : `${darkMode ? 'bg-gray-800 border border-gray-600 text-white' : 'bg-white border border-gray-200 text-gray-900'} shadow-sm`
+                              }`}
+                            >
+                              <p className="text-sm whitespace-pre-wrap leading-relaxed">{message.content}</p>
+                              <p className={`text-xs mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                                {message.timestamp.toLocaleTimeString()}
+                              </p>
+                            </div>
+                            {message.role === 'user' && (
+                              <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0">
+                                <User className="w-4 h-4 text-gray-600" />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                      {isTyping && (
+                        <div className="flex justify-start">
+                          <div className="flex items-start space-x-3 max-w-2xl">
                             <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#000000' }}>
                               <Sparkles className="w-4 h-4 text-white" />
                             </div>
-                          )}
-                          <div
-                            className={`px-4 py-3 rounded-2xl ${
-                              message.role === 'user'
-                                ? `${darkMode ? 'bg-gray-600 text-white' : 'bg-gray-100 text-gray-900'}`
-                                : `${darkMode ? 'bg-gray-800 border border-gray-700 text-white' : 'bg-white border border-gray-200 text-gray-900'} shadow-sm`
-                            }`}
-                          >
-                            <p className="text-sm whitespace-pre-wrap leading-relaxed">{message.content}</p>
-                            <p className={`text-xs mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                              {message.timestamp.toLocaleTimeString()}
-                            </p>
-                          </div>
-                          {message.role === 'user' && (
-                            <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0">
-                              <User className="w-4 h-4 text-gray-600" />
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                    {isTyping && (
-                      <div className="flex justify-start">
-                        <div className="flex items-start space-x-3 max-w-2xl">
-                          <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#000000' }}>
-                            <Sparkles className="w-4 h-4 text-white" />
-                          </div>
-                          <div className={`px-4 py-3 rounded-2xl ${darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'} shadow-sm`}>
-                            <div className="flex items-center space-x-2">
-                              <div className="flex space-x-1">
-                                <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: '#000000' }}></div>
-                                <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: '#000000', animationDelay: '0.1s' }}></div>
-                                <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: '#000000', animationDelay: '0.2s' }}></div>
+                            <div className={`px-4 py-3 rounded-2xl ${darkMode ? 'bg-gray-800 border border-gray-600' : 'bg-white border border-gray-200'} shadow-sm`}>
+                              <div className="flex items-center space-x-2">
+                                <div className="flex space-x-1">
+                                  <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: '#000000' }}></div>
+                                  <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: '#000000', animationDelay: '0.1s' }}></div>
+                                  <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: '#000000', animationDelay: '0.2s' }}></div>
+                                </div>
+                                <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Marwyck is typing...</span>
                               </div>
-                              <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Marwyck is typing...</span>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    )}
-                    <div ref={messagesEndRef} />
+                      )}
+                      <div ref={messagesEndRef} />
+                    </div>
                   </div>
                 </div>
-              </div>
-              
-              <div className={`border-t p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
-                <div className="max-w-4xl mx-auto">
-                  <div className="flex items-end space-x-2">
-                    <div className="flex-1">
-                      <div className={`flex items-center space-x-2 p-3 rounded-2xl ${darkMode ? 'bg-gray-700 border border-gray-600' : 'bg-gray-50 border border-gray-300'}`}>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={handleFileUpload}
-                          className={`p-2 rounded-full ${darkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-200'}`}
-                        >
-                          <Paperclip className="w-4 h-4" />
-                        </Button>
-                        <Input
-                          value={inputMessage}
-                          onChange={(e) => setInputMessage(e.target.value)}
-                          onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                          placeholder="Type your message..."
-                          className="flex-1 border-0 bg-transparent focus:ring-0 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
-                        />
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={handleVoiceTranscription}
-                          className={`p-2 rounded-full ${isRecording ? 'text-red-500' : `${darkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-200'}`}`}
-                        >
-                          {isRecording ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
-                        </Button>
+                
+                {/* Zone de saisie */}
+                <div className={`border-t p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                  <div className="max-w-4xl mx-auto">
+                    <div className="flex items-end space-x-3">
+                      <div className="flex-1">
+                        <div className={`flex items-center space-x-2 p-3 rounded-2xl ${darkMode ? 'bg-gray-700 border border-gray-600' : 'bg-gray-50 border border-gray-300'}`}>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={handleFileUpload}
+                            className={`p-2 rounded-full ${darkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-200'}`}
+                          >
+                            <Paperclip className="w-4 h-4" />
+                          </Button>
+                          <Input
+                            value={inputMessage}
+                            onChange={(e) => setInputMessage(e.target.value)}
+                            onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                            placeholder="Message Marwyck..."
+                            className="flex-1 border-0 bg-transparent focus:ring-0 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
+                          />
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={handleVoiceTranscription}
+                            className={`p-2 rounded-full ${isRecording ? 'text-red-500' : `${darkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-200'}`}`}
+                          >
+                            {isRecording ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+                          </Button>
+                        </div>
                       </div>
+                      <Button 
+                        onClick={handleSendMessage}
+                        disabled={!inputMessage.trim()}
+                        className="text-white p-3 rounded-full"
+                        style={{ backgroundColor: inputMessage.trim() ? '#000000' : '#666666' }}
+                      >
+                        <ArrowUp className="w-4 h-4" />
+                      </Button>
                     </div>
-                  <div className="flex items-center space-x-2">
-                    <Button 
-                      onClick={handleSendMessage}
-                      disabled={!inputMessage.trim()}
-                      className="text-white p-3 rounded-full self-center"
-                      style={{ backgroundColor: '#000000' }}
-                    >
-                      <ArrowUp className="w-4 h-4" />
-                    </Button>
-                  </div>
                   </div>
                 </div>
               </div>
