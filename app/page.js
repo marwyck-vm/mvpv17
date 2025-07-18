@@ -1840,10 +1840,10 @@ export default function MarwyckCopilot() {
               onClick={() => setActiveTab('account')}
               className={`w-full flex items-center ${sidebarCollapsed ? 'justify-center px-2' : 'px-3'} py-2 text-sm font-medium transition-colors ${
                 activeTab === 'account' 
-                  ? 'text-white rounded-xl' 
+                  ? `${darkMode ? 'text-gray-100 bg-gray-700' : 'text-gray-700 bg-gray-100'} rounded-xl`
                   : `${darkMode ? 'text-gray-100 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'} rounded-xl`
               }`}
-              style={activeTab === 'account' ? { backgroundColor: '#000000' } : {}}
+              style={}
               title={sidebarCollapsed ? 'Account' : ''}
             >
               <UserCircle className={`w-4 h-4 ${!sidebarCollapsed ? 'mr-3' : ''}`} />
