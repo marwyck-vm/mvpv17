@@ -403,7 +403,7 @@ export default function MarwyckCopilot() {
         previousValue: '28.5',
         change: '+14%', 
         icon: Clock, 
-        color: 'text-accent-cyan',
+        color: 'text-black',
         trend: 'up'
       },
       { 
