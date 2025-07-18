@@ -2684,8 +2684,8 @@ export default function MarwyckCopilot() {
                                           <div 
                                             className="w-full h-12 rounded-xl p-2 text-xs cursor-pointer hover:shadow-md transition-shadow border-2 flex items-center justify-center"
                                             style={{ 
-                                              backgroundColor: `${accentColor}40`,
-                                              borderColor: accentColor
+                                              backgroundColor: `#00000040`,
+                                              borderColor: '#000000'
                                             }}
                                             onClick={(e) => {
                                               e.stopPropagation();
