@@ -2203,28 +2203,28 @@ export default function MarwyckCopilot() {
                       <div className="space-y-4">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-2">
-                            <Clock className="w-4 h-4" style={{ color: accentColor }} />
+                            <Clock className="w-4 h-4" style={{ color: '#000000' }} />
                             <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Total Hours Saved</span>
                           </div>
                           <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>847h</span>
                         </div>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-2">
-                            <FileText className="w-4 h-4" style={{ color: accentColor }} />
+                            <FileText className="w-4 h-4" style={{ color: '#000000' }} />
                             <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Files Processed</span>
                           </div>
                           <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>1,234</span>
                         </div>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-2">
-                            <Calendar className="w-4 h-4" style={{ color: accentColor }} />
+                            <Calendar className="w-4 h-4" style={{ color: '#000000' }} />
                             <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Appointments</span>
                           </div>
                           <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>456</span>
                         </div>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-2">
-                            <Send className="w-4 h-4" style={{ color: accentColor }} />
+                            <Send className="w-4 h-4" style={{ color: '#000000' }} />
                             <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Messages Sent</span>
                           </div>
                           <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>3,789</span>
