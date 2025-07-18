@@ -1884,7 +1884,7 @@ export default function MarwyckCopilot() {
               )}
               {activeTab === 'communications' && (
                 <span className="flex items-center">
-                  SMS & Calls
+                  History
                 </span>
               )}
               {activeTab === 'team' && (
