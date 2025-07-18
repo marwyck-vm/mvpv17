@@ -3454,7 +3454,7 @@ export default function MarwyckCopilot() {
       </Dialog>
       
       {/* Modal de confirmation de suppression */}
-      <Dialog open={showDeleteConfirm} onOpenChange={setShowDeleteConfirm}>
+      <Dialog open={showChatDeleteConfirm} onOpenChange={setShowChatDeleteConfirm}>
         <DialogContent className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} rounded-xl`}>
           <DialogHeader>
             <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -3468,7 +3468,7 @@ export default function MarwyckCopilot() {
             <div className="flex justify-end space-x-2">
               <Button 
                 variant="outline" 
-                onClick={() => setShowDeleteConfirm(false)}
+                onClick={() => setShowChatDeleteConfirm(false)}
                 className={`${darkMode ? 'border-gray-600 text-gray-300' : 'border-gray-300 text-gray-600'}`}
               >
                 Cancel
