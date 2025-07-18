@@ -2020,7 +2020,7 @@ export default function MarwyckCopilot() {
                         <CardTitle className={`text-sm font-medium ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                           {kpi.title}
                         </CardTitle>
-                        <kpi.icon className={`w-4 h-4 ${kpi.color === 'text-accent-cyan' ? '' : kpi.color}`} style={kpi.color === 'text-accent-cyan' ? { color: accentColor } : {}} />
+                        <kpi.icon className={`w-4 h-4 ${kpi.color === 'text-black' ? '' : kpi.color}`} style={kpi.color === 'text-black' ? { color: accentColor } : {}} />
                       </CardHeader>
                       <CardContent>
                         <div className={`text-2xl font-bold font-space-grotesk mb-1 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
