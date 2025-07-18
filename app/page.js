@@ -2719,7 +2719,7 @@ export default function MarwyckCopilot() {
                         <div className="space-y-3">
                           <Button 
                             className="w-full text-white rounded-full" 
-                            style={{ backgroundColor: accentColor }}
+                            style={{ backgroundColor: '#000000' }}
                             onClick={() => setShowNewEventDialog(true)}
                           >
                             <Plus className="w-4 h-4 mr-2" />
