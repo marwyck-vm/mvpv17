@@ -3452,6 +3452,37 @@ export default function MarwyckCopilot() {
           </div>
         </DialogContent>
       </Dialog>
+      
+      {/* Modal de confirmation de suppression */}
+      <Dialog open={showDeleteConfirm} onOpenChange={setShowDeleteConfirm}>
+        <DialogContent className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} rounded-xl`}>
+          <DialogHeader>
+            <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>
+              Delete Chat
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <p className={`${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+              Are you sure you want to delete this chat? This action cannot be undone.
+            </p>
+            <div className="flex justify-end space-x-2">
+              <Button 
+                variant="outline" 
+                onClick={() => setShowDeleteConfirm(false)}
+                className={`${darkMode ? 'border-gray-600 text-gray-300' : 'border-gray-300 text-gray-600'}`}
+              >
+                Cancel
+              </Button>
+              <Button 
+                onClick={handleDeleteChat}
+                className="bg-red-600 hover:bg-red-700 text-white"
+              >
+                Delete
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
