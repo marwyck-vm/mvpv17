@@ -1865,7 +1865,7 @@ export default function MarwyckCopilot() {
                       ? 'text-white rounded-xl'
                       : `${darkMode ? 'text-gray-100 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'} rounded-xl`
                   }`}
-                  style={activeTab === item.id ? { backgroundColor: accentColor } : {}}
+                  style={activeTab === item.id ? { backgroundColor: '#000000' } : {}}
                   title={sidebarCollapsed ? item.label : ''}
                 >
                   <item.icon className={`w-4 h-4 ${!sidebarCollapsed ? 'mr-3' : ''}`} />
