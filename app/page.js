@@ -2140,7 +2140,7 @@ export default function MarwyckCopilot() {
                   </Card>
 
                   {/* Statistics */}
-                  <Card className={darkMode ? 'bg-gray-800 border-gray-700' : ''}>
+                  <Card className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                     <CardHeader>
                       <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Your Stats</CardTitle>
                     </CardHeader>
