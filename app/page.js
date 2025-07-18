@@ -1029,10 +1029,10 @@ export default function MarwyckCopilot() {
   // Function to get icon by dossier type
   const getTypeIcon = (type) => {
     switch (type) {
-      case 'sale': return <Home className="w-5 h-5" style={{ color: accentColor }} />
-      case 'purchase': return <DollarSign className="w-5 h-5" style={{ color: accentColor }} />
-      case 'rental': return <Building className="w-5 h-5" style={{ color: accentColor }} />
-      default: return <Building className="w-5 h-5" style={{ color: accentColor }} />
+      case 'sale': return <Home className="w-5 h-5" style={{ color: '#000000' }} />
+      case 'purchase': return <DollarSign className="w-5 h-5" style={{ color: '#000000' }} />
+      case 'rental': return <Building className="w-5 h-5" style={{ color: '#000000' }} />
+      default: return <Building className="w-5 h-5" style={{ color: '#000000' }} />
     }
   }
 
