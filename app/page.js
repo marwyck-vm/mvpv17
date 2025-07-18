@@ -1844,10 +1844,10 @@ export default function MarwyckCopilot() {
                   : `${darkMode ? 'text-gray-100 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'} rounded-xl`
               }`}
               style={}
-              title={sidebarCollapsed ? 'Account' : ''}
+              title={sidebarCollapsed ? 'Settings' : ''}
             >
-              <UserCircle className={`w-4 h-4 ${!sidebarCollapsed ? 'mr-3' : ''}`} />
-              {!sidebarCollapsed && 'Account'}
+              <Settings className={`w-4 h-4 ${!sidebarCollapsed ? 'mr-3' : ''}`} />
+              {!sidebarCollapsed && 'Settings'}
             </button>
           </div>
         </div>
