@@ -421,7 +421,7 @@ export default function MarwyckCopilot() {
         previousValue: '89%',
         change: '+3%', 
         icon: FileText, 
-        color: 'text-accent-cyan',
+        color: 'text-black',
         trend: 'up'
       },
       { 
