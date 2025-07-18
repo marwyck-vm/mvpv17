@@ -1874,7 +1874,7 @@ export default function MarwyckCopilot() {
               )}
               {activeTab === 'documents' && (
                 <span className="flex items-center">
-                  Documents
+                  Vault
                 </span>
               )}
               {activeTab === 'estimation' && (
