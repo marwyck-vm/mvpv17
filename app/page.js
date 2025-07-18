@@ -1896,7 +1896,7 @@ export default function MarwyckCopilot() {
                   ? 'text-white rounded-xl' 
                   : `${darkMode ? 'text-gray-100 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'} rounded-xl`
               }`}
-              style={activeTab === 'account' ? { backgroundColor: accentColor } : {}}
+              style={activeTab === 'account' ? { backgroundColor: '#000000' } : {}}
               title={sidebarCollapsed ? 'Account' : ''}
             >
               <UserCircle className={`w-4 h-4 ${!sidebarCollapsed ? 'mr-3' : ''}`} />
