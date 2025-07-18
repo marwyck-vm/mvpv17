@@ -1789,32 +1789,7 @@ export default function MarwyckCopilot() {
             onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
             className={`p-2 rounded-full ${sidebarCollapsed ? 'mx-auto' : ''}`}
           >
-            {/* 3 barres + barre pliée avec angle */}
-            <div className={`w-4 h-4 ${darkMode ? 'text-gray-100' : 'text-gray-700'}`}>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {sidebarCollapsed ? (
-                  // OUVRIR: 3 barres + barre pliée à droite
-                  <>
-                    <rect x="1" y="2" width="8" height="1.5" rx="0.75" fill="currentColor" />
-                    <rect x="1" y="7.25" width="8" height="1.5" rx="0.75" fill="currentColor" />
-                    <rect x="1" y="12.5" width="8" height="1.5" rx="0.75" fill="currentColor" />
-                    {/* Barre pliée à droite - angle vers la droite */}
-                    <path d="M11 4.5 L11 7.25 L13.5 7.25 L13.5 8.75 L11 8.75 L11 11.5" 
-                          stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-                  </>
-                ) : (
-                  // FERMER: barre pliée à gauche + 3 barres
-                  <>
-                    {/* Barre pliée à gauche - angle vers la gauche */}
-                    <path d="M5 4.5 L5 7.25 L2.5 7.25 L2.5 8.75 L5 8.75 L5 11.5" 
-                          stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-                    <rect x="7" y="2" width="8" height="1.5" rx="0.75" fill="currentColor" />
-                    <rect x="7" y="7.25" width="8" height="1.5" rx="0.75" fill="currentColor" />
-                    <rect x="7" y="12.5" width="8" height="1.5" rx="0.75" fill="currentColor" />
-                  </>
-                )}
-              </svg>
-            </div>
+            <Menu className={`w-4 h-4 ${darkMode ? 'text-gray-100' : 'text-gray-700'}`} />
           </Button>
         </div>
         
