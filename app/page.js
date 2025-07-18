@@ -1921,49 +1921,41 @@ export default function MarwyckCopilot() {
             <h1 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
               {activeTab === 'dashboard' && (
                 <span className="flex items-center">
-                  <BarChart3 className="w-5 h-5 mr-2 inline-block" style={{ color: accentColor }} />
                   Dashboard
                 </span>
               )}
               {activeTab === 'chat' && (
                 <span className="flex items-center">
-                  <MessageCircle className="w-5 h-5 mr-2 inline-block" style={{ color: accentColor }} />
                   Chat
                 </span>
               )}
               {activeTab === 'planning' && (
                 <span className="flex items-center">
-                  <Calendar className="w-5 h-5 mr-2 inline-block" style={{ color: accentColor }} />
                   Planning
                 </span>
               )}
               {activeTab === 'documents' && (
                 <span className="flex items-center">
-                  <FileText className="w-5 h-5 mr-2 inline-block" style={{ color: accentColor }} />
                   Documents
                 </span>
               )}
               {activeTab === 'estimation' && (
                 <span className="flex items-center">
-                  <Calculator className="w-5 h-5 mr-2 inline-block" style={{ color: accentColor }} />
                   Estimation
                 </span>
               )}
               {activeTab === 'communications' && (
                 <span className="flex items-center">
-                  <Phone className="w-5 h-5 mr-2 inline-block" style={{ color: accentColor }} />
                   SMS & Calls
                 </span>
               )}
               {activeTab === 'team' && (
                 <span className="flex items-center">
-                  <Users className="w-5 h-5 mr-2 inline-block" style={{ color: accentColor }} />
                   Team
                 </span>
               )}
               {activeTab === 'account' && (
                 <span className="flex items-center">
-                  <User className="w-5 h-5 mr-2 inline-block" style={{ color: accentColor }} />
                   Account
                 </span>
               )}
