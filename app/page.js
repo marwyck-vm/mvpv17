@@ -3740,15 +3740,24 @@ export default function MarwyckCopilot() {
                       </div>
                     </div>
                     
-                    {/* Bouton Save - aligné sans le style de drop zone */}
+                    {/* Boutons Save et Cancel */}
                     <div className="p-4 text-center">
-                      <Button 
-                        onClick={saveFileDetails}
-                        className="bg-black text-white hover:bg-gray-800 rounded-full px-4 py-1.5"
-                      >
-                        <Save className="w-4 h-4 mr-2" />
-                        Save
-                      </Button>
+                      <div className="flex gap-3">
+                        <Button 
+                          onClick={() => setShowFileDetailsModal(false)}
+                          variant="outline"
+                          className="flex-1 border-gray-300 hover:bg-gray-50 rounded-full px-4 py-1.5"
+                        >
+                          Cancel
+                        </Button>
+                        <Button 
+                          onClick={saveFileDetails}
+                          className="flex-1 bg-black text-white hover:bg-gray-800 rounded-full px-4 py-1.5"
+                        >
+                          <Save className="w-4 h-4 mr-2" />
+                          Save
+                        </Button>
+                      </div>
                     </div>
                   </>
                 )}
