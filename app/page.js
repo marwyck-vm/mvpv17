@@ -3447,8 +3447,8 @@ export default function MarwyckCopilot() {
         <DialogContent className={`max-w-7xl !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <div className="h-[85vh] flex gap-8">
             {/* Partie gauche - Informations modifiables */}
-            <div className={`w-[55%] ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl flex flex-col`}>
-              <div className="p-6 flex flex-col h-full">
+            <div className={`w-[55%] ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl`}>
+              <div className="p-6 h-full flex flex-col">
                 <div className="mb-6">
                   <h3 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                     File Details
@@ -3530,7 +3530,7 @@ export default function MarwyckCopilot() {
                     </div>
 
                     {/* Required Documents - taille augmentée */}
-                    <div className="flex-1 min-h-0 flex flex-col mb-4">
+                    <div className="flex-1 flex flex-col mb-4">
                       <label className={`block text-sm font-semibold mb-3 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                         Required Documents
                       </label>
@@ -3556,8 +3556,8 @@ export default function MarwyckCopilot() {
                       </div>
                     </div>
                     
-                    {/* Bouton Save aligné précisément avec le bas de Imported Files */}
-                    <div className="pt-12 mt-6">
+                    {/* Bouton Save aligné avec Browse Files - même padding que la zone de drop */}
+                    <div className="px-4 py-1.5">
                       <Button 
                         onClick={() => setShowFileDetailsModal(false)}
                         className="w-full bg-black hover:bg-gray-800 text-white rounded-full py-2.5 font-medium"
