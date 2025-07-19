@@ -919,7 +919,7 @@ export default function MarwyckCopilot() {
       [newChatId]: [initialMessage]
     }))
     
-    // Switch to the new chat
+    // Switch to the new chat immediately
     setSelectedClient(newChatId)
     
     console.log('New chat created for file:', baseFile, 'New chat ID:', newChatId)
