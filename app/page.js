@@ -586,25 +586,6 @@ export default function MarwyckCopilot() {
     return contextMessage + "📞 Schedule automatic follow-ups\n🏠 Estimate property values\n📅 Plan appointments\n📋 Check document status\n\nWhat would you like to do?"
   }
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'active': return 'bg-green-100 text-green-800 border-green-200'
-      case 'pending': return 'bg-orange-100 text-orange-800 border-orange-200'
-      case 'inactive': return 'bg-red-100 text-red-800 border-red-200'
-      case 'signed':
-      case 'received':
-      case 'completed':
-      case 'sent':
-      case 'delivered':
-        return 'text-success'
-      case 'missing':
-      case 'failed':
-        return 'text-danger'
-      default:
-        return 'text-gray-500'
-    }
-  }
-
   const getStatusIcon = (status) => {
     switch (status) {
       case 'signed':
