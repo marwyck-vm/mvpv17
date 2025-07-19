@@ -3422,11 +3422,11 @@ export default function MarwyckCopilot() {
       </Dialog>
 
       {/* Modal de détails du fichier */}
-      <Dialog open={showFileDetailsModal} onOpenChange={setShowFileDetailsModal}>
-        <DialogContent className={`max-w-6xl w-full h-[80vh] ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} rounded-xl p-0`}>
-          <div className="h-full flex">
+      <Dialog open={showFileDetailsModal} onOpenChange={setShowFileDetailsModal} modal={false}>
+        <DialogContent className={`max-w-6xl !rounded-2xl shadow-xl border p-0 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
+          <div className="h-[80vh] flex">
             {/* Partie gauche - Informations modifiables */}
-            <div className={`w-1/2 p-6 ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} rounded-l-xl border-r`}>
+            <div className={`w-1/2 p-6 ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} rounded-l-2xl border-r`}>
               <h3 className={`text-xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                 File Details
               </h3>
@@ -3538,7 +3538,7 @@ export default function MarwyckCopilot() {
             </div>
 
             {/* Partie droite - Fichiers importés */}
-            <div className="w-1/2 p-6 flex flex-col">
+            <div className={`w-1/2 p-6 flex flex-col ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-r-2xl`}>
               <h3 className={`text-xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                 Imported Files
               </h3>
@@ -3561,7 +3561,7 @@ export default function MarwyckCopilot() {
               </div>
 
               {/* Zone de drag & drop */}
-              <div className={`border-2 border-dashed ${darkMode ? 'border-gray-600 bg-gray-800' : 'border-gray-300 bg-gray-50'} rounded-lg p-8 text-center`}>
+              <div className={`border-2 border-dashed ${darkMode ? 'border-gray-600 bg-gray-700' : 'border-gray-300 bg-gray-50'} rounded-lg p-8 text-center`}>
                 <Upload className={`w-12 h-12 ${darkMode ? 'text-gray-400' : 'text-gray-500'} mx-auto mb-4`} />
                 <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'} mb-2`}>
                   Drag and drop files here, or
