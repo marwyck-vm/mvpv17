@@ -2304,15 +2304,15 @@ export default function MarwyckCopilot() {
                       {Object.keys(messages).filter(chatId => 
                         chatId === currentBaseFile || chatId.startsWith(`${currentBaseFile}_`)
                       ).map(chatId => {
-                        const lastMessage = messages[clientId]?.slice(-1)[0];
+                        const lastMessage = messages[chatId]?.slice(-1)[0];
                         if (!lastMessage) return null;
                         
                         return (
                           <div
-                            key={clientId}
-                            onClick={() => setSelectedClient(clientId)}
+                            key={chatId}
+                            onClick={() => setSelectedClient(chatId)}
                             className={`p-3 rounded-xl cursor-pointer transition-colors ${
-                              selectedClient === clientId 
+                              selectedClient === chatId 
                                 ? `${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} border rounded-xl`
                                 : `${darkMode ? 'hover:bg-gray-800 hover:rounded-xl' : 'hover:bg-white hover:rounded-xl'}`
                             }`}
