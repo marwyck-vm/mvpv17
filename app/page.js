@@ -2339,29 +2339,25 @@ export default function MarwyckCopilot() {
               </div>
 
               {/* Zone de chat principale */}
-              <div className="flex-1 flex flex-col">
-                {/* Header du chat */}
-                <div className="p-4">
-                  <div className="flex items-center justify-end">
-                    <div className="flex items-center space-x-2">
-                      <Button 
-                        size="sm" 
-                        variant="ghost"
-                        onClick={() => setShowChatDeleteConfirm(true)}
-                        className={`rounded-full text-red-500 hover:text-red-600 ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'}`}
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                      <Button 
-                        size="sm" 
-                        variant="ghost"
-                        onClick={() => setShowAIHelp(true)}
-                        className={`rounded-full text-yellow-500 hover:text-yellow-600 ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'}`}
-                      >
-                        <Lightbulb className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
+              <div className="flex-1 flex flex-col relative">
+                {/* Boutons flottants en haut à droite */}
+                <div className="absolute top-4 right-4 flex items-center space-x-2 z-10">
+                  <Button 
+                    size="sm" 
+                    variant="ghost"
+                    onClick={() => setShowChatDeleteConfirm(true)}
+                    className={`rounded-full text-red-500 hover:text-red-600 ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'}`}
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                  <Button 
+                    size="sm" 
+                    variant="ghost"
+                    onClick={() => setShowAIHelp(true)}
+                    className={`rounded-full text-yellow-500 hover:text-yellow-600 ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'}`}
+                  >
+                    <Lightbulb className="w-4 h-4" />
+                  </Button>
                 </div>
 
                 {/* Messages */}
