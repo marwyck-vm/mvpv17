@@ -3483,46 +3483,46 @@ export default function MarwyckCopilot() {
                         />
                       </div>
 
-                      {/* Contacts - reste fixe avec espacement corrigé */}
+                      {/* Contacts - reste fixe avec alignement corrigé */}
                       <div>
                         <label className={`block text-sm font-semibold mb-3 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                           Contacts
                         </label>
                         <div className="space-y-2">
                           {/* Contact 1 */}
-                          <div className="flex items-center space-x-1.5">
+                          <div className="flex items-center space-x-2">
                             <input
                               type="text"
                               placeholder="Name"
-                              className={`flex-1 px-2.5 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                             <input
                               type="email"
                               placeholder="Email"
-                              className={`flex-1 px-2.5 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                             <input
                               type="tel"
                               placeholder="Phone"
-                              className={`flex-1 px-2.5 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                           </div>
                           {/* Contact 2 */}
-                          <div className="flex items-center space-x-1.5">
+                          <div className="flex items-center space-x-2">
                             <input
                               type="text"
                               placeholder="Name"
-                              className={`flex-1 px-2.5 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                             <input
                               type="email"
                               placeholder="Email"
-                              className={`flex-1 px-2.5 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                             <input
                               type="tel"
                               placeholder="Phone"
-                              className={`flex-1 px-2.5 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                           </div>
                         </div>
