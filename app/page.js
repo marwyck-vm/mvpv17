@@ -2292,7 +2292,7 @@ export default function MarwyckCopilot() {
                         <SelectItem 
                           key={client.id} 
                           value={client.id} 
-                          className={`transition-colors ${darkMode ? 'text-gray-100 hover:!bg-gray-700' : 'text-gray-900 hover:!bg-gray-100'}`}
+                          className={`transition-colors rounded-lg ${darkMode ? 'text-gray-100 hover:!bg-gray-700' : 'text-gray-900 hover:!bg-gray-100'}`}
                         >
                           {client.name}
                         </SelectItem>
