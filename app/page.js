@@ -2414,7 +2414,7 @@ export default function MarwyckCopilot() {
                   <div className="max-w-4xl mx-auto">
                     <div className="flex items-end space-x-3">
                       <div className="flex-1">
-                        <div className={`flex items-center space-x-2 p-4 rounded-3xl ${darkMode ? 'bg-gray-700' : 'bg-gray-100'} shadow-sm`}>
+                        <div className={`flex items-center space-x-2 p-2 rounded-3xl ${darkMode ? 'bg-gray-700' : 'bg-gray-100'} shadow-sm`}>
                           <Button
                             variant="ghost"
                             size="sm"
