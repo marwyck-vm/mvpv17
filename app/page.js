@@ -3487,40 +3487,36 @@ export default function MarwyckCopilot() {
                     </label>
                     <div className="space-y-3">
                       {fileContacts.map(contact => (
-                        <div key={contact.id} className={`p-3 rounded-xl border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
-                          <div className="flex justify-end mb-2">
-                            <Button 
-                              variant="ghost" 
-                              size="sm" 
-                              onClick={() => removeContact(contact.id)}
-                              className="text-red-500 hover:bg-red-50 rounded-full p-1"
-                            >
-                              <X className="w-4 h-4" />
-                            </Button>
-                          </div>
-                          <div className="flex space-x-2">
-                            <input
-                              type="text"
-                              placeholder="Name"
-                              value={contact.name}
-                              onChange={(e) => updateContact(contact.id, 'name', e.target.value)}
-                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
-                            />
-                            <input
-                              type="email"
-                              placeholder="Email"
-                              value={contact.email}
-                              onChange={(e) => updateContact(contact.id, 'email', e.target.value)}
-                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
-                            />
-                            <input
-                              type="tel"
-                              placeholder="Phone"
-                              value={contact.phone}
-                              onChange={(e) => updateContact(contact.id, 'phone', e.target.value)}
-                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
-                            />
-                          </div>
+                        <div key={contact.id} className={`flex items-center space-x-2 p-3 rounded-xl border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
+                          <input
+                            type="text"
+                            placeholder="Name"
+                            value={contact.name}
+                            onChange={(e) => updateContact(contact.id, 'name', e.target.value)}
+                            className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                          />
+                          <input
+                            type="email"
+                            placeholder="Email"
+                            value={contact.email}
+                            onChange={(e) => updateContact(contact.id, 'email', e.target.value)}
+                            className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                          />
+                          <input
+                            type="tel"
+                            placeholder="Phone"
+                            value={contact.phone}
+                            onChange={(e) => updateContact(contact.id, 'phone', e.target.value)}
+                            className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                          />
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            onClick={() => removeContact(contact.id)}
+                            className="text-red-500 hover:bg-red-50 rounded-full p-2 flex-shrink-0"
+                          >
+                            <X className="w-4 h-4" />
+                          </Button>
                         </div>
                       ))}
                       {fileContacts.length < 2 && (
