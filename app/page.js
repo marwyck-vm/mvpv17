@@ -902,16 +902,34 @@ export default function MarwyckCopilot() {
     console.log('SMS conversation reset for client:', smsSelectedClient)
   }
   
-  // Handle Chat reset
+  // Handle Chat delete
   const handleDeleteChat = () => {
-    if (selectedClient !== 'general') {
-      setMessages(prev => {
-        const newMessages = { ...prev }
-        delete newMessages[selectedClient]
-        return newMessages
-      })
+    // Delete the current chat
+    setMessages(prev => {
+      const newMessages = { ...prev }
+      delete newMessages[selectedClient]
+      return newMessages
+    })
+    
+    // Find another chat in the same base file to switch to
+    const baseFile = selectedClient.includes('_') ? selectedClient.split('_')[0] : selectedClient
+    const remainingChats = Object.keys(messages).filter(chatId => 
+      chatId !== selectedClient && (chatId === baseFile || chatId.startsWith(`${baseFile}_`))
+    )
+    
+    if (remainingChats.length > 0) {
+      // Switch to most recent remaining chat
+      const latestChat = remainingChats.sort((a, b) => {
+        const timestampA = a.includes('_') ? parseInt(a.split('_').pop()) : 0
+        const timestampB = b.includes('_') ? parseInt(b.split('_').pop()) : 0
+        return timestampB - timestampA
+      })[0]
+      setSelectedClient(latestChat)
+    } else {
+      // No other chats, go back to base file
+      setSelectedClient(baseFile)
     }
-    setSelectedClient('general')
+    
     setShowChatDeleteConfirm(false)
   }
 
