@@ -2304,11 +2304,7 @@ export default function MarwyckCopilot() {
                       {Object.keys(messages).filter(chatId => 
                         chatId === currentBaseFile || chatId.startsWith(`${currentBaseFile}_`)
                       ).sort((a, b) => {
-                        // Put currently selected chat first, then sort by timestamp (newest first)
-                        if (a === selectedClient) return -1;
-                        if (b === selectedClient) return 1;
-                        
-                        // Extract timestamps for sorting
+                        // Sort by timestamp only (newest first), don't prioritize selected chat
                         const timestampA = a.includes('_') ? parseInt(a.split('_').pop()) : 0;
                         const timestampB = b.includes('_') ? parseInt(b.split('_').pop()) : 0;
                         
