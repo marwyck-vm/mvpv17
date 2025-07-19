@@ -3556,8 +3556,8 @@ export default function MarwyckCopilot() {
                       </div>
                     </div>
                     
-                    {/* Bouton Save aligné avec le bas de Imported Files */}
-                    <div className="pt-6 mt-2">
+                    {/* Bouton Save aligné précisément avec le bas de Imported Files */}
+                    <div className="pt-12 mt-6">
                       <Button 
                         onClick={() => setShowFileDetailsModal(false)}
                         className="w-full bg-black hover:bg-gray-800 text-white rounded-full py-2.5 font-medium"
