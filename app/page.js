@@ -3674,7 +3674,7 @@ export default function MarwyckCopilot() {
                     {/* Bouton Save - aligné sans le style de drop zone */}
                     <div className="p-4 text-center">
                       <Button 
-                        onClick={() => setShowFileDetailsModal(false)}
+                        onClick={saveFileDetails}
                         className="bg-black text-white hover:bg-gray-800 rounded-full px-4 py-1.5"
                       >
                         <Save className="w-4 h-4 mr-2" />
