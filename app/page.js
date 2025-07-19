@@ -2505,15 +2505,15 @@ export default function MarwyckCopilot() {
                   {dossiersList.map(dossier => (
                     <div 
                       key={dossier.id} 
-                      className={`bg-white rounded-xl border border-gray-200 p-6 cursor-pointer transition-all duration-300 hover:shadow-lg hover:shadow-black/10 hover:-translate-y-1 hover:border-gray-300 h-32 flex flex-col`}
+                      className={`bg-white rounded-xl border border-gray-200 p-6 cursor-pointer transition-all duration-300 hover:shadow-lg hover:shadow-black/10 hover:-translate-y-1 hover:border-gray-300 h-40 flex flex-col`}
                     >
                       {/* Header avec titre et type */}
-                      <div className="flex items-start justify-between mb-2">
+                      <div className="flex items-start justify-between mb-3">
                         <div className="flex-1">
                           <h3 className="text-xl font-bold text-gray-900 leading-tight">
                             {dossier.title || dossier.address}
                           </h3>
-                          <p className="text-gray-500 text-sm mt-1">
+                          <p className="text-gray-500 text-sm mt-2">
                             {dossier.address}
                           </p>
                         </div>
