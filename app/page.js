@@ -2493,7 +2493,7 @@ export default function MarwyckCopilot() {
                     </div>
                     <Button
                       onClick={() => addNewDossier('sale')}
-                      className="border border-black text-black bg-gray-100 hover:bg-gray-200 rounded-full px-6 py-2"
+                      className="border border-black text-black bg-gray-200 hover:bg-gray-300 rounded-full px-6 py-2"
                     >
                       <Plus className="w-4 h-4 mr-2" />
                       New file
