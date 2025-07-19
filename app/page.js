@@ -3488,8 +3488,7 @@ export default function MarwyckCopilot() {
                     <div className="space-y-3">
                       {fileContacts.map(contact => (
                         <div key={contact.id} className={`p-3 rounded-xl border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
-                          <div className="flex justify-between items-start mb-3">
-                            <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>Contact {fileContacts.indexOf(contact) + 1}</span>
+                          <div className="flex justify-end mb-2">
                             <Button 
                               variant="ghost" 
                               size="sm" 
@@ -3499,27 +3498,27 @@ export default function MarwyckCopilot() {
                               <X className="w-4 h-4" />
                             </Button>
                           </div>
-                          <div className="space-y-2">
+                          <div className="flex space-x-2">
                             <input
                               type="text"
                               placeholder="Name"
                               value={contact.name}
                               onChange={(e) => updateContact(contact.id, 'name', e.target.value)}
-                              className={`w-full px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
                             />
                             <input
                               type="email"
                               placeholder="Email"
                               value={contact.email}
                               onChange={(e) => updateContact(contact.id, 'email', e.target.value)}
-                              className={`w-full px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
                             />
                             <input
                               type="tel"
-                              placeholder="Phone number"
+                              placeholder="Phone"
                               value={contact.phone}
                               onChange={(e) => updateContact(contact.id, 'phone', e.target.value)}
-                              className={`w-full px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
                             />
                           </div>
                         </div>
