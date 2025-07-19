@@ -3556,8 +3556,8 @@ export default function MarwyckCopilot() {
                       </div>
                     </div>
                     
-                    {/* Bouton Save - exactement comme Browse Files avec p-4 */}
-                    <div className={`border-2 border-dashed ${darkMode ? 'border-gray-600 bg-gray-800' : 'border-gray-300 bg-gray-100'} rounded-xl p-4 text-center hover:border-black transition-colors`}>
+                    {/* Bouton Save - aligné sans le style de drop zone */}
+                    <div className="p-4 text-center">
                       <Button 
                         onClick={() => setShowFileDetailsModal(false)}
                         className="bg-black text-white hover:bg-gray-800 rounded-full px-4 py-1.5"
