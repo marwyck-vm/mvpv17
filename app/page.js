@@ -3447,7 +3447,8 @@ export default function MarwyckCopilot() {
         <DialogContent className={`max-w-7xl !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <div className="h-[85vh] flex gap-8">
             {/* Partie gauche - Informations modifiables */}
-            <div className={`w-[55%] p-6 ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl`}>
+            <div className={`w-[55%] ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl`}>
+              <div className="p-6 max-h-[600px] overflow-y-auto" style={{ scrollbarWidth: 'thin' }}>
               <div className="mb-6">
                 <h3 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                   File Details
