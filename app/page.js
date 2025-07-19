@@ -3482,12 +3482,12 @@ export default function MarwyckCopilot() {
 
                   {/* Contacts */}
                   <div>
-                    <label className={`block text-sm font-semibold mb-3 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+                    <label className={`block text-sm font-semibold mb-2 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                       Contacts
                     </label>
-                    <div className="space-y-3">
+                    <div className="space-y-2">
                       {fileContacts.map(contact => (
-                        <div key={contact.id} className={`flex items-center space-x-2 p-3 rounded-xl border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
+                        <div key={contact.id} className="flex items-center space-x-2">
                           <input
                             type="text"
                             placeholder="Name"
@@ -3509,21 +3509,19 @@ export default function MarwyckCopilot() {
                             onChange={(e) => updateContact(contact.id, 'phone', e.target.value)}
                             className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
                           />
-                          <Button 
-                            variant="ghost" 
-                            size="sm" 
+                          <button 
                             onClick={() => removeContact(contact.id)}
-                            className="text-red-500 hover:bg-red-50 rounded-full p-2 flex-shrink-0"
+                            className="text-red-500 hover:text-red-700 hover:bg-red-50 rounded-full p-1 flex-shrink-0 transition-colors"
                           >
                             <X className="w-4 h-4" />
-                          </Button>
+                          </button>
                         </div>
                       ))}
                       {fileContacts.length < 2 && (
                         <Button 
                           variant="outline" 
                           onClick={addContact}
-                          className="w-full rounded-full border-2 border-dashed border-gray-300 py-2 hover:border-black transition-colors"
+                          className="w-full rounded-full border-2 border-dashed border-gray-300 py-2 hover:border-black transition-colors text-sm h-8"
                         >
                           <Plus className="w-4 h-4 mr-2" />
                           Add Contact
