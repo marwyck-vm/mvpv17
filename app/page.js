@@ -120,6 +120,8 @@ export default function MarwyckCopilot() {
   const [showAIHelp, setShowAIHelp] = useState(false)
   const [showChatDeleteConfirm, setShowChatDeleteConfirm] = useState(false)
   const [showSMSAIHelp, setShowSMSAIHelp] = useState(false)
+  const [showFileDetailsModal, setShowFileDetailsModal] = useState(false)
+  const [selectedFileForDetails, setSelectedFileForDetails] = useState(null)
   const [accentColor, setAccentColor] = useState('#000000')
   const [showNewEventDialog, setShowNewEventDialog] = useState(false)
   const [showProposeDialog, setShowProposeDialog] = useState(false)
