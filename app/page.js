@@ -3623,17 +3623,17 @@ export default function MarwyckCopilot() {
               </div>
 
               {/* Zone de drag & drop */}
-              <div className={`border-2 border-dashed ${darkMode ? 'border-gray-600 bg-gray-800' : 'border-gray-300 bg-gray-100'} rounded-xl p-8 text-center hover:border-black transition-colors`}>
-                <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center mx-auto mb-4">
-                  <Upload className="w-8 h-8 text-gray-600" />
+              <div className={`border-2 border-dashed ${darkMode ? 'border-gray-600 bg-gray-800' : 'border-gray-300 bg-gray-100'} rounded-xl p-4 text-center hover:border-black transition-colors`}>
+                <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mx-auto mb-3">
+                  <Upload className="w-6 h-6 text-gray-600" />
                 </div>
-                <h4 className={`text-lg font-semibold mb-2 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+                <h4 className={`text-base font-semibold mb-2 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                   Drop files here
                 </h4>
-                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'} mb-4`}>
+                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'} mb-3`}>
                   Drag and drop files here, or click to browse
                 </p>
-                <Button className="bg-black text-white hover:bg-gray-800 rounded-xl px-6 py-2">
+                <Button className="bg-black text-white hover:bg-gray-800 rounded-full px-4 py-1.5">
                   Browse Files
                 </Button>
               </div>
