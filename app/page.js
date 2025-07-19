@@ -158,6 +158,19 @@ export default function MarwyckCopilot() {
     )
   }
 
+  // Fonction pour supprimer un dossier
+  const deleteDossier = (dossierId, e) => {
+    e.stopPropagation() // Empêcher l'ouverture du modal
+    setDossiersList(prevList => prevList.filter(dossier => dossier.id !== dossierId))
+  }
+
+  // Fonction pour partager un dossier avec l'équipe
+  const shareDossier = (dossierId, e) => {
+    e.stopPropagation() // Empêcher l'ouverture du modal
+    // Ici on pourrait ouvrir un modal pour choisir les membres de l'équipe
+    console.log(`Partage du dossier ${dossierId} avec l'équipe`)
+  }
+
   // Fonction pour changer le type de dossier (Sale/Purchase/Rental) - garde les documents
   const switchDossierType = (dossierId) => {
     const typeOrder = ['Sale', 'Purchase', 'Rental']
