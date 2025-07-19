@@ -2273,7 +2273,7 @@ export default function MarwyckCopilot() {
                       <SelectValue placeholder="General">
                         <div className="flex items-center">
                           <FolderOpen className="w-4 h-4 mr-2" />
-                          {clients.find(c => c.id === selectedClient)?.name || "General"}
+                          {clients.find(c => c.id === currentBaseFile)?.name || "General"}
                         </div>
                       </SelectValue>
                     </SelectTrigger>
