@@ -2303,7 +2303,17 @@ export default function MarwyckCopilot() {
                     }}>
                       {Object.keys(messages).filter(chatId => 
                         chatId === currentBaseFile || chatId.startsWith(`${currentBaseFile}_`)
-                      ).map(chatId => {
+                      ).sort((a, b) => {
+                        // Put currently selected chat first, then sort by timestamp (newest first)
+                        if (a === selectedClient) return -1;
+                        if (b === selectedClient) return 1;
+                        
+                        // Extract timestamps for sorting
+                        const timestampA = a.includes('_') ? parseInt(a.split('_').pop()) : 0;
+                        const timestampB = b.includes('_') ? parseInt(b.split('_').pop()) : 0;
+                        
+                        return timestampB - timestampA; // Newest first
+                      }).map(chatId => {
                         const lastMessage = messages[chatId]?.slice(-1)[0];
                         if (!lastMessage) return null;
                         
