@@ -2492,7 +2492,7 @@ export default function MarwyckCopilot() {
                       <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Manage your files and documents</p>
                     </div>
                     <Button
-                      onClick={() => addNewDossier('general')}
+                      onClick={() => addNewDossier('sale')}
                       className="border border-black text-black bg-gray-100 hover:bg-gray-200 rounded-full px-6 py-2"
                     >
                       <Plus className="w-4 h-4 mr-2" />
