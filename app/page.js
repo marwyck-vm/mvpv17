@@ -2481,142 +2481,59 @@ export default function MarwyckCopilot() {
             }}>
               <div className="max-w-6xl mx-auto">
                 <div className="mb-8">
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-6">
                     <div>
                       <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                         File Management
                       </h2>
                       <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Manage your files and documents</p>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Button
-                        onClick={() => addNewDossier('sale')}
-                        size="sm"
-                        className="text-white rounded-full"
-                        style={{ backgroundColor: '#000000' }}
-                      >
-                        <Plus className="w-4 h-4 mr-2" />
-                        Sale
-                      </Button>
-                      <Button
-                        onClick={() => addNewDossier('purchase')}
-                        size="sm"
-                        className="text-white rounded-full"
-                        style={{ backgroundColor: '#000000' }}
-                      >
-                        <Plus className="w-4 h-4 mr-2" />
-                        Purchase
-                      </Button>
-                      <Button
-                        onClick={() => addNewDossier('rental')}
-                        size="sm"
-                        className="text-white rounded-full"
-                        style={{ backgroundColor: '#000000' }}
-                      >
-                        <Plus className="w-4 h-4 mr-2" />
-                        Rental
-                      </Button>
-                    </div>
+                    <Button
+                      onClick={() => addNewDossier('general')}
+                      className="border border-black text-black bg-gray-100 hover:bg-gray-200 rounded-lg px-6 py-2"
+                    >
+                      <Plus className="w-4 h-4 mr-2" />
+                      New file
+                    </Button>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                   {dossiersList.map(dossier => (
-                    <Card key={dossier.id} className={`hover:shadow-lg transition-shadow rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                      <CardHeader>
-                        <div className="flex items-center justify-between">
-                          <div className="flex-1">
-                            <CardTitle className={`text-lg font-semibold flex items-center space-x-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                              {getTypeIcon(dossier.type)}
-                              <span>{dossier.title || dossier.address}</span>
-                            </CardTitle>
-                            <div className="flex items-center space-x-2 mt-2">
-                              <Badge variant="outline" className="text-xs rounded-full">
-                                {dossier.type}
-                              </Badge>
-                              <Badge 
-                                onClick={() => toggleDossierStatus(dossier.id)}
-                                className={`text-xs rounded-full cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-md hover:opacity-100 ${getStatusColor(dossier.status)}`}
-                              >
-                                {getStatusText(dossier.status)}
-                              </Badge>
-                            </div>
-                          </div>
-                          <div className="flex items-center space-x-1">
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => toggleDossierLock(dossier.id)}
-                              className="p-2 rounded-full"
-                            >
-                              {lockedDossiers[dossier.id] ? (
-                                <LockKeyholeOpen className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-black'}`} strokeWidth={1.5} />
-                              ) : (
-                                <LockKeyhole className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-black'}`} strokeWidth={1.5} />
-                              )}
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => showDeleteConfirmation(dossier.id)}
-                              className="p-2 text-red-500 hover:text-red-700 rounded-full"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </Button>
-                          </div>
+                    <div 
+                      key={dossier.id} 
+                      className={`bg-white rounded-xl border border-gray-200 p-6 cursor-pointer transition-all duration-300 hover:shadow-lg hover:shadow-black/10 hover:-translate-y-1 hover:border-gray-300`}
+                    >
+                      {/* Header avec titre et type */}
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex-1">
+                          <h3 className="text-lg font-semibold text-gray-900 leading-tight">
+                            {dossier.title || dossier.address}
+                          </h3>
                         </div>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-4">
-                          <div>
-                            <h4 className={`font-medium text-sm mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Documents</h4>
-                            <div className={`space-y-2 max-h-40 overflow-y-auto ${darkMode ? 'scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 scrollbar-thumb-rounded-full scrollbar-track-rounded-full' : 'scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full'}`} style={{scrollbarWidth: 'thin'}}>
-                              {dossier.documents.map(doc => (
-                                <div key={doc.id} className={`flex items-center justify-between p-2 rounded-lg transition-colors ${darkMode ? 'hover:bg-gray-800/30' : 'hover:bg-gray-100/30'}`}>
-                                  <div className="flex items-center space-x-2">
-                                    {getStatusIcon(doc.status)}
-                                    <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{doc.name}</span>
-                                  </div>
-                                  {doc.status === 'missing' && (
-                                    <Button 
-                                      size="sm" 
-                                      variant="outline" 
-                                      className={`text-xs rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
-                                    >
-                                      Remind
-                                    </Button>
-                                  )}
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                          
-                          <div>
-                            <h4 className={`font-medium text-sm mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Suggested actions</h4>
-                            <div className="space-y-1">
-                              {getSuggestedActions(dossier).map((action, index) => (
-                                <div key={index} className="flex items-center space-x-2">
-                                  <Target className="w-3 h-3" style={{ color: '#000000' }} />
-                                  <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{action}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                          
-                          <div className="pt-2 border-t">
-                            <Button 
-                              size="sm" 
-                              onClick={() => handleEditDossier(dossier)}
-                              className="w-full text-white rounded-full flex items-center" 
-                              style={{ backgroundColor: '#000000' }}
-                            >
-                              <Edit className="w-4 h-4 mr-2" />
-                              Edit file
-                            </Button>
-                          </div>
+                        <div>
+                          <span className="text-sm font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+                            {dossier.type}
+                          </span>
                         </div>
-                      </CardContent>
-                    </Card>
+                      </div>
+
+                      {/* Adresse */}
+                      <div className="mb-4">
+                        <p className="text-gray-600 text-sm">
+                          {dossier.address}
+                        </p>
+                      </div>
+
+                      {/* Nombre de fichiers en bas à gauche */}
+                      <div className="flex items-end justify-between">
+                        <div>
+                          <span className="text-sm text-gray-500">
+                            {dossier.documents.length} Files Inside
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
