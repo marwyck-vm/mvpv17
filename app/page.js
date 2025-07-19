@@ -2277,7 +2277,7 @@ export default function MarwyckCopilot() {
                 {/* Liste des conversations récentes */}
                 <div className="flex-1 overflow-hidden p-4">
                   <div className="h-full flex flex-col">
-                    <div className={`text-sm font-medium ${darkMode ? 'text-gray-400' : 'text-gray-500'} mb-3`}>
+                    <div className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-3`}>
                       Recent Chats
                     </div>
                     <div className="flex-1 overflow-y-auto space-y-2 pr-2" style={{
