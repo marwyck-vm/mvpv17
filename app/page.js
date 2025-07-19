@@ -3536,7 +3536,7 @@ export default function MarwyckCopilot() {
                     <label className={`block text-sm font-semibold mb-2 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                       Required Documents
                     </label>
-                    <div className="space-y-2 max-h-48 overflow-y-auto" style={{ scrollbarWidth: 'thin' }}>
+                    <div className="space-y-2 max-h-40 overflow-y-auto" style={{ scrollbarWidth: 'thin' }}>
                       {selectedFileForDetails.documents?.map(doc => (
                         <div key={doc.id} className={`flex items-center justify-between p-3 rounded-full border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} hover:border-gray-400 transition-colors`}>
                           <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
