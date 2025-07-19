@@ -2253,10 +2253,10 @@ export default function MarwyckCopilot() {
                   </label>
                   <Select value={selectedClient} onValueChange={setSelectedClient}>
                     <SelectTrigger className={`w-full rounded-xl ${darkMode ? 'bg-gray-800 border-gray-600 text-gray-100' : 'bg-white border-gray-200 text-gray-900'}`}>
-                      <SelectValue placeholder="Select a file">
+                      <SelectValue placeholder="General">
                         <div className="flex items-center">
                           <FolderOpen className="w-4 h-4 mr-2" />
-                          {clients.find(c => c.id === selectedClient)?.name || "Select a file"}
+                          {clients.find(c => c.id === selectedClient)?.name || "General"}
                         </div>
                       </SelectValue>
                     </SelectTrigger>
