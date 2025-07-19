@@ -827,16 +827,6 @@ export default function MarwyckCopilot() {
     }))
   }
 
-  const deleteDossier = (dossierId) => {
-    setDossiersList(prev => prev.filter(d => d.id !== dossierId))
-    // Remove messages for deleted dossier
-    setMessages(prev => {
-      const newMessages = { ...prev }
-      delete newMessages[dossierId.toString()]
-      return newMessages
-    })
-  }
-
   const getSuggestedActions = (dossier) => {
     const missingDocs = dossier.documents.filter(doc => doc.status === 'missing')
     const actions = []
