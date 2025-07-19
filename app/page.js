@@ -2314,7 +2314,7 @@ export default function MarwyckCopilot() {
               {/* Zone de chat principale */}
               <div className="flex-1 flex flex-col">
                 {/* Header du chat */}
-                <div className={`border-b p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                <div className="p-4">
                   <div className="flex items-center justify-end">
                     <div className="flex items-center space-x-2">
                       <Button 
