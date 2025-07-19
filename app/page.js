@@ -3586,7 +3586,7 @@ export default function MarwyckCopilot() {
             </div>
 
             {/* Partie droite - Fichiers importés */}
-            <div className={`w-[55%] ${darkMode ? 'bg-gray-900' : 'bg-gray-50'} rounded-xl p-6 border flex flex-col`}>
+            <div className={`w-[50%] ${darkMode ? 'bg-gray-900' : 'bg-gray-50'} rounded-xl p-6 border flex flex-col`}>
               <h3 className={`text-2xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                 Imported Files
               </h3>
