@@ -3582,9 +3582,7 @@ export default function MarwyckCopilot() {
                 <div className="space-y-3">
                   <div className={`p-4 rounded-xl border-2 ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} flex items-center justify-between hover:border-gray-400 transition-colors`}>
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 rounded-lg bg-red-100 flex items-center justify-center">
-                        <FileText className="w-5 h-5 text-red-600" />
-                      </div>
+                      <FileText className="w-6 h-6 text-red-600 rounded-lg" />
                       <div>
                         <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                           sample-document.pdf
@@ -3609,9 +3607,7 @@ export default function MarwyckCopilot() {
                   
                   <div className={`p-4 rounded-xl border-2 ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} flex items-center justify-between hover:border-gray-400 transition-colors`}>
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
-                        <FileText className="w-5 h-5 text-blue-600" />
-                      </div>
+                      <FileText className="w-6 h-6 text-blue-600 rounded-lg" />
                       <div>
                         <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                           contract.docx
