@@ -347,9 +347,25 @@ export default function MarwyckCopilot() {
     }))
   ]
 
-  // Get current messages for selected client
+  // Get current messages for selected client or active chat
   const getCurrentMessages = () => {
-    return messages[selectedClient] || []
+    // If selectedClient is a generated chat ID, use it directly
+    if (messages[selectedClient]) {
+      return messages[selectedClient]
+    }
+    
+    // If selectedClient is a base client (like 'general'), find the most recent chat for that client
+    const clientChats = Object.keys(messages).filter(chatId => 
+      chatId === selectedClient || chatId.startsWith(`${selectedClient}_`)
+    )
+    
+    if (clientChats.length === 0) {
+      return messages[selectedClient] || []
+    }
+    
+    // Return the most recent chat (highest timestamp)
+    const latestChatId = clientChats.sort().pop()
+    return messages[latestChatId] || []
   }
 
   // Add message to current client
