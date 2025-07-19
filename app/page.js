@@ -3566,15 +3566,15 @@ export default function MarwyckCopilot() {
                           <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                             {doc.name}
                           </span>
-                          <Select defaultValue={doc.status}>
-                            <SelectTrigger className="w-28 rounded-full">
+                          <Select defaultValue={doc.status || 'none'}>
+                            <SelectTrigger className={`w-32 rounded-full ${getStatusColor(doc.status || 'none')}`}>
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent className="rounded-xl">
+                              <SelectItem value="none" className="rounded-lg">None</SelectItem>
                               <SelectItem value="missing" className="rounded-lg">Missing</SelectItem>
                               <SelectItem value="pending" className="rounded-lg">Pending</SelectItem>
                               <SelectItem value="completed" className="rounded-lg">Completed</SelectItem>
-                              <SelectItem value="failed" className="rounded-lg">Failed</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
