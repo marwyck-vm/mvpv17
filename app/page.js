@@ -2301,9 +2301,9 @@ export default function MarwyckCopilot() {
                       scrollbarWidth: 'thin',
                       scrollbarColor: darkMode ? 'rgba(107, 114, 128, 0.6) transparent' : 'rgba(156, 163, 175, 0.6) transparent'
                     }}>
-                      {Object.keys(messages).filter(clientId => 
-                        clientId === selectedClient || clientId.startsWith(`${selectedClient}_`)
-                      ).map(clientId => {
+                      {Object.keys(messages).filter(chatId => 
+                        chatId === currentBaseFile || chatId.startsWith(`${currentBaseFile}_`)
+                      ).map(chatId => {
                         const lastMessage = messages[clientId]?.slice(-1)[0];
                         if (!lastMessage) return null;
                         
