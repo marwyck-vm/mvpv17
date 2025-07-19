@@ -3530,11 +3530,11 @@ export default function MarwyckCopilot() {
                     </div>
 
                     {/* Required Documents - avec scrollbar remise */}
-                    <div className="flex-1 flex flex-col mb-4">
+                    <div className="flex-1 mb-6">
                       <label className={`block text-sm font-semibold mb-3 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                         Required Documents
                       </label>
-                      <div className="flex-1 max-h-48 overflow-y-auto space-y-2 pr-2" style={{ scrollbarWidth: 'thin', scrollbarColor: '#9CA3AF transparent' }}>
+                      <div className="max-h-48 overflow-y-auto space-y-2 pr-2" style={{ scrollbarWidth: 'thin', scrollbarColor: '#9CA3AF transparent' }}>
                         {selectedFileForDetails.documents?.map(doc => (
                           <div key={doc.id} className={`flex items-center justify-between p-3 rounded-xl border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'} hover:border-gray-400 transition-all duration-200`}>
                             <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
@@ -3556,11 +3556,11 @@ export default function MarwyckCopilot() {
                       </div>
                     </div>
                     
-                    {/* Bouton Save aligné avec Browse Files - même padding que la zone de drop */}
-                    <div className="px-4 py-1.5">
+                    {/* Bouton Save - exactement comme Browse Files avec p-4 */}
+                    <div className={`border-2 border-dashed ${darkMode ? 'border-gray-600 bg-gray-800' : 'border-gray-300 bg-gray-100'} rounded-xl p-4 text-center hover:border-black transition-colors`}>
                       <Button 
                         onClick={() => setShowFileDetailsModal(false)}
-                        className="w-full bg-black hover:bg-gray-800 text-white rounded-full py-2.5 font-medium"
+                        className="bg-black text-white hover:bg-gray-800 rounded-full px-4 py-1.5"
                       >
                         <Save className="w-4 h-4 mr-2" />
                         Save
