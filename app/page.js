@@ -3420,6 +3420,160 @@ export default function MarwyckCopilot() {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Modal de détails du fichier */}
+      <Dialog open={showFileDetailsModal} onOpenChange={setShowFileDetailsModal}>
+        <DialogContent className={`max-w-6xl w-full h-[80vh] ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} rounded-xl p-0`}>
+          <div className="h-full flex">
+            {/* Partie gauche - Informations modifiables */}
+            <div className={`w-1/2 p-6 ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} rounded-l-xl border-r`}>
+              <h3 className={`text-xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                File Details
+              </h3>
+              
+              {selectedFileForDetails && (
+                <div className="space-y-6">
+                  {/* Titre modifiable */}
+                  <div>
+                    <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                      Title
+                    </label>
+                    <input
+                      type="text"
+                      defaultValue={selectedFileForDetails.title || selectedFileForDetails.address}
+                      className={`w-full px-3 py-2 rounded-lg border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                    />
+                  </div>
+
+                  {/* Adresse modifiable */}
+                  <div>
+                    <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                      Address
+                    </label>
+                    <input
+                      type="text"
+                      defaultValue={selectedFileForDetails.address}
+                      className={`w-full px-3 py-2 rounded-lg border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                    />
+                  </div>
+
+                  {/* Contacts (max 2) */}
+                  <div>
+                    <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                      Contacts (Max 2)
+                    </label>
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <input
+                          type="text"
+                          placeholder="Contact 1"
+                          className={`flex-1 px-3 py-2 rounded-lg border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                        />
+                        <Button size="sm" variant="outline" className="text-red-500">
+                          <X className="w-4 h-4" />
+                        </Button>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <input
+                          type="text"
+                          placeholder="Contact 2"
+                          className={`flex-1 px-3 py-2 rounded-lg border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                        />
+                        <Button size="sm" variant="outline" className="text-red-500">
+                          <X className="w-4 h-4" />
+                        </Button>
+                      </div>
+                      <Button size="sm" variant="outline" className="w-full">
+                        <Plus className="w-4 h-4 mr-2" />
+                        Add Contact
+                      </Button>
+                    </div>
+                  </div>
+
+                  {/* Type de dossier */}
+                  <div>
+                    <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                      File Type
+                    </label>
+                    <Select defaultValue={selectedFileForDetails.type}>
+                      <SelectTrigger className={`w-full ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300 text-gray-900'}`}>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="sale">Sale</SelectItem>
+                        <SelectItem value="purchase">Purchase</SelectItem>
+                        <SelectItem value="rental">Rental</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Documents nécessaires */}
+                  <div>
+                    <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                      Required Documents
+                    </label>
+                    <div className={`max-h-64 overflow-y-auto space-y-2 ${darkMode ? 'scrollbar-thin scrollbar-thumb-gray-600' : 'scrollbar-thin scrollbar-thumb-gray-300'}`}>
+                      {selectedFileForDetails.documents?.map(doc => (
+                        <div key={doc.id} className={`flex items-center justify-between p-3 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-white'} border`}>
+                          <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                            {doc.name}
+                          </span>
+                          <Select defaultValue={doc.status}>
+                            <SelectTrigger className="w-24">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="missing">Missing</SelectItem>
+                              <SelectItem value="pending">Pending</SelectItem>
+                              <SelectItem value="completed">Completed</SelectItem>
+                              <SelectItem value="failed">Failed</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Partie droite - Fichiers importés */}
+            <div className="w-1/2 p-6 flex flex-col">
+              <h3 className={`text-xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                Imported Files
+              </h3>
+              
+              {/* Liste des fichiers importés */}
+              <div className={`flex-1 overflow-y-auto mb-6 ${darkMode ? 'scrollbar-thin scrollbar-thumb-gray-600' : 'scrollbar-thin scrollbar-thumb-gray-300'}`}>
+                <div className="space-y-2">
+                  <div className={`p-3 rounded-lg border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'} flex items-center justify-between`}>
+                    <div className="flex items-center space-x-3">
+                      <FileText className="w-5 h-5 text-gray-500" />
+                      <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                        sample-document.pdf
+                      </span>
+                    </div>
+                    <Button size="sm" variant="ghost" className="text-red-500">
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Zone de drag & drop */}
+              <div className={`border-2 border-dashed ${darkMode ? 'border-gray-600 bg-gray-800' : 'border-gray-300 bg-gray-50'} rounded-lg p-8 text-center`}>
+                <Upload className={`w-12 h-12 ${darkMode ? 'text-gray-400' : 'text-gray-500'} mx-auto mb-4`} />
+                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'} mb-2`}>
+                  Drag and drop files here, or
+                </p>
+                <Button variant="outline" size="sm">
+                  Browse Files
+                </Button>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
