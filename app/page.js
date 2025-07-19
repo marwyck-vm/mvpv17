@@ -3529,12 +3529,12 @@ export default function MarwyckCopilot() {
                       </div>
                     </div>
 
-                    {/* Required Documents - avec scrollbar sans fond */}
-                    <div className="flex-1 min-h-0 flex flex-col">
+                    {/* Required Documents - taille augmentée */}
+                    <div className="flex-1 min-h-0 flex flex-col mb-4">
                       <label className={`block text-sm font-semibold mb-3 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                         Required Documents
                       </label>
-                      <div className="flex-1 overflow-y-auto space-y-2 pr-2" style={{ scrollbarWidth: 'thin', scrollbarColor: '#9CA3AF transparent' }}>
+                      <div className="flex-1 min-h-[200px] overflow-y-auto space-y-2 pr-2" style={{ scrollbarWidth: 'thin', scrollbarColor: '#9CA3AF transparent' }}>
                         {selectedFileForDetails.documents?.map(doc => (
                           <div key={doc.id} className={`flex items-center justify-between p-3 rounded-xl border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'} hover:border-gray-400 transition-all duration-200`}>
                             <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
@@ -3556,8 +3556,8 @@ export default function MarwyckCopilot() {
                       </div>
                     </div>
                     
-                    {/* Bouton Save descendu davantage */}
-                    <div className="pt-8 border-t border-gray-200 mt-8">
+                    {/* Bouton Save sans trait */}
+                    <div className="pt-4">
                       <Button 
                         onClick={() => setShowFileDetailsModal(false)}
                         className="w-full bg-black hover:bg-gray-800 text-white rounded-full py-2.5 font-medium"
