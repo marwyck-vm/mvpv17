@@ -2737,8 +2737,26 @@ export default function MarwyckCopilot() {
                       {/* Spacer pour pousser le contenu vers le bas */}
                       <div className="flex-1"></div>
 
-                      {/* Nombre de fichiers en bas à droite */}
-                      <div className="flex justify-end">
+                      {/* Nombre de fichiers et boutons d'action */}
+                      <div className="flex justify-between items-center">
+                        <div className="flex items-center space-x-2">
+                          <Button 
+                            size="sm" 
+                            variant="ghost" 
+                            className="text-red-500 hover:bg-red-50 rounded-full p-2"
+                            onClick={(e) => deleteDossier(dossier.id, e)}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                          <Button 
+                            size="sm" 
+                            variant="ghost" 
+                            className="text-blue-500 hover:bg-blue-50 rounded-full p-2"
+                            onClick={(e) => shareDossier(dossier.id, e)}
+                          >
+                            <UserPlus className="w-4 h-4" />
+                          </Button>
+                        </div>
                         <span className="text-xs text-gray-400">
                           {dossier.documents?.length || 0} Files Inside
                         </span>
