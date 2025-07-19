@@ -3620,10 +3620,10 @@ export default function MarwyckCopilot() {
                 </div>
               </div>
 
-              {/* Zone de drag & drop - hauteur réduite */}
+              {/* Zone de drag & drop - icône sans fond */}
               <div className={`border-2 border-dashed ${darkMode ? 'border-gray-600 bg-gray-800' : 'border-gray-300 bg-gray-100'} rounded-xl p-3 text-center hover:border-black transition-colors`}>
-                <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mx-auto mb-2">
-                  <Upload className="w-5 h-5 text-gray-600" />
+                <div className="flex items-center justify-center mx-auto mb-2">
+                  <Upload className="w-8 h-8 text-gray-600" />
                 </div>
                 <h4 className={`text-sm font-semibold mb-1 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                   Drop files here
