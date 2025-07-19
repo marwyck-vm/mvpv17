@@ -2507,6 +2507,10 @@ export default function MarwyckCopilot() {
                   {dossiersList.map(dossier => (
                     <div 
                       key={dossier.id} 
+                      onClick={() => {
+                        setSelectedFileForDetails(dossier)
+                        setShowFileDetailsModal(true)
+                      }}
                       className={`bg-white rounded-xl border border-gray-200 p-6 cursor-pointer transition-all duration-300 hover:shadow-lg hover:shadow-black/10 hover:-translate-y-1 hover:border-gray-300 h-40 flex flex-col`}
                     >
                       {/* Header avec titre et type */}
