@@ -149,6 +149,75 @@ export default function MarwyckCopilot() {
     ))
   }
 
+  // Fonction pour mettre à jour un dossier
+  const updateDossier = (dossierId, updates) => {
+    setDossiersList(prevList => 
+      prevList.map(dossier => 
+        dossier.id === dossierId ? { ...dossier, ...updates } : dossier
+      )
+    )
+  }
+
+  // Fonction pour changer le type de dossier (Sale/Purchase/Rental)
+  const switchDossierType = (dossierId) => {
+    const typeOrder = ['Sale', 'Purchase', 'Rental']
+    setDossiersList(prevList => 
+      prevList.map(dossier => {
+        if (dossier.id === dossierId) {
+          const currentIndex = typeOrder.indexOf(dossier.type)
+          const nextIndex = (currentIndex + 1) % typeOrder.length
+          const newType = typeOrder[nextIndex]
+          
+          // Générer de nouveaux documents selon le type
+          let newDocuments = []
+          if (newType === 'Sale') {
+            newDocuments = [
+              { id: 1, name: 'Listing Agreement', status: 'none' },
+              { id: 2, name: 'Property Disclosure Forms', status: 'none' },
+              { id: 3, name: 'Comparative Market Analysis (CMA)', status: 'none' },
+              { id: 4, name: 'Property Inspection Report', status: 'none' }
+            ]
+          } else if (newType === 'Purchase') {
+            newDocuments = [
+              { id: 1, name: 'Purchase Agreement', status: 'none' },
+              { id: 2, name: 'Loan Pre-approval', status: 'none' },
+              { id: 3, name: 'Property Inspection Report', status: 'none' }
+            ]
+          } else if (newType === 'Rental') {
+            newDocuments = [
+              { id: 1, name: 'Rental Application Form', status: 'none' },
+              { id: 2, name: 'Lease Agreement', status: 'none' }
+            ]
+          }
+          
+          return { ...dossier, type: newType, documents: newDocuments }
+        }
+        return dossier
+      })
+    )
+  }
+
+  // Gérer l'ouverture du modal File Details
+  const openFileDetails = (dossier) => {
+    setSelectedFileForDetails(dossier)
+    setFileTitle(dossier.title || '')
+    setFileAddress(dossier.address || '')
+    setFileContacts(dossier.contacts || [])
+    setShowFileDetailsModal(true)
+  }
+
+  // Sauvegarder les changements du modal File Details
+  const saveFileDetails = () => {
+    if (selectedFileForDetails) {
+      updateDossier(selectedFileForDetails.id, {
+        title: fileTitle,
+        address: fileAddress,
+        contacts: fileContacts
+      })
+    }
+    setShowFileDetailsModal(false)
+  }
+
   // Function to get status color
   const getStatusColor = (status) => {
     switch (status) {
