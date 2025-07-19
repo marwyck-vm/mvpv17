@@ -3323,7 +3323,7 @@ export default function MarwyckCopilot() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => removeContact(index)}
+                          onClick={() => removeEditingContact(index)}
                           className="p-1 text-red-500 hover:text-red-700 rounded-full"
                         >
                           <Trash2 className="w-4 h-4" />
