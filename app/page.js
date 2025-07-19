@@ -3563,6 +3563,17 @@ export default function MarwyckCopilot() {
                       ))}
                     </div>
                   </div>
+                  
+                  {/* Bouton Save */}
+                  <div className="pt-4">
+                    <Button 
+                      onClick={() => setShowFileDetailsModal(false)}
+                      className="w-full bg-black hover:bg-gray-800 text-white rounded-full py-2"
+                    >
+                      <Save className="w-4 h-4 mr-2" />
+                      Save
+                    </Button>
+                  </div>
                 </div>
               )}
             </div>
