@@ -83,6 +83,7 @@ export default function MarwyckCopilot() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [currentWeek, setCurrentWeek] = useState(0)
   const [selectedClient, setSelectedClient] = useState('general')
+  const [currentBaseFile, setCurrentBaseFile] = useState('general') // Track the base file separately
   const [messages, setMessages] = useState({
     general: [
       {
