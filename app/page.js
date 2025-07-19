@@ -158,22 +158,44 @@ export default function MarwyckCopilot() {
     )
   }
 
-  // Fonction pour changer le type de dossier (Sale/Purchase/Rental)
-  const switchDossierType = (dossierId) => {
-    const typeOrder = ['Sale', 'Purchase', 'Rental']
-    setDossiersList(prevList => 
-      prevList.map(dossier => {
-        if (dossier.id === dossierId) {
-          const currentIndex = typeOrder.indexOf(dossier.type)
-          const nextIndex = (currentIndex + 1) % typeOrder.length
-          const newType = typeOrder[nextIndex]
-          
-          // Ne changer que le type, garder les documents existants
-          return { ...dossier, type: newType }
-        }
-        return dossier
+  // Fonction pour changer le type depuis le modal File Details
+  const changeFileDetailsType = (newType) => {
+    if (selectedFileForDetails) {
+      // Générer les nouveaux documents selon le type
+      let newDocuments = []
+      if (newType === 'Sale') {
+        newDocuments = [
+          { id: 1, name: 'Listing Agreement', status: 'none' },
+          { id: 2, name: 'Property Disclosure Forms', status: 'none' },
+          { id: 3, name: 'Comparative Market Analysis (CMA)', status: 'none' },
+          { id: 4, name: 'Property Inspection Report', status: 'none' }
+        ]
+      } else if (newType === 'Purchase') {
+        newDocuments = [
+          { id: 1, name: 'Purchase Agreement', status: 'none' },
+          { id: 2, name: 'Loan Pre-approval', status: 'none' },
+          { id: 3, name: 'Property Inspection Report', status: 'none' }
+        ]
+      } else if (newType === 'Rental') {
+        newDocuments = [
+          { id: 1, name: 'Rental Application Form', status: 'none' },
+          { id: 2, name: 'Lease Agreement', status: 'none' }
+        ]
+      }
+
+      // Mettre à jour le dossier avec le nouveau type et les nouveaux documents
+      updateDossier(selectedFileForDetails.id, {
+        type: newType,
+        documents: newDocuments
       })
-    )
+
+      // Mettre à jour l'état local du modal
+      setSelectedFileForDetails({
+        ...selectedFileForDetails,
+        type: newType,
+        documents: newDocuments
+      })
+    }
   }
 
   // Gérer l'ouverture du modal File Details
