@@ -3483,58 +3483,58 @@ export default function MarwyckCopilot() {
                         />
                       </div>
 
-                      {/* Contacts - reste fixe avec taille réduite */}
+                      {/* Contacts - reste fixe avec espacement corrigé */}
                       <div>
                         <label className={`block text-sm font-semibold mb-3 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                           Contacts
                         </label>
                         <div className="space-y-2">
                           {/* Contact 1 */}
-                          <div className="flex items-center space-x-2">
+                          <div className="flex items-center space-x-1.5">
                             <input
                               type="text"
                               placeholder="Name"
-                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                              className={`flex-1 px-2.5 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                             <input
                               type="email"
                               placeholder="Email"
-                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                              className={`flex-1 px-2.5 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                             <input
                               type="tel"
                               placeholder="Phone"
-                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                              className={`flex-1 px-2.5 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                           </div>
                           {/* Contact 2 */}
-                          <div className="flex items-center space-x-2">
+                          <div className="flex items-center space-x-1.5">
                             <input
                               type="text"
                               placeholder="Name"
-                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                              className={`flex-1 px-2.5 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                             <input
                               type="email"
                               placeholder="Email"
-                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                              className={`flex-1 px-2.5 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                             <input
                               type="tel"
                               placeholder="Phone"
-                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                              className={`flex-1 px-2.5 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    {/* Required Documents - avec scrollbar */}
+                    {/* Required Documents - avec scrollbar sans fond */}
                     <div className="flex-1 min-h-0 flex flex-col">
                       <label className={`block text-sm font-semibold mb-3 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                         Required Documents
                       </label>
-                      <div className="flex-1 overflow-y-auto space-y-2 pr-2" style={{ scrollbarWidth: 'thin', scrollbarColor: '#9CA3AF #F3F4F6' }}>
+                      <div className="flex-1 overflow-y-auto space-y-2 pr-2" style={{ scrollbarWidth: 'thin', scrollbarColor: '#9CA3AF transparent' }}>
                         {selectedFileForDetails.documents?.map(doc => (
                           <div key={doc.id} className={`flex items-center justify-between p-3 rounded-xl border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'} hover:border-gray-400 transition-all duration-200`}>
                             <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
@@ -3556,8 +3556,8 @@ export default function MarwyckCopilot() {
                       </div>
                     </div>
                     
-                    {/* Bouton Save fixé en bas */}
-                    <div className="pt-4 border-t border-gray-200 mt-4">
+                    {/* Bouton Save aligné avec le bas de Imported Files */}
+                    <div className="pt-6 border-t border-gray-200 mt-6">
                       <Button 
                         onClick={() => setShowFileDetailsModal(false)}
                         className="w-full bg-black hover:bg-gray-800 text-white rounded-full py-2.5 font-medium"
