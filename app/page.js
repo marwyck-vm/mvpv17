@@ -158,6 +158,24 @@ export default function MarwyckCopilot() {
     )
   }
 
+  // Fonction pour changer le type de dossier (Sale/Purchase/Rental) - garde les documents
+  const switchDossierType = (dossierId) => {
+    const typeOrder = ['Sale', 'Purchase', 'Rental']
+    setDossiersList(prevList => 
+      prevList.map(dossier => {
+        if (dossier.id === dossierId) {
+          const currentIndex = typeOrder.indexOf(dossier.type)
+          const nextIndex = (currentIndex + 1) % typeOrder.length
+          const newType = typeOrder[nextIndex]
+          
+          // Ne changer que le type, garder les documents existants
+          return { ...dossier, type: newType }
+        }
+        return dossier
+      })
+    )
+  }
+
   // Fonction pour changer le type depuis le modal File Details
   const changeFileDetailsType = (newType) => {
     if (selectedFileForDetails) {
