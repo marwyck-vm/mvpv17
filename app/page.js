@@ -2714,15 +2714,9 @@ export default function MarwyckCopilot() {
                           </p>
                         </div>
                         <div>
-                          <button 
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              switchDossierType(dossier.id)
-                            }}
-                            className="text-xs font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full transition-colors duration-200"
-                          >
+                          <span className="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
                             {dossier.type}
-                          </button>
+                          </span>
                         </div>
                       </div>
 
