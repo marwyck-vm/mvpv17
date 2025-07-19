@@ -3624,10 +3624,22 @@ export default function MarwyckCopilot() {
             {/* Partie gauche - Informations modifiables */}
             <div className={`w-[55%] ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl`}>
               <div className="p-6 h-full flex flex-col">
-                <div className="mb-6">
+                <div className="mb-6 flex items-center justify-between">
                   <h3 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                     File Details
                   </h3>
+                  <div className="flex items-center">
+                    <Select value={selectedFileForDetails?.type || 'Sale'} onValueChange={changeFileDetailsType}>
+                      <SelectTrigger className="w-32 rounded-full">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="rounded-xl">
+                        <SelectItem value="Sale" className="rounded-lg">Sale</SelectItem>
+                        <SelectItem value="Purchase" className="rounded-lg">Purchase</SelectItem>
+                        <SelectItem value="Rental" className="rounded-lg">Rental</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
                 
                 {selectedFileForDetails && (
