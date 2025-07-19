@@ -2430,10 +2430,10 @@ export default function MarwyckCopilot() {
                       <Button 
                         onClick={handleSendMessage}
                         disabled={!inputMessage.trim()}
-                        className="text-white p-3 rounded-full shadow-md"
+                        className="text-white px-4 py-2 rounded-full shadow-md hover:shadow-lg transition-all"
                         style={{ backgroundColor: inputMessage.trim() ? '#000000' : '#666666' }}
                       >
-                        <ArrowUp className="w-4 h-4" />
+                        <Send className="w-4 h-4" />
                       </Button>
                     </div>
                   </div>
