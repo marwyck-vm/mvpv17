@@ -2323,7 +2323,7 @@ export default function MarwyckCopilot() {
                         </h2>
                         <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                           {selectedClient !== 'general' ? 
-                            `Working on: ${clients.find(c => c.id === selectedClient)?.name}` : 
+                            'General conversation' : 
                             'General conversation'
                           }
                         </p>
