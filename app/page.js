@@ -900,11 +900,8 @@ export default function MarwyckCopilot() {
   const handleChatReset = () => {
     setInputMessage('')
     
-    // Determine the base file (extract from current selectedClient if it's a generated chat ID)
-    const baseFile = selectedClient.includes('_') ? selectedClient.split('_')[0] : selectedClient
-    
-    // Create a new chat ID based on current file and timestamp
-    const newChatId = `${baseFile}_${Date.now()}`
+    // Create a new chat ID based on current base file and timestamp
+    const newChatId = `${currentBaseFile}_${Date.now()}`
     
     // Create initial AI message
     const initialMessage = {
@@ -914,7 +911,7 @@ export default function MarwyckCopilot() {
       timestamp: new Date()
     }
     
-    // Create new chat for the current file
+    // Create new chat for the current base file
     setMessages(prev => ({
       ...prev,
       [newChatId]: [initialMessage]
@@ -923,7 +920,7 @@ export default function MarwyckCopilot() {
     // Switch to the new chat immediately
     setSelectedClient(newChatId)
     
-    console.log('New chat created for file:', baseFile, 'New chat ID:', newChatId)
+    console.log('New chat created for base file:', currentBaseFile, 'New chat ID:', newChatId)
   }
   
   // Handle SMS message send
