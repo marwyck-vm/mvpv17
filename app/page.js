@@ -3569,7 +3569,7 @@ export default function MarwyckCopilot() {
                     </Button>
                   </div>
                 </div>
-              )}
+              </div>
             </div>
 
             {/* Partie droite - Fichiers importés */}
