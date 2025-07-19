@@ -368,7 +368,7 @@ export default function MarwyckCopilot() {
     return messages[latestChatId] || []
   }
 
-  // Add message to current client
+  // Add message to current client or active chat
   const addMessageToClient = (message) => {
     setMessages(prev => ({
       ...prev,
