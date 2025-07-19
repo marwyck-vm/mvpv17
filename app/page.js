@@ -168,29 +168,8 @@ export default function MarwyckCopilot() {
           const nextIndex = (currentIndex + 1) % typeOrder.length
           const newType = typeOrder[nextIndex]
           
-          // Générer de nouveaux documents selon le type
-          let newDocuments = []
-          if (newType === 'Sale') {
-            newDocuments = [
-              { id: 1, name: 'Listing Agreement', status: 'none' },
-              { id: 2, name: 'Property Disclosure Forms', status: 'none' },
-              { id: 3, name: 'Comparative Market Analysis (CMA)', status: 'none' },
-              { id: 4, name: 'Property Inspection Report', status: 'none' }
-            ]
-          } else if (newType === 'Purchase') {
-            newDocuments = [
-              { id: 1, name: 'Purchase Agreement', status: 'none' },
-              { id: 2, name: 'Loan Pre-approval', status: 'none' },
-              { id: 3, name: 'Property Inspection Report', status: 'none' }
-            ]
-          } else if (newType === 'Rental') {
-            newDocuments = [
-              { id: 1, name: 'Rental Application Form', status: 'none' },
-              { id: 2, name: 'Lease Agreement', status: 'none' }
-            ]
-          }
-          
-          return { ...dossier, type: newType, documents: newDocuments }
+          // Ne changer que le type, garder les documents existants
+          return { ...dossier, type: newType }
         }
         return dossier
       })
