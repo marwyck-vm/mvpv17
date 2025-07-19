@@ -639,7 +639,7 @@ export default function MarwyckCopilot() {
         id: Date.now() + index,
         name: doc.name,
         type: 'PDF',
-        status: 'missing',
+        status: 'none',
         required: doc.required
       }))
     }
