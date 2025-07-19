@@ -3457,9 +3457,9 @@ export default function MarwyckCopilot() {
                 
                 {selectedFileForDetails && (
                   <>
-                    {/* Contenu principal sans scrollbar */}
-                    <div className="flex-1 overflow-y-auto space-y-5" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                      {/* Titre modifiable - taille réduite */}
+                    {/* Title et Contacts - fixes en haut */}
+                    <div className="space-y-5 mb-5">
+                      {/* Titre modifiable - reste fixe */}
                       <div>
                         <label className={`block text-sm font-semibold mb-2 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                           Title
@@ -3471,7 +3471,7 @@ export default function MarwyckCopilot() {
                         />
                       </div>
 
-                      {/* Adresse modifiable - taille réduite */}
+                      {/* Adresse modifiable */}
                       <div>
                         <label className={`block text-sm font-semibold mb-2 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                           Address
@@ -3483,76 +3483,76 @@ export default function MarwyckCopilot() {
                         />
                       </div>
 
-                      {/* Contacts - taille augmentée */}
+                      {/* Contacts - reste fixe avec taille réduite */}
                       <div>
                         <label className={`block text-sm font-semibold mb-3 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                           Contacts
                         </label>
-                        <div className="space-y-3">
+                        <div className="space-y-2">
                           {/* Contact 1 */}
-                          <div className="flex items-center space-x-3">
+                          <div className="flex items-center space-x-2">
                             <input
                               type="text"
                               placeholder="Name"
-                              className={`flex-1 px-4 py-3 rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                             <input
                               type="email"
                               placeholder="Email"
-                              className={`flex-1 px-4 py-3 rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                             <input
                               type="tel"
                               placeholder="Phone"
-                              className={`flex-1 px-4 py-3 rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                           </div>
                           {/* Contact 2 */}
-                          <div className="flex items-center space-x-3">
+                          <div className="flex items-center space-x-2">
                             <input
                               type="text"
                               placeholder="Name"
-                              className={`flex-1 px-4 py-3 rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                             <input
                               type="email"
                               placeholder="Email"
-                              className={`flex-1 px-4 py-3 rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                             <input
                               type="tel"
                               placeholder="Phone"
-                              className={`flex-1 px-4 py-3 rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                              className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                           </div>
                         </div>
                       </div>
+                    </div>
 
-                      {/* Documents nécessaires - design propre et professionnel */}
-                      <div>
-                        <label className={`block text-sm font-semibold mb-3 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
-                          Required Documents
-                        </label>
-                        <div className="space-y-2" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                          {selectedFileForDetails.documents?.map(doc => (
-                            <div key={doc.id} className={`flex items-center justify-between p-3 rounded-xl border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'} hover:border-gray-400 transition-all duration-200`}>
-                              <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
-                                {doc.name}
-                              </span>
-                              <Select defaultValue={doc.status || 'none'}>
-                                <SelectTrigger className={`w-28 rounded-full text-xs ${getStatusColor(doc.status || 'none')}`}>
-                                  <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent className="rounded-xl">
-                                  <SelectItem value="none" className="rounded-lg">None</SelectItem>
-                                  <SelectItem value="missing" className="rounded-lg">Missing</SelectItem>
-                                  <SelectItem value="pending" className="rounded-lg">Pending</SelectItem>
-                                  <SelectItem value="completed" className="rounded-lg">Completed</SelectItem>
-                                </SelectContent>
-                              </Select>
-                            </div>
-                          ))}
-                        </div>
+                    {/* Required Documents - avec scrollbar */}
+                    <div className="flex-1 min-h-0 flex flex-col">
+                      <label className={`block text-sm font-semibold mb-3 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+                        Required Documents
+                      </label>
+                      <div className="flex-1 overflow-y-auto space-y-2 pr-2" style={{ scrollbarWidth: 'thin', scrollbarColor: '#9CA3AF #F3F4F6' }}>
+                        {selectedFileForDetails.documents?.map(doc => (
+                          <div key={doc.id} className={`flex items-center justify-between p-3 rounded-xl border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'} hover:border-gray-400 transition-all duration-200`}>
+                            <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+                              {doc.name}
+                            </span>
+                            <Select defaultValue={doc.status || 'none'}>
+                              <SelectTrigger className={`w-28 rounded-full text-xs ${getStatusColor(doc.status || 'none')}`}>
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent className="rounded-xl">
+                                <SelectItem value="none" className="rounded-lg">None</SelectItem>
+                                <SelectItem value="missing" className="rounded-lg">Missing</SelectItem>
+                                <SelectItem value="pending" className="rounded-lg">Pending</SelectItem>
+                                <SelectItem value="completed" className="rounded-lg">Completed</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        ))}
                       </div>
                     </div>
                     
