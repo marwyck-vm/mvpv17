@@ -279,9 +279,48 @@ export default function MarwyckCopilot() {
 
   // Mock data
   const dossiers = [
-    { id: 1, address: '123 Oak Street', type: 'Sale', status: 'active', priority: 'high' },
-    { id: 2, address: '456 Pine Avenue', type: 'Purchase', status: 'pending', priority: 'medium' },
-    { id: 3, address: '789 Elm Drive', type: 'Rental', status: 'completed', priority: 'low' }
+    { 
+      id: 1, 
+      title: '',
+      address: '123 Oak Street', 
+      type: 'Sale', 
+      status: 'active', 
+      priority: 'high',
+      contacts: [],
+      documents: [
+        { id: 1, name: 'Listing Agreement', status: 'completed' },
+        { id: 2, name: 'Property Disclosure Forms', status: 'pending' },
+        { id: 3, name: 'Comparative Market Analysis (CMA)', status: 'none' },
+        { id: 4, name: 'Property Inspection Report', status: 'missing' }
+      ]
+    },
+    { 
+      id: 2, 
+      title: '',
+      address: '456 Pine Avenue', 
+      type: 'Purchase', 
+      status: 'pending', 
+      priority: 'medium',
+      contacts: [],
+      documents: [
+        { id: 1, name: 'Purchase Agreement', status: 'completed' },
+        { id: 2, name: 'Loan Pre-approval', status: 'pending' },
+        { id: 3, name: 'Property Inspection Report', status: 'none' }
+      ]
+    },
+    { 
+      id: 3, 
+      title: '',
+      address: '789 Elm Drive', 
+      type: 'Rental', 
+      status: 'completed', 
+      priority: 'low',
+      contacts: [],
+      documents: [
+        { id: 1, name: 'Rental Application Form', status: 'completed' },
+        { id: 2, name: 'Lease Agreement', status: 'completed' }
+      ]
+    }
   ]
 
   const documentsTemplates = {
