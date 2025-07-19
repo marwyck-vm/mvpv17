@@ -2361,7 +2361,7 @@ export default function MarwyckCopilot() {
                             >
                               <p className="text-sm whitespace-pre-wrap leading-relaxed">{message.content}</p>
                               <p className={`text-xs mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                {message.timestamp.toLocaleTimeString()}
+                                {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                               </p>
                             </div>
                             {message.role === 'user' && (
