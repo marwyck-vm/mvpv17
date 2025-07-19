@@ -3426,7 +3426,7 @@ export default function MarwyckCopilot() {
         <DialogContent className={`max-w-7xl !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <div className="h-[85vh] flex gap-8">
             {/* Partie gauche - Informations modifiables */}
-            <div className={`w-1/2 p-6 ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl`}>
+            <div className={`w-[45%] p-6 ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl`}>
               <div className="mb-6">
                 <h3 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                   File Details
@@ -3459,66 +3459,12 @@ export default function MarwyckCopilot() {
                     />
                   </div>
 
-                  {/* Contacts (max 2) */}
+                  {/* Contacts */}
                   <div>
                     <label className={`block text-sm font-semibold mb-3 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
-                      Contacts (Max 2)
+                      Contacts
                     </label>
                     <div className="space-y-3">
-                      {/* Contact 1 */}
-                      <div className={`p-3 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
-                        <div className="flex items-center justify-between mb-2">
-                          <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Contact 1</span>
-                          <Button size="sm" variant="ghost" className="text-red-500 hover:bg-red-50 rounded-full p-1">
-                            <X className="w-4 h-4" />
-                          </Button>
-                        </div>
-                        <div className="flex space-x-2">
-                          <input
-                            type="text"
-                            placeholder="Full Name"
-                            className={`flex-1 px-3 py-1.5 rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-200 text-gray-900'}`}
-                          />
-                          <input
-                            type="email"
-                            placeholder="Email"
-                            className={`flex-1 px-3 py-1.5 rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-200 text-gray-900'}`}
-                          />
-                          <input
-                            type="tel"
-                            placeholder="Phone"
-                            className={`flex-1 px-3 py-1.5 rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-200 text-gray-900'}`}
-                          />
-                        </div>
-                      </div>
-
-                      {/* Contact 2 */}
-                      <div className={`p-3 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
-                        <div className="flex items-center justify-between mb-2">
-                          <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Contact 2</span>
-                          <Button size="sm" variant="ghost" className="text-red-500 hover:bg-red-50 rounded-full p-1">
-                            <X className="w-4 h-4" />
-                          </Button>
-                        </div>
-                        <div className="flex space-x-2">
-                          <input
-                            type="text"
-                            placeholder="Full Name"
-                            className={`flex-1 px-3 py-1.5 rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-200 text-gray-900'}`}
-                          />
-                          <input
-                            type="email"
-                            placeholder="Email"
-                            className={`flex-1 px-3 py-1.5 rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-200 text-gray-900'}`}
-                          />
-                          <input
-                            type="tel"
-                            placeholder="Phone"
-                            className={`flex-1 px-3 py-1.5 rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-200 text-gray-900'}`}
-                          />
-                        </div>
-                      </div>
-
                       <Button variant="outline" className="w-full rounded-full border-2 border-dashed border-gray-300 py-2 hover:border-black transition-colors">
                         <Plus className="w-4 h-4 mr-2" />
                         Add Contact
@@ -3526,30 +3472,13 @@ export default function MarwyckCopilot() {
                     </div>
                   </div>
 
-                  {/* Type de dossier */}
-                  <div>
-                    <label className={`block text-sm font-semibold mb-2 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
-                      File Type
-                    </label>
-                    <Select defaultValue={selectedFileForDetails.type}>
-                      <SelectTrigger className={`w-full px-3 py-1.5 rounded-full border-2 ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-200 text-gray-900'}`}>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent className="rounded-xl">
-                        <SelectItem value="sale" className="rounded-lg">Sale</SelectItem>
-                        <SelectItem value="purchase" className="rounded-lg">Purchase</SelectItem>
-                        <SelectItem value="rental" className="rounded-lg">Rental</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
                   {/* Documents nécessaires */}
                   <div>
                     <label className={`block text-sm font-semibold mb-2 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                       Required Documents
                     </label>
-                    <div className="space-y-2">
-                      {selectedFileForDetails.documents?.slice(0, 4).map(doc => (
+                    <div className="space-y-2 max-h-64 overflow-y-auto" style={{ scrollbarWidth: 'thin' }}>
+                      {selectedFileForDetails.documents?.map(doc => (
                         <div key={doc.id} className={`flex items-center justify-between p-3 rounded-full border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} hover:border-gray-400 transition-colors`}>
                           <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                             {doc.name}
@@ -3574,7 +3503,7 @@ export default function MarwyckCopilot() {
             </div>
 
             {/* Partie droite - Fichiers importés */}
-            <div className={`w-1/2 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'} rounded-xl p-6 border flex flex-col`}>
+            <div className={`w-[55%] ${darkMode ? 'bg-gray-900' : 'bg-gray-50'} rounded-xl p-6 border flex flex-col`}>
               <h3 className={`text-2xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                 Imported Files
               </h3>
