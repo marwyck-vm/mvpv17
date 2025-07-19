@@ -2331,7 +2331,7 @@ export default function MarwyckCopilot() {
                         onClick={() => setShowAIHelp(true)}
                         className={`rounded-full ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-600 hover:bg-gray-100'}`}
                       >
-                        <Info className="w-4 h-4" />
+                        <Lightbulb className="w-4 h-4" />
                       </Button>
                     </div>
                   </div>
