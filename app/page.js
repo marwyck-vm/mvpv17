@@ -3456,7 +3456,7 @@ export default function MarwyckCopilot() {
               </div>
               
               {selectedFileForDetails && (
-                <div className="space-y-5">
+                <div className="space-y-3">
                   {/* Titre modifiable */}
                   <div>
                     <label className={`block text-sm font-semibold mb-2 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
