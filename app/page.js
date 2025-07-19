@@ -1095,7 +1095,7 @@ export default function MarwyckCopilot() {
   }
 
   // Function to remove contact
-  const removeContact = (contactIndex) => {
+  const removeEditingContact = (contactIndex) => {
     if (editingDossier) {
       const newContacts = [...(editingDossier.contacts || [])];
       newContacts.splice(contactIndex, 1);
