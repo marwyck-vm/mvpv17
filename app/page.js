@@ -3504,10 +3504,54 @@ export default function MarwyckCopilot() {
                       Contacts
                     </label>
                     <div className="space-y-3">
-                      <Button variant="outline" className="w-full rounded-full border-2 border-dashed border-gray-300 py-2 hover:border-black transition-colors">
-                        <Plus className="w-4 h-4 mr-2" />
-                        Add Contact
-                      </Button>
+                      {fileContacts.map(contact => (
+                        <div key={contact.id} className={`p-3 rounded-xl border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
+                          <div className="flex justify-between items-start mb-3">
+                            <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>Contact {fileContacts.indexOf(contact) + 1}</span>
+                            <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              onClick={() => removeContact(contact.id)}
+                              className="text-red-500 hover:bg-red-50 rounded-full p-1"
+                            >
+                              <X className="w-4 h-4" />
+                            </Button>
+                          </div>
+                          <div className="space-y-2">
+                            <input
+                              type="text"
+                              placeholder="Name"
+                              value={contact.name}
+                              onChange={(e) => updateContact(contact.id, 'name', e.target.value)}
+                              className={`w-full px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                            />
+                            <input
+                              type="email"
+                              placeholder="Email"
+                              value={contact.email}
+                              onChange={(e) => updateContact(contact.id, 'email', e.target.value)}
+                              className={`w-full px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                            />
+                            <input
+                              type="tel"
+                              placeholder="Phone number"
+                              value={contact.phone}
+                              onChange={(e) => updateContact(contact.id, 'phone', e.target.value)}
+                              className={`w-full px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                      {fileContacts.length < 2 && (
+                        <Button 
+                          variant="outline" 
+                          onClick={addContact}
+                          className="w-full rounded-full border-2 border-dashed border-gray-300 py-2 hover:border-black transition-colors"
+                        >
+                          <Plus className="w-4 h-4 mr-2" />
+                          Add Contact
+                        </Button>
+                      )}
                     </div>
                   </div>
 
