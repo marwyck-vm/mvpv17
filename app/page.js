@@ -2338,7 +2338,7 @@ export default function MarwyckCopilot() {
                         size="sm" 
                         variant="ghost"
                         onClick={() => setShowChatDeleteConfirm(true)}
-                        className={`rounded-full ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-600 hover:bg-gray-100'}`}
+                        className={`rounded-full text-red-500 hover:text-red-600 ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'}`}
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>
@@ -2346,7 +2346,7 @@ export default function MarwyckCopilot() {
                         size="sm" 
                         variant="ghost"
                         onClick={() => setShowAIHelp(true)}
-                        className={`rounded-full ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-600 hover:bg-gray-100'}`}
+                        className={`rounded-full text-yellow-500 hover:text-yellow-600 ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'}`}
                       >
                         <Lightbulb className="w-4 h-4" />
                       </Button>
