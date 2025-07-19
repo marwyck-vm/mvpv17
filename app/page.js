@@ -583,15 +583,18 @@ export default function MarwyckCopilot() {
   }
 
   const addNewDossier = (type) => {
+    const validType = type || 'sale'
+    const template = documentsTemplates[validType] || documentsTemplates['sale'] || []
+    
     const newDossier = {
       id: Date.now(),
       title: 'New File',
       address: 'New address',
-      type: type,
+      type: validType,
       status: 'active',
       priority: 'medium',
       contacts: [],
-      documents: documentsTemplates[type].map((doc, index) => ({
+      documents: template.map((doc, index) => ({
         id: Date.now() + index,
         name: doc.name,
         type: 'PDF',
