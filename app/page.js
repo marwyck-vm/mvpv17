@@ -123,6 +123,8 @@ export default function MarwyckCopilot() {
   const [showFileDetailsModal, setShowFileDetailsModal] = useState(false)
   const [selectedFileForDetails, setSelectedFileForDetails] = useState(null)
   const [fileContacts, setFileContacts] = useState([])
+  const [fileTitle, setFileTitle] = useState('')
+  const [fileAddress, setFileAddress] = useState('')
 
   // Functions for managing contacts
   const addContact = () => {
