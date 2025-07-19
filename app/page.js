@@ -2637,11 +2637,7 @@ export default function MarwyckCopilot() {
                   {dossiersList.map(dossier => (
                     <div 
                       key={dossier.id} 
-                      onClick={() => {
-                        setSelectedFileForDetails(dossier)
-                        setFileContacts(dossier.contacts || [])
-                        setShowFileDetailsModal(true)
-                      }}
+                      onClick={() => openFileDetails(dossier)}
                       className={`bg-white rounded-xl border border-gray-200 p-6 cursor-pointer transition-all duration-300 hover:shadow-lg hover:shadow-black/10 hover:-translate-y-1 hover:border-gray-300 h-40 flex flex-col`}
                     >
                       {/* Header avec titre et type */}
@@ -2655,9 +2651,15 @@ export default function MarwyckCopilot() {
                           </p>
                         </div>
                         <div>
-                          <span className="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-lg">
+                          <button 
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              switchDossierType(dossier.id)
+                            }}
+                            className="text-xs font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full transition-colors duration-200"
+                          >
                             {dossier.type}
-                          </span>
+                          </button>
                         </div>
                       </div>
 
@@ -2667,7 +2669,7 @@ export default function MarwyckCopilot() {
                       {/* Nombre de fichiers en bas à droite */}
                       <div className="flex justify-end">
                         <span className="text-xs text-gray-400">
-                          {dossier.documents.length} Files Inside
+                          {dossier.documents?.length || 0} Files Inside
                         </span>
                       </div>
                     </div>
