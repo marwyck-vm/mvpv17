@@ -3423,67 +3423,77 @@ export default function MarwyckCopilot() {
 
       {/* Modal de détails du fichier */}
       <Dialog open={showFileDetailsModal} onOpenChange={setShowFileDetailsModal} modal={false}>
-        <DialogContent className={`max-w-6xl !rounded-2xl shadow-xl border p-0 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
-          <div className="h-[80vh] flex">
+        <DialogContent className={`max-w-7xl !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
+          <div className="h-[85vh] flex gap-8">
             {/* Partie gauche - Informations modifiables */}
-            <div className={`w-1/2 p-6 ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} rounded-l-2xl border-r`}>
-              <h3 className={`text-xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                File Details
-              </h3>
+            <div className={`w-1/2 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'} rounded-xl p-6 border`}>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                  File Details
+                </h3>
+                <Button 
+                  size="sm" 
+                  variant="ghost"
+                  onClick={() => setShowFileDetailsModal(false)}
+                  className={`rounded-full ${darkMode ? 'text-gray-400 hover:text-gray-200' : 'text-gray-500 hover:text-gray-700'}`}
+                >
+                  <X className="w-5 h-5" />
+                </Button>
+              </div>
               
               {selectedFileForDetails && (
-                <div className="space-y-6">
+                <div className="space-y-6 overflow-y-auto max-h-[70vh]" style={{ scrollbarWidth: 'thin' }}>
                   {/* Titre modifiable */}
                   <div>
-                    <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    <label className={`block text-sm font-semibold mb-3 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                       Title
                     </label>
                     <input
                       type="text"
                       defaultValue={selectedFileForDetails.title || selectedFileForDetails.address}
-                      className={`w-full px-3 py-2 rounded-lg border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                      className={`w-full px-4 py-3 rounded-xl border-2 focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-800 border-gray-600 text-white focus:border-gray-400' : 'bg-white border-gray-200 text-gray-900'}`}
                     />
                   </div>
 
                   {/* Adresse modifiable */}
                   <div>
-                    <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    <label className={`block text-sm font-semibold mb-3 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                       Address
                     </label>
                     <input
                       type="text"
                       defaultValue={selectedFileForDetails.address}
-                      className={`w-full px-3 py-2 rounded-lg border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                      className={`w-full px-4 py-3 rounded-xl border-2 focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-800 border-gray-600 text-white focus:border-gray-400' : 'bg-white border-gray-200 text-gray-900'}`}
                     />
                   </div>
 
                   {/* Contacts (max 2) */}
                   <div>
-                    <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    <label className={`block text-sm font-semibold mb-3 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                       Contacts (Max 2)
                     </label>
-                    <div className="space-y-2">
-                      <div className="flex items-center space-x-2">
+                    <div className="space-y-3">
+                      <div className="flex items-center space-x-3">
                         <input
                           type="text"
                           placeholder="Contact 1"
-                          className={`flex-1 px-3 py-2 rounded-lg border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                          className={`flex-1 px-4 py-3 rounded-xl border-2 focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-800 border-gray-600 text-white focus:border-gray-400' : 'bg-white border-gray-200 text-gray-900'}`}
                         />
-                        <Button size="sm" variant="outline" className="text-red-500">
+                        <Button size="sm" variant="ghost" className="text-red-500 hover:bg-red-50 rounded-full p-2">
                           <X className="w-4 h-4" />
                         </Button>
                       </div>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-3">
                         <input
                           type="text"
                           placeholder="Contact 2"
-                          className={`flex-1 px-3 py-2 rounded-lg border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                          className={`flex-1 px-4 py-3 rounded-xl border-2 focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-800 border-gray-600 text-white focus:border-gray-400' : 'bg-white border-gray-200 text-gray-900'}`}
                         />
-                        <Button size="sm" variant="outline" className="text-red-500">
+                        <Button size="sm" variant="ghost" className="text-red-500 hover:bg-red-50 rounded-full p-2">
                           <X className="w-4 h-4" />
                         </Button>
                       </div>
-                      <Button size="sm" variant="outline" className="w-full">
+                      <Button variant="outline" className="w-full rounded-xl border-2 border-dashed border-gray-300 py-3 hover:border-black transition-colors">
                         <Plus className="w-4 h-4 mr-2" />
                         Add Contact
                       </Button>
@@ -3492,41 +3502,41 @@ export default function MarwyckCopilot() {
 
                   {/* Type de dossier */}
                   <div>
-                    <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    <label className={`block text-sm font-semibold mb-3 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                       File Type
                     </label>
                     <Select defaultValue={selectedFileForDetails.type}>
-                      <SelectTrigger className={`w-full ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300 text-gray-900'}`}>
+                      <SelectTrigger className={`w-full px-4 py-3 rounded-xl border-2 ${darkMode ? 'bg-gray-800 border-gray-600 text-white' : 'bg-white border-gray-200 text-gray-900'}`}>
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="sale">Sale</SelectItem>
-                        <SelectItem value="purchase">Purchase</SelectItem>
-                        <SelectItem value="rental">Rental</SelectItem>
+                      <SelectContent className="rounded-xl">
+                        <SelectItem value="sale" className="rounded-lg">Sale</SelectItem>
+                        <SelectItem value="purchase" className="rounded-lg">Purchase</SelectItem>
+                        <SelectItem value="rental" className="rounded-lg">Rental</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
 
                   {/* Documents nécessaires */}
                   <div>
-                    <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    <label className={`block text-sm font-semibold mb-3 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                       Required Documents
                     </label>
-                    <div className={`max-h-64 overflow-y-auto space-y-2 ${darkMode ? 'scrollbar-thin scrollbar-thumb-gray-600' : 'scrollbar-thin scrollbar-thumb-gray-300'}`}>
-                      {selectedFileForDetails.documents?.map(doc => (
-                        <div key={doc.id} className={`flex items-center justify-between p-3 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-white'} border`}>
-                          <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    <div className="space-y-3 max-h-80 overflow-y-auto" style={{ scrollbarWidth: 'thin' }}>
+                      {selectedFileForDetails.documents?.slice(0, 8).map(doc => (
+                        <div key={doc.id} className={`flex items-center justify-between p-4 rounded-xl border-2 ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} hover:border-gray-400 transition-colors`}>
+                          <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                             {doc.name}
                           </span>
                           <Select defaultValue={doc.status}>
-                            <SelectTrigger className="w-24">
+                            <SelectTrigger className="w-32 rounded-lg">
                               <SelectValue />
                             </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="missing">Missing</SelectItem>
-                              <SelectItem value="pending">Pending</SelectItem>
-                              <SelectItem value="completed">Completed</SelectItem>
-                              <SelectItem value="failed">Failed</SelectItem>
+                            <SelectContent className="rounded-xl">
+                              <SelectItem value="missing" className="rounded-lg">Missing</SelectItem>
+                              <SelectItem value="pending" className="rounded-lg">Pending</SelectItem>
+                              <SelectItem value="completed" className="rounded-lg">Completed</SelectItem>
+                              <SelectItem value="failed" className="rounded-lg">Failed</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
@@ -3538,22 +3548,48 @@ export default function MarwyckCopilot() {
             </div>
 
             {/* Partie droite - Fichiers importés */}
-            <div className={`w-1/2 p-6 flex flex-col ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-r-2xl`}>
-              <h3 className={`text-xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+            <div className={`w-1/2 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'} rounded-xl p-6 border flex flex-col`}>
+              <h3 className={`text-2xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                 Imported Files
               </h3>
               
               {/* Liste des fichiers importés */}
-              <div className={`flex-1 overflow-y-auto mb-6 ${darkMode ? 'scrollbar-thin scrollbar-thumb-gray-600' : 'scrollbar-thin scrollbar-thumb-gray-300'}`}>
-                <div className="space-y-2">
-                  <div className={`p-3 rounded-lg border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'} flex items-center justify-between`}>
+              <div className="flex-1 mb-6 overflow-y-auto" style={{ scrollbarWidth: 'thin' }}>
+                <div className="space-y-3">
+                  <div className={`p-4 rounded-xl border-2 ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} flex items-center justify-between hover:border-gray-400 transition-colors`}>
                     <div className="flex items-center space-x-3">
-                      <FileText className="w-5 h-5 text-gray-500" />
-                      <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                        sample-document.pdf
-                      </span>
+                      <div className="w-10 h-10 rounded-lg bg-red-100 flex items-center justify-center">
+                        <FileText className="w-5 h-5 text-red-600" />
+                      </div>
+                      <div>
+                        <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+                          sample-document.pdf
+                        </span>
+                        <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                          245 KB • PDF
+                        </p>
+                      </div>
                     </div>
-                    <Button size="sm" variant="ghost" className="text-red-500">
+                    <Button size="sm" variant="ghost" className="text-red-500 hover:bg-red-50 rounded-full p-2">
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
+                  
+                  <div className={`p-4 rounded-xl border-2 ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} flex items-center justify-between hover:border-gray-400 transition-colors`}>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+                        <FileText className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <div>
+                        <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+                          contract.docx
+                        </span>
+                        <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                          128 KB • Word
+                        </p>
+                      </div>
+                    </div>
+                    <Button size="sm" variant="ghost" className="text-red-500 hover:bg-red-50 rounded-full p-2">
                       <Trash2 className="w-4 h-4" />
                     </Button>
                   </div>
@@ -3561,12 +3597,17 @@ export default function MarwyckCopilot() {
               </div>
 
               {/* Zone de drag & drop */}
-              <div className={`border-2 border-dashed ${darkMode ? 'border-gray-600 bg-gray-700' : 'border-gray-300 bg-gray-50'} rounded-lg p-8 text-center`}>
-                <Upload className={`w-12 h-12 ${darkMode ? 'text-gray-400' : 'text-gray-500'} mx-auto mb-4`} />
-                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'} mb-2`}>
-                  Drag and drop files here, or
+              <div className={`border-2 border-dashed ${darkMode ? 'border-gray-600 bg-gray-800' : 'border-gray-300 bg-gray-100'} rounded-xl p-8 text-center hover:border-black transition-colors`}>
+                <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center mx-auto mb-4">
+                  <Upload className="w-8 h-8 text-gray-600" />
+                </div>
+                <h4 className={`text-lg font-semibold mb-2 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+                  Drop files here
+                </h4>
+                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'} mb-4`}>
+                  Drag and drop files here, or click to browse
                 </p>
-                <Button variant="outline" size="sm">
+                <Button className="bg-black text-white hover:bg-gray-800 rounded-xl px-6 py-2">
                   Browse Files
                 </Button>
               </div>
