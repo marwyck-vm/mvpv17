@@ -123,6 +123,44 @@ export default function MarwyckCopilot() {
   const [showFileDetailsModal, setShowFileDetailsModal] = useState(false)
   const [selectedFileForDetails, setSelectedFileForDetails] = useState(null)
   const [fileContacts, setFileContacts] = useState([])
+
+  // Functions for managing contacts
+  const addContact = () => {
+    if (fileContacts.length < 2) {
+      const newContact = {
+        id: Date.now(),
+        name: '',
+        email: '',
+        phone: ''
+      }
+      setFileContacts([...fileContacts, newContact])
+    }
+  }
+
+  const removeContact = (contactId) => {
+    setFileContacts(fileContacts.filter(contact => contact.id !== contactId))
+  }
+
+  const updateContact = (contactId, field, value) => {
+    setFileContacts(fileContacts.map(contact => 
+      contact.id === contactId ? { ...contact, [field]: value } : contact
+    ))
+  }
+
+  // Function to get status color
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'missing':
+        return 'bg-red-100 text-red-800 border-red-200'
+      case 'pending':
+        return 'bg-orange-100 text-orange-800 border-orange-200'
+      case 'completed':
+        return 'bg-green-100 text-green-800 border-green-200'
+      case 'none':
+      default:
+        return 'bg-gray-100 text-gray-600 border-gray-200'
+    }
+  }
   const [accentColor, setAccentColor] = useState('#000000')
   const [showNewEventDialog, setShowNewEventDialog] = useState(false)
   const [showProposeDialog, setShowProposeDialog] = useState(false)
