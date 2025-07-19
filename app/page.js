@@ -3449,7 +3449,7 @@ export default function MarwyckCopilot() {
             {/* Partie gauche - Informations modifiables */}
             <div className={`w-[55%] ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl flex flex-col`}>
               <div className="p-6 flex flex-col h-full">
-                <div className="mb-8">
+                <div className="mb-6">
                   <h3 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                     File Details
                   </h3>
@@ -3457,90 +3457,90 @@ export default function MarwyckCopilot() {
                 
                 {selectedFileForDetails && (
                   <>
-                    {/* Contenu principal avec scroll */}
-                    <div className="flex-1 overflow-y-auto space-y-6 pr-2" style={{ scrollbarWidth: 'thin' }}>
-                      {/* Titre modifiable */}
+                    {/* Contenu principal sans scrollbar */}
+                    <div className="flex-1 overflow-y-auto space-y-5" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                      {/* Titre modifiable - taille réduite */}
                       <div>
-                        <label className={`block text-sm font-semibold mb-3 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+                        <label className={`block text-sm font-semibold mb-2 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                           Title
                         </label>
                         <input
                           type="text"
                           defaultValue={selectedFileForDetails.title || selectedFileForDetails.address}
-                          className={`w-full px-4 py-3 rounded-full border-2 focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-700 border-gray-600 text-white focus:border-gray-400' : 'bg-white border-gray-200 text-gray-900'}`}
+                          className={`w-full px-3 py-2 rounded-full border-2 focus:outline-none focus:border-black transition-colors text-sm ${darkMode ? 'bg-gray-700 border-gray-600 text-white focus:border-gray-400' : 'bg-white border-gray-200 text-gray-900'}`}
                         />
                       </div>
 
-                      {/* Adresse modifiable */}
+                      {/* Adresse modifiable - taille réduite */}
                       <div>
-                        <label className={`block text-sm font-semibold mb-3 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+                        <label className={`block text-sm font-semibold mb-2 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                           Address
                         </label>
                         <input
                           type="text"
                           defaultValue={selectedFileForDetails.address}
-                          className={`w-full px-4 py-3 rounded-full border-2 focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-700 border-gray-600 text-white focus:border-gray-400' : 'bg-white border-gray-200 text-gray-900'}`}
+                          className={`w-full px-3 py-2 rounded-full border-2 focus:outline-none focus:border-black transition-colors text-sm ${darkMode ? 'bg-gray-700 border-gray-600 text-white focus:border-gray-400' : 'bg-white border-gray-200 text-gray-900'}`}
                         />
                       </div>
 
-                      {/* Contacts */}
+                      {/* Contacts - taille augmentée */}
                       <div>
                         <label className={`block text-sm font-semibold mb-3 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                           Contacts
                         </label>
                         <div className="space-y-3">
-                          {/* Contact 1 - Fixe */}
+                          {/* Contact 1 */}
                           <div className="flex items-center space-x-3">
                             <input
                               type="text"
                               placeholder="Name"
-                              className={`flex-1 px-3 py-2.5 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                              className={`flex-1 px-4 py-3 rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                             <input
                               type="email"
                               placeholder="Email"
-                              className={`flex-1 px-3 py-2.5 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                              className={`flex-1 px-4 py-3 rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                             <input
                               type="tel"
                               placeholder="Phone"
-                              className={`flex-1 px-3 py-2.5 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                              className={`flex-1 px-4 py-3 rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                           </div>
-                          {/* Contact 2 - Fixe */}
+                          {/* Contact 2 */}
                           <div className="flex items-center space-x-3">
                             <input
                               type="text"
                               placeholder="Name"
-                              className={`flex-1 px-3 py-2.5 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                              className={`flex-1 px-4 py-3 rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                             <input
                               type="email"
                               placeholder="Email"
-                              className={`flex-1 px-3 py-2.5 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                              className={`flex-1 px-4 py-3 rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                             <input
                               type="tel"
                               placeholder="Phone"
-                              className={`flex-1 px-3 py-2.5 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                              className={`flex-1 px-4 py-3 rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                           </div>
                         </div>
                       </div>
 
-                      {/* Documents nécessaires */}
+                      {/* Documents nécessaires - design propre et professionnel */}
                       <div>
                         <label className={`block text-sm font-semibold mb-3 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                           Required Documents
                         </label>
-                        <div className="space-y-2 max-h-60 overflow-y-auto" style={{ scrollbarWidth: 'thin' }}>
+                        <div className="space-y-2" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                           {selectedFileForDetails.documents?.map(doc => (
-                            <div key={doc.id} className={`flex items-center justify-between p-4 rounded-full border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'} hover:border-gray-400 transition-colors`}>
+                            <div key={doc.id} className={`flex items-center justify-between p-3 rounded-xl border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'} hover:border-gray-400 transition-all duration-200`}>
                               <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                                 {doc.name}
                               </span>
                               <Select defaultValue={doc.status || 'none'}>
-                                <SelectTrigger className={`w-32 rounded-full ${getStatusColor(doc.status || 'none')}`}>
+                                <SelectTrigger className={`w-28 rounded-full text-xs ${getStatusColor(doc.status || 'none')}`}>
                                   <SelectValue />
                                 </SelectTrigger>
                                 <SelectContent className="rounded-xl">
@@ -3557,10 +3557,10 @@ export default function MarwyckCopilot() {
                     </div>
                     
                     {/* Bouton Save fixé en bas */}
-                    <div className="pt-6 border-t border-gray-200 mt-6">
+                    <div className="pt-4 border-t border-gray-200 mt-4">
                       <Button 
                         onClick={() => setShowFileDetailsModal(false)}
-                        className="w-full bg-black hover:bg-gray-800 text-white rounded-full py-3"
+                        className="w-full bg-black hover:bg-gray-800 text-white rounded-full py-2.5 font-medium"
                       >
                         <Save className="w-4 h-4 mr-2" />
                         Save
