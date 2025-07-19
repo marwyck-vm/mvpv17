@@ -63,6 +63,7 @@ import {
   X,
   Save,
   Copy,
+  UserPlus,
   Lightbulb,
   ClipboardList,
   LockKeyhole,
