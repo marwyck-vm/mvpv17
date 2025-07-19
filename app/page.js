@@ -3465,28 +3465,29 @@ export default function MarwyckCopilot() {
       </Dialog>
       
       {/* Modal de confirmation de suppression */}
-      <Dialog open={showChatDeleteConfirm} onOpenChange={setShowChatDeleteConfirm}>
-        <DialogContent className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} rounded-xl`}>
-          <DialogHeader>
-            <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>
-              Delete Chat
-            </DialogTitle>
-          </DialogHeader>
+      <Dialog open={showChatDeleteConfirm} onOpenChange={setShowChatDeleteConfirm} modal={false}>
+        <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <div className="space-y-4">
-            <p className={`${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-              Are you sure you want to delete this chat? This action cannot be undone.
-            </p>
-            <div className="flex justify-end space-x-2">
+            <div className="text-center">
+              <Trash2 className="w-8 h-8 text-red-500 mx-auto mb-3" />
+              <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} mb-2`}>
+                Delete Chat
+              </h3>
+              <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                Are you sure you want to delete this chat? This action cannot be undone.
+              </p>
+            </div>
+            <div className="flex justify-center space-x-3 pt-2">
               <Button 
                 variant="outline" 
                 onClick={() => setShowChatDeleteConfirm(false)}
-                className={`${darkMode ? 'border-gray-600 text-gray-300' : 'border-gray-300 text-gray-600'}`}
+                className={`rounded-full px-6 ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-600 hover:bg-gray-100'}`}
               >
                 Cancel
               </Button>
               <Button 
                 onClick={handleDeleteChat}
-                className="bg-red-600 hover:bg-red-700 text-white"
+                className="bg-red-600 hover:bg-red-700 text-white rounded-full px-6"
               >
                 Delete
               </Button>
