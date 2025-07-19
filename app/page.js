@@ -2252,7 +2252,23 @@ export default function MarwyckCopilot() {
                   <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                     Vault Files
                   </label>
-                  <Select value={selectedClient} onValueChange={setSelectedClient}>
+                  <Select value={currentBaseFile} onValueChange={(newBaseFile) => {
+                    setCurrentBaseFile(newBaseFile)
+                    
+                    // Find the most recent chat for this base file
+                    const chatsForBaseFile = Object.keys(messages).filter(chatId => 
+                      chatId === newBaseFile || chatId.startsWith(`${newBaseFile}_`)
+                    )
+                    
+                    if (chatsForBaseFile.length > 0) {
+                      // Select the most recent chat (highest timestamp)
+                      const latestChat = chatsForBaseFile.sort().pop()
+                      setSelectedClient(latestChat)
+                    } else {
+                      // No chats for this base file, select the base file itself
+                      setSelectedClient(newBaseFile)
+                    }
+                  }}>
                     <SelectTrigger className={`w-full rounded-xl ${darkMode ? 'bg-gray-800 border-gray-600 text-gray-100' : 'bg-white border-gray-200 text-gray-900'}`}>
                       <SelectValue placeholder="General">
                         <div className="flex items-center">
