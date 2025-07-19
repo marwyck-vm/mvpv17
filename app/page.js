@@ -3594,9 +3594,17 @@ export default function MarwyckCopilot() {
                         </p>
                       </div>
                     </div>
-                    <Button size="sm" variant="ghost" className="text-red-500 hover:bg-red-50 rounded-full p-2">
-                      <Trash2 className="w-4 h-4" />
-                    </Button>
+                    <div className="flex items-center space-x-2">
+                      <Button size="sm" variant="ghost" className="text-blue-500 hover:bg-blue-50 rounded-full p-2">
+                        <Eye className="w-4 h-4" />
+                      </Button>
+                      <Button size="sm" variant="ghost" className="text-green-500 hover:bg-green-50 rounded-full p-2">
+                        <Download className="w-4 h-4" />
+                      </Button>
+                      <Button size="sm" variant="ghost" className="text-red-500 hover:bg-red-50 rounded-full p-2">
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
                   </div>
                   
                   <div className={`p-4 rounded-xl border-2 ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'} flex items-center justify-between hover:border-gray-400 transition-colors`}>
@@ -3613,9 +3621,17 @@ export default function MarwyckCopilot() {
                         </p>
                       </div>
                     </div>
-                    <Button size="sm" variant="ghost" className="text-red-500 hover:bg-red-50 rounded-full p-2">
-                      <Trash2 className="w-4 h-4" />
-                    </Button>
+                    <div className="flex items-center space-x-2">
+                      <Button size="sm" variant="ghost" className="text-blue-500 hover:bg-blue-50 rounded-full p-2">
+                        <Eye className="w-4 h-4" />
+                      </Button>
+                      <Button size="sm" variant="ghost" className="text-green-500 hover:bg-green-50 rounded-full p-2">
+                        <Download className="w-4 h-4" />
+                      </Button>
+                      <Button size="sm" variant="ghost" className="text-red-500 hover:bg-red-50 rounded-full p-2">
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
