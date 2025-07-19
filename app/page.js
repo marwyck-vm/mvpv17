@@ -3448,7 +3448,7 @@ export default function MarwyckCopilot() {
           <div className="h-[85vh] flex gap-8">
             {/* Partie gauche - Informations modifiables */}
             <div className={`w-[55%] ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl`}>
-              <div className="p-6 max-h-[600px] overflow-y-auto" style={{ scrollbarWidth: 'thin' }}>
+              <div className="p-6">
               <div className="mb-6">
                 <h3 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                   File Details
