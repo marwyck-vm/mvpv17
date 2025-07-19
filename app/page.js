@@ -2505,17 +2505,17 @@ export default function MarwyckCopilot() {
                   {dossiersList.map(dossier => (
                     <div 
                       key={dossier.id} 
-                      className={`bg-white rounded-xl border border-gray-200 p-6 cursor-pointer transition-all duration-300 hover:shadow-lg hover:shadow-black/10 hover:-translate-y-1 hover:border-gray-300`}
+                      className={`bg-white rounded-xl border border-gray-200 p-6 cursor-pointer transition-all duration-300 hover:shadow-lg hover:shadow-black/10 hover:-translate-y-1 hover:border-gray-300 h-32`}
                     >
                       {/* Header avec titre et type */}
-                      <div className="flex items-start justify-between mb-3">
+                      <div className="flex items-start justify-between mb-2">
                         <div className="flex-1">
-                          <h3 className="text-lg font-semibold text-gray-900 leading-tight">
+                          <h3 className="text-xl font-bold text-gray-900 leading-tight">
                             {dossier.title || dossier.address}
                           </h3>
                         </div>
                         <div>
-                          <span className="text-sm font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+                          <span className="text-xs font-medium text-gray-600 bg-gray-100 px-2 py-1 rounded-full">
                             {dossier.type}
                           </span>
                         </div>
@@ -2523,15 +2523,15 @@ export default function MarwyckCopilot() {
 
                       {/* Adresse */}
                       <div className="mb-4">
-                        <p className="text-gray-600 text-sm">
+                        <p className="text-gray-500 text-sm">
                           {dossier.address}
                         </p>
                       </div>
 
-                      {/* Nombre de fichiers en bas à gauche */}
-                      <div className="flex items-end justify-between">
-                        <div>
-                          <span className="text-sm text-gray-500">
+                      {/* Nombre de fichiers en bas à droite */}
+                      <div className="flex items-end justify-end h-full">
+                        <div className="mt-auto">
+                          <span className="text-xs text-gray-400">
                             {dossier.documents.length} Files Inside
                           </span>
                         </div>
