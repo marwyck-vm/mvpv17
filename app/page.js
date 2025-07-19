@@ -355,28 +355,10 @@ export default function MarwyckCopilot() {
 
   // Add message to current client or active chat
   const addMessageToClient = (message) => {
-    setMessages(prev => {
-      // If this is a timestamped chat (contains _), update its ID to current timestamp to bring it to top
-      let newChatId = selectedClient
-      if (selectedClient.includes('_')) {
-        const baseFile = selectedClient.split('_')[0]
-        newChatId = `${baseFile}_${Date.now()}`
-      }
-      
-      const newMessages = { ...prev }
-      
-      // If chat ID changed, move messages to new ID and delete old
-      if (newChatId !== selectedClient) {
-        newMessages[newChatId] = [...(prev[selectedClient] || []), message]
-        delete newMessages[selectedClient]
-        // Update selectedClient to new ID
-        setTimeout(() => setSelectedClient(newChatId), 0)
-      } else {
-        newMessages[selectedClient] = [...(prev[selectedClient] || []), message]
-      }
-      
-      return newMessages
-    })
+    setMessages(prev => ({
+      ...prev,
+      [selectedClient]: [...(prev[selectedClient] || []), message]
+    }))
   }
 
   // Get real week label based on current date and offset
