@@ -3487,47 +3487,42 @@ export default function MarwyckCopilot() {
                       Contacts
                     </label>
                     <div className="space-y-2">
-                      {fileContacts.map(contact => (
-                        <div key={contact.id} className="flex items-center space-x-2">
-                          <input
-                            type="text"
-                            placeholder="Name"
-                            value={contact.name}
-                            onChange={(e) => updateContact(contact.id, 'name', e.target.value)}
-                            className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
-                          />
-                          <input
-                            type="email"
-                            placeholder="Email"
-                            value={contact.email}
-                            onChange={(e) => updateContact(contact.id, 'email', e.target.value)}
-                            className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
-                          />
-                          <input
-                            type="tel"
-                            placeholder="Phone"
-                            value={contact.phone}
-                            onChange={(e) => updateContact(contact.id, 'phone', e.target.value)}
-                            className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
-                          />
-                          <button 
-                            onClick={() => removeContact(contact.id)}
-                            className="text-red-500 hover:text-red-700 hover:bg-red-50 rounded-full p-1 flex-shrink-0 transition-colors"
-                          >
-                            <X className="w-4 h-4" />
-                          </button>
-                        </div>
-                      ))}
-                      {fileContacts.length < 2 && (
-                        <Button 
-                          variant="outline" 
-                          onClick={addContact}
-                          className="w-full rounded-full border-2 border-dashed border-gray-300 py-2 hover:border-black transition-colors text-sm h-8"
-                        >
-                          <Plus className="w-4 h-4 mr-2" />
-                          Add Contact
-                        </Button>
-                      )}
+                      {/* Contact 1 - Fixe */}
+                      <div className="flex items-center space-x-2">
+                        <input
+                          type="text"
+                          placeholder="Name"
+                          className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                        />
+                        <input
+                          type="email"
+                          placeholder="Email"
+                          className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                        />
+                        <input
+                          type="tel"
+                          placeholder="Phone"
+                          className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                        />
+                      </div>
+                      {/* Contact 2 - Fixe */}
+                      <div className="flex items-center space-x-2">
+                        <input
+                          type="text"
+                          placeholder="Name"
+                          className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                        />
+                        <input
+                          type="email"
+                          placeholder="Email"
+                          className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                        />
+                        <input
+                          type="tel"
+                          placeholder="Phone"
+                          className={`flex-1 px-3 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'bg-white border-gray-300 text-gray-900'}`}
+                        />
+                      </div>
                     </div>
                   </div>
 
