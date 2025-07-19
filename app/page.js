@@ -2346,24 +2346,26 @@ export default function MarwyckCopilot() {
 
               {/* Zone de chat principale */}
               <div className="flex-1 flex flex-col relative">
-                {/* Boutons flottants en haut à droite */}
+                {/* Boutons flottants en haut à droite avec fond moderne */}
                 <div className="absolute top-4 right-4 flex items-center space-x-2 z-10">
-                  <Button 
-                    size="sm" 
-                    variant="ghost"
-                    onClick={() => setShowChatDeleteConfirm(true)}
-                    className={`rounded-full text-red-500 hover:text-red-600 ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'}`}
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </Button>
-                  <Button 
-                    size="sm" 
-                    variant="ghost"
-                    onClick={() => setShowAIHelp(true)}
-                    className={`rounded-full text-yellow-500 hover:text-yellow-600 ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'}`}
-                  >
-                    <Lightbulb className="w-4 h-4" />
-                  </Button>
+                  <div className={`flex items-center space-x-2 px-3 py-2 rounded-full backdrop-blur-md border shadow-lg ${darkMode ? 'bg-gray-900/80 border-gray-700/50' : 'bg-white/80 border-gray-200/50'}`}>
+                    <Button 
+                      size="sm" 
+                      variant="ghost"
+                      onClick={() => setShowChatDeleteConfirm(true)}
+                      className={`rounded-full p-2 text-red-500 hover:text-red-600 ${darkMode ? 'hover:bg-gray-700/50' : 'hover:bg-gray-100/50'}`}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                    <Button 
+                      size="sm" 
+                      variant="ghost"
+                      onClick={() => setShowAIHelp(true)}
+                      className={`rounded-full p-2 text-yellow-500 hover:text-yellow-600 ${darkMode ? 'hover:bg-gray-700/50' : 'hover:bg-gray-100/50'}`}
+                    >
+                      <Lightbulb className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
 
                 {/* Messages */}
