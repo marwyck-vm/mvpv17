@@ -2704,18 +2704,15 @@ export default function MarwyckCopilot() {
                       ))}
                       {isTyping && (
                         <div className="flex justify-start">
-                          <div className="flex items-start space-x-3 max-w-2xl">
-                            <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#000000' }}>
-                              <Sparkles className="w-4 h-4 text-white" />
-                            </div>
-                            <div className={`px-4 py-3 rounded-2xl ${darkMode ? 'bg-gray-800 border border-gray-600' : 'bg-white border border-gray-200'} shadow-sm`}>
+                          <div className="flex items-start max-w-2xl">
+                            <div className="px-4 py-3 rounded-2xl">
                               <div className="flex items-center space-x-2">
                                 <div className="flex space-x-1">
                                   <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: '#000000' }}></div>
                                   <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: '#000000', animationDelay: '0.1s' }}></div>
                                   <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: '#000000', animationDelay: '0.2s' }}></div>
                                 </div>
-                                <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Marwyck is typing...</span>
+                                <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>AI is typing...</span>
                               </div>
                             </div>
                           </div>
