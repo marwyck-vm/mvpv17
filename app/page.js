@@ -1325,6 +1325,30 @@ export default function MarwyckCopilot() {
     }
   }
 
+  // Function to save File Details changes
+  const saveFileDetailsChanges = () => {
+    if (selectedFileForDetails) {
+      const updatedFile = {
+        ...selectedFileForDetails,
+        title: fileTitle,
+        address: fileAddress,
+        contacts: fileContacts
+      }
+      
+      // Update the main dossiers list
+      setDossiersList(prev => 
+        prev.map(dossier => 
+          dossier.id === selectedFileForDetails.id 
+            ? updatedFile
+            : dossier
+        )
+      )
+      
+      // Update the selected file for details
+      setSelectedFileForDetails(updatedFile)
+    }
+  }
+
   // Function to toggle dossier status
   const toggleDossierStatus = (dossierId) => {
     setDossiersList(prev =>
