@@ -2692,18 +2692,41 @@ export default function MarwyckCopilot() {
                           key={message.id}
                           className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                         >
-                          <div className="flex items-start max-w-2xl">
-                            <div className={`px-4 py-3 rounded-2xl ${
-                              message.role === 'user'
-                                ? `${darkMode ? 'bg-gray-700' : 'bg-gray-200'}`
-                                : ''
-                            }`}>
-                              <p className={`text-sm whitespace-pre-wrap leading-relaxed ${darkMode ? 'text-white' : 'text-gray-900'}`}>{message.content}</p>
-                              <p className={`text-xs mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                              </p>
+                          {message.role === 'assistant' ? (
+                            // Messages IA avec effet hover
+                            <div className="group max-w-2xl">
+                              <div className="flex items-start">
+                                <div className="px-4 py-3 rounded-2xl">
+                                  <p className={`text-sm whitespace-pre-wrap leading-relaxed ${darkMode ? 'text-white' : 'text-gray-900'}`}>{message.content}</p>
+                                </div>
+                              </div>
+                              {/* Heure et bouton copy - apparaissent au hover avec fondu */}
+                              <div className="flex items-center justify-between mt-1 px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+                                <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                                  {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                </p>
+                                <button 
+                                  onClick={() => navigator.clipboard.writeText(message.content)}
+                                  className={`flex items-center space-x-1 text-xs px-2 py-1 rounded-full transition-colors ${
+                                    darkMode ? 'text-gray-400 hover:text-white hover:bg-gray-700' : 'text-gray-500 hover:text-gray-900 hover:bg-gray-100'
+                                  }`}
+                                >
+                                  <Copy className="w-3 h-3" />
+                                  <span>Copy</span>
+                                </button>
+                              </div>
                             </div>
-                          </div>
+                          ) : (
+                            // Messages utilisateur - structure existante
+                            <div className="flex items-start max-w-2xl">
+                              <div className={`px-4 py-3 rounded-2xl ${darkMode ? 'bg-gray-700' : 'bg-gray-200'}`}>
+                                <p className={`text-sm whitespace-pre-wrap leading-relaxed ${darkMode ? 'text-white' : 'text-gray-900'}`}>{message.content}</p>
+                                <p className={`text-xs mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                                  {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                </p>
+                              </div>
+                            </div>
+                          )}
                         </div>
                       ))}
                       {isTyping && (
