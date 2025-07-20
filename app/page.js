@@ -1471,7 +1471,17 @@ export default function MarwyckCopilot() {
   }
 
   const handleRemoveTeamMember = (memberId) => {
-    setTeamMembers(prev => prev.filter(member => member.id !== memberId))
+    const member = teamMembers.find(m => m.id === memberId)
+    setSelectedMemberForDelete(member)
+    setShowDeleteMemberConfirm(true)
+  }
+
+  const confirmDeleteMember = () => {
+    if (selectedMemberForDelete) {
+      setTeamMembers(prev => prev.filter(member => member.id !== selectedMemberForDelete.id))
+      setShowDeleteMemberConfirm(false)
+      setSelectedMemberForDelete(null)
+    }
   }
 
   const toggleMemberStatus = (memberId) => {
