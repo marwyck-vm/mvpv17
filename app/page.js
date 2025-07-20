@@ -3789,7 +3789,10 @@ export default function MarwyckCopilot() {
                         <input
                           type="text"
                           value={fileTitle}
-                          onChange={(e) => setFileTitle(e.target.value)}
+                          onChange={(e) => {
+                            setFileTitle(e.target.value)
+                            saveFileDetailsChanges()
+                          }}
                           placeholder={selectedFileForDetails?.address || ''}
                           className={`w-full px-3 py-2 rounded-full border-2 focus:outline-none focus:border-black transition-colors text-sm ${darkMode ? 'bg-gray-700 border-gray-600 text-white focus:border-gray-400' : 'bg-white border-gray-200 text-gray-900'}`}
                         />
