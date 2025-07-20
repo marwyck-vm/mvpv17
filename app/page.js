@@ -3405,11 +3405,6 @@ export default function MarwyckCopilot() {
                       <CardContent className="p-6">
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center space-x-3">
-                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                              <span className="text-white font-semibold text-lg">
-                                {member.name.split(' ').map(n => n[0]).join('')}
-                              </span>
-                            </div>
                             <div>
                               <h3 className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                                 {member.name}
@@ -3419,12 +3414,17 @@ export default function MarwyckCopilot() {
                               </p>
                             </div>
                           </div>
-                          <Badge 
-                            variant="secondary" 
-                            className={`${member.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}
-                          >
-                            {member.status}
-                          </Badge>
+                          <div className="rounded-full px-3 py-1">
+                            {member.status === 'active' ? (
+                              <span className="text-xs font-medium text-green-800 bg-green-100 px-3 py-1 rounded-full">
+                                Active
+                              </span>
+                            ) : (
+                              <span className="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+                                Last active {member.lastActiveTime}
+                              </span>
+                            )}
+                          </div>
                         </div>
                         
                         <div className="space-y-2 mb-4">
@@ -3442,23 +3442,9 @@ export default function MarwyckCopilot() {
                               </span>
                             </div>
                           )}
-                          <div className="flex items-center space-x-2">
-                            <Calendar className="w-4 h-4 text-gray-500" />
-                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                              Joined {new Date(member.joinDate).toLocaleDateString()}
-                            </span>
-                          </div>
                         </div>
 
                         <div className="flex space-x-2">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => toggleMemberStatus(member.id)}
-                            className="flex-1 rounded-full"
-                          >
-                            {member.status === 'active' ? 'Deactivate' : 'Activate'}
-                          </Button>
                           <Button
                             variant="outline"
                             size="sm"
