@@ -3284,8 +3284,9 @@ export default function MarwyckCopilot() {
                                 </div>
                               </div>
                               <div className="text-right">
-                                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{activity.time}</p>
-                                <div className="flex items-center space-x-1">
+                                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{activity.date}</p>
+                                <p className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>{activity.time}</p>
+                                <div className="flex items-center space-x-1 mt-1">
                                   {activity.status === 'sent' && <span className={`text-xs px-2 py-1 rounded-full ${darkMode ? 'bg-blue-900 text-blue-300' : 'bg-blue-100 text-blue-800'}`}>Sent</span>}
                                   {activity.status === 'delivered' && <span className={`text-xs px-2 py-1 rounded-full ${darkMode ? 'bg-green-900 text-green-300' : 'bg-green-100 text-green-800'}`}>Delivered</span>}
                                   {activity.status === 'completed' && <span className={`text-xs px-2 py-1 rounded-full ${darkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-800'}`}>Completed</span>}
