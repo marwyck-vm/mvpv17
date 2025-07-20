@@ -3487,20 +3487,20 @@ export default function MarwyckCopilot() {
                 scrollbarColor: darkMode ? 'rgba(107, 114, 128, 0.6) transparent' : 'rgba(156, 163, 175, 0.6) transparent'
               }}>
                 {editingDossier?.documents.map(doc => (
-                  <div key={doc.id} className={`flex items-center justify-between p-3 border rounded-xl ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
+                  <div key={doc.id} className={`flex items-center justify-between p-3 border rounded-xl transition-all duration-200 ${getDocumentBoxColor(doc.status || 'none', darkMode)}`}>
                     <div className="flex items-center space-x-2">
                       {getStatusIcon(doc.status)}
                       <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{doc.name}</span>
                     </div>
                     <Select value={doc.status} onValueChange={(value) => updateDocumentStatus(doc.id, value)}>
-                      <SelectTrigger className={`w-32 rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}>
+                      <SelectTrigger className={`w-32 rounded-full text-xs ${getStatusColor(doc.status || 'none')}`}>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent className={`rounded-xl ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
+                        <SelectItem value="none" className={`transition-colors rounded-lg ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}>None</SelectItem>
                         <SelectItem value="missing" className={`transition-colors rounded-lg ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}>Missing</SelectItem>
-                        <SelectItem value="received" className={`transition-colors rounded-lg ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}>Received</SelectItem>
-                        <SelectItem value="signed" className={`transition-colors rounded-lg ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}>Signed</SelectItem>
                         <SelectItem value="pending" className={`transition-colors rounded-lg ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}>Pending</SelectItem>
+                        <SelectItem value="completed" className={`transition-colors rounded-lg ${darkMode ? 'text-gray-100 hover:!bg-gray-600' : 'text-gray-900 hover:!bg-gray-100'}`}>Completed</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
