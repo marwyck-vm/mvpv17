@@ -3963,7 +3963,7 @@ export default function MarwyckCopilot() {
       </Dialog>
 
       {/* Modal de partage avec l'équipe */}
-      <Dialog open={showShareFileModal} onOpenChange={setShowShareFileModal}>
+      <Dialog open={showShareFileModal} onOpenChange={setShowShareFileModal} modal={false}>
         <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <DialogHeader>
             <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -3973,23 +3973,25 @@ export default function MarwyckCopilot() {
               Select team members to share this file with
             </p>
           </DialogHeader>
-          <div className="space-y-3 mt-4">
-            {teamMembers.map(member => (
-              <label key={member.id} className={`flex items-center space-x-3 p-3 rounded-xl border cursor-pointer hover:bg-gray-50 ${darkMode ? 'border-gray-600 hover:bg-gray-700' : 'border-gray-200'}`}>
-                <input
-                  type="checkbox"
-                  className="rounded border-gray-300 text-black focus:ring-black"
-                />
-                <div className="flex-1">
-                  <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                    {member.name}
-                  </p>
-                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                    {member.role}
-                  </p>
-                </div>
-              </label>
-            ))}
+          <div className="mt-4">
+            <div className="max-h-48 overflow-y-auto space-y-3 pr-2" style={{ scrollbarWidth: 'thin', scrollbarColor: '#9CA3AF transparent' }}>
+              {teamMembers.map(member => (
+                <label key={member.id} className={`flex items-center space-x-3 p-3 rounded-xl border cursor-pointer hover:bg-gray-50 ${darkMode ? 'border-gray-600 hover:bg-gray-700' : 'border-gray-200'}`}>
+                  <input
+                    type="checkbox"
+                    className="rounded border-gray-300 text-black focus:ring-black"
+                  />
+                  <div className="flex-1">
+                    <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                      {member.name}
+                    </p>
+                    <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                      {member.role}
+                    </p>
+                  </div>
+                </label>
+              ))}
+            </div>
           </div>
           <div className="flex space-x-3 mt-6">
             <Button 
@@ -4011,7 +4013,7 @@ export default function MarwyckCopilot() {
       </Dialog>
 
       {/* Modal de confirmation de suppression */}
-      <Dialog open={showDeleteFileConfirm} onOpenChange={setShowDeleteFileConfirm}>
+      <Dialog open={showDeleteFileConfirm} onOpenChange={setShowDeleteFileConfirm} modal={false}>
         <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <DialogHeader>
             <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>
