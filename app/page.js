@@ -3819,16 +3819,37 @@ export default function MarwyckCopilot() {
                             <input
                               type="text"
                               placeholder="Name"
+                              value={fileContacts[0]?.name || ''}
+                              onChange={(e) => {
+                                const newContacts = [...fileContacts]
+                                newContacts[0] = { ...newContacts[0], name: e.target.value }
+                                setFileContacts(newContacts)
+                                saveFileDetailsChanges()
+                              }}
                               className={`w-1/3 px-2 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                             <input
                               type="email"
                               placeholder="Email"
+                              value={fileContacts[0]?.email || ''}
+                              onChange={(e) => {
+                                const newContacts = [...fileContacts]
+                                newContacts[0] = { ...newContacts[0], email: e.target.value }
+                                setFileContacts(newContacts)
+                                saveFileDetailsChanges()
+                              }}
                               className={`w-1/3 px-2 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                             <input
                               type="tel"
                               placeholder="Phone"
+                              value={fileContacts[0]?.phone || ''}
+                              onChange={(e) => {
+                                const newContacts = [...fileContacts]
+                                newContacts[0] = { ...newContacts[0], phone: e.target.value }
+                                setFileContacts(newContacts)
+                                saveFileDetailsChanges()
+                              }}
                               className={`w-1/3 px-2 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                           </div>
@@ -3837,16 +3858,37 @@ export default function MarwyckCopilot() {
                             <input
                               type="text"
                               placeholder="Name"
+                              value={fileContacts[1]?.name || ''}
+                              onChange={(e) => {
+                                const newContacts = [...fileContacts]
+                                newContacts[1] = { ...newContacts[1], name: e.target.value }
+                                setFileContacts(newContacts)
+                                saveFileDetailsChanges()
+                              }}
                               className={`w-1/3 px-2 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                             <input
                               type="email"
                               placeholder="Email"
+                              value={fileContacts[1]?.email || ''}
+                              onChange={(e) => {
+                                const newContacts = [...fileContacts]
+                                newContacts[1] = { ...newContacts[1], email: e.target.value }
+                                setFileContacts(newContacts)
+                                saveFileDetailsChanges()
+                              }}
                               className={`w-1/3 px-2 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                             <input
                               type="tel"
                               placeholder="Phone"
+                              value={fileContacts[1]?.phone || ''}
+                              onChange={(e) => {
+                                const newContacts = [...fileContacts]
+                                newContacts[1] = { ...newContacts[1], phone: e.target.value }
+                                setFileContacts(newContacts)
+                                saveFileDetailsChanges()
+                              }}
                               className={`w-1/3 px-2 py-2 text-sm rounded-full border focus:outline-none focus:border-black transition-colors ${darkMode ? 'bg-gray-600 border-gray-500 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
                             />
                           </div>
