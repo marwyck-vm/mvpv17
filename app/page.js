@@ -2693,7 +2693,11 @@ export default function MarwyckCopilot() {
                           className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                         >
                           <div className="flex items-start max-w-2xl">
-                            <div className="px-4 py-3 rounded-2xl">
+                            <div className={`px-4 py-3 rounded-2xl ${
+                              message.role === 'user'
+                                ? `${darkMode ? 'bg-gray-700' : 'bg-gray-200'}`
+                                : ''
+                            }`}>
                               <p className={`text-sm whitespace-pre-wrap leading-relaxed ${darkMode ? 'text-white' : 'text-gray-900'}`}>{message.content}</p>
                               <p className={`text-xs mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                                 {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
