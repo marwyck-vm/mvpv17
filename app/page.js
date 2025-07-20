@@ -2692,29 +2692,13 @@ export default function MarwyckCopilot() {
                           key={message.id}
                           className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                         >
-                          <div className="flex items-start space-x-3 max-w-2xl">
-                            {message.role === 'assistant' && (
-                              <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#000000' }}>
-                                <Sparkles className="w-4 h-4 text-white" />
-                              </div>
-                            )}
-                            <div
-                              className={`px-4 py-3 rounded-2xl ${
-                                message.role === 'user'
-                                  ? `${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-200 text-gray-900'}`
-                                  : `${darkMode ? 'bg-gray-800 border border-gray-600 text-white' : 'bg-white border border-gray-200 text-gray-900'} shadow-sm`
-                              }`}
-                            >
-                              <p className="text-sm whitespace-pre-wrap leading-relaxed">{message.content}</p>
+                          <div className="flex items-start max-w-2xl">
+                            <div className="px-4 py-3 rounded-2xl">
+                              <p className={`text-sm whitespace-pre-wrap leading-relaxed ${darkMode ? 'text-white' : 'text-gray-900'}`}>{message.content}</p>
                               <p className={`text-xs mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                                 {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                               </p>
                             </div>
-                            {message.role === 'user' && (
-                              <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0">
-                                <User className="w-4 h-4 text-gray-600" />
-                              </div>
-                            )}
                           </div>
                         </div>
                       ))}
