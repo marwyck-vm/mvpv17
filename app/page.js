@@ -3248,9 +3248,13 @@ export default function MarwyckCopilot() {
                       <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Recent Communications</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <div className="space-y-4">
-                        {recentActivities.map(activity => (
-                          <div key={activity.id} className={`p-4 rounded-xl border ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                      <div className="max-h-96 overflow-y-auto space-y-4" style={{ scrollbarWidth: 'thin', scrollbarColor: 'transparent transparent' }}>
+                        {recentActivities.map((activity, index) => (
+                          <div 
+                            key={activity.id} 
+                            className={`p-4 rounded-xl border cursor-pointer transition-colors ${darkMode ? 'border-gray-700 hover:border-gray-600' : 'border-gray-200 hover:border-gray-300'} ${selectedActivity?.id === activity.id ? (darkMode ? 'bg-gray-700 border-gray-500' : 'bg-blue-50 border-blue-200') : ''}`}
+                            onClick={() => setSelectedActivity(activity)}
+                          >
                             <div className="flex items-center justify-between">
                               <div className="flex items-center space-x-3">
                                 <div className="flex-shrink-0">
@@ -3270,8 +3274,10 @@ export default function MarwyckCopilot() {
                               <div className="text-right">
                                 <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{activity.time}</p>
                                 <div className="flex items-center space-x-1">
-                                  {getStatusIcon(activity.status)}
-                                  <span className={`text-xs ${getStatusColor(activity.status)}`}>{activity.status}</span>
+                                  {activity.status === 'sent' && <span className={`text-xs px-2 py-1 rounded-full ${darkMode ? 'bg-blue-900 text-blue-300' : 'bg-blue-100 text-blue-800'}`}>Sent</span>}
+                                  {activity.status === 'delivered' && <span className={`text-xs px-2 py-1 rounded-full ${darkMode ? 'bg-green-900 text-green-300' : 'bg-green-100 text-green-800'}`}>Delivered</span>}
+                                  {activity.status === 'completed' && <span className={`text-xs px-2 py-1 rounded-full ${darkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-800'}`}>Completed</span>}
+                                  {activity.status === 'pending' && <span className={`text-xs px-2 py-1 rounded-full ${darkMode ? 'bg-yellow-900 text-yellow-300' : 'bg-yellow-100 text-yellow-800'}`}>Pending</span>}
                                 </div>
                               </div>
                             </div>
@@ -3281,13 +3287,84 @@ export default function MarwyckCopilot() {
                     </CardContent>
                   </Card>
 
-                  <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
+                  <Card className={`lg:col-span-2 rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                     <CardHeader>
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Quick Stats</CardTitle>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Activity Details</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between">
+                      {selectedActivity ? (
+                        <div className="space-y-4">
+                          <div className="flex items-center space-x-3 pb-3 border-b border-gray-200 dark:border-gray-700">
+                            <div className="flex-shrink-0">
+                              {selectedActivity.type === 'sms' && <Smartphone className="w-6 h-6" style={{ color: '#000000' }} />}
+                              {selectedActivity.type === 'email' && <Mail className="w-6 h-6" style={{ color: '#000000' }} />}
+                              {selectedActivity.type === 'call' && <PhoneCall className="w-6 h-6" style={{ color: '#000000' }} />}
+                            </div>
+                            <div>
+                              <h3 className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                {selectedActivity.contact}
+                              </h3>
+                              <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                                {selectedActivity.type.toUpperCase()} • {selectedActivity.time}
+                              </p>
+                            </div>
+                          </div>
+                          
+                          <div>
+                            <h4 className={`font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Summary</h4>
+                            <p className={`text-sm leading-relaxed ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                              {selectedActivity.message}
+                            </p>
+                          </div>
+                          
+                          <div>
+                            <h4 className={`font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Status</h4>
+                            <div className="flex items-center space-x-2">
+                              {selectedActivity.status === 'sent' && (
+                                <div className="flex items-center space-x-2">
+                                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                  <span className={`text-sm ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>Message sent successfully</span>
+                                </div>
+                              )}
+                              {selectedActivity.status === 'delivered' && (
+                                <div className="flex items-center space-x-2">
+                                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                  <span className={`text-sm ${darkMode ? 'text-green-400' : 'text-green-600'}`}>Successfully delivered</span>
+                                </div>
+                              )}
+                              {selectedActivity.status === 'completed' && (
+                                <div className="flex items-center space-x-2">
+                                  <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+                                  <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Action completed</span>
+                                </div>
+                              )}
+                              {selectedActivity.status === 'pending' && (
+                                <div className="flex items-center space-x-2">
+                                  <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+                                  <span className={`text-sm ${darkMode ? 'text-yellow-400' : 'text-yellow-600'}`}>Awaiting response</span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                          
+                          {selectedActivity.type === 'call' && (
+                            <div>
+                              <h4 className={`font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Call Details</h4>
+                              <div className="space-y-1 text-sm">
+                                <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Duration: 5 mins 32 secs</p>
+                                <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Quality: Excellent</p>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      ) : (
+                        <div className="text-center py-8">
+                          <MessageCircle className={`w-12 h-12 mx-auto mb-3 ${darkMode ? 'text-gray-600' : 'text-gray-400'}`} />
+                          <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                            Select a communication from the history to view details
+                          </p>
+                        </div>
+                      )}
                           <div className="flex items-center space-x-2">
                             <Smartphone className="w-4 h-4" style={{ color: '#000000' }} />
                             <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>SMS Sent</span>
