@@ -1285,6 +1285,28 @@ export default function MarwyckCopilot() {
     }
   }
 
+  // Function to update document status in File Details modal
+  const updateFileDetailsDocumentStatus = (docId, newStatus) => {
+    if (selectedFileForDetails) {
+      const updatedFile = {
+        ...selectedFileForDetails,
+        documents: selectedFileForDetails.documents.map(doc =>
+          doc.id === docId ? { ...doc, status: newStatus } : doc
+        )
+      }
+      setSelectedFileForDetails(updatedFile)
+      
+      // Also update the main dossiers list
+      setDossiersList(prev => 
+        prev.map(dossier => 
+          dossier.id === selectedFileForDetails.id 
+            ? updatedFile
+            : dossier
+        )
+      )
+    }
+  }
+
   // Function to toggle dossier status
   const toggleDossierStatus = (dossierId) => {
     setDossiersList(prev =>
