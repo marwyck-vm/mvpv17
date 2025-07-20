@@ -758,18 +758,18 @@ export default function MarwyckCopilot() {
   const kpis = getKpisForWeek(currentWeek)
 
   const recentActivities = [
-    { id: 1, type: 'sms', contact: 'John Smith', message: 'Visit reminder tomorrow 2pm', date: 'Today', time: '10:30', status: 'sent' },
-    { id: 2, type: 'email', contact: 'Marie Durant', message: 'Signed documents received', date: 'Today', time: '09:15', status: 'delivered' },
-    { id: 3, type: 'call', contact: 'Paul Martin', message: 'Follow-up call completed', date: 'Today', time: '08:45', status: 'completed' },
-    { id: 4, type: 'sms', contact: 'Sophie Leroux', message: 'Property viewing confirmation', date: 'Yesterday', time: '14:20', status: 'delivered' },
-    { id: 5, type: 'email', contact: 'Michel Dubois', message: 'Contract amendment requested', date: 'Yesterday', time: '11:30', status: 'pending' },
-    { id: 6, type: 'call', contact: 'Clara Benoit', message: 'Initial consultation scheduled', date: 'Yesterday', time: '16:45', status: 'completed' },
-    { id: 7, type: 'sms', contact: 'Thomas Moreau', message: 'Appointment rescheduled to Friday', date: '19 Jul', time: '13:15', status: 'sent' },
-    { id: 8, type: 'email', contact: 'Julie Rousseau', message: 'Market analysis report sent', date: '19 Jul', time: '15:30', status: 'delivered' },
-    { id: 9, type: 'call', contact: 'Antoine Leroy', message: 'Property valuation discussion', date: '18 Jul', time: '09:45', status: 'completed' },
-    { id: 10, type: 'sms', contact: 'Émilie Blanc', message: 'Key pickup confirmation', date: '18 Jul', time: '12:10', status: 'sent' },
-    { id: 11, type: 'email', contact: 'Vincent Martin', message: 'Insurance documents pending', date: '17 Jul', time: '10:15', status: 'pending' },
-    { id: 12, type: 'call', contact: 'Isabelle Petit', message: 'Closing date coordination', date: '17 Jul', time: '17:20', status: 'completed' }
+    { id: 1, type: 'sms', contact: 'John Smith', message: 'Visit reminder tomorrow 2pm', date: '20/07/2025', time: '10:30 AM', status: 'sent' },
+    { id: 2, type: 'email', contact: 'Marie Durant', message: 'Signed documents received', date: '20/07/2025', time: '09:15 AM', status: 'delivered' },
+    { id: 3, type: 'call', contact: 'Paul Martin', message: 'Follow-up call completed', date: '20/07/2025', time: '08:45 AM', status: 'completed' },
+    { id: 4, type: 'sms', contact: 'Sophie Leroux', message: 'Property viewing confirmation', date: '19/07/2025', time: '02:20 PM', status: 'delivered' },
+    { id: 5, type: 'email', contact: 'Michel Dubois', message: 'Contract amendment requested', date: '19/07/2025', time: '11:30 AM', status: 'pending' },
+    { id: 6, type: 'call', contact: 'Clara Benoit', message: 'Initial consultation scheduled', date: '19/07/2025', time: '04:45 PM', status: 'completed' },
+    { id: 7, type: 'sms', contact: 'Thomas Moreau', message: 'Appointment rescheduled to Friday', date: '18/07/2025', time: '01:15 PM', status: 'sent' },
+    { id: 8, type: 'email', contact: 'Julie Rousseau', message: 'Market analysis report sent', date: '18/07/2025', time: '03:30 PM', status: 'delivered' },
+    { id: 9, type: 'call', contact: 'Antoine Leroy', message: 'Property valuation discussion', date: '17/07/2025', time: '09:45 AM', status: 'completed' },
+    { id: 10, type: 'sms', contact: 'Émilie Blanc', message: 'Key pickup confirmation', date: '17/07/2025', time: '12:10 PM', status: 'sent' },
+    { id: 11, type: 'email', contact: 'Vincent Martin', message: 'Insurance documents pending', date: '16/07/2025', time: '10:15 AM', status: 'pending' },
+    { id: 12, type: 'call', contact: 'Isabelle Petit', message: 'Closing date coordination', date: '16/07/2025', time: '05:20 PM', status: 'completed' }
   ]
 
   const scrollToBottom = () => {
