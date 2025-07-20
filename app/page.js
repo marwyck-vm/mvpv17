@@ -4015,28 +4015,31 @@ export default function MarwyckCopilot() {
       {/* Modal de confirmation de suppression */}
       <Dialog open={showDeleteFileConfirm} onOpenChange={setShowDeleteFileConfirm} modal={false}>
         <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
-          <DialogHeader>
-            <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>
-              Delete this file?
-            </DialogTitle>
-            <p className={`text-sm mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-              This action will permanently delete <strong>{selectedFileForDelete?.title || selectedFileForDelete?.address}</strong>. This cannot be undone.
-            </p>
-          </DialogHeader>
-          <div className="flex space-x-3 mt-6">
-            <Button 
-              variant="outline" 
-              onClick={() => setShowDeleteFileConfirm(false)}
-              className={`flex-1 rounded-full ${darkMode ? 'border-gray-600 text-white hover:bg-gray-700' : 'border-gray-300'}`}
-            >
-              Cancel
-            </Button>
-            <Button 
-              onClick={confirmDeleteDossier}
-              className="flex-1 bg-red-600 hover:bg-red-700 text-white rounded-full"
-            >
-              Delete
-            </Button>
+          <div className="space-y-4">
+            <div className="text-center">
+              <Trash2 className="w-8 h-8 text-red-500 mx-auto mb-3" />
+              <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} mb-2`}>
+                Delete File
+              </h3>
+              <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                Are you sure you want to delete <strong>{selectedFileForDelete?.title || selectedFileForDelete?.address}</strong>? This action cannot be undone.
+              </p>
+            </div>
+            <div className="flex justify-center space-x-3 pt-2">
+              <Button 
+                variant="outline" 
+                onClick={() => setShowDeleteFileConfirm(false)}
+                className={`rounded-full px-6 ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-600 hover:bg-gray-100'}`}
+              >
+                Cancel
+              </Button>
+              <Button 
+                onClick={confirmDeleteDossier}
+                className="bg-red-600 hover:bg-red-700 text-white rounded-full px-6"
+              >
+                Delete
+              </Button>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
