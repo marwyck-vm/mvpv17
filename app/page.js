@@ -3306,20 +3306,10 @@ export default function MarwyckCopilot() {
                     <CardContent>
                       {selectedActivity ? (
                         <div className="space-y-4">
-                          <div className="flex items-center space-x-3 pb-3 border-b border-gray-200 dark:border-gray-700">
-                            <div className="flex-shrink-0">
-                              {selectedActivity.type === 'sms' && <Smartphone className="w-6 h-6" style={{ color: '#000000' }} />}
-                              {selectedActivity.type === 'email' && <Mail className="w-6 h-6" style={{ color: '#000000' }} />}
-                              {selectedActivity.type === 'call' && <PhoneCall className="w-6 h-6" style={{ color: '#000000' }} />}
-                            </div>
-                            <div>
-                              <h3 className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                {selectedActivity.contact}
-                              </h3>
-                              <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                {selectedActivity.type.toUpperCase()} • {selectedActivity.time}
-                              </p>
-                            </div>
+                          <div className="pb-3 border-b border-gray-200 dark:border-gray-700">
+                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                              {selectedActivity.time}
+                            </p>
                           </div>
                           
                           <div>
