@@ -3662,9 +3662,9 @@ export default function MarwyckCopilot() {
                     File Details
                   </h3>
                   <div className="flex items-center">
-                    <Select value={selectedFileForDetails?.type || 'Sale'} onValueChange={changeFileDetailsType}>
+                    <Select value={selectedFileForDetails?.type || ''} onValueChange={changeFileDetailsType}>
                       <SelectTrigger className="w-32 rounded-full">
-                        <SelectValue />
+                        <SelectValue placeholder="Select type" />
                       </SelectTrigger>
                       <SelectContent className="rounded-xl">
                         <SelectItem value="Sale" className="rounded-lg">Sale</SelectItem>
