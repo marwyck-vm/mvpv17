@@ -4017,10 +4017,10 @@ export default function MarwyckCopilot() {
         <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <DialogHeader>
             <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>
-              Delete "{selectedFileForDelete?.title || selectedFileForDelete?.address}"?
+              Delete this file?
             </DialogTitle>
             <p className={`text-sm mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-              This action will permanently delete this file. This cannot be undone.
+              This action will permanently delete <strong>{selectedFileForDelete?.title || selectedFileForDelete?.address}</strong>. This cannot be undone.
             </p>
           </DialogHeader>
           <div className="flex space-x-3 mt-6">
