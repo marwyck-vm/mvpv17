@@ -2827,10 +2827,16 @@ export default function MarwyckCopilot() {
                     </div>
                     <Button
                       onClick={() => addNewDossier()}
-                      className="border border-black text-black bg-gray-200 hover:bg-gray-300 rounded-full px-6 py-2"
+                      className="group relative overflow-hidden bg-black text-white hover:bg-gray-800 transition-all duration-200 rounded-2xl px-8 py-3 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
                     >
-                      <Plus className="w-4 h-4 mr-2" />
-                      New file
+                      <div className="flex items-center space-x-2">
+                        <div className="relative">
+                          <Plus className="w-5 h-5 transition-transform group-hover:rotate-90 duration-200" />
+                        </div>
+                        <span className="text-sm font-semibold">New File</span>
+                      </div>
+                      {/* Subtle gradient overlay on hover */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
                     </Button>
                   </div>
                 </div>
