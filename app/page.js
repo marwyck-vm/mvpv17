@@ -133,8 +133,12 @@ export default function MarwyckCopilot() {
   const [selectedFileForShare, setSelectedFileForShare] = useState(null)
   const [selectedFileForDelete, setSelectedFileForDelete] = useState(null)
   
-  // État pour l'activité sélectionnée dans l'historique
+  // États pour l'activité sélectionnée dans l'historique
   const [selectedActivity, setSelectedActivity] = useState(null)
+  
+  // États pour le modal de suppression de membre d'équipe
+  const [showDeleteMemberConfirm, setShowDeleteMemberConfirm] = useState(false)
+  const [selectedMemberForDelete, setSelectedMemberForDelete] = useState(null)
 
   // Functions for managing contacts
   const addContact = () => {
