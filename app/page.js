@@ -3368,26 +3368,9 @@ export default function MarwyckCopilot() {
                           </p>
                         </div>
                       )}
-                          <div className="flex items-center space-x-2">
-                            <Smartphone className="w-4 h-4" style={{ color: '#000000' }} />
-                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>SMS Sent</span>
-                          </div>
-                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>89</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2">
-                            <Mail className="w-4 h-4" style={{ color: '#000000' }} />
-                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Emails</span>
-                          </div>
-                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>156</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2">
-                            <PhoneCall className="w-4 h-4" style={{ color: '#000000' }} />
-                            <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Calls</span>
-                          </div>
-                          <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>34</span>
-                        </div>
+                    </CardContent>
+                  </Card>
+                </div>
                       </div>
                     </CardContent>
                   </Card>
