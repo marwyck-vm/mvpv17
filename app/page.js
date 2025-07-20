@@ -858,15 +858,15 @@ export default function MarwyckCopilot() {
     }
   }
 
-  const addNewDossier = (type) => {
-    const validType = type || 'sale'
-    const template = documentsTemplates[validType] || documentsTemplates['sale'] || []
+  const addNewDossier = (type = '') => {
+    // Ne pas définir de type par défaut, laisser vide
+    const template = type ? (documentsTemplates[type] || []) : []
     
     const newDossier = {
       id: Date.now(),
       title: 'New File',
       address: 'New address',
-      type: validType,
+      type: type, // Peut être vide
       status: 'active',
       priority: 'medium',
       contacts: [],
