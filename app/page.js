@@ -3260,7 +3260,7 @@ export default function MarwyckCopilot() {
                       <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Recent Communications</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <div className="max-h-96 overflow-y-auto space-y-4 pr-2" style={{ scrollbarWidth: 'thin', scrollbarColor: '#9CA3AF #F3F4F6' }}>
+                      <div className="max-h-96 overflow-y-auto space-y-4 pr-2" style={{ scrollbarWidth: 'thin', scrollbarColor: '#9CA3AF transparent' }}>
                         {recentActivities.map((activity, index) => (
                           <div 
                             key={activity.id} 
