@@ -1454,21 +1454,38 @@ export default function MarwyckCopilot() {
 
   // Team management functions
   const handleAddTeamMember = () => {
-    if (newTeamMember.name && newTeamMember.role && newTeamMember.email) {
-      const newMember = {
-        id: Date.now(),
-        name: newTeamMember.name,
-        role: newTeamMember.role,
-        email: newTeamMember.email,
-        phone: newTeamMember.phone || '',
-        avatar: null,
-        status: 'active',
-        joinDate: new Date().toISOString().split('T')[0]
-      }
-      setTeamMembers(prev => [...prev, newMember])
-      setNewTeamMember({ name: '', role: '', email: '', phone: '' })
-      setShowAddTeamMember(false)
+    // Validation des champs
+    const errors = {
+      name: !newTeamMember.name.trim(),
+      role: !newTeamMember.role.trim(),
+      email: !newTeamMember.email.trim(),
+      phone: !newTeamMember.phone.trim()
     }
+    
+    setTeamMemberValidationErrors(errors)
+    
+    // Si il y a des erreurs, ne pas continuer
+    if (Object.values(errors).some(error => error)) {
+      return
+    }
+    
+    // Si tous les champs sont remplis
+    const newMember = {
+      id: Date.now(),
+      name: newTeamMember.name,
+      role: newTeamMember.role,
+      email: newTeamMember.email,
+      phone: newTeamMember.phone,
+      avatar: null,
+      status: 'active',
+      lastActiveTime: null,
+      color: '#10B981'
+    }
+    
+    setTeamMembers(prev => [...prev, newMember])
+    setNewTeamMember({ name: '', role: '', email: '', phone: '' })
+    setTeamMemberValidationErrors({ name: false, role: false, email: false, phone: false })
+    setShowAddTeamMember(false)
   }
 
   const handleRemoveTeamMember = (memberId) => {
