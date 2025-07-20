@@ -3967,10 +3967,10 @@ export default function MarwyckCopilot() {
         <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <DialogHeader>
             <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>
-              Share "{selectedFileForShare?.title || selectedFileForShare?.address}" with team
+              Share this file with team?
             </DialogTitle>
             <p className={`text-sm mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-              Select team members to share this file with
+              Select team members to share <strong>{selectedFileForShare?.title || selectedFileForShare?.address}</strong> with.
             </p>
           </DialogHeader>
           <div className="mt-4">
