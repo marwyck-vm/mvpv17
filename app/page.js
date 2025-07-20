@@ -3415,30 +3415,38 @@ export default function MarwyckCopilot() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                   {teamMembers.map(member => (
-                    <Card key={member.id} className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
+                    <Card key={member.id} className={`group rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''} hover:shadow-lg transition-shadow`}>
                       <CardContent className="p-6">
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center space-x-3">
                             <div>
-                              <h3 className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                {member.name}
-                              </h3>
-                              <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                              <div className="flex items-center space-x-2">
+                                <h3 className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                  {member.name}
+                                </h3>
+                                {member.status === 'active' ? (
+                                  <span className="text-xs font-medium text-green-800 bg-green-100 px-2 py-1 rounded-full">
+                                    Active
+                                  </span>
+                                ) : (
+                                  <span className="text-xs font-medium text-gray-600 bg-gray-100 px-2 py-1 rounded-full">
+                                    Last active {member.lastActiveTime}
+                                  </span>
+                                )}
+                              </div>
+                              <p className={`text-sm mt-1 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                                 {member.role}
                               </p>
                             </div>
                           </div>
-                          <div className="rounded-full px-3 py-1">
-                            {member.status === 'active' ? (
-                              <span className="text-xs font-medium text-green-800 bg-green-100 px-3 py-1 rounded-full">
-                                Active
-                              </span>
-                            ) : (
-                              <span className="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
-                                Last active {member.lastActiveTime}
-                              </span>
-                            )}
-                          </div>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleRemoveTeamMember(member.id)}
+                            className="rounded-full text-red-600 hover:text-red-700 hover:bg-red-50 opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
                         </div>
                         
                         <div className="space-y-2 mb-4">
@@ -3456,17 +3464,6 @@ export default function MarwyckCopilot() {
                               </span>
                             </div>
                           )}
-                        </div>
-
-                        <div className="flex space-x-2">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleRemoveTeamMember(member.id)}
-                            className="rounded-full text-red-600 hover:text-red-700 hover:bg-red-50"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
                         </div>
                       </CardContent>
                     </Card>
