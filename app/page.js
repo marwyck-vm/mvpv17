@@ -489,43 +489,31 @@ export default function MarwyckCopilot() {
       id: 1, 
       title: '',
       address: '123 Oak Street', 
-      type: 'Sale', 
+      type: '', // Pas de type sélectionné initialement
       status: 'active', 
       priority: 'high',
       contacts: [],
-      documents: [
-        { id: 1, name: 'Listing Agreement', status: 'completed' },
-        { id: 2, name: 'Property Disclosure Forms', status: 'pending' },
-        { id: 3, name: 'Comparative Market Analysis (CMA)', status: 'none' },
-        { id: 4, name: 'Property Inspection Report', status: 'missing' }
-      ]
+      documents: []
     },
     { 
       id: 2, 
       title: '',
       address: '456 Pine Avenue', 
-      type: 'Purchase', 
+      type: '', // Pas de type sélectionné initialement
       status: 'pending', 
       priority: 'medium',
       contacts: [],
-      documents: [
-        { id: 1, name: 'Purchase Agreement', status: 'completed' },
-        { id: 2, name: 'Loan Pre-approval', status: 'pending' },
-        { id: 3, name: 'Property Inspection Report', status: 'none' }
-      ]
+      documents: []
     },
     { 
       id: 3, 
       title: '',
       address: '789 Elm Drive', 
-      type: 'Rental', 
+      type: '', // Pas de type sélectionné initialement
       status: 'completed', 
       priority: 'low',
       contacts: [],
-      documents: [
-        { id: 1, name: 'Rental Application Form', status: 'completed' },
-        { id: 2, name: 'Lease Agreement', status: 'completed' }
-      ]
+      documents: []
     }
   ])
   
