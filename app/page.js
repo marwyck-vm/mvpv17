@@ -392,6 +392,7 @@ export default function MarwyckCopilot() {
   const [selectedTeamMembers, setSelectedTeamMembers] = useState([])
   const [showAddTeamMember, setShowAddTeamMember] = useState(false)
   const [newTeamMember, setNewTeamMember] = useState({ name: '', role: '', email: '', phone: '' })
+  const [teamMemberValidationErrors, setTeamMemberValidationErrors] = useState({ name: false, role: false, email: false, phone: false })
   
   // Send to Client states
   const [showSendToClientDialog, setShowSendToClientDialog] = useState(false)
