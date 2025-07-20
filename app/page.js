@@ -2067,10 +2067,10 @@ export default function MarwyckCopilot() {
       </Dialog>
 
       {/* Add Team Member Modal */}
-      <Dialog open={showAddTeamMember} onOpenChange={setShowAddTeamMember}>
-        <DialogContent className="sm:max-w-md rounded-2xl">
+      <Dialog open={showAddTeamMember} onOpenChange={setShowAddTeamMember} modal={false}>
+        <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <DialogHeader>
-            <DialogTitle>Add Team Member</DialogTitle>
+            <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>Add Team Member</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div>
