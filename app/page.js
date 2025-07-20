@@ -2106,50 +2106,93 @@ export default function MarwyckCopilot() {
           </DialogHeader>
           <div className="space-y-4">
             <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Name</label>
+              <div className="flex items-center space-x-2 mb-2">
+                <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Name</label>
+                {teamMemberValidationErrors.name && (
+                  <div className="flex items-center space-x-1">
+                    <AlertTriangle className="w-4 h-4 text-red-500" />
+                    <span className="text-xs text-red-500">Required</span>
+                  </div>
+                )}
+              </div>
               <Input 
                 placeholder="Full name" 
-                className="rounded-xl" 
+                className={`rounded-xl ${teamMemberValidationErrors.name ? 'border-red-500 focus:border-red-500' : ''}`}
                 value={newTeamMember.name}
                 onChange={(e) => setNewTeamMember({...newTeamMember, name: e.target.value})}
               />
             </div>
             <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Role</label>
+              <div className="flex items-center space-x-2 mb-2">
+                <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Role</label>
+                {teamMemberValidationErrors.role && (
+                  <div className="flex items-center space-x-1">
+                    <AlertTriangle className="w-4 h-4 text-red-500" />
+                    <span className="text-xs text-red-500">Required</span>
+                  </div>
+                )}
+              </div>
               <Input 
                 placeholder="e.g., Real Estate Agent" 
-                className="rounded-xl" 
+                className={`rounded-xl ${teamMemberValidationErrors.role ? 'border-red-500 focus:border-red-500' : ''}`}
                 value={newTeamMember.role}
                 onChange={(e) => setNewTeamMember({...newTeamMember, role: e.target.value})}
               />
             </div>
             <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Email</label>
+              <div className="flex items-center space-x-2 mb-2">
+                <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Email</label>
+                {teamMemberValidationErrors.email && (
+                  <div className="flex items-center space-x-1">
+                    <AlertTriangle className="w-4 h-4 text-red-500" />
+                    <span className="text-xs text-red-500">Required</span>
+                  </div>
+                )}
+              </div>
               <Input 
-                type="email" 
                 placeholder="email@example.com" 
-                className="rounded-xl" 
+                type="email" 
+                className={`rounded-xl ${teamMemberValidationErrors.email ? 'border-red-500 focus:border-red-500' : ''}`}
                 value={newTeamMember.email}
                 onChange={(e) => setNewTeamMember({...newTeamMember, email: e.target.value})}
               />
             </div>
             <div>
-              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Phone</label>
+              <div className="flex items-center space-x-2 mb-2">
+                <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Phone</label>
+                {teamMemberValidationErrors.phone && (
+                  <div className="flex items-center space-x-1">
+                    <AlertTriangle className="w-4 h-4 text-red-500" />
+                    <span className="text-xs text-red-500">Required</span>
+                  </div>
+                )}
+              </div>
               <Input 
-                type="tel" 
                 placeholder="+33 6 12 34 56 78" 
-                className="rounded-xl" 
+                type="tel" 
+                className={`rounded-xl ${teamMemberValidationErrors.phone ? 'border-red-500 focus:border-red-500' : ''}`}
                 value={newTeamMember.phone}
                 onChange={(e) => setNewTeamMember({...newTeamMember, phone: e.target.value})}
               />
             </div>
+          </div>
+          <div className="flex space-x-3 mt-6">
+            <Button 
+              variant="outline" 
+              onClick={() => {
+                setShowAddTeamMember(false)
+                setTeamMemberValidationErrors({ name: false, role: false, email: false, phone: false })
+              }}
+              className={`flex-1 rounded-full ${darkMode ? 'border-gray-600 text-white hover:bg-gray-700' : 'border-gray-300'}`}
+            >
+              Cancel
+            </Button>
             <Button 
               onClick={handleAddTeamMember}
-              className="w-full text-white rounded-full" 
+              className="flex-1 text-white rounded-full" 
               style={{ backgroundColor: '#000000' }}
             >
-              <Plus className="w-4 h-4 mr-2" />
-              Add Member
+              Save
             </Button>
           </div>
         </DialogContent>
