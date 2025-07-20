@@ -370,7 +370,7 @@ export default function MarwyckCopilot() {
       phone: '+33 6 12 34 56 78',
       avatar: null,
       status: 'active',
-      joinDate: '2024-01-15',
+      lastActiveTime: null, // active maintenant
       color: '#10B981'
     },
     { 
@@ -380,8 +380,8 @@ export default function MarwyckCopilot() {
       email: 'jean.martin@marwyck.com',
       phone: '+33 6 87 65 43 21',
       avatar: null,
-      status: 'active',
-      joinDate: '2024-02-20',
+      status: 'inactive',
+      lastActiveTime: '2 hours ago',
       color: '#8B5CF6'
     }
   ])
