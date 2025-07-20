@@ -126,6 +126,12 @@ export default function MarwyckCopilot() {
   const [fileContacts, setFileContacts] = useState([])
   const [fileTitle, setFileTitle] = useState('')
   const [fileAddress, setFileAddress] = useState('')
+  
+  // Nouveaux états pour les modals de partage et suppression
+  const [showShareFileModal, setShowShareFileModal] = useState(false)
+  const [showDeleteFileConfirm, setShowDeleteFileConfirm] = useState(false)
+  const [selectedFileForShare, setSelectedFileForShare] = useState(null)
+  const [selectedFileForDelete, setSelectedFileForDelete] = useState(null)
 
   // Functions for managing contacts
   const addContact = () => {
