@@ -2652,7 +2652,7 @@ export default function MarwyckCopilot() {
                       size="sm" 
                       variant="ghost"
                       onClick={() => setShowAIHelp(true)}
-                      className={`rounded-full p-2 text-yellow-500 hover:text-yellow-600 ${darkMode ? 'hover:bg-gray-700/50' : 'hover:bg-gray-100/50'}`}
+                      className={`rounded-full p-2 text-black hover:text-gray-800 ${darkMode ? 'hover:bg-gray-700/50' : 'hover:bg-gray-100/50'}`}
                     >
                       <Lightbulb className="w-4 h-4" />
                     </Button>
