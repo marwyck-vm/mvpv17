@@ -196,23 +196,46 @@ export default function MarwyckCopilot() {
       // Générer les nouveaux documents selon le type
       let newDocuments = []
       if (newType === 'Sale') {
-        newDocuments = [
-          { id: 1, name: 'Listing Agreement', status: 'none' },
-          { id: 2, name: 'Property Disclosure Forms', status: 'none' },
-          { id: 3, name: 'Comparative Market Analysis (CMA)', status: 'none' },
-          { id: 4, name: 'Property Inspection Report', status: 'none' }
+        const saleDocuments = [
+          'Listing Agreement', 'Property Disclosure Forms', 'Comparative Market Analysis (CMA)', 
+          'Preliminary Title Report', 'Homeowners Association (HOA) Documents', 'Marketing Authorization', 
+          'Inspection Reports', 'Repair Estimates', 'Proof of Ownership (Title Deed)', 
+          'Utility Bills & Property Tax Records', 'Purchase Agreement (accepted offer)', 
+          'Counter Offer(s)', 'Contingency Removal Forms', 'Appraisal Report', 
+          'Final Walkthrough Form', 'Closing Disclosure (CD)', 'Deed (Transfer of Title)', 
+          'Settlement Statement / HUD-1', 'Commission Agreement / Invoice'
         ]
+        newDocuments = saleDocuments.map((doc, index) => ({
+          id: index + 1,
+          name: doc,
+          status: 'none'
+        }))
       } else if (newType === 'Purchase') {
-        newDocuments = [
-          { id: 1, name: 'Purchase Agreement', status: 'none' },
-          { id: 2, name: 'Loan Pre-approval', status: 'none' },
-          { id: 3, name: 'Property Inspection Report', status: 'none' }
+        const purchaseDocuments = [
+          'Buyer Representation Agreement', 'Mortgage Pre-Approval Letter', 'Proof of Funds', 
+          'Purchase Offer / Sales Contract', 'Earnest Money Receipt', 'Inspection Reports', 
+          'Contingency Forms', 'Appraisal Report', 'Title Report', 'Title Insurance', 
+          'Closing Disclosure (CD)', 'Loan Documents', 'Homeowners Insurance Policy', 
+          'Settlement Statement (HUD-1)', 'Final Walkthrough Acknowledgement', 'Deed (received at closing)'
         ]
+        newDocuments = purchaseDocuments.map((doc, index) => ({
+          id: index + 1,
+          name: doc,
+          status: 'none'
+        }))
       } else if (newType === 'Rental') {
-        newDocuments = [
-          { id: 1, name: 'Rental Application Form', status: 'none' },
-          { id: 2, name: 'Lease Agreement', status: 'none' }
+        const rentalDocuments = [
+          'Listing Agreement', 'Property Condition Report', 'Rental Application Form', 
+          'Credit Report & Background Check Consent', 'Lease Agreement / Rental Contract', 
+          'Lead-Based Paint Disclosure', 'Security Deposit Receipt', 'Pet Agreement', 
+          'Move-in Checklist / Condition Report', 'Rent Payment Receipts', 
+          'Maintenance Request Forms', 'Lease Renewal or Termination Notices'
         ]
+        newDocuments = rentalDocuments.map((doc, index) => ({
+          id: index + 1,
+          name: doc,
+          status: 'none'
+        }))
       }
 
       // Mettre à jour le dossier avec le nouveau type et les nouveaux documents
