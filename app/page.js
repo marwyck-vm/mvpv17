@@ -2109,10 +2109,7 @@ export default function MarwyckCopilot() {
               <div className="flex items-center space-x-2 mb-2">
                 <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Name</label>
                 {teamMemberValidationErrors.name && (
-                  <div className="flex items-center space-x-1">
-                    <AlertTriangle className="w-4 h-4 text-red-500" />
-                    <span className="text-xs text-red-500">Required</span>
-                  </div>
+                  <AlertTriangle className="w-4 h-4 text-red-500" />
                 )}
               </div>
               <Input 
@@ -2126,10 +2123,7 @@ export default function MarwyckCopilot() {
               <div className="flex items-center space-x-2 mb-2">
                 <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Role</label>
                 {teamMemberValidationErrors.role && (
-                  <div className="flex items-center space-x-1">
-                    <AlertTriangle className="w-4 h-4 text-red-500" />
-                    <span className="text-xs text-red-500">Required</span>
-                  </div>
+                  <AlertTriangle className="w-4 h-4 text-red-500" />
                 )}
               </div>
               <Input 
@@ -2143,10 +2137,7 @@ export default function MarwyckCopilot() {
               <div className="flex items-center space-x-2 mb-2">
                 <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Email</label>
                 {teamMemberValidationErrors.email && (
-                  <div className="flex items-center space-x-1">
-                    <AlertTriangle className="w-4 h-4 text-red-500" />
-                    <span className="text-xs text-red-500">Required</span>
-                  </div>
+                  <AlertTriangle className="w-4 h-4 text-red-500" />
                 )}
               </div>
               <Input 
@@ -2161,10 +2152,7 @@ export default function MarwyckCopilot() {
               <div className="flex items-center space-x-2 mb-2">
                 <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Phone</label>
                 {teamMemberValidationErrors.phone && (
-                  <div className="flex items-center space-x-1">
-                    <AlertTriangle className="w-4 h-4 text-red-500" />
-                    <span className="text-xs text-red-500">Required</span>
-                  </div>
+                  <AlertTriangle className="w-4 h-4 text-red-500" />
                 )}
               </div>
               <Input 
