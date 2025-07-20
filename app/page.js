@@ -3239,7 +3239,7 @@ export default function MarwyckCopilot() {
                   <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                     Communications History
                   </h2>
-                  <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>View all SMS and call activities</p>
+                  <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Track and review all communication activities</p>
                 </div>
 
                 {/* Professional Chat Interface */}
