@@ -3782,7 +3782,7 @@ export default function MarwyckCopilot() {
                       </label>
                       <div className="max-h-52 overflow-y-auto space-y-2 pr-2" style={{ scrollbarWidth: 'thin', scrollbarColor: '#9CA3AF transparent' }}>
                         {selectedFileForDetails.documents?.map(doc => (
-                          <div key={doc.id} className={`flex items-center justify-between p-3 rounded-xl border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'} hover:border-gray-400 transition-all duration-200`}>
+                          <div key={doc.id} className={`flex items-center justify-between p-3 rounded-xl border transition-all duration-200 ${getDocumentBoxColor(doc.status || 'none', darkMode)}`}>
                             <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                               {doc.name}
                             </span>
