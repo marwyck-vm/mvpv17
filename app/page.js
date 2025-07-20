@@ -3823,7 +3823,7 @@ export default function MarwyckCopilot() {
                             <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                               {doc.name}
                             </span>
-                            <Select defaultValue={doc.status || 'none'}>
+                            <Select value={doc.status || 'none'} onValueChange={(value) => updateFileDetailsDocumentStatus(doc.id, value)}>
                               <SelectTrigger className={`w-28 rounded-full text-xs ${getStatusColor(doc.status || 'none')}`}>
                                 <SelectValue />
                               </SelectTrigger>
