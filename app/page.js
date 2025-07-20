@@ -2812,8 +2812,8 @@ export default function MarwyckCopilot() {
                               {dossier.type}
                             </span>
                           ) : (
-                            <span className="text-xs font-medium text-gray-400 bg-gray-50 px-3 py-1 rounded-full">
-                              No Type
+                            <span className="text-xs font-medium text-gray-400 bg-gray-50 px-3 py-1 rounded-full border border-dashed border-gray-300">
+                              Select type
                             </span>
                           )}
                         </div>
@@ -2836,7 +2836,7 @@ export default function MarwyckCopilot() {
                           <Button 
                             size="sm" 
                             variant="ghost" 
-                            className="text-blue-500 hover:bg-blue-50 rounded-full p-2"
+                            className="text-black hover:bg-gray-100 rounded-full p-2"
                             onClick={(e) => shareDossier(dossier.id, e)}
                           >
                             <UserPlus className="w-4 h-4" />
