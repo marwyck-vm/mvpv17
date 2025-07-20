@@ -533,33 +533,48 @@ export default function MarwyckCopilot() {
   const [dossiersList, setDossiersList] = useState([
     { 
       id: 1, 
-      title: '',
+      title: 'Sale File Example',
       address: '123 Oak Street', 
-      type: '', // Pas de type sélectionné initialement
+      type: 'sale', // Type sélectionné pour voir les documents
       status: 'active', 
       priority: 'high',
       contacts: [],
-      documents: []
+      documents: [
+        { id: 1, name: 'Listing Agreement', status: 'completed' },
+        { id: 2, name: 'Property Disclosure Forms', status: 'pending' },
+        { id: 3, name: 'Comparative Market Analysis (CMA)', status: 'missing' },
+        { id: 4, name: 'Preliminary Title Report', status: 'none' }
+      ]
     },
     { 
       id: 2, 
-      title: '',
+      title: 'Purchase File Example',
       address: '456 Pine Avenue', 
-      type: '', // Pas de type sélectionné initialement
+      type: 'purchase', // Type sélectionné 
       status: 'pending', 
       priority: 'medium',
       contacts: [],
-      documents: []
+      documents: [
+        { id: 1, name: 'Buyer Representation Agreement', status: 'completed' },
+        { id: 2, name: 'Mortgage Pre-Approval Letter', status: 'pending' },
+        { id: 3, name: 'Proof of Funds', status: 'missing' },
+        { id: 4, name: 'Purchase Offer / Sales Contract', status: 'none' }
+      ]
     },
     { 
       id: 3, 
-      title: '',
+      title: 'Rental File Example',
       address: '789 Elm Drive', 
-      type: '', // Pas de type sélectionné initialement
+      type: 'rental', // Type sélectionné
       status: 'completed', 
       priority: 'low',
       contacts: [],
-      documents: []
+      documents: [
+        { id: 1, name: 'Listing Agreement', status: 'completed' },
+        { id: 2, name: 'Property Condition Report', status: 'pending' },
+        { id: 3, name: 'Rental Application Form', status: 'missing' },
+        { id: 4, name: 'Credit Report & Background Check Consent', status: 'none' }
+      ]
     }
   ])
   
