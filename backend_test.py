@@ -6,7 +6,7 @@ import sys
 from datetime import datetime, timedelta
 
 # Get the base URL from environment variables
-BASE_URL = os.environ.get('NEXT_PUBLIC_BASE_URL', 'https://8c12228b-8480-4374-8ce7-6c9cffeeca83.preview.emergentagent.com')
+BASE_URL = os.environ.get('NEXT_PUBLIC_BASE_URL', 'https://e2e78b12-42f4-443d-acef-6ddbc0e8041b.preview.emergentagent.com')
 API_BASE_URL = f"{BASE_URL}/api"
 
 # Test results tracking
