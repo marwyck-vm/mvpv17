@@ -3480,7 +3480,7 @@ export default function MarwyckCopilot() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                   {teamMembers.map(member => (
-                    <Card key={member.id} className={`group rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''} hover:shadow-lg transition-shadow`}>
+                    <Card key={member.id} className={`group rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''} hover:shadow-lg transition-shadow relative`}>
                       <CardContent className="p-6">
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center space-x-3">
@@ -3504,14 +3504,6 @@ export default function MarwyckCopilot() {
                               </p>
                             </div>
                           </div>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleRemoveTeamMember(member.id)}
-                            className="rounded-full text-red-600 hover:text-red-700 hover:bg-red-50 opacity-0 group-hover:opacity-100 transition-opacity"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
                         </div>
                         
                         <div className="space-y-2 mb-4">
@@ -3529,6 +3521,18 @@ export default function MarwyckCopilot() {
                               </span>
                             </div>
                           )}
+                        </div>
+
+                        {/* Delete button positioned like in Vault - bottom left, only visible on hover */}
+                        <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleRemoveTeamMember(member.id)}
+                            className="rounded-full text-red-600 hover:text-red-700 hover:bg-red-50 w-8 h-8 p-0"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
                         </div>
                       </CardContent>
                     </Card>
