@@ -274,7 +274,7 @@ export default function MarwyckCopilot() {
     setShowFileDetailsModal(false)
   }
 
-  // Function to get status color
+  // Function to get status color for badges and selectors
   const getStatusColor = (status) => {
     switch (status) {
       case 'missing':
@@ -286,6 +286,29 @@ export default function MarwyckCopilot() {
       case 'none':
       default:
         return 'bg-gray-100 text-gray-600 border-gray-200'
+    }
+  }
+
+  // Function to get background color for document boxes
+  const getDocumentBoxColor = (status, darkMode) => {
+    switch (status) {
+      case 'missing':
+        return darkMode 
+          ? 'bg-red-900 border-red-700 hover:border-red-600' 
+          : 'bg-red-50 border-red-200 hover:border-red-300'
+      case 'pending':
+        return darkMode 
+          ? 'bg-orange-900 border-orange-700 hover:border-orange-600' 
+          : 'bg-orange-50 border-orange-200 hover:border-orange-300'
+      case 'completed':
+        return darkMode 
+          ? 'bg-green-900 border-green-700 hover:border-green-600' 
+          : 'bg-green-50 border-green-200 hover:border-green-300'
+      case 'none':
+      default:
+        return darkMode 
+          ? 'bg-gray-700 border-gray-600 hover:border-gray-500' 
+          : 'bg-gray-50 border-gray-200 hover:border-gray-300'
     }
   }
   const [accentColor, setAccentColor] = useState('#000000')
