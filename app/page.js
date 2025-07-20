@@ -3309,6 +3309,9 @@ export default function MarwyckCopilot() {
                         <div className="space-y-4">
                           <div className="pb-3 border-b border-gray-200 dark:border-gray-700">
                             <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                              {selectedActivity.date}
+                            </p>
+                            <p className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
                               {selectedActivity.time}
                             </p>
                           </div>
