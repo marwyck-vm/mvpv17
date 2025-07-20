@@ -2099,7 +2099,18 @@ export default function MarwyckCopilot() {
       </Dialog>
 
       {/* Add Team Member Modal */}
-      <Dialog open={showAddTeamMember} onOpenChange={setShowAddTeamMember} modal={false}>
+      <Dialog 
+        open={showAddTeamMember} 
+        onOpenChange={(open) => {
+          setShowAddTeamMember(open)
+          if (!open) {
+            // Reset erreurs et formulaire quand on ferme le modal
+            setTeamMemberValidationErrors({ name: false, role: false, email: false, phone: false })
+            setNewTeamMember({ name: '', role: '', email: '', phone: '' })
+          }
+        }} 
+        modal={false}
+      >
         <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <DialogHeader>
             <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>Add Team Member</DialogTitle>
