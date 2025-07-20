@@ -2729,9 +2729,15 @@ export default function MarwyckCopilot() {
                           </p>
                         </div>
                         <div>
-                          <span className="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
-                            {dossier.type}
-                          </span>
+                          {dossier.type ? (
+                            <span className="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+                              {dossier.type}
+                            </span>
+                          ) : (
+                            <span className="text-xs font-medium text-gray-400 bg-gray-50 px-3 py-1 rounded-full">
+                              No Type
+                            </span>
+                          )}
                         </div>
                       </div>
 
