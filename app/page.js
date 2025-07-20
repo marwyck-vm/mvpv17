@@ -3264,7 +3264,7 @@ export default function MarwyckCopilot() {
                         {recentActivities.map((activity, index) => (
                           <div 
                             key={activity.id} 
-                            className={`p-4 rounded-xl border cursor-pointer transition-colors ${darkMode ? 'border-gray-700 hover:border-gray-600' : 'border-gray-200 hover:border-gray-300'} ${selectedActivity?.id === activity.id ? (darkMode ? 'bg-gray-700 border-gray-500' : 'bg-blue-50 border-blue-200') : ''}`}
+                            className={`p-4 rounded-xl border cursor-pointer transition-colors ${darkMode ? 'border-gray-700 hover:border-gray-600' : 'border-gray-200 hover:border-gray-300'} ${selectedActivity?.id === activity.id ? (darkMode ? 'bg-gray-700 border-gray-500' : 'bg-gray-100 border-gray-400') : ''}`}
                             onClick={() => setSelectedActivity(activity)}
                           >
                             <div className="flex items-center justify-between">
