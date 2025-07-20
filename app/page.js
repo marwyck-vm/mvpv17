@@ -3371,10 +3371,6 @@ export default function MarwyckCopilot() {
                     </CardContent>
                   </Card>
                 </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
               </div>
             </div>
           )}
