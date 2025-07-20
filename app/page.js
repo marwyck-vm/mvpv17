@@ -2705,7 +2705,7 @@ export default function MarwyckCopilot() {
                     <div 
                       key={dossier.id} 
                       onClick={() => openFileDetails(dossier)}
-                      className={`bg-white rounded-xl border border-gray-200 p-6 cursor-pointer transition-all duration-300 hover:shadow-lg hover:shadow-black/10 hover:-translate-y-1 hover:border-gray-300 h-40 flex flex-col`}
+                      className={`bg-white rounded-xl border border-gray-200 p-4 cursor-pointer transition-all duration-300 hover:shadow-lg hover:shadow-black/10 hover:-translate-y-1 hover:border-gray-300 h-48 flex flex-col`}
                     >
                       {/* Header avec titre et type */}
                       <div className="flex items-start justify-between mb-3">
