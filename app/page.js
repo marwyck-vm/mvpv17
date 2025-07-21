@@ -2345,10 +2345,8 @@ export default function MarwyckCopilot() {
                 <div className="mb-8">
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                        {getWeekLabel(currentWeek).label}
-                      </h2>
-                      <p className={`font-inter ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{getWeekLabel(currentWeek).date}</p>
+                      <h2 className="text-2xl font-bold font-plus-jakarta text-gray-900">Good afternoon (nom enregistré dans settings)</h2>
+                      <p className={`font-inter ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Here's what's happening today</p>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Button
@@ -2367,13 +2365,24 @@ export default function MarwyckCopilot() {
                       </Button>
                     </div>
                   </div>
-                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                    Efficiency {kpis[0].change.startsWith('+') ? 'increased' : 'decreased'} by <span className={`font-medium ${kpis[0].change.startsWith('+') ? 'text-success' : 'text-red-500'}`}>{kpis[0].change}</span> from last week
-                  </p>
                 </div>
 
-                {/* KPIs */}
+                {/* KPIs Grid with Week Info Box */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                  {/* Week Info Box (first position) */}
+                  <Card className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
+                    <CardHeader className="pb-3">
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>This week</CardTitle>
+                      <p className={`font-inter text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{getWeekLabel(currentWeek).date}</p>
+                    </CardHeader>
+                    <CardContent>
+                      <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                        Efficiency {kpis[0].change.startsWith('+') ? 'increased' : 'decreased'} by <span className={`font-medium ${kpis[0].change.startsWith('+') ? 'text-success' : 'text-red-500'}`}>{kpis[0].change}</span> from last week
+                      </p>
+                    </CardContent>
+                  </Card>
+
+                  {/* KPI Cards (positions 2, 3, 4) */}
                   {kpis.map((kpi, index) => (
                     <Card key={index} className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
