@@ -699,7 +699,7 @@ export default function MarwyckCopilot() {
     return { date: dateRange, label }
   }
 
-  // Dynamic KPIs based on current week
+  // Dynamic KPIs based on current week (removed Appointments Scheduled)
   const getKpisForWeek = (weekOffset) => {
     const baseKpis = [
       { 
@@ -728,15 +728,6 @@ export default function MarwyckCopilot() {
         icon: FileText, 
         color: 'text-black',
         trend: 'up'
-      },
-      { 
-        title: 'Appointments Scheduled', 
-        value: '28', 
-        previousValue: '24',
-        change: '+17%', 
-        icon: Calendar, 
-        color: 'text-black',
-        trend: 'up'
       }
     ]
 
@@ -744,8 +735,7 @@ export default function MarwyckCopilot() {
       return [
         { ...baseKpis[0], value: '28.5', previousValue: '31.2', change: '-9%', color: 'text-black', trend: 'down' },
         { ...baseKpis[1], value: '142', previousValue: '158', change: '-10%', color: 'text-black', trend: 'down' },
-        { ...baseKpis[2], value: '89%', previousValue: '92%', change: '-3%', color: 'text-black', trend: 'down' },
-        { ...baseKpis[3], value: '24', previousValue: '29', change: '-17%', color: 'text-black', trend: 'down' }
+        { ...baseKpis[2], value: '89%', previousValue: '92%', change: '-3%', color: 'text-black', trend: 'down' }
       ]
     } else if (weekOffset === 0) {
       return baseKpis
@@ -754,8 +744,7 @@ export default function MarwyckCopilot() {
       return [
         { ...baseKpis[0], value: '35.8', previousValue: '32.5', change: '+10%', color: 'text-black', trend: 'up' },
         { ...baseKpis[1], value: '164', previousValue: '156', change: '+5%', color: 'text-black', trend: 'up' },
-        { ...baseKpis[2], value: '94%', previousValue: '92%', change: '+2%', color: 'text-black', trend: 'up' },
-        { ...baseKpis[3], value: '32', previousValue: '28', change: '+14%', color: 'text-black', trend: 'up' }
+        { ...baseKpis[2], value: '94%', previousValue: '92%', change: '+2%', color: 'text-black', trend: 'up' }
       ]
     }
   }
