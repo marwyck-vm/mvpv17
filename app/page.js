@@ -2206,24 +2206,24 @@ export default function MarwyckCopilot() {
       <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-300 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r flex flex-col`}>
         <div className={`p-4 flex items-center justify-between`}>
           {sidebarCollapsed ? (
-            <div className="group relative">
+            <div className="group relative w-8 h-8">
               <img 
                 src="/favicon_noir.png" 
                 alt="MARWYCK" 
-                className="h-8 w-8 dark:hidden cursor-pointer"
+                className="w-8 h-8 dark:hidden cursor-pointer group-hover:opacity-0 transition-opacity"
                 onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
               />
               <img 
                 src="/favicon_blanc.png" 
                 alt="MARWYCK" 
-                className="h-8 w-8 hidden dark:block cursor-pointer"
+                className="w-8 h-8 hidden dark:block cursor-pointer group-hover:opacity-0 transition-opacity"
                 onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
               />
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 p-2 rounded-full transition-opacity"
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 p-2 rounded-full transition-opacity w-8 h-8"
               >
                 <Menu className={`w-4 h-4 ${darkMode ? 'text-gray-100' : 'text-gray-700'}`} />
               </Button>
