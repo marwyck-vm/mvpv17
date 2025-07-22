@@ -3120,40 +3120,16 @@ export default function MarwyckCopilot() {
                       </Button>
                     </div>
                   </div>
-                  
-                  {/* Time Slider */}
-                  <div className="flex items-center space-x-4 mb-4">
-                    <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                      Time Range:
-                    </span>
-                    <div className="flex-1 max-w-md">
-                      <input
-                        type="range"
-                        min="0"
-                        max="18"
-                        defaultValue="0"
-                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-                        onChange={(e) => {
-                          const startHour = parseInt(e.target.value);
-                          document.querySelector('.time-grid').scrollTop = startHour * 48; // 48px per hour
-                        }}
-                      />
-                      <div className="flex justify-between text-xs mt-1">
-                        <span className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>6 AM</span>
-                        <span className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>12 PM</span>
-                        <span className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>6 PM</span>
-                        <span className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>11 PM</span>
-                      </div>
-                    </div>
-                  </div>
                 </div>
 
                 {/* Calendar Grid */}
-                <div className="h-[calc(100vh-200px)] flex flex-col">
+                <div className="h-[calc(100vh-120px)] flex flex-col">
                   {/* Day Headers */}
                   <div className={`flex border-b ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'}`}>
-                    <div className={`w-16 flex items-center justify-center py-2 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-                      <span className={`text-xs font-medium ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>GMT+02</span>
+                    <div className={`w-20 flex items-center justify-center py-3 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                      <span className={`text-xs font-medium ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                        GMT{new Date().getTimezoneOffset() <= 0 ? '+' : '-'}{Math.abs(Math.floor(new Date().getTimezoneOffset() / 60)).toString().padStart(2, '0')}
+                      </span>
                     </div>
                     {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map((day, index) => {
                       const weekDates = getCurrentWeekDates()
@@ -3162,25 +3138,33 @@ export default function MarwyckCopilot() {
                       const dateString = `${(dayDate.getMonth() + 1).toString().padStart(2, '0')}/${dayDate.getDate().toString().padStart(2, '0')}`
                       
                       return (
-                        <div key={day} className={`flex-1 text-center py-2 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'} last:border-r-0`}>
-                          <div className={`text-xs font-medium mb-1 ${isToday ? 'text-black' : darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                        <div key={day} className={`flex-1 text-center py-3 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'} last:border-r-0`}>
+                          <div className={`text-xs font-medium mb-2 ${isToday ? 'text-black font-bold' : darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                             {day}
                           </div>
-                          <div className={`text-lg font-semibold ${isToday ? 'w-8 h-8 rounded-full border-2 border-black flex items-center justify-center mx-auto text-black' : darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                            {isToday ? dayDate.getDate() : dateString}
-                          </div>
+                          {isToday ? (
+                            <div className="flex justify-center">
+                              <div className="w-8 h-8 rounded-full border-2 border-black flex items-center justify-center">
+                                <span className="text-lg font-bold text-black">{dayDate.getDate()}</span>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className={`text-lg font-semibold ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                              {dateString}
+                            </div>
+                          )}
                         </div>
                       )
                     })}
                   </div>
 
                   {/* Time Grid */}
-                  <div className="flex-1 overflow-y-auto time-grid">
-                    <div className="flex">
+                  <div className="flex-1 overflow-y-auto">
+                    <div className="flex min-h-full">
                       {/* Time Column */}
-                      <div className={`w-16 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                      <div className={`w-20 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
                         {Array.from({ length: 18 }, (_, i) => i + 6).map(hour => (
-                          <div key={hour} className={`h-12 flex items-center justify-center border-b text-xs font-medium ${darkMode ? 'border-gray-700 text-gray-400' : 'border-gray-200 text-gray-500'}`}>
+                          <div key={hour} className={`h-16 flex items-center justify-center border-b text-xs font-medium ${darkMode ? 'border-gray-700 text-gray-400' : 'border-gray-200 text-gray-500'}`}>
                             {hour === 0 ? '12 AM' : 
                              hour === 12 ? '12 PM' : 
                              hour < 12 ? `${hour} AM` : 
@@ -3192,7 +3176,7 @@ export default function MarwyckCopilot() {
                       {/* Days Columns */}
                       {[6, 0, 1, 2, 3, 4, 5].map((dayIndex, colIndex) => { // Dimanche (6) en premier
                         return (
-                          <div key={dayIndex} className={`flex-1 ${darkMode ? 'border-gray-700' : 'border-gray-200'} border-r last:border-r-0`}>
+                          <div key={dayIndex} className={`flex-1 min-w-0 ${darkMode ? 'border-gray-700' : 'border-gray-200'} border-r last:border-r-0`}>
                             {Array.from({ length: 18 }, (_, i) => i + 6).map(hour => {
                               const currentWeekEvents = getCurrentWeekEvents();
                               const hasEvent = currentWeekEvents.find(event => 
@@ -3202,7 +3186,7 @@ export default function MarwyckCopilot() {
                               return (
                                 <div 
                                   key={`${dayIndex}-${hour}`} 
-                                  className={`h-12 border-b ${darkMode ? 'border-gray-700 hover:bg-gray-700/30' : 'border-gray-200 hover:bg-gray-50'} cursor-pointer relative`}
+                                  className={`h-16 border-b ${darkMode ? 'border-gray-700 hover:bg-gray-700/30' : 'border-gray-200 hover:bg-gray-50'} cursor-pointer relative`}
                                   onClick={() => {
                                     const weekDates = getCurrentWeekDates();
                                     const slotDate = weekDates[dayIndex === 6 ? 6 : dayIndex];
@@ -3222,7 +3206,7 @@ export default function MarwyckCopilot() {
                                 >
                                   {hasEvent && (
                                     <div 
-                                      className="absolute inset-x-1 top-0.5 bottom-0.5 rounded text-white text-xs px-2 flex items-center"
+                                      className="absolute inset-x-1 top-1 bottom-1 rounded text-white text-xs px-2 flex items-center shadow-sm"
                                       style={{ backgroundColor: '#dc2626' }}
                                       onClick={(e) => {
                                         e.stopPropagation();
@@ -3230,7 +3214,7 @@ export default function MarwyckCopilot() {
                                         setShowEventDetails(true);
                                       }}
                                     >
-                                      <span className="truncate font-medium">{hasEvent.title}</span>
+                                      <span className="truncate font-medium text-xs leading-tight">{hasEvent.title}</span>
                                     </div>
                                   )}
                                 </div>
