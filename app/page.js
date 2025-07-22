@@ -451,6 +451,15 @@ export default function MarwyckCopilot() {
     }
   }
 
+  const getTrafficDotColor = () => {
+    switch (trafficStatus) {
+      case 'good': return 'bg-green-400'
+      case 'medium': return 'bg-orange-400'
+      case 'heavy': return 'bg-red-400'
+      default: return 'bg-gray-400'
+    }
+  }
+
   const getTrafficText = () => {
     switch (trafficStatus) {
       case 'good': return 'Light'
