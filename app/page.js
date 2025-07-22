@@ -2470,7 +2470,7 @@ export default function MarwyckCopilot() {
                             </div>
                             <Badge 
                               variant="outline" 
-                              className={`text-sm px-3 py-1 rounded-full border ${getTypeColor(event.type)}`}
+                              className={`text-sm px-2 py-0.5 rounded-full border ${getTypeColor(event.type)}`}
                             >
                               {event.type}
                             </Badge>
