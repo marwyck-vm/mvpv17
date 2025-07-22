@@ -2405,7 +2405,19 @@ export default function MarwyckCopilot() {
                           {kpi.value}
                         </div>
                         <div className="flex items-center space-x-2">
-                          <p className={`text-xs ${kpi.change.startsWith('+') ? 'text-success' : 'text-red-500'}`}>{kpi.change}</p>
+                          <div className="flex items-center space-x-1">
+                            {kpi.change.startsWith('+') ? (
+                              <>
+                                <span className="text-emerald-600 font-medium">↑</span>
+                                <p className="text-xs text-emerald-600 font-medium">{kpi.change.replace('+', '')}</p>
+                              </>
+                            ) : (
+                              <>
+                                <span className="text-red-500 font-medium">↓</span>
+                                <p className="text-xs text-red-500 font-medium">{kpi.change.replace('-', '')}</p>
+                              </>
+                            )}
+                          </div>
                           <p className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>vs {kpi.previousValue}</p>
                         </div>
                       </CardContent>
