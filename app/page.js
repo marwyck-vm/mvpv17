@@ -3230,8 +3230,8 @@ export default function MarwyckCopilot() {
               </div>
 
               {/* Quick Actions Sidebar */}
-              <div className="w-80 p-6 overflow-y-auto flex flex-col" style={{ background: 'transparent', paddingTop: '0' }}>
-                <div className="mb-6" style={{ marginTop: '140px' }}>
+              <div className="w-80 p-6 flex flex-col" style={{ background: 'transparent', paddingTop: '0' }}>
+                <div className="mb-6" style={{ marginTop: '80px' }}>
                   <Card className={`rounded-xl shadow-lg ${darkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-100'}`}>
                     <CardHeader className="pb-4">
                       <CardTitle className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Quick Actions</CardTitle>
