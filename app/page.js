@@ -2333,12 +2333,14 @@ export default function MarwyckCopilot() {
               <span className="font-mono">{currentTime.toLocaleTimeString()}</span>
             </div>
             
-            {/* Traffic Status - Fixed width container with icon */}
+            {/* Traffic Status - Neutral dot with tooltip */}
             <div className="flex items-center space-x-2 w-48 flex-shrink-0">
-              <Navigation className={`w-4 h-4 ${getTrafficColor()}`} />
-              <span className={`text-sm font-medium whitespace-nowrap ${getTrafficColor()}`}>
-                Traffic nearby: <span className="font-semibold">{getTrafficText()}</span>
-              </span>
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-gray-400 rounded-full" title={`Traffic: ${getTrafficText()}`}></div>
+                <span className={`text-sm font-medium whitespace-nowrap ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                  Traffic: <span className="font-semibold">{getTrafficText()}</span>
+                </span>
+              </div>
             </div>
           </div>
         </div>
