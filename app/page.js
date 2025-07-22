@@ -2210,8 +2210,8 @@ export default function MarwyckCopilot() {
               <img 
                 src={darkMode ? "/logo-white.svg" : "/logo-black.svg"} 
                 alt="MARWYCK" 
-                className="h-6 w-auto object-contain"
-                style={{ maxWidth: '140px' }}
+                className="h-8 w-auto"
+                style={{ maxWidth: '160px', minWidth: '120px', display: 'block' }}
               />
             </div>
           )}
