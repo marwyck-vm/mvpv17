@@ -2480,7 +2480,7 @@ export default function MarwyckCopilot() {
                       <CardHeader>
                         <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} flex items-center`}>
                           <Lightbulb className="w-5 h-5 mr-2" style={{ color: '#000000' }} />
-                          Meeting Preparation
+                          Today's AI Suggestions
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
