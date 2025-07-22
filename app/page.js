@@ -2895,7 +2895,7 @@ export default function MarwyckCopilot() {
                                   <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: '#000000', animationDelay: '0.1s' }}></div>
                                   <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: '#000000', animationDelay: '0.2s' }}></div>
                                 </div>
-                                <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>AI is typing...</span>
+                                <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Marwyck is typing...</span>
                               </div>
                             </div>
                           </div>
