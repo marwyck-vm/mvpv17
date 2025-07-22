@@ -2206,13 +2206,16 @@ export default function MarwyckCopilot() {
       <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-300 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r flex flex-col`}>
         <div className={`p-4 flex items-center justify-between`}>
           {!sidebarCollapsed && (
-            <div className="flex items-center h-8">
+            <div className="flex items-center h-8 bg-red-100">
               <img 
                 src={darkMode ? "/logo-white.svg" : "/logo-black.svg"} 
                 alt="MARWYCK" 
                 className="h-6 w-auto object-contain"
-                style={{ maxWidth: '140px' }}
+                style={{ maxWidth: '140px', border: '2px solid red' }}
+                onLoad={() => console.log('Logo loaded!')}
+                onError={(e) => console.log('Logo failed to load:', e)}
               />
+              <span style={{color: 'red', fontSize: '10px'}}>DEBUG: {darkMode ? 'dark mode' : 'light mode'}</span>
             </div>
           )}
           <Button
