@@ -3126,7 +3126,7 @@ export default function MarwyckCopilot() {
                 <div className={`h-[calc(100vh-240px)] flex flex-col rounded-xl shadow-lg border ${darkMode ? 'border-gray-700 bg-white' : 'border-gray-200 bg-white'}`}>
                   {/* Day Headers */}
                   <div className={`flex border-b shadow-sm rounded-t-xl ${darkMode ? 'border-gray-700 bg-gray-50' : 'border-gray-200 bg-gray-50'}`}>
-                    <div className={`w-16 flex flex-col items-center justify-between py-4 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                    <div className={`flex flex-col items-center justify-between py-4 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'}`} style={{ width: '66px' }}>
                       <div></div>
                       <span className={`text-xs font-normal ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                         GMT{new Date().getTimezoneOffset() <= 0 ? '+' : '-'}{Math.abs(Math.floor(new Date().getTimezoneOffset() / 60)).toString().padStart(2, '0')}
@@ -3163,7 +3163,7 @@ export default function MarwyckCopilot() {
                   <div className="flex-1 overflow-y-auto rounded-b-xl bg-white" style={{ maxHeight: 'calc(100vh - 320px)' }}>
                     <div className="flex">
                       {/* Time Column */}
-                      <div className="w-16 border-r-2 bg-white border-gray-300">
+                      <div className="border-r-2 bg-white border-gray-300" style={{ width: '66px' }}>
                         {Array.from({ length: 24 }, (_, i) => i).map(hour => (
                           <div key={hour} className="h-12 flex items-center justify-center border-b text-xs font-medium border-gray-200 text-gray-500">
                             {hour === 0 ? '12 AM' : 
