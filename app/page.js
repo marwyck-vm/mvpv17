@@ -405,6 +405,13 @@ export default function MarwyckCopilot() {
     selectedContacts: false 
   })
   
+  // User profile settings
+  const [userProfile, setUserProfile] = useState({
+    fullName: 'Marie Dubois',
+    email: 'marie@marwyck.com',
+    company: 'Marwyck Real Estate'
+  })
+  
   const messagesEndRef = useRef(null)
 
   // Available accent colors - Harvey AI style: black and white only
