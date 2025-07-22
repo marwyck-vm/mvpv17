@@ -3231,7 +3231,7 @@ export default function MarwyckCopilot() {
 
               {/* Quick Actions Sidebar */}
               <div className="w-80 p-6 overflow-y-auto flex flex-col" style={{ background: 'transparent', paddingTop: '0' }}>
-                <div className="mb-6" style={{ marginTop: '120px' }}>
+                <div className="mb-6" style={{ marginTop: '140px' }}>
                   <Card className={`rounded-xl shadow-lg ${darkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-100'}`}>
                     <CardHeader className="pb-4">
                       <CardTitle className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Quick Actions</CardTitle>
@@ -3271,37 +3271,40 @@ export default function MarwyckCopilot() {
 
                 <Card className={`rounded-xl shadow-lg ${darkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-100'}`}>
                   <CardHeader className="pb-4">
-                    <CardTitle className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Team Planning</CardTitle>
+                    <CardTitle className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Vault Files</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-3">
-                      {teamMembers.map(member => (
-                        <div key={member.id} className={`flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors`}>
-                          <input
-                            type="checkbox"
-                            id={`team-${member.id}`}
-                            checked={selectedTeamMembers.includes(member.id)}
-                            onChange={(e) => {
-                              if (e.target.checked) {
-                                setSelectedTeamMembers(prev => [...prev, member.id])
-                              } else {
-                                setSelectedTeamMembers(prev => prev.filter(id => id !== member.id))
-                              }
-                            }}
-                            className="w-4 h-4 rounded"
-                          />
-                          <div 
-                            className="w-4 h-4 rounded-full shadow-sm"
-                            style={{ backgroundColor: member.color }}
-                          ></div>
-                          <label 
-                            htmlFor={`team-${member.id}`}
-                            className={`text-sm font-medium cursor-pointer flex-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
-                          >
-                            {member.name}
-                          </label>
-                        </div>
-                      ))}
+                    <div className="space-y-4">
+                      <div>
+                        <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                          Select Client Files
+                        </label>
+                        <Select>
+                          <SelectTrigger className="w-full rounded-xl">
+                            <SelectValue placeholder="Choose files from vault" />
+                          </SelectTrigger>
+                          <SelectContent className="rounded-xl">
+                            <SelectItem value="property-001">📁 Property Smith - Sale</SelectItem>
+                            <SelectItem value="property-002">📁 Johnson House - Purchase</SelectItem>
+                            <SelectItem value="property-003">📁 Brown Apartment - Rental</SelectItem>
+                            <SelectItem value="property-004">📁 Wilson Estate - Sale</SelectItem>
+                            <SelectItem value="property-005">📁 Davis Condo - Purchase</SelectItem>
+                            <SelectItem value="property-006">📁 Miller Commercial - Lease</SelectItem>
+                            <SelectItem value="property-007">📁 Garcia Villa - Sale</SelectItem>
+                            <SelectItem value="property-008">📁 Anderson Duplex - Rental</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div className="pt-2">
+                        <Button 
+                          className="w-full text-white rounded-xl shadow-md hover:shadow-lg transition-all font-semibold" 
+                          style={{ backgroundColor: '#000000' }}
+                        >
+                          <FolderOpen className="w-4 h-4 mr-2" />
+                          Apply to Planning
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
