@@ -2205,30 +2205,55 @@ export default function MarwyckCopilot() {
       {/* Sidebar */}
       <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-300 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r flex flex-col`}>
         <div className={`p-4 flex items-center justify-between`}>
-          {!sidebarCollapsed && (
-            <div className="flex items-center h-8">
+          {sidebarCollapsed ? (
+            <div className="group relative">
               <img 
-                src="/logo_noir.svg" 
+                src="/favicon_noir.png" 
                 alt="MARWYCK" 
-                className="h-6 w-auto dark:hidden"
-                style={{ maxWidth: '120px' }}
+                className="h-8 w-8 dark:hidden cursor-pointer"
+                onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
               />
               <img 
-                src="/logo_blanc.svg" 
+                src="/favicon_blanc.png" 
                 alt="MARWYCK" 
-                className="h-6 w-auto hidden dark:block"
-                style={{ maxWidth: '120px' }}
+                className="h-8 w-8 hidden dark:block cursor-pointer"
+                onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
               />
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 p-2 rounded-full transition-opacity"
+              >
+                <Menu className={`w-4 h-4 ${darkMode ? 'text-gray-100' : 'text-gray-700'}`} />
+              </Button>
             </div>
+          ) : (
+            <>
+              <div className="flex items-center h-8">
+                <img 
+                  src="/logo_noir.svg" 
+                  alt="MARWYCK" 
+                  className="h-6 w-auto dark:hidden"
+                  style={{ maxWidth: '120px' }}
+                />
+                <img 
+                  src="/logo_blanc.svg" 
+                  alt="MARWYCK" 
+                  className="h-6 w-auto hidden dark:block"
+                  style={{ maxWidth: '120px' }}
+                />
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+                className="p-2 rounded-full"
+              >
+                <Menu className={`w-4 h-4 ${darkMode ? 'text-gray-100' : 'text-gray-700'}`} />
+              </Button>
+            </>
           )}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            className={`p-2 rounded-full ${sidebarCollapsed ? 'mx-auto' : ''}`}
-          >
-            <Menu className={`w-4 h-4 ${darkMode ? 'text-gray-100' : 'text-gray-700'}`} />
-          </Button>
         </div>
         
         <nav className="flex-1 p-2">
