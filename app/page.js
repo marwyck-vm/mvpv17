@@ -3271,7 +3271,7 @@ export default function MarwyckCopilot() {
 
                 <Card className={`rounded-xl shadow-lg ${darkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-100'}`}>
                   <CardHeader className="pb-4">
-                    <CardTitle className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Vault Files</CardTitle>
+                    <CardTitle className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Team Files</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
@@ -3279,7 +3279,7 @@ export default function MarwyckCopilot() {
                         <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                           Select Client Files
                         </label>
-                        <div className={`border rounded-xl p-3 max-h-32 overflow-y-auto ${darkMode ? 'border-gray-600 bg-gray-800' : 'border-gray-300 bg-white'}`}>
+                        <div className={`border rounded-xl p-3 max-h-32 overflow-y-auto ${darkMode ? 'border-gray-600 bg-transparent' : 'border-gray-300 bg-transparent'}`}>
                           <div className="space-y-2">
                             {[
                               { id: 'property-001', name: 'Property Smith - Sale' },
