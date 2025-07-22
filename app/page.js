@@ -3132,31 +3132,37 @@ export default function MarwyckCopilot() {
                         GMT{new Date().getTimezoneOffset() <= 0 ? '+' : '-'}{Math.abs(Math.floor(new Date().getTimezoneOffset() / 60)).toString().padStart(2, '0')}
                       </span>
                     </div>
-                    {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map((day, index) => {
-                      const weekDates = getCurrentWeekDates()
-                      const dayDate = weekDates[index]
-                      const isToday = dayDate.toDateString() === new Date().toDateString()
-                      const dateString = `${(dayDate.getMonth() + 1).toString().padStart(2, '0')}/${dayDate.getDate().toString().padStart(2, '0')}`
-                      
-                      return (
-                        <div key={day} className="flex-1 text-center py-4 border-r border-gray-200 last:border-r-0">
-                          <div className={`text-xs font-bold mb-2 uppercase tracking-wide ${isToday ? 'text-black' : 'text-gray-500'}`}>
-                            {day}
-                          </div>
-                          {isToday ? (
-                            <div className="flex justify-center">
-                              <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center shadow-lg">
-                                <span className="text-sm font-bold">{dayDate.getDate()}</span>
+                    <div className="flex-1 flex">
+                      {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map((day, index) => {
+                        const weekDates = getCurrentWeekDates()
+                        const dayDate = weekDates[index]
+                        const isToday = dayDate.toDateString() === new Date().toDateString()
+                        const dateString = `${(dayDate.getMonth() + 1).toString().padStart(2, '0')}/${dayDate.getDate().toString().padStart(2, '0')}`
+                        
+                        return (
+                          <div key={day} className="flex-1 text-center py-4 border-r border-gray-200 last:border-r-0">
+                            <div className={`text-xs font-bold mb-2 uppercase tracking-wide ${isToday ? 'text-black' : 'text-gray-500'}`}>
+                              {day}
+                            </div>
+                            {isToday ? (
+                              <div className="flex justify-center">
+                                <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center shadow-lg">
+                                  <span className="text-sm font-bold">{dayDate.getDate()}</span>
+                                </div>
                               </div>
-                            </div>
-                          ) : (
-                            <div className="text-sm font-medium text-gray-600">
-                              {dateString}
-                            </div>
-                          )}
-                        </div>
-                      )
-                    })}
+                            ) : (
+                              <div className="text-sm font-medium text-gray-600">
+                                {dateString}
+                              </div>
+                            )}
+                          </div>
+                        )
+                      })}
+                    </div>
+                    {/* Scrollbar artificielle à droite des dates */}
+                    <div className="w-3 bg-gray-100 border-l border-gray-200 flex flex-col justify-center">
+                      <div className="w-1.5 h-12 bg-gray-400 rounded-full mx-auto opacity-60"></div>
+                    </div>
                   </div>
 
                   {/* Time Grid - 24 hours */}
