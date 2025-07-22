@@ -3120,26 +3120,54 @@ export default function MarwyckCopilot() {
                       </Button>
                     </div>
                   </div>
+                  
+                  {/* Time Slider */}
+                  <div className="flex items-center space-x-4 mb-4">
+                    <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                      Time Range:
+                    </span>
+                    <div className="flex-1 max-w-md">
+                      <input
+                        type="range"
+                        min="0"
+                        max="18"
+                        defaultValue="0"
+                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                        onChange={(e) => {
+                          const startHour = parseInt(e.target.value);
+                          document.querySelector('.time-grid').scrollTop = startHour * 48; // 48px per hour
+                        }}
+                      />
+                      <div className="flex justify-between text-xs mt-1">
+                        <span className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>6 AM</span>
+                        <span className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>12 PM</span>
+                        <span className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>6 PM</span>
+                        <span className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>11 PM</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Calendar Grid */}
-                <div className="h-[calc(100vh-140px)] flex flex-col">
+                <div className="h-[calc(100vh-200px)] flex flex-col">
                   {/* Day Headers */}
                   <div className={`flex border-b ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'}`}>
                     <div className={`w-16 flex items-center justify-center py-2 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
                       <span className={`text-xs font-medium ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>GMT+02</span>
                     </div>
-                    {['DIM.', 'LUN.', 'MAR.', 'MER.', 'JEU.', 'VEN.', 'SAM.'].map((day, index) => {
+                    {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map((day, index) => {
                       const weekDates = getCurrentWeekDates()
-                      const dayDate = weekDates[index === 0 ? 6 : index - 1] // Dimanche à la fin pour le français
+                      const dayDate = weekDates[index === 0 ? 6 : index - 1] // Dimanche à la fin pour l'affichage
                       const isToday = dayDate.toDateString() === new Date().toDateString()
+                      const dateString = `${(dayDate.getMonth() + 1).toString().padStart(2, '0')}/${dayDate.getDate().toString().padStart(2, '0')}`
+                      
                       return (
                         <div key={day} className={`flex-1 text-center py-2 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'} last:border-r-0`}>
-                          <div className={`text-xs font-medium ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                          <div className={`text-xs font-medium mb-1 ${isToday ? 'text-black' : darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                             {day}
                           </div>
-                          <div className={`text-xl font-semibold mt-1 ${isToday ? 'bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto' : darkMode ? 'text-white' : 'text-gray-900'}`}>
-                            {dayDate.getDate()}
+                          <div className={`text-lg font-semibold ${isToday ? 'w-8 h-8 rounded-full border-2 border-black flex items-center justify-center mx-auto text-black' : darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                            {isToday ? dayDate.getDate() : dateString}
                           </div>
                         </div>
                       )
@@ -3147,13 +3175,16 @@ export default function MarwyckCopilot() {
                   </div>
 
                   {/* Time Grid */}
-                  <div className="flex-1 overflow-y-auto">
+                  <div className="flex-1 overflow-y-auto time-grid">
                     <div className="flex">
                       {/* Time Column */}
                       <div className={`w-16 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
-                        {Array.from({ length: 24 }, (_, i) => i + 6).filter(hour => hour < 24).map(hour => (
+                        {Array.from({ length: 18 }, (_, i) => i + 6).map(hour => (
                           <div key={hour} className={`h-12 flex items-center justify-center border-b text-xs font-medium ${darkMode ? 'border-gray-700 text-gray-400' : 'border-gray-200 text-gray-500'}`}>
-                            {hour} {hour < 12 ? 'AM' : 'PM'}
+                            {hour === 0 ? '12 AM' : 
+                             hour === 12 ? '12 PM' : 
+                             hour < 12 ? `${hour} AM` : 
+                             `${hour - 12} PM`}
                           </div>
                         ))}
                       </div>
