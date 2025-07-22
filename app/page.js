@@ -3279,7 +3279,7 @@ export default function MarwyckCopilot() {
                         <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                           Select Client Files
                         </label>
-                        <div className={`border rounded-xl p-3 max-h-32 overflow-y-auto ${darkMode ? 'border-gray-600 bg-transparent' : 'border-gray-300 bg-transparent'}`}>
+                        <div className={`border rounded-xl p-3 max-h-32 overflow-y-auto ${darkMode ? 'border-gray-600 bg-transparent' : 'border-gray-300 bg-transparent'}`} style={{ scrollbarWidth: 'thin', scrollbarColor: '#d1d5db transparent' }}>
                           <div className="space-y-2">
                             {[
                               { id: 'property-001', name: 'Property Smith - Sale' },
