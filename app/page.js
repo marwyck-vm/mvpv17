@@ -2352,7 +2352,7 @@ export default function MarwyckCopilot() {
                 <div className="mb-8">
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <h2 className="text-2xl font-bold font-plus-jakarta text-gray-900">Good afternoon (nom enregistré dans settings)</h2>
+                      <h2 className="text-2xl font-bold font-plus-jakarta text-gray-900">Good afternoon {userProfile.fullName}</h2>
                       <p className={`font-inter ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Here's what's happening today</p>
                     </div>
                     <div className="flex items-center space-x-2">
