@@ -3123,10 +3123,10 @@ export default function MarwyckCopilot() {
                 </div>
 
                 {/* Calendar Grid Container - Box avec bords arrondis */}
-                <div className={`h-[calc(100vh-240px)] flex flex-col rounded-xl shadow-lg border ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'}`}>
+                <div className={`h-[calc(100vh-240px)] flex flex-col rounded-xl shadow-lg border ${darkMode ? 'border-gray-700 bg-white' : 'border-gray-200 bg-white'}`}>
                   {/* Day Headers */}
-                  <div className={`flex border-b shadow-sm rounded-t-xl ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-gray-50'}`}>
-                    <div className={`w-20 flex flex-col items-center justify-between py-4 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                  <div className={`flex border-b shadow-sm rounded-t-xl ${darkMode ? 'border-gray-700 bg-gray-50' : 'border-gray-200 bg-gray-50'}`}>
+                    <div className={`w-16 flex flex-col items-center justify-between py-4 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
                       <div></div>
                       <span className={`text-xs font-normal ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                         GMT{new Date().getTimezoneOffset() <= 0 ? '+' : '-'}{Math.abs(Math.floor(new Date().getTimezoneOffset() / 60)).toString().padStart(2, '0')}
@@ -3160,12 +3160,12 @@ export default function MarwyckCopilot() {
                   </div>
 
                   {/* Time Grid - 24 hours */}
-                  <div className="flex-1 overflow-y-auto rounded-b-xl" style={{ maxHeight: 'calc(100vh - 320px)' }}>
+                  <div className="flex-1 overflow-y-auto rounded-b-xl bg-white" style={{ maxHeight: 'calc(100vh - 320px)' }}>
                     <div className="flex">
                       {/* Time Column */}
-                      <div className={`w-20 border-r-2 ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-gray-50 border-gray-300'}`}>
+                      <div className="w-16 border-r-2 bg-white border-gray-300">
                         {Array.from({ length: 24 }, (_, i) => i).map(hour => (
-                          <div key={hour} className={`h-12 flex items-center justify-center border-b text-xs font-medium ${darkMode ? 'border-gray-700 text-gray-400' : 'border-gray-200 text-gray-500'}`}>
+                          <div key={hour} className="h-12 flex items-center justify-center border-b text-xs font-medium border-gray-200 text-gray-500">
                             {hour === 0 ? '12 AM' : 
                              hour === 12 ? '12 PM' : 
                              hour < 12 ? `${hour} AM` : 
@@ -3177,7 +3177,7 @@ export default function MarwyckCopilot() {
                       {/* Days Columns */}
                       {[6, 0, 1, 2, 3, 4, 5].map((dayIndex, colIndex) => {
                         return (
-                          <div key={dayIndex} className={`flex-1 min-w-0 ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'} border-r last:border-r-0`}>
+                          <div key={dayIndex} className="flex-1 min-w-0 border-gray-200 bg-white border-r last:border-r-0">
                             {Array.from({ length: 24 }, (_, i) => i).map(hour => {
                               const currentWeekEvents = getCurrentWeekEvents();
                               const hasEvent = currentWeekEvents.find(event => 
@@ -3187,7 +3187,7 @@ export default function MarwyckCopilot() {
                               return (
                                 <div 
                                   key={`${dayIndex}-${hour}`} 
-                                  className={`h-12 border-b ${darkMode ? 'border-gray-700 hover:bg-gray-700/30' : 'border-gray-100 hover:bg-gray-50'} cursor-pointer relative transition-colors`}
+                                  className="h-12 border-b border-gray-100 hover:bg-gray-50 cursor-pointer relative transition-colors"
                                   onClick={() => {
                                     const weekDates = getCurrentWeekDates();
                                     const slotDate = weekDates[dayIndex];
