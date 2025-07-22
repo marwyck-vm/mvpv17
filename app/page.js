@@ -2515,7 +2515,7 @@ export default function MarwyckCopilot() {
                                 {item.checked && <CheckCircle className="w-3 h-3 text-white" />}
                               </button>
                               <span className={`text-sm ${item.checked ? 'line-through opacity-75' : ''} ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                                📋 {item.text}
+                                {item.icon} {item.text}
                               </span>
                             </div>
                           ))}
