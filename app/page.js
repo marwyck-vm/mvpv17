@@ -3123,10 +3123,10 @@ export default function MarwyckCopilot() {
                 </div>
 
                 {/* Calendar Grid Container - Box avec bords arrondis */}
-                <div className={`h-[calc(100vh-240px)] flex flex-col rounded-xl shadow-lg border ${darkMode ? 'border-gray-700 bg-white' : 'border-gray-200 bg-white'}`}>
+                <div className="h-[calc(100vh-240px)] flex flex-col rounded-xl shadow-lg border border-gray-100 bg-white">
                   {/* Day Headers */}
-                  <div className={`flex border-b shadow-sm rounded-t-xl bg-white border-gray-200`}>
-                    <div className={`flex flex-col items-center justify-between py-4 border-r border-gray-200`} style={{ width: '66px' }}>
+                  <div className="flex border-b shadow-sm rounded-t-xl bg-white border-gray-200">
+                    <div className="flex flex-col items-center justify-between py-4 border-r border-gray-200" style={{ width: '66px' }}>
                       <div></div>
                       <span className="text-xs font-normal text-gray-500">
                         GMT{new Date().getTimezoneOffset() <= 0 ? '+' : '-'}{Math.abs(Math.floor(new Date().getTimezoneOffset() / 60)).toString().padStart(2, '0')}
@@ -3231,7 +3231,7 @@ export default function MarwyckCopilot() {
 
               {/* Quick Actions Sidebar */}
               <div className="w-80 p-6 overflow-y-auto flex flex-col" style={{ background: 'transparent', paddingTop: '0' }}>
-                <div className="mb-6" style={{ marginTop: '80px' }}>
+                <div className="mb-6" style={{ marginTop: '120px' }}>
                   <Card className={`rounded-xl shadow-lg ${darkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-100'}`}>
                     <CardHeader className="pb-4">
                       <CardTitle className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Quick Actions</CardTitle>
