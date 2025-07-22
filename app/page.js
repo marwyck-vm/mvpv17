@@ -971,11 +971,11 @@ export default function MarwyckCopilot() {
 
   const getTypeColor = (type) => {
     switch (type) {
-      case 'visit': return 'bg-blue-100 text-blue-800 border-blue-200'
-      case 'signature': return 'bg-green-100 text-green-800 border-green-200'
-      case 'estimation': return 'bg-purple-100 text-purple-800 border-purple-200'
-      case 'meeting': return 'bg-orange-100 text-orange-800 border-orange-200'
-      default: return 'bg-gray-100 text-gray-800 border-gray-200'
+      case 'visit': return 'border border-blue-200 text-blue-700 bg-transparent hover:bg-blue-50'
+      case 'signature': return 'border border-green-200 text-green-700 bg-transparent hover:bg-green-50'
+      case 'estimation': return 'border border-purple-200 text-purple-700 bg-transparent hover:bg-purple-50'
+      case 'meeting': return 'border border-orange-200 text-orange-700 bg-transparent hover:bg-orange-50'
+      default: return 'border border-gray-200 text-gray-700 bg-transparent hover:bg-gray-50'
     }
   }
 
