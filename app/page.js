@@ -3160,7 +3160,7 @@ export default function MarwyckCopilot() {
                   </div>
 
                   {/* Time Grid - 24 hours */}
-                  <div className="flex-1 overflow-y-auto rounded-b-xl bg-white scrollbar-transparent" style={{ maxHeight: 'calc(100vh - 320px)', scrollbarWidth: 'thin', scrollbarColor: 'transparent transparent' }}>
+                  <div className="flex-1 overflow-y-auto rounded-b-xl bg-white" style={{ maxHeight: 'calc(100vh - 320px)', scrollbarWidth: 'thin', scrollbarColor: '#d1d5db transparent' }}>
                     <div className="flex">
                       {/* Time Column */}
                       <div className="border-r-2 bg-white border-gray-200" style={{ width: '66px' }}>
