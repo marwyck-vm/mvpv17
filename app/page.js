@@ -2207,15 +2207,12 @@ export default function MarwyckCopilot() {
         <div className={`p-4 flex items-center justify-between`}>
           {!sidebarCollapsed && (
             <div className="flex items-center h-8">
-              {/* Essayer avec PNG à la place */}
-              <div className="h-8 flex items-center">
-                <img 
-                  src={darkMode ? "/logo-dark.png" : "/logo-light.png"} 
-                  alt="MARWYCK Logo" 
-                  className="h-full w-auto object-contain"
-                  style={{ maxHeight: '32px', maxWidth: '160px' }}
-                />
-              </div>
+              <img 
+                src={darkMode ? "/logo-white.svg" : "/logo-black.svg"} 
+                alt="MARWYCK" 
+                className="h-6 w-auto object-contain"
+                style={{ maxWidth: '140px' }}
+              />
             </div>
           )}
           <Button
