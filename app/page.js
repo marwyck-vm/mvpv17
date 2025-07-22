@@ -2393,7 +2393,7 @@ export default function MarwyckCopilot() {
 
                   {/* KPI Cards (positions 2, 3, 4) */}
                   {kpis.map((kpi, index) => (
-                    <Card key={index} className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
+                    <Card key={index} className={`hover:shadow-lg transition-shadow h-full ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className={`text-sm font-medium ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                           {kpi.title}
