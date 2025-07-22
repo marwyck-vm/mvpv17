@@ -3160,8 +3160,8 @@ export default function MarwyckCopilot() {
                       })}
                     </div>
                     {/* Scrollbar artificielle à droite des dates */}
-                    <div className="w-3 bg-gray-100 border-l border-gray-200 flex flex-col justify-center">
-                      <div className="w-1.5 h-12 bg-gray-400 rounded-full mx-auto opacity-60"></div>
+                    <div className="w-3 bg-transparent border-l border-transparent flex flex-col justify-center">
+                      <div className="w-1.5 h-12 bg-transparent rounded-full mx-auto opacity-60"></div>
                     </div>
                   </div>
 
