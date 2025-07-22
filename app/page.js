@@ -2379,12 +2379,12 @@ export default function MarwyckCopilot() {
                 {/* KPIs Grid with Week Info Box */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                   {/* Week Info Box (first position) */}
-                  <Card className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
+                  <Card className={`hover:shadow-lg transition-shadow h-full ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
                     <CardHeader className="pb-3">
                       <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>This week</CardTitle>
                       <p className={`font-inter text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{getWeekLabel(currentWeek).date}</p>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="flex-1 flex flex-col justify-center">
                       <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                         Efficiency {kpis[0].change.startsWith('+') ? 'increased' : 'decreased'} by <span className={`font-medium ${kpis[0].change.startsWith('+') ? 'text-success' : 'text-red-500'}`}>{kpis[0].change}</span> from last week
                       </p>
