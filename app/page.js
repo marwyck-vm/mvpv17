@@ -2447,7 +2447,7 @@ export default function MarwyckCopilot() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => setShowNewAppointmentModal(true)}
+                        onClick={() => setActiveTab('planning')}
                         className={`text-sm ${darkMode ? 'text-gray-400 hover:text-gray-200 hover:bg-gray-700' : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'} h-auto px-3 py-1 rounded-lg hover:rounded-lg transition-all duration-200 ease-in-out`}
                       >
                         + Add
