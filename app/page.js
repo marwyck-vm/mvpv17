@@ -2442,7 +2442,7 @@ export default function MarwyckCopilot() {
                               <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                                 {event.title}
                               </p>
-                              <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                              <p className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'} font-light`}>
                                 {event.client} • {event.time}
                               </p>
                             </div>
