@@ -2342,13 +2342,18 @@ export default function MarwyckCopilot() {
               <span className="font-mono">{currentTime.toLocaleTimeString()}</span>
             </div>
             
-            {/* Traffic Status - Neutral dot with tooltip */}
+            {/* Traffic Status - Dynamic colored dot with custom tooltip */}
             <div className="flex items-center space-x-2 w-48 flex-shrink-0">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-gray-400 rounded-full" title={`Traffic: ${getTrafficText()}`}></div>
+              <div className="flex items-center space-x-2 relative group">
+                <div className={`w-2 h-2 ${getTrafficDotColor()} rounded-full`}></div>
                 <span className={`text-sm font-medium whitespace-nowrap ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                   Traffic: <span className="font-semibold">{getTrafficText()}</span>
                 </span>
+                {/* Custom Tooltip */}
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 text-xs text-white bg-gray-800 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+                  Real-time traffic overview on nearby roads
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
+                </div>
               </div>
             </div>
           </div>
