@@ -2207,25 +2207,12 @@ export default function MarwyckCopilot() {
         <div className={`p-4 flex items-center justify-between`}>
           {!sidebarCollapsed && (
             <div className="flex items-center h-8">
-              {/* FORCE L'AFFICHAGE DU LOGO AVEC DIAGNOSTIC */}
-              <div style={{ background: 'red', padding: '2px' }}>
-                <img 
-                  src={darkMode ? "/logo-white.svg" : "/logo-black.svg"} 
-                  alt="MARWYCK" 
-                  className="h-8 w-auto"
-                  style={{ 
-                    maxWidth: '160px', 
-                    minWidth: '120px', 
-                    display: 'block !important',
-                    visibility: 'visible !important',
-                    opacity: '1 !important',
-                    zIndex: '9999 !important',
-                    position: 'relative !important'
-                  }}
-                  onLoad={() => console.log('Logo loaded successfully!')}
-                  onError={() => console.log('Logo failed to load!')}
-                />
-              </div>
+              <img 
+                src={darkMode ? "/logo-white.svg" : "/logo-black.svg"} 
+                alt="MARWYCK Logo" 
+                className="h-8 w-auto"
+                style={{ maxWidth: '160px' }}
+              />
             </div>
           )}
           <Button
