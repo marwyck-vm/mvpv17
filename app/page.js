@@ -980,11 +980,11 @@ export default function MarwyckCopilot() {
 
   const getTypeColor = (type) => {
     switch (type) {
-      case 'visit': return 'border border-blue-300 text-blue-800 bg-transparent hover:bg-blue-50'
-      case 'signature': return 'border border-green-300 text-green-800 bg-transparent hover:bg-green-50'
-      case 'estimation': return 'border border-purple-300 text-purple-800 bg-transparent hover:bg-purple-50'
-      case 'meeting': return 'border border-orange-300 text-orange-800 bg-transparent hover:bg-orange-50'
-      default: return 'border border-gray-300 text-gray-800 bg-transparent hover:bg-gray-50'
+      case 'visit': return 'border border-blue-400 text-blue-900 bg-transparent hover:bg-blue-50'
+      case 'signature': return 'border border-green-400 text-green-900 bg-transparent hover:bg-green-50'
+      case 'estimation': return 'border border-purple-400 text-purple-900 bg-transparent hover:bg-purple-50'
+      case 'meeting': return 'border border-orange-400 text-orange-900 bg-transparent hover:bg-orange-50'
+      default: return 'border border-gray-400 text-gray-900 bg-transparent hover:bg-gray-50'
     }
   }
 
