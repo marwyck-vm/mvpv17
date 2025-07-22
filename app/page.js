@@ -2208,7 +2208,7 @@ export default function MarwyckCopilot() {
           {!sidebarCollapsed && (
             <div className="flex items-center h-8">
               <img 
-                src="/marwyck-logo.svg" 
+                src="/logo_noir.svg" 
                 alt="MARWYCK" 
                 className="h-8 w-auto"
                 style={{ maxWidth: '160px' }}
