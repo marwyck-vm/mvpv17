@@ -3126,8 +3126,9 @@ export default function MarwyckCopilot() {
                 <div className="h-[calc(100vh-140px)] flex flex-col">
                   {/* Day Headers */}
                   <div className={`flex border-b shadow-sm ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-gray-50'}`}>
-                    <div className={`w-20 flex items-center justify-center py-4 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-                      <span className={`text-xs font-semibold ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                    <div className={`w-20 flex flex-col items-center justify-between py-4 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                      <div></div>
+                      <span className={`text-xs font-normal ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                         GMT{new Date().getTimezoneOffset() <= 0 ? '+' : '-'}{Math.abs(Math.floor(new Date().getTimezoneOffset() / 60)).toString().padStart(2, '0')}
                       </span>
                     </div>
@@ -3159,10 +3160,10 @@ export default function MarwyckCopilot() {
                   </div>
 
                   {/* Time Grid - 24 hours */}
-                  <div className="flex-1 overflow-y-auto">
+                  <div className="flex-1 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 220px)' }}>
                     <div className="flex">
                       {/* Time Column */}
-                      <div className={`w-20 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
+                      <div className={`w-20 border-r-2 ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-gray-50 border-gray-300'}`}>
                         {Array.from({ length: 24 }, (_, i) => i).map(hour => (
                           <div key={hour} className={`h-12 flex items-center justify-center border-b text-xs font-medium ${darkMode ? 'border-gray-700 text-gray-400' : 'border-gray-200 text-gray-500'}`}>
                             {hour === 0 ? '12 AM' : 
