@@ -3190,7 +3190,7 @@ export default function MarwyckCopilot() {
                                   className={`h-12 border-b ${darkMode ? 'border-gray-700 hover:bg-gray-700/30' : 'border-gray-100 hover:bg-gray-50'} cursor-pointer relative transition-colors`}
                                   onClick={() => {
                                     const weekDates = getCurrentWeekDates();
-                                    const slotDate = weekDates[dayIndex === 6 ? 6 : dayIndex];
+                                    const slotDate = weekDates[dayIndex];
                                     const dateString = slotDate.toISOString().split('T')[0];
                                     const timeString = hour.toString().padStart(2, '0') + ':00';
                                     
