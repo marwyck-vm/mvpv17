@@ -358,10 +358,10 @@ export default function MarwyckCopilot() {
   const [rescheduleValidationErrors, setRescheduleValidationErrors] = useState({ currentAppointment: false, newDate: false, newTime: false })
   const [editingDossier, setEditingDossier] = useState(null)
   const [meetingChecklist, setMeetingChecklist] = useState([
-    { id: 1, text: "Prepare property keys", checked: false },
-    { id: 2, text: "Confirm time with client", checked: false },
-    { id: 3, text: "Gather all necessary documents", checked: false },
-    { id: 4, text: "Check route and travel time", checked: false }
+    { id: 1, text: "Prepare property keys", checked: false, icon: "🔑" },
+    { id: 2, text: "Confirm time with client", checked: false, icon: "📞" },
+    { id: 3, text: "Gather all necessary documents", checked: false, icon: "📄" },
+    { id: 4, text: "Check route and travel time", checked: false, icon: "🗺️" }
   ])
   
   // Team management state
