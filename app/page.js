@@ -3125,10 +3125,10 @@ export default function MarwyckCopilot() {
                 {/* Calendar Grid Container - Box avec bords arrondis */}
                 <div className={`h-[calc(100vh-240px)] flex flex-col rounded-xl shadow-lg border ${darkMode ? 'border-gray-700 bg-white' : 'border-gray-200 bg-white'}`}>
                   {/* Day Headers */}
-                  <div className={`flex border-b shadow-sm rounded-t-xl ${darkMode ? 'border-gray-700 bg-gray-50' : 'border-gray-200 bg-gray-50'}`}>
-                    <div className={`flex flex-col items-center justify-between py-4 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'}`} style={{ width: '66px' }}>
+                  <div className={`flex border-b shadow-sm rounded-t-xl bg-white border-gray-200`}>
+                    <div className={`flex flex-col items-center justify-between py-4 border-r border-gray-200`} style={{ width: '66px' }}>
                       <div></div>
-                      <span className={`text-xs font-normal ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                      <span className="text-xs font-normal text-gray-500">
                         GMT{new Date().getTimezoneOffset() <= 0 ? '+' : '-'}{Math.abs(Math.floor(new Date().getTimezoneOffset() / 60)).toString().padStart(2, '0')}
                       </span>
                     </div>
@@ -3139,8 +3139,8 @@ export default function MarwyckCopilot() {
                       const dateString = `${(dayDate.getMonth() + 1).toString().padStart(2, '0')}/${dayDate.getDate().toString().padStart(2, '0')}`
                       
                       return (
-                        <div key={day} className={`flex-1 text-center py-4 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'} last:border-r-0`}>
-                          <div className={`text-xs font-bold mb-2 uppercase tracking-wide ${isToday ? 'text-black' : darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                        <div key={day} className="flex-1 text-center py-4 border-r border-gray-200 last:border-r-0">
+                          <div className={`text-xs font-bold mb-2 uppercase tracking-wide ${isToday ? 'text-black' : 'text-gray-500'}`}>
                             {day}
                           </div>
                           {isToday ? (
@@ -3150,7 +3150,7 @@ export default function MarwyckCopilot() {
                               </div>
                             </div>
                           ) : (
-                            <div className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                            <div className="text-sm font-medium text-gray-600">
                               {dateString}
                             </div>
                           )}
@@ -3163,9 +3163,9 @@ export default function MarwyckCopilot() {
                   <div className="flex-1 overflow-y-auto rounded-b-xl bg-white" style={{ maxHeight: 'calc(100vh - 320px)' }}>
                     <div className="flex">
                       {/* Time Column */}
-                      <div className="border-r-2 bg-white border-gray-300" style={{ width: '66px' }}>
+                      <div className="border-r-2 bg-white border-gray-200" style={{ width: '66px' }}>
                         {Array.from({ length: 24 }, (_, i) => i).map(hour => (
-                          <div key={hour} className="h-12 flex items-center justify-center border-b text-xs font-medium border-gray-200 text-gray-500">
+                          <div key={hour} className="h-12 flex items-center justify-center border-b border-gray-200 text-xs font-medium text-gray-500">
                             {hour === 0 ? '12 AM' : 
                              hour === 12 ? '12 PM' : 
                              hour < 12 ? `${hour} AM` : 
@@ -3187,7 +3187,7 @@ export default function MarwyckCopilot() {
                               return (
                                 <div 
                                   key={`${dayIndex}-${hour}`} 
-                                  className="h-12 border-b border-gray-100 hover:bg-gray-50 cursor-pointer relative transition-colors"
+                                  className="h-12 border-b border-gray-200 hover:bg-gray-50 cursor-pointer relative transition-colors"
                                   onClick={() => {
                                     const weekDates = getCurrentWeekDates();
                                     const slotDate = weekDates[dayIndex];
@@ -3230,42 +3230,44 @@ export default function MarwyckCopilot() {
               </div>
 
               {/* Quick Actions Sidebar */}
-              <div className="w-80 p-6 overflow-y-auto" style={{ background: 'transparent' }}>
-                <Card className={`rounded-xl shadow-lg ${darkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-100'} mb-6`}>
-                  <CardHeader className="pb-4">
-                    <CardTitle className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Quick Actions</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      <Button 
-                        className="w-full text-white rounded-xl shadow-md hover:shadow-lg transition-all font-semibold" 
-                        style={{ backgroundColor: '#000000' }}
-                        onClick={() => setShowNewEventDialog(true)}
-                      >
-                        <Plus className="w-4 h-4 mr-2" />
-                        New Appointment
-                      </Button>
+              <div className="w-80 p-6 overflow-y-auto flex flex-col" style={{ background: 'transparent', paddingTop: '0' }}>
+                <div className="mb-6" style={{ marginTop: '80px' }}>
+                  <Card className={`rounded-xl shadow-lg ${darkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-100'}`}>
+                    <CardHeader className="pb-4">
+                      <CardTitle className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Quick Actions</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        <Button 
+                          className="w-full text-white rounded-xl shadow-md hover:shadow-lg transition-all font-semibold" 
+                          style={{ backgroundColor: '#000000' }}
+                          onClick={() => setShowNewEventDialog(true)}
+                        >
+                          <Plus className="w-4 h-4 mr-2" />
+                          New Appointment
+                        </Button>
 
-                      <Button 
-                        variant="outline" 
-                        className={`w-full rounded-xl font-medium shadow-sm hover:shadow-md transition-all ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
-                        onClick={() => setShowProposeDialog(true)}
-                      >
-                        <Calendar className="w-4 h-4 mr-2" />
-                        Propose Slots
-                      </Button>
+                        <Button 
+                          variant="outline" 
+                          className={`w-full rounded-xl font-medium shadow-sm hover:shadow-md transition-all ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                          onClick={() => setShowProposeDialog(true)}
+                        >
+                          <Calendar className="w-4 h-4 mr-2" />
+                          Propose Slots
+                        </Button>
 
-                      <Button 
-                        variant="outline" 
-                        className={`w-full rounded-xl font-medium shadow-sm hover:shadow-md transition-all ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
-                        onClick={() => setShowRescheduleDialog(true)}
-                      >
-                        <Clock className="w-4 h-4 mr-2" />
-                        Reschedule
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
+                        <Button 
+                          variant="outline" 
+                          className={`w-full rounded-xl font-medium shadow-sm hover:shadow-md transition-all ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                          onClick={() => setShowRescheduleDialog(true)}
+                        >
+                          <Clock className="w-4 h-4 mr-2" />
+                          Reschedule
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
 
                 <Card className={`rounded-xl shadow-lg ${darkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-100'}`}>
                   <CardHeader className="pb-4">
