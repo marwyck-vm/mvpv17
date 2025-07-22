@@ -2552,7 +2552,7 @@ export default function MarwyckCopilot() {
                             <User className="w-10 h-10 text-white" />
                           </div>
                           <div>
-                            <h3 className={`text-lg font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>John Doe</h3>
+                            <h3 className={`text-lg font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>{userProfile.fullName}</h3>
                             <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Real Estate Agent</p>
                           </div>
                         </div>
