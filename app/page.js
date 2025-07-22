@@ -3081,235 +3081,212 @@ export default function MarwyckCopilot() {
 
           {/* Planning */}
           {activeTab === 'planning' && (
-            <div className="p-6 h-full overflow-y-auto">
-              <div className="max-w-6xl mx-auto">
-                <div className="mb-8">
-                  <div className="mb-4">
-                    <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                      Planning
-                    </h2>
-                    <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Manage your appointments and schedule</p>
-                  </div>
-                  <div className="text-center mb-4">
-                    <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                      {getWeekLabel(currentWeek).label}
-                    </h3>
-                    <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{getWeekLabel(currentWeek).date}</p>
-                  </div>
-                  <div className="flex items-center justify-center space-x-2 mb-4">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setCurrentWeek(currentWeek - 1)}
-                      className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
-                    >
-                      <ChevronLeft className="w-4 h-4" />
-                      Previous
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setCurrentWeek(0)}
-                      disabled={currentWeek === 0}
-                      className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
-                    >
-                      Today
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setCurrentWeek(currentWeek + 1)}
-                      className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
-                    >
-                      Next
-                      <ChevronRight className="w-4 h-4" />
-                    </Button>
+            <div className="h-full flex">
+              <div className="flex-1 overflow-hidden">
+                {/* Header */}
+                <div className={`px-6 py-4 border-b ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                        Planning
+                      </h2>
+                      <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Manage your appointments and schedule</p>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setCurrentWeek(currentWeek - 1)}
+                        className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                      >
+                        <ChevronLeft className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setCurrentWeek(0)}
+                        disabled={currentWeek === 0}
+                        className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                      >
+                        Today
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setCurrentWeek(currentWeek + 1)}
+                        className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </Button>
+                    </div>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-                  <div className="lg:col-span-3">
-                    <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                      <CardContent className="p-0">
-                        {/* Calendar container with scroll and rounded corners */}
-                        <div className="rounded-xl overflow-hidden">
-                          {/* Day headers with CSS table for perfect alignment */}
-                          <div className="flex bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-                            <div className="w-20 border-r border-gray-200 dark:border-gray-700 flex items-center justify-center">
-                              <span className={`text-xs font-medium ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Time</span>
-                            </div>
-                            {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, index) => {
-                              const weekDates = getCurrentWeekDates()
-                              const dayDate = weekDates[index]
+                {/* Calendar Grid */}
+                <div className="h-[calc(100vh-140px)] flex flex-col">
+                  {/* Day Headers */}
+                  <div className={`flex border-b ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'}`}>
+                    <div className={`w-16 flex items-center justify-center py-2 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                      <span className={`text-xs font-medium ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>GMT+02</span>
+                    </div>
+                    {['DIM.', 'LUN.', 'MAR.', 'MER.', 'JEU.', 'VEN.', 'SAM.'].map((day, index) => {
+                      const weekDates = getCurrentWeekDates()
+                      const dayDate = weekDates[index === 0 ? 6 : index - 1] // Dimanche à la fin pour le français
+                      const isToday = dayDate.toDateString() === new Date().toDateString()
+                      return (
+                        <div key={day} className={`flex-1 text-center py-2 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'} last:border-r-0`}>
+                          <div className={`text-xs font-medium ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                            {day}
+                          </div>
+                          <div className={`text-xl font-semibold mt-1 ${isToday ? 'bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto' : darkMode ? 'text-white' : 'text-gray-900'}`}>
+                            {dayDate.getDate()}
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+
+                  {/* Time Grid */}
+                  <div className="flex-1 overflow-y-auto">
+                    <div className="flex">
+                      {/* Time Column */}
+                      <div className={`w-16 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                        {Array.from({ length: 24 }, (_, i) => i + 6).filter(hour => hour < 24).map(hour => (
+                          <div key={hour} className={`h-12 flex items-center justify-center border-b text-xs font-medium ${darkMode ? 'border-gray-700 text-gray-400' : 'border-gray-200 text-gray-500'}`}>
+                            {hour} {hour < 12 ? 'AM' : 'PM'}
+                          </div>
+                        ))}
+                      </div>
+                      
+                      {/* Days Columns */}
+                      {[6, 0, 1, 2, 3, 4, 5].map((dayIndex, colIndex) => { // Dimanche (6) en premier
+                        return (
+                          <div key={dayIndex} className={`flex-1 ${darkMode ? 'border-gray-700' : 'border-gray-200'} border-r last:border-r-0`}>
+                            {Array.from({ length: 18 }, (_, i) => i + 6).map(hour => {
+                              const currentWeekEvents = getCurrentWeekEvents();
+                              const hasEvent = currentWeekEvents.find(event => 
+                                event.dayOfWeek === dayIndex && parseInt(event.time.split(':')[0]) === hour
+                              );
+                              
                               return (
-                                <div key={day} className={`flex-1 h-16 flex flex-col items-center justify-center ${index < 6 ? 'border-r border-gray-200 dark:border-gray-700' : ''}`}>
-                                  <span className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                    {day}
-                                  </span>
-                                  <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                    {dayDate.getDate()}
-                                  </span>
+                                <div 
+                                  key={`${dayIndex}-${hour}`} 
+                                  className={`h-12 border-b ${darkMode ? 'border-gray-700 hover:bg-gray-700/30' : 'border-gray-200 hover:bg-gray-50'} cursor-pointer relative`}
+                                  onClick={() => {
+                                    const weekDates = getCurrentWeekDates();
+                                    const slotDate = weekDates[dayIndex === 6 ? 6 : dayIndex];
+                                    const dateString = slotDate.toISOString().split('T')[0];
+                                    const timeString = hour.toString().padStart(2, '0') + ':00';
+                                    
+                                    setNewEventData({
+                                      title: '',
+                                      date: dateString,
+                                      time: timeString,
+                                      details: '',
+                                      clientFile: '',
+                                      teamMember: ''
+                                    });
+                                    setShowNewEventDialog(true);
+                                  }}
+                                >
+                                  {hasEvent && (
+                                    <div 
+                                      className="absolute inset-x-1 top-0.5 bottom-0.5 rounded text-white text-xs px-2 flex items-center"
+                                      style={{ backgroundColor: '#dc2626' }}
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedEvent(hasEvent);
+                                        setShowEventDetails(true);
+                                      }}
+                                    >
+                                      <span className="truncate font-medium">{hasEvent.title}</span>
+                                    </div>
+                                  )}
                                 </div>
-                              )
+                              );
                             })}
                           </div>
-                          
-                          {/* Scrollable hours and events area */}
-                          <div className="h-[450px] overflow-y-auto">
-                            <div className="flex">
-                              {/* Hours column */}
-                              <div className="w-20 border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-                                {Array.from({ length: 24 }, (_, i) => i).map(hour => (
-                                  <div key={hour} className="h-16 border-b border-gray-200 dark:border-gray-700 flex items-start justify-center pt-1">
-                                    <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                      {hour === 0 ? '12 AM' : 
-                                       hour === 12 ? '12 PM' : 
-                                       hour < 12 ? `${hour} AM` : 
-                                       `${hour - 12} PM`}
-                                    </span>
-                                  </div>
-                                ))}
-                              </div>
-                              
-                              {/* Days columns - using exact flex-1 like headers */}
-                              {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, dayIndex) => (
-                                <div key={day} className={`flex-1 ${dayIndex < 6 ? 'border-r border-gray-200 dark:border-gray-700' : ''}`}>
-                                  {/* Hour slots */}
-                                  {Array.from({ length: 24 }, (_, hourIndex) => {
-                                    const hour = hourIndex;
-                                    const currentWeekEvents = getCurrentWeekEvents();
-                                    const hasEvent = currentWeekEvents.find(event => 
-                                      event.dayOfWeek === dayIndex && parseInt(event.time.split(':')[0]) === hour
-                                    );
-                                    
-                                    return (
-                                      <div 
-                                        key={`${day}-${hour}`} 
-                                        className="h-16 border-b border-gray-200 dark:border-gray-700 p-1 hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer relative"
-                                        onClick={() => {
-                                          // Calculate the date for this slot
-                                          const weekDates = getCurrentWeekDates();
-                                          const slotDate = weekDates[dayIndex];
-                                          const dateString = slotDate.toISOString().split('T')[0];
-                                          const timeString = hour.toString().padStart(2, '0') + ':00';
-                                          
-                                          // Pre-fill the new event data
-                                          setNewEventData({
-                                            title: '',
-                                            date: dateString,
-                                            time: timeString,
-                                            details: '',
-                                            clientFile: '',
-                                            teamMember: ''
-                                          });
-                                          setShowNewEventDialog(true);
-                                        }}
-                                      >
-                                        {hasEvent && (
-                                          <div 
-                                            className="w-full h-12 rounded-xl p-2 text-xs cursor-pointer hover:shadow-md transition-shadow border-2 flex items-center justify-center"
-                                            style={{ 
-                                              backgroundColor: `#00000040`,
-                                              borderColor: '#000000'
-                                            }}
-                                            onClick={(e) => {
-                                              e.stopPropagation();
-                                              setSelectedEvent(hasEvent);
-                                              setShowEventDetails(true);
-                                            }}
-                                          >
-                                            <p className={`font-medium text-xs text-center leading-tight ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                              {hasEvent.title}
-                                            </p>
-                                          </div>
-                                        )}
-                                      </div>
-                                    );
-                                  })}
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-
-                  <div className="space-y-6">
-                    <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                      <CardHeader>
-                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Quick Actions</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-3">
-                          <Button 
-                            className="w-full text-white rounded-full" 
-                            style={{ backgroundColor: '#000000' }}
-                            onClick={() => setShowNewEventDialog(true)}
-                          >
-                            <Plus className="w-4 h-4 mr-2" />
-                            New Appointment
-                          </Button>
-
-                          <Button 
-                            variant="outline" 
-                            className={`w-full rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
-                            onClick={() => setShowProposeDialog(true)}
-                          >
-                            <Calendar className="w-4 h-4 mr-2" />
-                            Propose slots
-                          </Button>
-
-                          <Button 
-                            variant="outline" 
-                            className={`w-full rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
-                            onClick={() => setShowRescheduleDialog(true)}
-                          >
-                            <Clock className="w-4 h-4 mr-2" />
-                            Reschedule
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    <Card className={`rounded-xl ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                      <CardHeader>
-                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Team Planning</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-3">
-                          {teamMembers.map(member => (
-                            <div key={member.id} className="flex items-center space-x-3">
-                              <input
-                                type="checkbox"
-                                id={`team-${member.id}`}
-                                checked={selectedTeamMembers.includes(member.id)}
-                                onChange={(e) => {
-                                  if (e.target.checked) {
-                                    setSelectedTeamMembers(prev => [...prev, member.id])
-                                  } else {
-                                    setSelectedTeamMembers(prev => prev.filter(id => id !== member.id))
-                                  }
-                                }}
-                                className="w-4 h-4 rounded"
-                              />
-                              <div 
-                                className="w-4 h-4 rounded-full"
-                                style={{ backgroundColor: member.color }}
-                              ></div>
-                              <label 
-                                htmlFor={`team-${member.id}`}
-                                className={`text-sm cursor-pointer flex-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
-                              >
-                                {member.name}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
+              </div>
+
+              {/* Quick Actions Sidebar */}
+              <div className={`w-80 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'} border-l p-6 overflow-y-auto`}>
+                <Card className={`rounded-xl ${darkMode ? 'bg-gray-900 border-gray-700' : 'bg-white'} mb-6`}>
+                  <CardHeader>
+                    <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Quick Actions</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <Button 
+                        className="w-full text-white rounded-full" 
+                        style={{ backgroundColor: '#000000' }}
+                        onClick={() => setShowNewEventDialog(true)}
+                      >
+                        <Plus className="w-4 h-4 mr-2" />
+                        New Appointment
+                      </Button>
+
+                      <Button 
+                        variant="outline" 
+                        className={`w-full rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                        onClick={() => setShowProposeDialog(true)}
+                      >
+                        <Calendar className="w-4 h-4 mr-2" />
+                        Propose slots
+                      </Button>
+
+                      <Button 
+                        variant="outline" 
+                        className={`w-full rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                        onClick={() => setShowRescheduleDialog(true)}
+                      >
+                        <Clock className="w-4 h-4 mr-2" />
+                        Reschedule
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className={`rounded-xl ${darkMode ? 'bg-gray-900 border-gray-700' : 'bg-white'}`}>
+                  <CardHeader>
+                    <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Team Planning</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      {teamMembers.map(member => (
+                        <div key={member.id} className="flex items-center space-x-3">
+                          <input
+                            type="checkbox"
+                            id={`team-${member.id}`}
+                            checked={selectedTeamMembers.includes(member.id)}
+                            onChange={(e) => {
+                              if (e.target.checked) {
+                                setSelectedTeamMembers(prev => [...prev, member.id])
+                              } else {
+                                setSelectedTeamMembers(prev => prev.filter(id => id !== member.id))
+                              }
+                            }}
+                            className="w-4 h-4 rounded"
+                          />
+                          <div 
+                            className="w-4 h-4 rounded-full"
+                            style={{ backgroundColor: member.color }}
+                          ></div>
+                          <label 
+                            htmlFor={`team-${member.id}`}
+                            className={`text-sm cursor-pointer flex-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
+                          >
+                            {member.name}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
             </div>
           )}
