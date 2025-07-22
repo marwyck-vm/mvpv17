@@ -3085,7 +3085,7 @@ export default function MarwyckCopilot() {
               <div className="flex-1 overflow-hidden">
                 {/* Header */}
                 <div className={`px-6 py-4 border-b ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between">
                     <div>
                       <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                         Planning
@@ -3097,7 +3097,7 @@ export default function MarwyckCopilot() {
                         variant="outline"
                         size="sm"
                         onClick={() => setCurrentWeek(currentWeek - 1)}
-                        className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                        className={`rounded-xl ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
                       >
                         <ChevronLeft className="w-4 h-4" />
                       </Button>
@@ -3106,7 +3106,7 @@ export default function MarwyckCopilot() {
                         size="sm"
                         onClick={() => setCurrentWeek(0)}
                         disabled={currentWeek === 0}
-                        className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                        className={`rounded-xl px-4 ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700 disabled:opacity-50' : 'border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-50'}`}
                       >
                         Today
                       </Button>
@@ -3114,7 +3114,7 @@ export default function MarwyckCopilot() {
                         variant="outline"
                         size="sm"
                         onClick={() => setCurrentWeek(currentWeek + 1)}
-                        className={`rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                        className={`rounded-xl ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
                       >
                         <ChevronRight className="w-4 h-4" />
                       </Button>
@@ -3123,33 +3123,33 @@ export default function MarwyckCopilot() {
                 </div>
 
                 {/* Calendar Grid */}
-                <div className="h-[calc(100vh-120px)] flex flex-col">
+                <div className="h-[calc(100vh-140px)] flex flex-col">
                   {/* Day Headers */}
-                  <div className={`flex border-b ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'}`}>
-                    <div className={`w-20 flex items-center justify-center py-3 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-                      <span className={`text-xs font-medium ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                  <div className={`flex border-b shadow-sm ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-gray-50'}`}>
+                    <div className={`w-20 flex items-center justify-center py-4 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                      <span className={`text-xs font-semibold ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                         GMT{new Date().getTimezoneOffset() <= 0 ? '+' : '-'}{Math.abs(Math.floor(new Date().getTimezoneOffset() / 60)).toString().padStart(2, '0')}
                       </span>
                     </div>
                     {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map((day, index) => {
                       const weekDates = getCurrentWeekDates()
-                      const dayDate = weekDates[index === 0 ? 6 : index - 1] // Dimanche à la fin pour l'affichage
+                      const dayDate = weekDates[index === 0 ? 6 : index - 1]
                       const isToday = dayDate.toDateString() === new Date().toDateString()
                       const dateString = `${(dayDate.getMonth() + 1).toString().padStart(2, '0')}/${dayDate.getDate().toString().padStart(2, '0')}`
                       
                       return (
-                        <div key={day} className={`flex-1 text-center py-3 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'} last:border-r-0`}>
-                          <div className={`text-xs font-medium mb-2 ${isToday ? 'text-black font-bold' : darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                        <div key={day} className={`flex-1 text-center py-4 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'} last:border-r-0`}>
+                          <div className={`text-xs font-bold mb-2 uppercase tracking-wide ${isToday ? 'text-black' : darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                             {day}
                           </div>
                           {isToday ? (
                             <div className="flex justify-center">
-                              <div className="w-8 h-8 rounded-full border-2 border-black flex items-center justify-center">
-                                <span className="text-lg font-bold text-black">{dayDate.getDate()}</span>
+                              <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center shadow-lg">
+                                <span className="text-sm font-bold">{dayDate.getDate()}</span>
                               </div>
                             </div>
                           ) : (
-                            <div className={`text-lg font-semibold ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                            <div className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                               {dateString}
                             </div>
                           )}
@@ -3158,13 +3158,13 @@ export default function MarwyckCopilot() {
                     })}
                   </div>
 
-                  {/* Time Grid */}
+                  {/* Time Grid - 24 hours */}
                   <div className="flex-1 overflow-y-auto">
-                    <div className="flex min-h-full">
+                    <div className="flex">
                       {/* Time Column */}
-                      <div className={`w-20 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
-                        {Array.from({ length: 18 }, (_, i) => i + 6).map(hour => (
-                          <div key={hour} className={`h-16 flex items-center justify-center border-b text-xs font-medium ${darkMode ? 'border-gray-700 text-gray-400' : 'border-gray-200 text-gray-500'}`}>
+                      <div className={`w-20 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
+                        {Array.from({ length: 24 }, (_, i) => i).map(hour => (
+                          <div key={hour} className={`h-12 flex items-center justify-center border-b text-xs font-medium ${darkMode ? 'border-gray-700 text-gray-400' : 'border-gray-200 text-gray-500'}`}>
                             {hour === 0 ? '12 AM' : 
                              hour === 12 ? '12 PM' : 
                              hour < 12 ? `${hour} AM` : 
@@ -3174,10 +3174,10 @@ export default function MarwyckCopilot() {
                       </div>
                       
                       {/* Days Columns */}
-                      {[6, 0, 1, 2, 3, 4, 5].map((dayIndex, colIndex) => { // Dimanche (6) en premier
+                      {[6, 0, 1, 2, 3, 4, 5].map((dayIndex, colIndex) => {
                         return (
                           <div key={dayIndex} className={`flex-1 min-w-0 ${darkMode ? 'border-gray-700' : 'border-gray-200'} border-r last:border-r-0`}>
-                            {Array.from({ length: 18 }, (_, i) => i + 6).map(hour => {
+                            {Array.from({ length: 24 }, (_, i) => i).map(hour => {
                               const currentWeekEvents = getCurrentWeekEvents();
                               const hasEvent = currentWeekEvents.find(event => 
                                 event.dayOfWeek === dayIndex && parseInt(event.time.split(':')[0]) === hour
@@ -3186,7 +3186,7 @@ export default function MarwyckCopilot() {
                               return (
                                 <div 
                                   key={`${dayIndex}-${hour}`} 
-                                  className={`h-16 border-b ${darkMode ? 'border-gray-700 hover:bg-gray-700/30' : 'border-gray-200 hover:bg-gray-50'} cursor-pointer relative`}
+                                  className={`h-12 border-b ${darkMode ? 'border-gray-700 hover:bg-gray-700/30' : 'border-gray-100 hover:bg-gray-50'} cursor-pointer relative transition-colors`}
                                   onClick={() => {
                                     const weekDates = getCurrentWeekDates();
                                     const slotDate = weekDates[dayIndex === 6 ? 6 : dayIndex];
@@ -3206,15 +3206,15 @@ export default function MarwyckCopilot() {
                                 >
                                   {hasEvent && (
                                     <div 
-                                      className="absolute inset-x-1 top-1 bottom-1 rounded text-white text-xs px-2 flex items-center shadow-sm"
-                                      style={{ backgroundColor: '#dc2626' }}
+                                      className="absolute inset-x-1 top-1 bottom-1 rounded-lg text-white text-xs px-2 flex items-center shadow-md transition-all hover:shadow-lg cursor-pointer"
+                                      style={{ backgroundColor: '#000000' }}
                                       onClick={(e) => {
                                         e.stopPropagation();
                                         setSelectedEvent(hasEvent);
                                         setShowEventDetails(true);
                                       }}
                                     >
-                                      <span className="truncate font-medium text-xs leading-tight">{hasEvent.title}</span>
+                                      <span className="truncate font-semibold text-xs leading-tight">{hasEvent.title}</span>
                                     </div>
                                   )}
                                 </div>
@@ -3230,14 +3230,14 @@ export default function MarwyckCopilot() {
 
               {/* Quick Actions Sidebar */}
               <div className={`w-80 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'} border-l p-6 overflow-y-auto`}>
-                <Card className={`rounded-xl ${darkMode ? 'bg-gray-900 border-gray-700' : 'bg-white'} mb-6`}>
-                  <CardHeader>
-                    <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Quick Actions</CardTitle>
+                <Card className={`rounded-xl shadow-lg ${darkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-100'} mb-6`}>
+                  <CardHeader className="pb-4">
+                    <CardTitle className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Quick Actions</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
                       <Button 
-                        className="w-full text-white rounded-full" 
+                        className="w-full text-white rounded-xl shadow-md hover:shadow-lg transition-all font-semibold" 
                         style={{ backgroundColor: '#000000' }}
                         onClick={() => setShowNewEventDialog(true)}
                       >
@@ -3247,16 +3247,16 @@ export default function MarwyckCopilot() {
 
                       <Button 
                         variant="outline" 
-                        className={`w-full rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                        className={`w-full rounded-xl font-medium shadow-sm hover:shadow-md transition-all ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
                         onClick={() => setShowProposeDialog(true)}
                       >
                         <Calendar className="w-4 h-4 mr-2" />
-                        Propose slots
+                        Propose Slots
                       </Button>
 
                       <Button 
                         variant="outline" 
-                        className={`w-full rounded-full ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                        className={`w-full rounded-xl font-medium shadow-sm hover:shadow-md transition-all ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
                         onClick={() => setShowRescheduleDialog(true)}
                       >
                         <Clock className="w-4 h-4 mr-2" />
@@ -3266,14 +3266,14 @@ export default function MarwyckCopilot() {
                   </CardContent>
                 </Card>
 
-                <Card className={`rounded-xl ${darkMode ? 'bg-gray-900 border-gray-700' : 'bg-white'}`}>
-                  <CardHeader>
-                    <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Team Planning</CardTitle>
+                <Card className={`rounded-xl shadow-lg ${darkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-100'}`}>
+                  <CardHeader className="pb-4">
+                    <CardTitle className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Team Planning</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
                       {teamMembers.map(member => (
-                        <div key={member.id} className="flex items-center space-x-3">
+                        <div key={member.id} className={`flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors`}>
                           <input
                             type="checkbox"
                             id={`team-${member.id}`}
@@ -3288,12 +3288,12 @@ export default function MarwyckCopilot() {
                             className="w-4 h-4 rounded"
                           />
                           <div 
-                            className="w-4 h-4 rounded-full"
+                            className="w-4 h-4 rounded-full shadow-sm"
                             style={{ backgroundColor: member.color }}
                           ></div>
                           <label 
                             htmlFor={`team-${member.id}`}
-                            className={`text-sm cursor-pointer flex-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
+                            className={`text-sm font-medium cursor-pointer flex-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
                           >
                             {member.name}
                           </label>
