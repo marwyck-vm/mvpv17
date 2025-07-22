@@ -2428,8 +2428,15 @@ export default function MarwyckCopilot() {
                 {/* Dashboard Bottom Section - Appointments and Activity */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <Card className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                    <CardHeader>
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-6">
                       <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Upcoming Appointments</CardTitle>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className={`text-sm ${darkMode ? 'text-gray-400 hover:text-gray-200' : 'text-gray-600 hover:text-gray-800'} h-auto p-1`}
+                      >
+                        + Add
+                      </Button>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
