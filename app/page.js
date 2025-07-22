@@ -2560,11 +2560,19 @@ export default function MarwyckCopilot() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div>
                             <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Full Name</label>
-                            <Input defaultValue="John Doe" className="rounded-xl" />
+                            <Input 
+                              value={userProfile.fullName} 
+                              onChange={(e) => setUserProfile({...userProfile, fullName: e.target.value})}
+                              className="rounded-xl" 
+                            />
                           </div>
                           <div>
                             <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Email</label>
-                            <Input defaultValue="john@marwyck.com" className="rounded-xl" />
+                            <Input 
+                              value={userProfile.email} 
+                              onChange={(e) => setUserProfile({...userProfile, email: e.target.value})}
+                              className="rounded-xl" 
+                            />
                           </div>
                           <div>
                             <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Phone</label>
@@ -2572,7 +2580,11 @@ export default function MarwyckCopilot() {
                           </div>
                           <div>
                             <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Agency</label>
-                            <Input defaultValue="Marwyck Real Estate" className="rounded-xl" />
+                            <Input 
+                              value={userProfile.company} 
+                              onChange={(e) => setUserProfile({...userProfile, company: e.target.value})}
+                              className="rounded-xl" 
+                            />
                           </div>
                         </div>
                         
