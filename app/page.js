@@ -3279,21 +3279,34 @@ export default function MarwyckCopilot() {
                         <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                           Select Client Files
                         </label>
-                        <Select>
-                          <SelectTrigger className="w-full rounded-xl">
-                            <SelectValue placeholder="Choose files from vault" />
-                          </SelectTrigger>
-                          <SelectContent className="rounded-xl">
-                            <SelectItem value="property-001">📁 Property Smith - Sale</SelectItem>
-                            <SelectItem value="property-002">📁 Johnson House - Purchase</SelectItem>
-                            <SelectItem value="property-003">📁 Brown Apartment - Rental</SelectItem>
-                            <SelectItem value="property-004">📁 Wilson Estate - Sale</SelectItem>
-                            <SelectItem value="property-005">📁 Davis Condo - Purchase</SelectItem>
-                            <SelectItem value="property-006">📁 Miller Commercial - Lease</SelectItem>
-                            <SelectItem value="property-007">📁 Garcia Villa - Sale</SelectItem>
-                            <SelectItem value="property-008">📁 Anderson Duplex - Rental</SelectItem>
-                          </SelectContent>
-                        </Select>
+                        <div className={`border rounded-xl p-3 max-h-48 overflow-y-auto ${darkMode ? 'border-gray-600 bg-gray-800' : 'border-gray-300 bg-white'}`}>
+                          <div className="space-y-2">
+                            {[
+                              { id: 'property-001', name: 'Property Smith - Sale' },
+                              { id: 'property-002', name: 'Johnson House - Purchase' },
+                              { id: 'property-003', name: 'Brown Apartment - Rental' },
+                              { id: 'property-004', name: 'Wilson Estate - Sale' },
+                              { id: 'property-005', name: 'Davis Condo - Purchase' },
+                              { id: 'property-006', name: 'Miller Commercial - Lease' },
+                              { id: 'property-007', name: 'Garcia Villa - Sale' },
+                              { id: 'property-008', name: 'Anderson Duplex - Rental' }
+                            ].map(file => (
+                              <div key={file.id} className={`flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors`}>
+                                <input
+                                  type="checkbox"
+                                  id={file.id}
+                                  className="w-4 h-4 rounded"
+                                />
+                                <label 
+                                  htmlFor={file.id}
+                                  className={`text-sm font-medium cursor-pointer flex-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
+                                >
+                                  {file.name}
+                                </label>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
                       </div>
 
                       <div className="pt-2">
