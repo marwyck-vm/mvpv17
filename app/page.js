@@ -2211,18 +2211,7 @@ export default function MarwyckCopilot() {
                 src={darkMode ? "/logo-white.svg" : "/logo-black.svg"} 
                 alt="MARWYCK" 
                 className="h-8 w-auto max-w-[160px] object-contain"
-                onError={(e) => {
-                  // Fallback au texte si les images ne se chargent pas
-                  e.target.style.display = 'none';
-                  e.target.nextElementSibling.style.display = 'block';
-                }}
               />
-              <span 
-                className={`font-black text-xl tracking-tight hidden ${darkMode ? 'text-white' : 'text-black'}`}
-                style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
-              >
-                MARWYCK
-              </span>
             </div>
           )}
           <Button
