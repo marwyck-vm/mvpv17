@@ -2210,13 +2210,13 @@ export default function MarwyckCopilot() {
               <img 
                 src="/favicon_noir.png" 
                 alt="MARWYCK" 
-                className="w-8 h-8 dark:hidden cursor-pointer group-hover:opacity-0 transition-opacity"
+                className="w-8 h-8 dark:hidden cursor-pointer group-hover:opacity-0 transition-opacity object-contain"
                 onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
               />
               <img 
                 src="/favicon_blanc.png" 
                 alt="MARWYCK" 
-                className="w-8 h-8 hidden dark:block cursor-pointer group-hover:opacity-0 transition-opacity"
+                className="w-8 h-8 hidden dark:block cursor-pointer group-hover:opacity-0 transition-opacity object-contain"
                 onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
               />
               <Button
