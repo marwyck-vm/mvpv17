@@ -2451,7 +2451,7 @@ export default function MarwyckCopilot() {
                           setActiveTab('planning')
                           setShowNewEventDialog(true)
                         }}
-                        className={`text-sm px-3 py-1 h-auto transition-all duration-200 rounded-md hover:rounded-lg ${darkMode ? 'text-gray-400 hover:text-gray-200 hover:bg-gray-700' : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'}`}
+                        className={`text-sm px-3 py-1 h-auto transition-all duration-200 rounded-none hover:rounded-xl ${darkMode ? 'text-gray-400 hover:text-gray-200 hover:bg-gray-700' : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'}`}
                       >
                         + Add
                       </Button>
