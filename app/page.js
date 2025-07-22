@@ -3134,7 +3134,7 @@ export default function MarwyckCopilot() {
                     </div>
                     {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map((day, index) => {
                       const weekDates = getCurrentWeekDates()
-                      const dayDate = weekDates[index === 0 ? 6 : index - 1]
+                      const dayDate = weekDates[index]
                       const isToday = dayDate.toDateString() === new Date().toDateString()
                       const dateString = `${(dayDate.getMonth() + 1).toString().padStart(2, '0')}/${dayDate.getDate().toString().padStart(2, '0')}`
                       
