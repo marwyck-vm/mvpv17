@@ -2786,7 +2786,7 @@ export default function MarwyckCopilot() {
                 </div>
 
                 {/* Grille des projets créés */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 mt-6">
                   {createdProjects.map((project, index) => (
                     <div 
                       key={project.id}
