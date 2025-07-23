@@ -2791,7 +2791,7 @@ export default function MarwyckCopilot() {
                   {createdProjects.map((project, index) => (
                     <div 
                       key={project.id}
-                      className="group w-72 h-36 bg-white border border-gray-200 rounded-[9px] p-3 cursor-pointer hover:shadow-md transition-all relative overflow-hidden"
+                      className="group w-72 h-36 bg-white border border-gray-200 rounded-[9px] p-3 cursor-pointer hover:shadow-md transition-all duration-300 ease-out relative overflow-hidden"
                     >
                       {/* Texte en haut à gauche */}
                       <div className="absolute top-3 left-3">
