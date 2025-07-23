@@ -2888,7 +2888,7 @@ export default function MarwyckCopilot() {
                           )}
                         </div>
                       </div>
-                      <div className="mt-1 space-y-2">
+                      <div className="mt-1 space-y-1">
                         {selectedFile?.contacts?.map((contact, index) => (
                           <div key={contact.id} className="flex items-center">
                             <div className="flex-1">
@@ -2953,11 +2953,11 @@ export default function MarwyckCopilot() {
                               )}
                             </div>
                             
-                            {/* Bouton de suppression pour le 2ème contact */}
-                            {index === 1 && (
+                            {/* Bouton de suppression pour le 2ème contact uniquement */}
+                            {index === 1 && selectedFile?.contacts?.length === 2 && (
                               <button
                                 onClick={() => removeContact(contact.id)}
-                                className="ml-2 text-gray-400 hover:text-gray-600 transition-colors"
+                                className="ml-3 text-gray-400 hover:text-gray-600 transition-colors"
                               >
                                 <X className="w-4 h-4" />
                               </button>
