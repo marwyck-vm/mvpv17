@@ -2995,13 +2995,13 @@ export default function MarwyckCopilot() {
                       <div className="ml-9 mt-2 flex space-x-4">
                         {/* Boîte de gauche - 75% - Interface de chat */}
                         <div className="file-detail-box-left w-[75%] h-96 bg-white border border-gray-200 rounded-xl cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
-                          {/* Zone des messages scrollable avec dégradé en haut */}
+                          {/* Zone des messages scrollable avec dégradé en haut renforcé */}
                           <div className="flex-1 relative overflow-hidden">
-                            {/* Dégradé de fondu en haut */}
-                            <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-white to-transparent z-10 pointer-events-none rounded-t-xl"></div>
+                            {/* Dégradé de fondu en haut plus prononcé */}
+                            <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-white via-white/80 to-transparent z-10 pointer-events-none rounded-t-xl"></div>
                             
                             {/* Messages */}
-                            <div className="h-full p-4 pt-6 space-y-3 overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.3) transparent' }}>
+                            <div className="h-full p-4 pt-8 space-y-3 overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.3) transparent' }}>
                               {/* Message du bot */}
                               <div className="flex justify-start">
                                 <div className="max-w-xs">
@@ -3044,26 +3044,26 @@ export default function MarwyckCopilot() {
                             </div>
                           </div>
 
-                          {/* Zone de saisie */}
-                          <div className="p-4 bg-white border-t border-gray-100">
-                            <div className="flex items-center space-x-3">
-                              {/* Icône trombone */}
-                              <button className="text-black hover:text-gray-600 transition-colors">
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          {/* Zone de saisie plus compacte */}
+                          <div className="px-3 py-2 bg-white border-t border-gray-100">
+                            <div className="flex items-center space-x-2">
+                              {/* Icône trombone plus petite */}
+                              <button className="text-black hover:text-gray-600 transition-colors p-1">
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
                                 </svg>
                               </button>
                               
-                              {/* Input */}
+                              {/* Input plus compact */}
                               <input
                                 type="text"
                                 placeholder="Tapez votre message..."
-                                className="flex-1 px-4 py-2 border-2 border-black rounded-[9px] focus:outline-none focus:border-gray-700 text-sm bg-white"
+                                className="flex-1 px-3 py-1.5 border-2 border-black rounded-[9px] focus:outline-none focus:border-gray-700 text-sm bg-white"
                               />
                               
-                              {/* Bouton envoyer */}
-                              <button className="bg-black hover:bg-gray-800 text-white rounded-[9px] p-2 transition-colors">
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              {/* Bouton envoyer plus compact */}
+                              <button className="bg-black hover:bg-gray-800 text-white rounded-[9px] p-1.5 transition-colors">
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
                                 </svg>
                               </button>
