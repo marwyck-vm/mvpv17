@@ -3000,8 +3000,8 @@ export default function MarwyckCopilot() {
                             {/* Dégradé de fondu en haut plus prononcé - n'affecte pas la scrollbar */}
                             <div className="absolute top-0 left-0 right-4 h-12 bg-gradient-to-b from-white via-white/80 to-transparent z-10 pointer-events-none rounded-t-xl"></div>
                             
-                            {/* Messages alignés avec la zone de saisie */}
-                            <div className="h-full px-10 py-4 pt-8 space-y-3 overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.3) transparent' }}>
+                            {/* Messages avec encore plus d'espacement des bords */}
+                            <div className="h-full px-8 py-4 pt-8 space-y-3 overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.3) transparent' }}>
                               {/* Message du bot */}
                               <div className="flex justify-start">
                                 <div className="max-w-xs">
@@ -3044,8 +3044,8 @@ export default function MarwyckCopilot() {
                             </div>
                           </div>
 
-                          {/* Zone de saisie centrée et alignée avec les messages */}
-                          <div className="px-10 py-2 bg-white border-t border-gray-100 rounded-b-xl">
+                          {/* Zone de saisie plus compacte avec coins arrondis */}
+                          <div className="px-3 py-2 bg-white border-t border-gray-100 rounded-b-xl">
                             <div className="flex items-center space-x-2">
                               {/* Icône trombone plus grosse */}
                               <button className="text-black hover:text-gray-600 transition-colors p-1">
