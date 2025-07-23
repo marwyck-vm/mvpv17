@@ -2872,12 +2872,15 @@ export default function MarwyckCopilot() {
                             </div>
                           ) : (
                             <>
-                              <div className="flex items-center space-x-2">
-                                <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                  {selectedFile?.name || 'New File'}
-                                </h2>
-                                <ChevronRight className="w-5 h-5 text-black" />
-                              </div>
+                              <button
+                                onClick={() => setSelectedFile(null)}
+                                className="text-black hover:text-gray-700 transition-colors"
+                              >
+                                <ChevronLeft className="w-5 h-5" />
+                              </button>
+                              <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                {selectedFile?.name || 'New File'}
+                              </h2>
                               <button
                                 onClick={() => {
                                   setEditingFileName(true)
