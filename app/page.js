@@ -2842,7 +2842,7 @@ export default function MarwyckCopilot() {
                   // Vue détaillée du fichier sélectionné
                   <div>
                     <div className="mb-8">
-                        <div className="mb-6">
+                        <div className="mb-3">
                         <div className="flex items-baseline">
                           {/* Bouton de retour - sa propre boîte à gauche aligné avec le texte */}
                           <div className="mr-4">
@@ -2901,7 +2901,7 @@ export default function MarwyckCopilot() {
                           </div>
                         </div>
                       </div>
-                      <div className="ml-9 mt-0 -space-y-1">
+                      <div className="ml-9 mt-1 -space-y-1">
                         {selectedFile?.contacts?.map((contact, index) => (
                           <div key={contact.id} className="group flex items-center h-8">
                             {editingContact === contact.id ? (
