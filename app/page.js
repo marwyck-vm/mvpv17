@@ -2997,9 +2997,12 @@ export default function MarwyckCopilot() {
                         <div className="file-detail-box-left w-[75%] h-96 bg-white border border-gray-200 rounded-xl cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
                           {/* Zone des messages scrollable avec dégradé en haut renforcé */}
                           <div className="flex-1 relative overflow-hidden">
-                            {/* Bouton nouveau chat en haut à droite */}
-                            <div className="absolute top-3 right-3 z-20">
-                              <button className="text-gray-400 hover:text-black transition-colors duration-200">
+                            {/* Bouton nouveau chat en haut à droite - non affecté par le fade */}
+                            <div className="absolute top-3 right-3 z-30">
+                              <button 
+                                className="text-gray-400 hover:text-black transition-colors duration-200"
+                                title="Create new chat"
+                              >
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                                 </svg>
