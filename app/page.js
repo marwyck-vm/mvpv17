@@ -155,10 +155,6 @@ export default function MarwyckCopilot() {
     }
   }
 
-  const removeContact = (contactId) => {
-    setFileContacts(fileContacts.filter(contact => contact.id !== contactId))
-  }
-
   const updateContact = (contactId, field, value) => {
     setFileContacts(fileContacts.map(contact => 
       contact.id === contactId ? { ...contact, [field]: value } : contact
