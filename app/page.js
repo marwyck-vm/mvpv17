@@ -2998,15 +2998,18 @@ export default function MarwyckCopilot() {
                           {/* Zone des messages scrollable avec dégradé en haut renforcé */}
                           <div className="flex-1 relative overflow-hidden">
                             {/* Bouton nouveau chat en haut à droite - non affecté par le fade */}
-                            <div className="absolute top-3 right-3 z-30">
-                              <button 
-                                className="text-gray-400 hover:text-black transition-colors duration-200"
-                                title="Create new chat"
-                              >
+                            <div className="absolute top-3 right-3 z-30 group">
+                              <button className="text-gray-400 hover:text-black transition-colors duration-200">
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                                 </svg>
                               </button>
+                              {/* Tooltip personnalisé au-dessus du bouton */}
+                              <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                                <div className="bg-gray-800 text-white text-xs rounded-md px-2 py-1 whitespace-nowrap">
+                                  Create new chat
+                                </div>
+                              </div>
                             </div>
                             
                             {/* Dégradé de fondu en haut plus prononcé - n'affecte pas la scrollbar */}
