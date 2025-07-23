@@ -2791,11 +2791,16 @@ export default function MarwyckCopilot() {
                   {createdProjects.map((project, index) => (
                     <div 
                       key={project.id}
-                      className="w-72 h-36 bg-white border border-gray-200 rounded-[9px] p-3 cursor-pointer hover:shadow-md transition-all relative"
+                      className="group w-72 h-36 bg-white border border-gray-200 rounded-[9px] p-3 cursor-pointer hover:shadow-md transition-all relative"
                     >
                       {/* Texte en haut à gauche */}
                       <div className="absolute top-3 left-3">
                         <div className="text-black text-sm font-medium">New address</div>
+                      </div>
+                      
+                      {/* Icône bouclier en haut à droite - apparaît au hover */}
+                      <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <Shield className="w-4 h-4 text-black" />
                       </div>
                       
                       {/* Ligne du bas avec nombre de fichiers et statut de partage */}
