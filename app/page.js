@@ -2993,11 +2993,70 @@ export default function MarwyckCopilot() {
                       
                       {/* Deux grosses boîtes avec effet hover */}
                       <div className="ml-9 mt-2 flex space-x-4">
-                        {/* Boîte de gauche - 75% */}
-                        <div className="file-detail-box-left w-[75%] h-96 bg-white border border-gray-200 rounded-xl p-8 cursor-pointer hover:shadow-lg transition-shadow duration-200 relative">
-                          {/* Contenu de la boîte gauche */}
-                          <div className="absolute top-8 left-8">
-                            <div className="text-black text-xl font-medium">Content Left</div>
+                        {/* Boîte de gauche - 75% - Interface de chat */}
+                        <div className="file-detail-box-left w-[75%] h-96 bg-white border border-gray-200 rounded-xl p-0 cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
+                          {/* Header du chat */}
+                          <div className="flex items-center justify-between p-4 border-b border-gray-200">
+                            <div className="flex items-center space-x-3">
+                              <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                                <span className="text-white text-sm font-medium">AI</span>
+                              </div>
+                              <div>
+                                <h3 className="text-lg font-medium text-gray-900">Marwyck Assistant</h3>
+                                <p className="text-sm text-gray-500">En ligne</p>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Zone des messages */}
+                          <div className="flex-1 p-4 overflow-y-auto space-y-4">
+                            {/* Message du bot */}
+                            <div className="flex items-start space-x-3">
+                              <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span className="text-white text-xs">AI</span>
+                              </div>
+                              <div className="bg-gray-100 rounded-2xl rounded-tl-sm px-4 py-2 max-w-xs">
+                                <p className="text-sm text-gray-800">Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd'hui ?</p>
+                              </div>
+                            </div>
+
+                            {/* Message de l'utilisateur */}
+                            <div className="flex items-start space-x-3 justify-end">
+                              <div className="bg-blue-500 rounded-2xl rounded-tr-sm px-4 py-2 max-w-xs">
+                                <p className="text-sm text-white">Pouvez-vous m'aider avec ce dossier ?</p>
+                              </div>
+                              <div className="w-6 h-6 bg-gray-400 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span className="text-white text-xs">U</span>
+                              </div>
+                            </div>
+
+                            {/* Message du bot */}
+                            <div className="flex items-start space-x-3">
+                              <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span className="text-white text-xs">AI</span>
+                              </div>
+                              <div className="bg-gray-100 rounded-2xl rounded-tl-sm px-4 py-2 max-w-xs">
+                                <p className="text-sm text-gray-800">Bien sûr ! Je peux vous aider à analyser et gérer vos dossiers immobiliers. Que souhaitez-vous faire ?</p>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Zone de saisie */}
+                          <div className="p-4 border-t border-gray-200">
+                            <div className="flex items-center space-x-3">
+                              <div className="flex-1 relative">
+                                <input
+                                  type="text"
+                                  placeholder="Tapez votre message..."
+                                  className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm"
+                                />
+                              </div>
+                              <button className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-2 transition-colors">
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                </svg>
+                              </button>
+                            </div>
                           </div>
                         </div>
                         
