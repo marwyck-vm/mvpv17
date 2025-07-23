@@ -2843,18 +2843,15 @@ export default function MarwyckCopilot() {
                   <div>
                     <div className="mb-8">
                         <div className="mb-6">
-                        {/* Flèche de retour - sa propre box */}
-                        <div className="mb-4">
+                        {/* Flèche de retour et titre sur la même ligne */}
+                        <div className="group flex items-center space-x-3">
                           <button
                             onClick={() => setSelectedFile(null)}
                             className="text-black hover:text-gray-700 transition-colors"
                           >
                             <ChevronLeft className="w-5 h-5" />
                           </button>
-                        </div>
-                        
-                        {/* Titre New File - sa propre box alignée sur bord gauche des contacts */}
-                        <div className="group flex items-center space-x-3">
+                          
                           {editingFileName ? (
                             <div className="flex items-center space-x-2">
                               <input
