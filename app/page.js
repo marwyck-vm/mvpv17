@@ -581,7 +581,12 @@ export default function MarwyckCopilot() {
       id: Date.now(),
       createdAt: new Date()
     }
-    setCreatedProjects(prev => [...prev, newProject])
+    console.log('Creating new project:', newProject)
+    setCreatedProjects(prev => {
+      const updated = [...prev, newProject]
+      console.log('Updated projects:', updated)
+      return updated
+    })
   }
 
   const [dossiersList, setDossiersList] = useState([
