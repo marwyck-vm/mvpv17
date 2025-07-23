@@ -2816,7 +2816,7 @@ export default function MarwyckCopilot() {
                                 }}
                                 className="text-black hover:text-gray-700 transition-colors"
                               >
-                                <PenTool className="w-5 h-5" />
+                                <Edit className="w-5 h-5" />
                               </button>
                             </>
                           )}
