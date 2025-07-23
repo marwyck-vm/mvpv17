@@ -2843,8 +2843,8 @@ export default function MarwyckCopilot() {
                   <div>
                     <div className="mb-8">
                         <div className="mb-6">
-                        <div className="flex items-start">
-                          {/* Bouton de retour - sa propre boîte à gauche */}
+                        <div className="flex items-baseline">
+                          {/* Bouton de retour - sa propre boîte à gauche aligné avec le texte */}
                           <div className="mr-4">
                             <button
                               onClick={() => setSelectedFile(null)}
