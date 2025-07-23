@@ -2893,10 +2893,10 @@ export default function MarwyckCopilot() {
                       </div>
                       <div className="mt-0 -space-y-1">
                         {selectedFile?.contacts?.map((contact, index) => (
-                          <div key={contact.id} className="group flex items-center">
+                          <div key={contact.id} className="group flex items-center h-8">
                             {editingContact === contact.id ? (
-                              <div className="flex items-center space-x-2">
-                                <div className="flex items-center space-x-2 bg-gray-50 px-2 py-0.5 rounded-[9px] border hover:border-gray-400 transition-colors">
+                              <div className="flex items-center space-x-2 w-full">
+                                <div className="flex items-center space-x-2 bg-gray-50 px-2 py-0.5 rounded-[9px] border hover:border-gray-400 transition-colors h-7">
                                   <input
                                     type="text"
                                     value={tempContactData.fullName}
@@ -2929,9 +2929,9 @@ export default function MarwyckCopilot() {
                                 </button>
                               </div>
                             ) : (
-                              <div className="flex items-center">
+                              <div className="flex items-center w-full">
                                 <div 
-                                  className="inline-flex items-center space-x-2 cursor-pointer hover:bg-gray-50 px-2 py-0.5 rounded-[9px] transition-colors"
+                                  className="inline-flex items-center space-x-2 cursor-pointer hover:bg-gray-50 px-2 py-0.5 rounded-[9px] transition-colors h-7"
                                   onClick={() => {
                                     setEditingContact(contact.id)
                                     setTempContactData({
@@ -2958,7 +2958,7 @@ export default function MarwyckCopilot() {
                                 {index === 1 && selectedFile?.contacts?.length === 2 && (
                                   <button
                                     onClick={() => removeContact(contact.id)}
-                                    className="ml-1 text-gray-400 hover:text-gray-600 transition-colors opacity-0 group-hover:opacity-100"
+                                    className="ml-1 text-gray-400 hover:text-gray-600 transition-all duration-200 opacity-0 group-hover:opacity-100"
                                   >
                                     <X className="w-4 h-4" />
                                   </button>
@@ -2968,13 +2968,15 @@ export default function MarwyckCopilot() {
                           </div>
                         ))}
                         
-                        {/* Bouton + pour ajouter un contact (max 2) */}
+                        {/* Bouton + pour ajouter un contact (max 2) - hauteur fixe */}
                         {(!selectedFile?.contacts || selectedFile.contacts.length < 2) && (
-                          <div 
-                            className="inline-flex items-center cursor-pointer hover:bg-gray-50 px-2 py-0.5 rounded-[9px] transition-colors"
-                            onClick={addNewContact}
-                          >
-                            <span className="text-gray-400 text-lg">+</span>
+                          <div className="h-8 flex items-center">
+                            <div 
+                              className="inline-flex items-center cursor-pointer hover:bg-gray-50 px-2 py-0.5 rounded-[9px] transition-colors h-7"
+                              onClick={addNewContact}
+                            >
+                              <span className="text-gray-400 text-lg">+</span>
+                            </div>
                           </div>
                         )}
                       </div>
