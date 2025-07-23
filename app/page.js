@@ -2888,7 +2888,7 @@ export default function MarwyckCopilot() {
                           )}
                         </div>
                       </div>
-                      <div className="mt-1 space-y-1">
+                      <div className="mt-1 space-y-0.5">
                         {selectedFile?.contacts?.map((contact, index) => (
                           <div key={contact.id} className="flex items-center">
                             <div className="flex-1">
