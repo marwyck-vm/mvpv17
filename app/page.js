@@ -2785,7 +2785,7 @@ export default function MarwyckCopilot() {
                                 value={tempFileName}
                                 onChange={(e) => setTempFileName(e.target.value)}
                                 onKeyPress={(e) => e.key === 'Enter' && saveFileName()}
-                                className="text-2xl font-bold font-plus-jakarta bg-transparent border-b-2 border-gray-300 focus:border-black outline-none"
+                                className="text-2xl font-bold font-plus-jakarta bg-transparent outline-none"
                                 autoFocus
                               />
                               <button
