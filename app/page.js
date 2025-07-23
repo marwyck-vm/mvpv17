@@ -2842,7 +2842,7 @@ export default function MarwyckCopilot() {
                   // Vue détaillée du fichier sélectionné
                   <div>
                     <div className="mb-8">
-                        <div className="mb-3">
+                        <div className="mb-4">
                         <div className="flex items-baseline">
                           {/* Bouton de retour - sa propre boîte à gauche aligné avec le texte */}
                           <div className="mr-4">
@@ -2855,7 +2855,7 @@ export default function MarwyckCopilot() {
                           </div>
                           
                           {/* Titre New File - sa propre boîte alignée avec les contacts */}
-                          <div className="group flex items-center space-x-3 flex-1">
+                          <div className="group flex items-center space-x-3 flex-1 mt-2">
                             {editingFileName ? (
                               <div className="flex items-center space-x-2">
                                 <input
@@ -2863,7 +2863,7 @@ export default function MarwyckCopilot() {
                                   value={tempFileName}
                                   onChange={(e) => setTempFileName(e.target.value)}
                                   onKeyPress={(e) => e.key === 'Enter' && saveFileName()}
-                                  className="text-2xl font-bold font-plus-jakarta bg-transparent outline-none"
+                                  className="text-3xl font-bold font-plus-jakarta bg-transparent outline-none"
                                   autoFocus
                                 />
                                 <button
@@ -2884,7 +2884,7 @@ export default function MarwyckCopilot() {
                               </div>
                             ) : (
                               <>
-                                <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                <h2 className={`text-3xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                                   {selectedFile?.name || 'New File'}
                                 </h2>
                                 <button
