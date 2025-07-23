@@ -643,14 +643,11 @@ export default function MarwyckCopilot() {
     }
   }
 
-  // Fonction pour ajouter un nouveau contact
-  const addNewContact = () => {
-    if (selectedFile) {
-      const newContact = { id: Date.now(), fullName: '', mail: '', phone: '' }
-      const updatedProject = {
-        ...selectedFile,
-        contacts: [...(selectedFile.contacts || []), newContact]
-      }
+  // Fonction pour supprimer un contact
+  const removeContact = (contactId) => {
+    if (selectedFile && selectedFile.contacts.length > 1) {
+      const updatedContacts = selectedFile.contacts.filter(contact => contact.id !== contactId)
+      const updatedProject = { ...selectedFile, contacts: updatedContacts }
       
       setSelectedFile(updatedProject)
       setCreatedProjects(prev => 
@@ -660,6 +657,12 @@ export default function MarwyckCopilot() {
             : project
         )
       )
+      
+      // Réinitialiser l'état d'édition si on supprime le contact en cours d'édition
+      if (editingContact === contactId) {
+        setEditingContact(null)
+        setTempContactData({ fullName: '', mail: '', phone: '' })
+      }
     }
   }
 
