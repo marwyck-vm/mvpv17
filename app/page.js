@@ -2843,55 +2843,60 @@ export default function MarwyckCopilot() {
                   <div>
                     <div className="mb-8">
                         <div className="flex items-center justify-between mb-6">
-                        <div className="group flex items-center space-x-3">
-                          {editingFileName ? (
-                            <div className="flex items-center space-x-2">
-                              <input
-                                type="text"
-                                value={tempFileName}
-                                onChange={(e) => setTempFileName(e.target.value)}
-                                onKeyPress={(e) => e.key === 'Enter' && saveFileName()}
-                                className="text-2xl font-bold font-plus-jakarta bg-transparent outline-none"
-                                autoFocus
-                              />
-                              <button
-                                onClick={saveFileName}
-                                className="text-black hover:text-gray-700"
-                              >
-                                <Save className="w-5 h-5" />
-                              </button>
-                              <button
-                                onClick={() => {
-                                  setEditingFileName(false)
-                                  setTempFileName('')
-                                }}
-                                className="text-black hover:text-gray-700"
-                              >
-                                <X className="w-5 h-5" />
-                              </button>
-                            </div>
-                          ) : (
-                            <>
-                              <button
-                                onClick={() => setSelectedFile(null)}
-                                className="text-black hover:text-gray-700 transition-colors"
-                              >
-                                <ChevronLeft className="w-5 h-5" />
-                              </button>
-                              <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                {selectedFile?.name || 'New File'}
-                              </h2>
-                              <button
-                                onClick={() => {
-                                  setEditingFileName(true)
-                                  setTempFileName(selectedFile?.name || 'New File')
-                                }}
-                                className="text-black hover:text-gray-700 transition-all duration-200 opacity-0 group-hover:opacity-100"
-                              >
-                                <Edit className="w-5 h-5" />
-                              </button>
-                            </>
-                          )}
+                        <div className="flex items-center space-x-4">
+                          {/* Flèche de retour - box séparée */}
+                          <button
+                            onClick={() => setSelectedFile(null)}
+                            className="text-black hover:text-gray-700 transition-colors"
+                          >
+                            <ChevronLeft className="w-5 h-5" />
+                          </button>
+                          
+                          {/* Titre et bouton d'édition - groupe séparé */}
+                          <div className="group flex items-center space-x-3">
+                            {editingFileName ? (
+                              <div className="flex items-center space-x-2">
+                                <input
+                                  type="text"
+                                  value={tempFileName}
+                                  onChange={(e) => setTempFileName(e.target.value)}
+                                  onKeyPress={(e) => e.key === 'Enter' && saveFileName()}
+                                  className="text-2xl font-bold font-plus-jakarta bg-transparent outline-none"
+                                  autoFocus
+                                />
+                                <button
+                                  onClick={saveFileName}
+                                  className="text-black hover:text-gray-700"
+                                >
+                                  <Save className="w-5 h-5" />
+                                </button>
+                                <button
+                                  onClick={() => {
+                                    setEditingFileName(false)
+                                    setTempFileName('')
+                                  }}
+                                  className="text-black hover:text-gray-700"
+                                >
+                                  <X className="w-5 h-5" />
+                                </button>
+                              </div>
+                            ) : (
+                              <>
+                                <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                  {selectedFile?.name || 'New File'}
+                                </h2>
+                                <button
+                                  onClick={() => {
+                                    setEditingFileName(true)
+                                    setTempFileName(selectedFile?.name || 'New File')
+                                  }}
+                                  className="text-black hover:text-gray-700 transition-all duration-200 opacity-0 group-hover:opacity-100"
+                                >
+                                  <Edit className="w-5 h-5" />
+                                </button>
+                              </>
+                            )}
+                          </div>
                         </div>
                       </div>
                       <div className="mt-0 -space-y-1">
