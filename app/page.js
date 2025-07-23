@@ -2747,85 +2747,112 @@ export default function MarwyckCopilot() {
           {activeTab === 'documents' && (
             <div className="p-6 h-full overflow-y-auto">
               <div className="max-w-6xl mx-auto">
-                <div className="mb-8">
-                  <div className="flex items-center justify-between mb-6">
-                    <div>
-                      <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                        File Management
-                      </h2>
-                      <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Secure and manage your files</p>
+                {selectedFile ? (
+                  // Vue détaillée du fichier sélectionné
+                  <div>
+                    <div className="mb-8">
+                      <div className="flex items-center justify-between mb-6">
+                        <div>
+                          <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                            File Configuration
+                          </h2>
+                          <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Configure your file settings</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Contenu vide pour l'instant */}
+                    <div className="text-center py-16">
+                      <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                        File configuration page - content coming soon
+                      </p>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  // Vue liste des fichiers (existante)
+                  <div>
+                    <div className="mb-8">
+                      <div className="flex items-center justify-between mb-6">
+                        <div>
+                          <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                            File Management
+                          </h2>
+                          <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Secure and manage your files</p>
+                        </div>
+                      </div>
+                    </div>
 
-                {/* Create new file box */}
-                <div 
-                  className="w-72 h-36 bg-white border-2 border-dashed border-gray-300 rounded-[9px] p-3 cursor-pointer hover:border-gray-400 transition-colors relative"
-                  onClick={() => {
-                    console.log('New project clicked!')
-                    createNewProject()
-                  }}
-                >
-                  {/* Icon + en haut à droite */}
-                  <div className="absolute top-3 right-3">
-                    <Plus className="w-6 h-6 text-gray-400" />
-                  </div>
-                  
-                  {/* Texte en bas à gauche */}
-                  <div className="absolute bottom-3 left-3">
-                    <span className="text-gray-700 text-sm font-medium">New project</span>
-                  </div>
-                </div>
-
-                {/* My Projects section */}
-                <div className="mt-8 flex items-center space-x-3">
-                  <h3 className={`text-xl font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                    My Projects
-                  </h3>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className={`rounded-[9px] p-2 ${darkMode ? 'hover:bg-gray-700 text-gray-400' : 'hover:bg-gray-100 text-gray-500'}`}
-                    title="Filter projects"
-                  >
-                    <Filter className="w-5 h-5" />
-                  </Button>
-                </div>
-
-                {/* Grille des projets créés */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 mt-6">
-                  {createdProjects.map((project, index) => (
+                    {/* Create new file box */}
                     <div 
-                      key={project.id}
-                      className="group w-72 h-36 bg-white border border-gray-200 rounded-[9px] p-3 cursor-pointer hover:shadow-md transition-all duration-300 ease-out relative overflow-hidden"
+                      className="w-72 h-36 bg-white border-2 border-dashed border-gray-300 rounded-[9px] p-3 cursor-pointer hover:border-gray-400 transition-colors relative"
+                      onClick={() => {
+                        console.log('New project clicked!')
+                        createNewProject()
+                      }}
                     >
-                      {/* Texte en haut à gauche */}
-                      <div className="absolute top-3 left-3">
-                        <div className="text-black text-sm font-medium">New address</div>
-                      </div>
-                      
-                      {/* Icône de statut en haut à droite - toujours visible */}
+                      {/* Icon + en haut à droite */}
                       <div className="absolute top-3 right-3">
-                        {index % 2 === 0 ? (
-                          <Building className="w-4 h-4 text-gray-500" />
-                        ) : (
-                          <Users className="w-4 h-4 text-gray-500" />
-                        )}
+                        <Plus className="w-6 h-6 text-gray-400" />
                       </div>
                       
-                      {/* Ligne du bas avec nombre de fichiers */}
+                      {/* Texte en bas à gauche */}
                       <div className="absolute bottom-3 left-3">
-                        <span className="text-gray-500 text-xs font-normal">23 Files</span>
-                      </div>
-                      
-                      {/* Animation bouclier et texte "Secured by Marwyck" - glisse du bord */}
-                      <div className="absolute bottom-3 right-3 flex items-center space-x-2 transform translate-x-full group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out">
-                        <Shield className="w-4 h-4 text-black" />
-                        <span className="text-black text-xs font-medium whitespace-nowrap">Secured by Marwyck</span>
+                        <span className="text-gray-700 text-sm font-medium">New project</span>
                       </div>
                     </div>
-                  ))}
-                </div>
+
+                    {/* My Projects section */}
+                    <div className="mt-8 flex items-center space-x-3">
+                      <h3 className={`text-xl font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                        My Projects
+                      </h3>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className={`rounded-[9px] p-2 ${darkMode ? 'hover:bg-gray-700 text-gray-400' : 'hover:bg-gray-100 text-gray-500'}`}
+                        title="Filter projects"
+                      >
+                        <Filter className="w-5 h-5" />
+                      </Button>
+                    </div>
+
+                    {/* Grille des projets créés */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 mt-6">
+                      {createdProjects.map((project, index) => (
+                        <div 
+                          key={project.id}
+                          className="group w-72 h-36 bg-white border border-gray-200 rounded-[9px] p-3 cursor-pointer hover:shadow-md transition-all duration-300 ease-out relative overflow-hidden"
+                          onClick={() => setSelectedFile(project)}
+                        >
+                          {/* Texte en haut à gauche */}
+                          <div className="absolute top-3 left-3">
+                            <div className="text-black text-sm font-medium">New address</div>
+                          </div>
+                          
+                          {/* Icône de statut en haut à droite - toujours visible */}
+                          <div className="absolute top-3 right-3">
+                            {index % 2 === 0 ? (
+                              <Building className="w-4 h-4 text-gray-500" />
+                            ) : (
+                              <Users className="w-4 h-4 text-gray-500" />
+                            )}
+                          </div>
+                          
+                          {/* Ligne du bas avec nombre de fichiers */}
+                          <div className="absolute bottom-3 left-3">
+                            <span className="text-gray-500 text-xs font-normal">23 Files</span>
+                          </div>
+                          
+                          {/* Animation bouclier et texte "Secured by Marwyck" - glisse du bord */}
+                          <div className="absolute bottom-3 right-3 flex items-center space-x-2 transform translate-x-full group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out">
+                            <Shield className="w-4 h-4 text-black" />
+                            <span className="text-black text-xs font-medium whitespace-nowrap">Secured by Marwyck</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           )}
