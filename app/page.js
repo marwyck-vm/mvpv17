@@ -2888,47 +2888,47 @@ export default function MarwyckCopilot() {
                           )}
                         </div>
                       </div>
-                      <div className="mt-0 space-y-0">
+                      <div className="mt-0 -space-y-1">
                         {selectedFile?.contacts?.map((contact, index) => (
                           <div key={contact.id} className="group flex items-center">
-                            <div className="flex-1">
-                              {editingContact === contact.id ? (
-                                <div className="flex items-center space-x-2">
-                                  <div className="flex items-center space-x-2 bg-gray-50 px-2 py-1 rounded-[9px] border hover:border-gray-400 transition-colors">
-                                    <input
-                                      type="text"
-                                      value={tempContactData.fullName}
-                                      onChange={(e) => setTempContactData(prev => ({ ...prev, fullName: e.target.value }))}
-                                      placeholder="Full name"
-                                      className="bg-transparent outline-none text-gray-600 placeholder-gray-400 text-sm w-20"
-                                    />
-                                    <span className="text-gray-600">•</span>
-                                    <input
-                                      type="email"
-                                      value={tempContactData.mail}
-                                      onChange={(e) => setTempContactData(prev => ({ ...prev, mail: e.target.value }))}
-                                      placeholder="Mail"
-                                      className="bg-transparent outline-none text-gray-600 placeholder-gray-400 text-sm w-24"
-                                    />
-                                    <span className="text-gray-600">•</span>
-                                    <input
-                                      type="tel"
-                                      value={tempContactData.phone}
-                                      onChange={(e) => setTempContactData(prev => ({ ...prev, phone: e.target.value }))}
-                                      placeholder="Phone Number"
-                                      className="bg-transparent outline-none text-gray-600 placeholder-gray-400 text-sm w-28"
-                                    />
-                                  </div>
-                                  <button
-                                    onClick={() => saveContactData(contact.id)}
-                                    className="text-black hover:text-gray-700"
-                                  >
-                                    <Save className="w-4 h-4" />
-                                  </button>
+                            {editingContact === contact.id ? (
+                              <div className="flex items-center space-x-2">
+                                <div className="flex items-center space-x-2 bg-gray-50 px-2 py-0.5 rounded-[9px] border hover:border-gray-400 transition-colors">
+                                  <input
+                                    type="text"
+                                    value={tempContactData.fullName}
+                                    onChange={(e) => setTempContactData(prev => ({ ...prev, fullName: e.target.value }))}
+                                    placeholder="Full name"
+                                    className="bg-transparent outline-none text-gray-600 placeholder-gray-400 text-sm w-20"
+                                  />
+                                  <span className="text-gray-600">•</span>
+                                  <input
+                                    type="email"
+                                    value={tempContactData.mail}
+                                    onChange={(e) => setTempContactData(prev => ({ ...prev, mail: e.target.value }))}
+                                    placeholder="Mail"
+                                    className="bg-transparent outline-none text-gray-600 placeholder-gray-400 text-sm w-24"
+                                  />
+                                  <span className="text-gray-600">•</span>
+                                  <input
+                                    type="tel"
+                                    value={tempContactData.phone}
+                                    onChange={(e) => setTempContactData(prev => ({ ...prev, phone: e.target.value }))}
+                                    placeholder="Phone Number"
+                                    className="bg-transparent outline-none text-gray-600 placeholder-gray-400 text-sm w-28"
+                                  />
                                 </div>
-                              ) : (
+                                <button
+                                  onClick={() => saveContactData(contact.id)}
+                                  className="text-black hover:text-gray-700"
+                                >
+                                  <Save className="w-4 h-4" />
+                                </button>
+                              </div>
+                            ) : (
+                              <div className="flex items-center">
                                 <div 
-                                  className="inline-flex items-center space-x-2 cursor-pointer hover:bg-gray-50 px-2 py-1 rounded-[9px] transition-colors"
+                                  className="inline-flex items-center space-x-2 cursor-pointer hover:bg-gray-50 px-2 py-0.5 rounded-[9px] transition-colors"
                                   onClick={() => {
                                     setEditingContact(contact.id)
                                     setTempContactData({
@@ -2950,17 +2950,17 @@ export default function MarwyckCopilot() {
                                     {contact.phone || 'Phone Number'}
                                   </span>
                                 </div>
-                              )}
-                            </div>
-                            
-                            {/* Bouton de suppression pour le 2ème contact uniquement - apparaît à droite au survol */}
-                            {index === 1 && selectedFile?.contacts?.length === 2 && (
-                              <button
-                                onClick={() => removeContact(contact.id)}
-                                className="ml-2 text-gray-400 hover:text-gray-600 transition-colors opacity-0 group-hover:opacity-100"
-                              >
-                                <X className="w-4 h-4" />
-                              </button>
+                                
+                                {/* Bouton de suppression pour le 2ème contact uniquement - juste à droite du contact */}
+                                {index === 1 && selectedFile?.contacts?.length === 2 && (
+                                  <button
+                                    onClick={() => removeContact(contact.id)}
+                                    className="ml-1 text-gray-400 hover:text-gray-600 transition-colors opacity-0 group-hover:opacity-100"
+                                  >
+                                    <X className="w-4 h-4" />
+                                  </button>
+                                )}
+                              </div>
                             )}
                           </div>
                         ))}
