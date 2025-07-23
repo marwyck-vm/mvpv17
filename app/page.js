@@ -2753,20 +2753,20 @@ export default function MarwyckCopilot() {
 
                 {/* Create new file box */}
                 <div 
-                  className="w-72 h-36 bg-white border-2 border-dashed border-gray-300 rounded-[9px] p-4 cursor-pointer hover:border-gray-400 transition-colors relative"
+                  className="w-72 h-36 bg-white border-2 border-dashed border-gray-300 rounded-[9px] p-3 cursor-pointer hover:border-gray-400 transition-colors relative"
                   onClick={() => {
                     console.log('New project clicked!')
                     createNewProject()
                   }}
                 >
                   {/* Icon + en haut à droite */}
-                  <div className="absolute top-4 right-4">
+                  <div className="absolute top-3 right-3">
                     <Plus className="w-6 h-6 text-gray-400" />
                   </div>
                   
                   {/* Texte en bas à gauche */}
-                  <div className="absolute bottom-4 left-4">
-                    <span className="text-gray-700 font-medium">New project</span>
+                  <div className="absolute bottom-3 left-3">
+                    <span className="text-gray-700 text-sm font-medium">New project</span>
                   </div>
                 </div>
 
