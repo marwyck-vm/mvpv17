@@ -68,7 +68,8 @@ import {
   ClipboardList,
   LockKeyhole,
   LockKeyholeOpen,
-  PenTool
+  PenTool,
+  Shield
 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
