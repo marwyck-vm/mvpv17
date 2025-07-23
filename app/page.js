@@ -2786,7 +2786,7 @@ export default function MarwyckCopilot() {
                 </div>
 
                 {/* Grille des projets créés */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-6">
                   {createdProjects.map(project => (
                     <div 
                       key={project.id}
@@ -2803,7 +2803,7 @@ export default function MarwyckCopilot() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="p-1 h-6 w-6 rounded-md hover:bg-red-50 text-red-500 hover:text-red-600"
+                          className="p-1 h-6 w-6 rounded-[9px] hover:bg-red-50 text-red-500 hover:text-red-600"
                           onClick={(e) => {
                             e.stopPropagation()
                             setCreatedProjects(prev => prev.filter(p => p.id !== project.id))
@@ -2814,7 +2814,7 @@ export default function MarwyckCopilot() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="p-1 h-6 w-6 rounded-md hover:bg-gray-50 text-gray-500"
+                          className="p-1 h-6 w-6 rounded-[9px] hover:bg-gray-50 text-gray-500"
                           onClick={(e) => e.stopPropagation()}
                         >
                           <UserPlus className="w-4 h-4" />
