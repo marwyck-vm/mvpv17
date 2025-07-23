@@ -2993,31 +2993,19 @@ export default function MarwyckCopilot() {
                       
                       {/* Deux grosses boîtes avec effet hover */}
                       <div className="ml-9 mt-6 flex space-x-4">
-                        {/* Boîte de gauche - 65% */}
-                        <div className="group w-[65%] h-48 bg-white border border-gray-200 rounded-[9px] p-6 cursor-pointer hover:shadow-md transition-all duration-300 ease-out relative overflow-hidden">
+                        {/* Boîte de gauche - 75% */}
+                        <div className="file-detail-box-left w-[75%] h-64 bg-white border border-gray-200 rounded-xl p-6 cursor-pointer hover:shadow-lg transition-shadow duration-200 relative">
                           {/* Contenu de la boîte gauche */}
                           <div className="absolute top-6 left-6">
                             <div className="text-black text-lg font-medium">Content Left</div>
                           </div>
-                          
-                          {/* Animation bouclier et texte "Secured by Marwyck" - glisse du bord */}
-                          <div className="absolute bottom-6 right-6 flex items-center space-x-2 transform translate-x-full group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out">
-                            <Shield className="w-4 h-4 text-black" />
-                            <span className="text-black text-xs font-normal">Secured by Marwyck</span>
-                          </div>
                         </div>
                         
-                        {/* Boîte de droite - 35% */}
-                        <div className="group w-[35%] h-48 bg-white border border-gray-200 rounded-[9px] p-6 cursor-pointer hover:shadow-md transition-all duration-300 ease-out relative overflow-hidden">
+                        {/* Boîte de droite - 25% */}
+                        <div className="file-detail-box-right w-[25%] h-64 bg-white border border-gray-200 rounded-xl p-6 cursor-pointer hover:shadow-lg transition-shadow duration-200 relative">
                           {/* Contenu de la boîte droite */}
                           <div className="absolute top-6 left-6">
                             <div className="text-black text-lg font-medium">Content Right</div>
-                          </div>
-                          
-                          {/* Animation bouclier et texte "Secured by Marwyck" - glisse du bord */}
-                          <div className="absolute bottom-6 right-6 flex items-center space-x-2 transform translate-x-full group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out">
-                            <Shield className="w-4 h-4 text-black" />
-                            <span className="text-black text-xs font-normal">Secured by Marwyck</span>
                           </div>
                         </div>
                       </div>
