@@ -2321,34 +2321,14 @@ export default function MarwyckCopilot() {
                   Dashboard
                 </span>
               )}
-              {activeTab === 'chat' && (
-                <span className="flex items-center">
-                  Chat
-                </span>
-              )}
-              {activeTab === 'planning' && (
-                <span className="flex items-center">
-                  Planning
-                </span>
-              )}
               {activeTab === 'documents' && (
                 <span className="flex items-center">
                   Vault
                 </span>
               )}
-              {activeTab === 'estimation' && (
+              {activeTab === 'studi' && (
                 <span className="flex items-center">
-                  Estimation
-                </span>
-              )}
-              {activeTab === 'communications' && (
-                <span className="flex items-center">
-                  History
-                </span>
-              )}
-              {activeTab === 'team' && (
-                <span className="flex items-center">
-                  Team
+                  Studi
                 </span>
               )}
               {activeTab === 'account' && (
