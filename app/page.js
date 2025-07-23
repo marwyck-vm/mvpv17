@@ -2968,7 +2968,7 @@ export default function MarwyckCopilot() {
                         {/* Bouton + pour ajouter un contact (max 2) */}
                         {(!selectedFile?.contacts || selectedFile.contacts.length < 2) && (
                           <div 
-                            className="inline-flex items-center cursor-pointer hover:bg-gray-50 px-2 py-1 rounded-[9px] transition-colors"
+                            className="inline-flex items-center cursor-pointer hover:bg-gray-50 px-2 py-1 rounded-[9px] transition-colors mt-1"
                             onClick={addNewContact}
                           >
                             <span className="text-gray-400 text-lg">+</span>
