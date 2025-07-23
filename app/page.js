@@ -2994,94 +2994,74 @@ export default function MarwyckCopilot() {
                       {/* Deux grosses boîtes avec effet hover */}
                       <div className="ml-9 mt-2 flex space-x-4">
                         {/* Boîte de gauche - 75% - Interface de chat */}
-                        <div className="file-detail-box-left w-[75%] h-96 bg-white border border-gray-200 rounded-xl p-0 cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col overflow-hidden">
-                          {/* Zone des messages avec fondu en haut */}
-                          <div className="flex-1 relative">
+                        <div className="file-detail-box-left w-[75%] h-96 bg-white border border-gray-200 rounded-xl cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
+                          {/* Zone des messages scrollable avec dégradé en haut */}
+                          <div className="flex-1 relative overflow-hidden">
                             {/* Dégradé de fondu en haut */}
-                            <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-white to-transparent z-10 pointer-events-none"></div>
+                            <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-white to-transparent z-10 pointer-events-none rounded-t-xl"></div>
                             
-                            {/* Zone des messages scrollable */}
-                            <div 
-                              className="h-full p-4 space-y-4"
-                              style={{
-                                overflowY: 'scroll',
-                                scrollbarWidth: 'thin',
-                                scrollbarColor: 'rgba(156, 163, 175, 0.5) transparent'
-                              }}
-                            >
-                              {/* Message du bot - sans fond */}
+                            {/* Messages */}
+                            <div className="h-full p-4 pt-6 space-y-3 overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.3) transparent' }}>
+                              {/* Message du bot */}
                               <div className="flex justify-start">
-                                <div className="px-4 py-2 max-w-xs">
-                                  <p className="text-sm text-gray-800">Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd'hui ?</p>
+                                <div className="max-w-xs">
+                                  <p className="text-sm text-gray-800 px-3 py-2">Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd'hui ?</p>
                                 </div>
                               </div>
 
-                              {/* Message de l'utilisateur - fond gris avec bords arrondis */}
+                              {/* Message utilisateur */}
                               <div className="flex justify-end">
-                                <div className="bg-gray-200 rounded-[9px] px-4 py-2 max-w-xs">
+                                <div className="bg-gray-200 rounded-[9px] px-3 py-2 max-w-xs">
                                   <p className="text-sm text-gray-800">Pouvez-vous m'aider avec ce dossier ?</p>
                                 </div>
                               </div>
 
-                              {/* Message du bot - sans fond */}
+                              {/* Message du bot */}
                               <div className="flex justify-start">
-                                <div className="px-4 py-2 max-w-xs">
-                                  <p className="text-sm text-gray-800">Bien sûr ! Je peux vous aider à analyser et gérer vos dossiers immobiliers. Que souhaitez-vous faire ?</p>
+                                <div className="max-w-xs">
+                                  <p className="text-sm text-gray-800 px-3 py-2">Bien sûr ! Je peux vous aider à analyser et gérer vos dossiers immobiliers.</p>
                                 </div>
                               </div>
 
-                              {/* Messages supplémentaires pour tester le scroll */}
+                              {/* Plus de messages pour tester le scroll */}
                               <div className="flex justify-end">
-                                <div className="bg-gray-200 rounded-[9px] px-4 py-2 max-w-xs">
-                                  <p className="text-sm text-gray-800">J'aimerais savoir comment gérer mes documents</p>
-                                </div>
-                              </div>
-
-                              <div className="flex justify-start">
-                                <div className="px-4 py-2 max-w-xs">
-                                  <p className="text-sm text-gray-800">Je peux vous aider à organiser vos documents, les trier par catégorie et vous rappeler les échéances importantes.</p>
-                                </div>
-                              </div>
-
-                              <div className="flex justify-end">
-                                <div className="bg-gray-200 rounded-[9px] px-4 py-2 max-w-xs">
-                                  <p className="text-sm text-gray-800">Parfait, pouvez-vous me montrer un exemple ?</p>
+                                <div className="bg-gray-200 rounded-[9px] px-3 py-2 max-w-xs">
+                                  <p className="text-sm text-gray-800">Comment gérer mes documents ?</p>
                                 </div>
                               </div>
 
                               <div className="flex justify-start">
-                                <div className="px-4 py-2 max-w-xs">
-                                  <p className="text-sm text-gray-800">Voici comment procéder : vous pouvez télécharger vos documents via l'icône trombone, et je les analyserai automatiquement.</p>
+                                <div className="max-w-xs">
+                                  <p className="text-sm text-gray-800 px-3 py-2">Je peux organiser vos documents et vous rappeler les échéances.</p>
                                 </div>
                               </div>
 
                               <div className="flex justify-end">
-                                <div className="bg-gray-200 rounded-[9px] px-4 py-2 max-w-xs">
-                                  <p className="text-sm text-gray-800">Excellent, merci pour cette explication détaillée !</p>
+                                <div className="bg-gray-200 rounded-[9px] px-3 py-2 max-w-xs">
+                                  <p className="text-sm text-gray-800">Parfait, merci !</p>
                                 </div>
                               </div>
                             </div>
                           </div>
 
-                          {/* Zone de saisie avec bordure noire */}
-                          <div className="p-4 bg-white border-t border-gray-200 flex-shrink-0">
+                          {/* Zone de saisie */}
+                          <div className="p-4 bg-white border-t border-gray-100">
                             <div className="flex items-center space-x-3">
-                              {/* Icône trombone pour joindre des fichiers */}
+                              {/* Icône trombone */}
                               <button className="text-black hover:text-gray-600 transition-colors">
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
                                 </svg>
                               </button>
                               
-                              <div className="flex-1 relative">
-                                <input
-                                  type="text"
-                                  placeholder="Tapez votre message..."
-                                  className="w-full px-4 py-2 border-2 border-black rounded-[9px] focus:outline-none focus:border-gray-700 focus:ring-1 focus:ring-gray-700 text-sm bg-white"
-                                />
-                              </div>
+                              {/* Input */}
+                              <input
+                                type="text"
+                                placeholder="Tapez votre message..."
+                                className="flex-1 px-4 py-2 border-2 border-black rounded-[9px] focus:outline-none focus:border-gray-700 text-sm bg-white"
+                              />
                               
-                              {/* Bouton envoyer - carré noir avec flèche blanche vers le haut */}
+                              {/* Bouton envoyer */}
                               <button className="bg-black hover:bg-gray-800 text-white rounded-[9px] p-2 transition-colors">
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
