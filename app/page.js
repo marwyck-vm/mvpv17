@@ -2722,10 +2722,7 @@ export default function MarwyckCopilot() {
 
           {/* Documents */}
           {activeTab === 'documents' && (
-            <div className="p-6 h-full overflow-y-auto" style={{
-              scrollbarWidth: 'auto',
-              scrollbarColor: darkMode ? 'rgba(107, 114, 128, 0.6) transparent' : 'rgba(156, 163, 175, 0.6) transparent'
-            }}>
+            <div className="p-6 h-full overflow-y-auto">
               <div className="max-w-6xl mx-auto">
                 <div className="mb-8">
                   <div className="flex items-center justify-between mb-6">
@@ -2733,83 +2730,9 @@ export default function MarwyckCopilot() {
                       <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                         File Management
                       </h2>
-                      <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Manage your files and documents</p>
+                      <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Secure and manage your files</p>
                     </div>
-                    <Button
-                      onClick={() => addNewDossier()}
-                      className="group relative overflow-hidden bg-black text-white hover:bg-gray-800 transition-all duration-200 rounded-2xl px-8 py-3 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
-                    >
-                      <div className="flex items-center space-x-2">
-                        <div className="relative">
-                          <Plus className="w-5 h-5 transition-transform group-hover:rotate-90 duration-200" />
-                        </div>
-                        <span className="text-sm font-semibold">New File</span>
-                      </div>
-                      {/* Subtle gradient overlay on hover */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
-                    </Button>
                   </div>
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                  {dossiersList.map(dossier => (
-                    <div 
-                      key={dossier.id} 
-                      onClick={() => openFileDetails(dossier)}
-                      className={`bg-white rounded-xl border border-gray-200 p-4 cursor-pointer transition-all duration-300 hover:shadow-lg hover:shadow-black/10 hover:-translate-y-1 hover:border-gray-300 h-48 flex flex-col`}
-                    >
-                      {/* Header avec titre et type */}
-                      <div className="flex items-start justify-between mb-3">
-                        <div className="flex-1">
-                          <h3 className="text-xl font-bold text-gray-900 leading-tight">
-                            {dossier.title || dossier.address}
-                          </h3>
-                          <p className="text-gray-500 text-sm mt-2">
-                            {dossier.address}
-                          </p>
-                        </div>
-                        <div>
-                          {dossier.type ? (
-                            <span className="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
-                              {dossier.type}
-                            </span>
-                          ) : (
-                            <span className="text-xs font-medium text-gray-400 bg-gray-50 px-3 py-1 rounded-full border border-dashed border-gray-300">
-                              Select type
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Spacer pour pousser le contenu vers le bas */}
-                      <div className="flex-1"></div>
-
-                      {/* Nombre de fichiers et boutons d'action */}
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center space-x-2">
-                          <Button 
-                            size="sm" 
-                            variant="ghost" 
-                            className="text-red-500 hover:bg-red-50 rounded-full p-2"
-                            onClick={(e) => deleteDossier(dossier.id, e)}
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
-                          <Button 
-                            size="sm" 
-                            variant="ghost" 
-                            className="text-black hover:bg-gray-100 rounded-full p-2"
-                            onClick={(e) => shareDossier(dossier.id, e)}
-                          >
-                            <UserPlus className="w-4 h-4" />
-                          </Button>
-                        </div>
-                        <span className="text-xs text-gray-400">
-                          {dossier.documents?.length || 0} Files Inside
-                        </span>
-                      </div>
-                    </div>
-                  ))}
                 </div>
               </div>
             </div>
