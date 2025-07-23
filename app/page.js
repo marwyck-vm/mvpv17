@@ -643,6 +643,26 @@ export default function MarwyckCopilot() {
     }
   }
 
+  // Fonction pour ajouter un nouveau contact
+  const addNewContact = () => {
+    if (selectedFile && selectedFile.contacts.length < 2) {
+      const newContact = { id: Date.now(), fullName: '', mail: '', phone: '' }
+      const updatedProject = {
+        ...selectedFile,
+        contacts: [...(selectedFile.contacts || []), newContact]
+      }
+      
+      setSelectedFile(updatedProject)
+      setCreatedProjects(prev => 
+        prev.map(project => 
+          project.id === selectedFile.id 
+            ? updatedProject 
+            : project
+        )
+      )
+    }
+  }
+
   // Fonction pour supprimer un contact
   const removeContact = (contactId) => {
     if (selectedFile && selectedFile.contacts.length > 1) {
