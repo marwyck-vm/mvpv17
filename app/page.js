@@ -2704,13 +2704,13 @@ export default function MarwyckCopilot() {
             </div>
           )}
 
-          {/* Studi */}
-          {activeTab === 'studi' && (
+          {/* Studio */}
+          {activeTab === 'studio' && (
             <div className="p-6 h-full overflow-y-auto">
               <div className="max-w-4xl mx-auto">
                 <div className="text-center py-16">
                   <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'} mb-4`}>
-                    Studi
+                    Studio
                   </h2>
                   <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                     This page is under construction
