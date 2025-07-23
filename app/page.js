@@ -2997,11 +2997,11 @@ export default function MarwyckCopilot() {
                         <div className="file-detail-box-left w-[75%] h-96 bg-white border border-gray-200 rounded-xl cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
                           {/* Zone des messages scrollable avec dégradé en haut renforcé */}
                           <div className="flex-1 relative overflow-hidden">
-                            {/* Dégradé de fondu en haut plus prononcé */}
-                            <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-white via-white/80 to-transparent z-10 pointer-events-none rounded-t-xl"></div>
+                            {/* Dégradé de fondu en haut plus prononcé - n'affecte pas la scrollbar */}
+                            <div className="absolute top-0 left-0 right-4 h-12 bg-gradient-to-b from-white via-white/80 to-transparent z-10 pointer-events-none rounded-t-xl"></div>
                             
-                            {/* Messages */}
-                            <div className="h-full p-4 pt-8 space-y-3 overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.3) transparent' }}>
+                            {/* Messages avec plus d'espacement des bords */}
+                            <div className="h-full px-6 py-4 pt-8 space-y-3 overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.3) transparent' }}>
                               {/* Message du bot */}
                               <div className="flex justify-start">
                                 <div className="max-w-xs">
