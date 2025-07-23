@@ -2771,9 +2771,9 @@ export default function MarwyckCopilot() {
                 </div>
 
                 {/* My Projects section */}
-                <div className="mt-8 flex items-center justify-between">
+                <div className="mt-8 flex items-center space-x-3">
                   <h3 className={`text-xl font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                    My Projects ({createdProjects.length})
+                    My Projects
                   </h3>
                   <Button
                     variant="ghost"
@@ -2790,7 +2790,7 @@ export default function MarwyckCopilot() {
                   {createdProjects.map(project => (
                     <div 
                       key={project.id}
-                      className="w-full h-36 bg-white border border-gray-200 rounded-[9px] p-4 cursor-pointer hover:shadow-md transition-all relative"
+                      className="w-72 h-36 bg-white border border-gray-200 rounded-[9px] p-4 cursor-pointer hover:shadow-md transition-all relative"
                     >
                       {/* Texte en haut à gauche */}
                       <div className="absolute top-4 left-4">
