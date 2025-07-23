@@ -2747,7 +2747,10 @@ export default function MarwyckCopilot() {
                 </div>
 
                 {/* Create new file box */}
-                <div className="w-72 h-36 bg-white border-2 border-dashed border-gray-300 rounded-[9px] p-4 cursor-pointer hover:border-gray-400 transition-colors relative">
+                <div 
+                  className="w-72 h-36 bg-white border-2 border-dashed border-gray-300 rounded-[9px] p-4 cursor-pointer hover:border-gray-400 transition-colors relative"
+                  onClick={createNewProject}
+                >
                   {/* Icon + en haut à droite */}
                   <div className="absolute top-4 right-4">
                     <Plus className="w-6 h-6 text-gray-400" />
@@ -2772,6 +2775,45 @@ export default function MarwyckCopilot() {
                   >
                     <Filter className="w-5 h-5" />
                   </Button>
+                </div>
+
+                {/* Grille des projets créés */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-6">
+                  {createdProjects.map(project => (
+                    <div 
+                      key={project.id}
+                      className="w-72 h-36 bg-white border border-gray-200 rounded-[9px] p-4 cursor-pointer hover:shadow-md transition-all relative"
+                    >
+                      {/* Texte en haut à gauche */}
+                      <div className="absolute top-4 left-4">
+                        <div className="text-black font-medium">New address</div>
+                        <div className="text-gray-500 text-sm mt-1">New contact</div>
+                      </div>
+                      
+                      {/* Boutons en bas à gauche */}
+                      <div className="absolute bottom-4 left-4 flex items-center space-x-2">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="p-1 h-6 w-6 rounded-md hover:bg-red-50 text-red-500 hover:text-red-600"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setCreatedProjects(prev => prev.filter(p => p.id !== project.id))
+                          }}
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="p-1 h-6 w-6 rounded-md hover:bg-gray-50 text-gray-500"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <UserPlus className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
