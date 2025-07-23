@@ -2744,7 +2744,7 @@ export default function MarwyckCopilot() {
                   
                   {/* Texte en bas à gauche */}
                   <div className="absolute bottom-4 left-4">
-                    <span className="text-gray-700 font-medium">Create a new file</span>
+                    <span className="text-gray-700 font-medium">New project</span>
                   </div>
                 </div>
               </div>
