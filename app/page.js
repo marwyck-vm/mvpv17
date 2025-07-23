@@ -2995,8 +2995,8 @@ export default function MarwyckCopilot() {
                       <div className="ml-9 mt-2 flex space-x-4">
                         {/* Boîte de gauche - 75% - Interface de chat */}
                         <div className="file-detail-box-left w-[75%] h-96 bg-white border border-gray-200 rounded-xl p-0 cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
-                          {/* Zone des messages - remonte jusqu'en haut */}
-                          <div className="flex-1 p-4 overflow-y-auto space-y-4">
+                          {/* Zone des messages - remonte jusqu'en haut avec scrollbar visible */}
+                          <div className="flex-1 p-4 overflow-y-scroll space-y-4 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
                             {/* Message du bot - sans fond */}
                             <div className="flex justify-start">
                               <div className="px-4 py-2 max-w-xs">
@@ -3017,6 +3017,31 @@ export default function MarwyckCopilot() {
                                 <p className="text-sm text-gray-800">Bien sûr ! Je peux vous aider à analyser et gérer vos dossiers immobiliers. Que souhaitez-vous faire ?</p>
                               </div>
                             </div>
+
+                            {/* Messages supplémentaires pour tester le scroll */}
+                            <div className="flex justify-end">
+                              <div className="bg-gray-200 rounded-[9px] px-4 py-2 max-w-xs">
+                                <p className="text-sm text-gray-800">J'aimerais savoir comment gérer mes documents</p>
+                              </div>
+                            </div>
+
+                            <div className="flex justify-start">
+                              <div className="px-4 py-2 max-w-xs">
+                                <p className="text-sm text-gray-800">Je peux vous aider à organiser vos documents, les trier par catégorie et vous rappeler les échéances importantes.</p>
+                              </div>
+                            </div>
+
+                            <div className="flex justify-end">
+                              <div className="bg-gray-200 rounded-[9px] px-4 py-2 max-w-xs">
+                                <p className="text-sm text-gray-800">Parfait, pouvez-vous me montrer un exemple ?</p>
+                              </div>
+                            </div>
+
+                            <div className="flex justify-start">
+                              <div className="px-4 py-2 max-w-xs">
+                                <p className="text-sm text-gray-800">Voici comment procéder : vous pouvez télécharger vos documents via l'icône trombone, et je les analyserai automatiquement.</p>
+                              </div>
+                            </div>
                           </div>
 
                           {/* Zone de saisie - fond transparent sans bord */}
@@ -3033,7 +3058,7 @@ export default function MarwyckCopilot() {
                                 <input
                                   type="text"
                                   placeholder="Tapez votre message..."
-                                  className="w-full px-4 py-2 border border-gray-300 rounded-[9px] focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm"
+                                  className="w-full px-4 py-2 border border-black rounded-[9px] focus:outline-none focus:border-gray-700 focus:ring-1 focus:ring-gray-700 text-sm"
                                 />
                               </div>
                               
