@@ -2734,6 +2734,19 @@ export default function MarwyckCopilot() {
                     </div>
                   </div>
                 </div>
+
+                {/* Create new file box */}
+                <div className="w-80 h-48 bg-white border-2 border-dashed border-gray-300 rounded-[9px] p-4 cursor-pointer hover:border-gray-400 transition-colors relative">
+                  {/* Icon + en haut à gauche */}
+                  <div className="absolute top-4 left-4">
+                    <Plus className="w-6 h-6 text-gray-400" />
+                  </div>
+                  
+                  {/* Texte en bas à gauche */}
+                  <div className="absolute bottom-4 left-4">
+                    <span className="text-gray-700 font-medium">Create a new file</span>
+                  </div>
+                </div>
               </div>
             </div>
           )}
