@@ -2852,8 +2852,8 @@ export default function MarwyckCopilot() {
                             <ChevronLeft className="w-5 h-5" />
                           </button>
                           
-                          {/* Titre et bouton d'édition - groupe séparé */}
-                          <div className="group flex items-center space-x-3">
+                          {/* Titre et bouton d'édition - groupe séparé avec alignement sur contacts */}
+                          <div className="group flex items-center space-x-3 -ml-2">
                             {editingFileName ? (
                               <div className="flex items-center space-x-2">
                                 <input
