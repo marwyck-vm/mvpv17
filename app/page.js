@@ -2848,32 +2848,59 @@ export default function MarwyckCopilot() {
                       <div className="mt-2">
                         {editingContact ? (
                           <div className="flex items-center space-x-2">
-                            <input
-                              type="text"
-                              value={tempContact}
-                              onChange={(e) => setTempContact(e.target.value)}
-                              onKeyPress={(e) => e.key === 'Enter' && saveContact()}
-                              className="text-base font-light bg-transparent outline-none text-gray-400"
-                              placeholder="Full name • Mail • Phone Number"
-                              autoFocus
-                            />
+                            <div className="flex items-center space-x-2 bg-gray-50 px-3 py-2 rounded-[9px] border hover:border-gray-400 transition-colors">
+                              <input
+                                type="text"
+                                value={tempContactData.fullName}
+                                onChange={(e) => setTempContactData(prev => ({ ...prev, fullName: e.target.value }))}
+                                placeholder="Full name"
+                                className="bg-transparent outline-none text-gray-700 placeholder-gray-400 text-sm w-20"
+                              />
+                              <span className="text-gray-400">•</span>
+                              <input
+                                type="email"
+                                value={tempContactData.mail}
+                                onChange={(e) => setTempContactData(prev => ({ ...prev, mail: e.target.value }))}
+                                placeholder="Mail"
+                                className="bg-transparent outline-none text-gray-700 placeholder-gray-400 text-sm w-24"
+                              />
+                              <span className="text-gray-400">•</span>
+                              <input
+                                type="tel"
+                                value={tempContactData.phone}
+                                onChange={(e) => setTempContactData(prev => ({ ...prev, phone: e.target.value }))}
+                                placeholder="Phone Number"
+                                className="bg-transparent outline-none text-gray-700 placeholder-gray-400 text-sm w-28"
+                              />
+                            </div>
                             <button
-                              onClick={saveContact}
+                              onClick={saveContactData}
                               className="text-black hover:text-gray-700"
                             >
                               <Save className="w-4 h-4" />
                             </button>
                           </div>
                         ) : (
-                          <p 
-                            className={`${darkMode ? 'text-gray-400' : 'text-gray-400'} font-light cursor-pointer hover:text-gray-600 transition-colors`}
+                          <div 
+                            className="inline-flex items-center space-x-2 cursor-pointer hover:bg-gray-50 px-3 py-2 rounded-[9px] transition-colors"
                             onClick={() => {
                               setEditingContact(true)
-                              setTempContact(selectedFile?.contact || 'Full name • Mail • Phone Number')
+                              const contact = selectedFile?.contactData || { fullName: '', mail: '', phone: '' }
+                              setTempContactData(contact)
                             }}
                           >
-                            {selectedFile?.contact || 'Full name • Mail • Phone Number'}
-                          </p>
+                            <span className="text-gray-400 text-sm">
+                              {selectedFile?.contactData?.fullName || 'Full name'}
+                            </span>
+                            <span className="text-gray-400">•</span>
+                            <span className="text-gray-400 text-sm">
+                              {selectedFile?.contactData?.mail || 'Mail'}
+                            </span>
+                            <span className="text-gray-400">•</span>
+                            <span className="text-gray-400 text-sm">
+                              {selectedFile?.contactData?.phone || 'Phone Number'}
+                            </span>
+                          </div>
                         )}
                       </div>
                     </div>
