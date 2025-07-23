@@ -2770,7 +2770,7 @@ export default function MarwyckCopilot() {
                 {/* My Projects section */}
                 <div className="mt-8 flex items-center justify-between">
                   <h3 className={`text-xl font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                    My Projects
+                    My Projects ({createdProjects.length})
                   </h3>
                   <Button
                     variant="ghost"
