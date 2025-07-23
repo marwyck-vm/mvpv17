@@ -2754,7 +2754,10 @@ export default function MarwyckCopilot() {
                 {/* Create new file box */}
                 <div 
                   className="w-72 h-36 bg-white border-2 border-dashed border-gray-300 rounded-[9px] p-4 cursor-pointer hover:border-gray-400 transition-colors relative"
-                  onClick={createNewProject}
+                  onClick={() => {
+                    console.log('New project clicked!')
+                    createNewProject()
+                  }}
                 >
                   {/* Icon + en haut à droite */}
                   <div className="absolute top-4 right-4">
