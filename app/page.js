@@ -2327,9 +2327,9 @@ export default function MarwyckCopilot() {
                   Vault
                 </span>
               )}
-              {activeTab === 'studi' && (
+              {activeTab === 'studio' && (
                 <span className="flex items-center">
-                  Studi
+                  Studio
                 </span>
               )}
               {activeTab === 'account' && (
