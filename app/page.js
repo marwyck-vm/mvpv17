@@ -2782,7 +2782,7 @@ export default function MarwyckCopilot() {
                   {createdProjects.map(project => (
                     <div 
                       key={project.id}
-                      className="w-72 h-36 bg-white border border-gray-200 rounded-[9px] p-4 cursor-pointer hover:shadow-md transition-all relative"
+                      className="w-full h-36 bg-white border border-gray-200 rounded-[9px] p-4 cursor-pointer hover:shadow-md transition-all relative"
                     >
                       {/* Texte en haut à gauche */}
                       <div className="absolute top-4 left-4">
