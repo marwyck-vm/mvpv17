@@ -2845,7 +2845,37 @@ export default function MarwyckCopilot() {
                           )}
                         </div>
                       </div>
-                      <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Full name - Mail - Phone Number</p>
+                      <div className="mt-2">
+                        {editingContact ? (
+                          <div className="flex items-center space-x-2">
+                            <input
+                              type="text"
+                              value={tempContact}
+                              onChange={(e) => setTempContact(e.target.value)}
+                              onKeyPress={(e) => e.key === 'Enter' && saveContact()}
+                              className="text-base font-light bg-transparent outline-none text-gray-400"
+                              placeholder="Full name • Mail • Phone Number"
+                              autoFocus
+                            />
+                            <button
+                              onClick={saveContact}
+                              className="text-black hover:text-gray-700"
+                            >
+                              <Save className="w-4 h-4" />
+                            </button>
+                          </div>
+                        ) : (
+                          <p 
+                            className={`${darkMode ? 'text-gray-400' : 'text-gray-400'} font-light cursor-pointer hover:text-gray-600 transition-colors`}
+                            onClick={() => {
+                              setEditingContact(true)
+                              setTempContact(selectedFile?.contact || 'Full name • Mail • Phone Number')
+                            }}
+                          >
+                            {selectedFile?.contact || 'Full name • Mail • Phone Number'}
+                          </p>
+                        )}
+                      </div>
                     </div>
                     
                     
