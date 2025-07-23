@@ -2843,60 +2843,65 @@ export default function MarwyckCopilot() {
                   <div>
                     <div className="mb-8">
                         <div className="mb-6">
-                        {/* Flèche de retour et titre sur la même ligne */}
-                        <div className="group flex items-center space-x-3">
-                          <button
-                            onClick={() => setSelectedFile(null)}
-                            className="text-black hover:text-gray-700 transition-colors"
-                          >
-                            <ChevronLeft className="w-5 h-5" />
-                          </button>
+                        <div className="flex items-start">
+                          {/* Bouton de retour - sa propre boîte à gauche */}
+                          <div className="mr-4">
+                            <button
+                              onClick={() => setSelectedFile(null)}
+                              className="text-black hover:text-gray-700 transition-colors"
+                            >
+                              <ChevronLeft className="w-5 h-5" />
+                            </button>
+                          </div>
                           
-                          {editingFileName ? (
-                            <div className="flex items-center space-x-2">
-                              <input
-                                type="text"
-                                value={tempFileName}
-                                onChange={(e) => setTempFileName(e.target.value)}
-                                onKeyPress={(e) => e.key === 'Enter' && saveFileName()}
-                                className="text-2xl font-bold font-plus-jakarta bg-transparent outline-none"
-                                autoFocus
-                              />
-                              <button
-                                onClick={saveFileName}
-                                className="text-black hover:text-gray-700"
-                              >
-                                <Save className="w-5 h-5" />
-                              </button>
-                              <button
-                                onClick={() => {
-                                  setEditingFileName(false)
-                                  setTempFileName('')
-                                }}
-                                className="text-black hover:text-gray-700"
-                              >
-                                <X className="w-5 h-5" />
-                              </button>
-                            </div>
-                          ) : (
-                            <>
-                              <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                {selectedFile?.name || 'New File'}
-                              </h2>
-                              <button
-                                onClick={() => {
-                                  setEditingFileName(true)
-                                  setTempFileName(selectedFile?.name || 'New File')
-                                }}
-                                className="text-black hover:text-gray-700 transition-all duration-200 opacity-0 group-hover:opacity-100"
-                              >
-                                <Edit className="w-5 h-5" />
-                              </button>
-                            </>
-                          )}
+                          {/* Titre New File - sa propre boîte alignée avec les contacts */}
+                          <div className="group flex items-center space-x-3 flex-1">
+                            {editingFileName ? (
+                              <div className="flex items-center space-x-2">
+                                <input
+                                  type="text"
+                                  value={tempFileName}
+                                  onChange={(e) => setTempFileName(e.target.value)}
+                                  onKeyPress={(e) => e.key === 'Enter' && saveFileName()}
+                                  className="text-2xl font-bold font-plus-jakarta bg-transparent outline-none"
+                                  autoFocus
+                                />
+                                <button
+                                  onClick={saveFileName}
+                                  className="text-black hover:text-gray-700"
+                                >
+                                  <Save className="w-5 h-5" />
+                                </button>
+                                <button
+                                  onClick={() => {
+                                    setEditingFileName(false)
+                                    setTempFileName('')
+                                  }}
+                                  className="text-black hover:text-gray-700"
+                                >
+                                  <X className="w-5 h-5" />
+                                </button>
+                              </div>
+                            ) : (
+                              <>
+                                <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                  {selectedFile?.name || 'New File'}
+                                </h2>
+                                <button
+                                  onClick={() => {
+                                    setEditingFileName(true)
+                                    setTempFileName(selectedFile?.name || 'New File')
+                                  }}
+                                  className="text-black hover:text-gray-700 transition-all duration-200 opacity-0 group-hover:opacity-100"
+                                >
+                                  <Edit className="w-5 h-5" />
+                                </button>
+                              </>
+                            )}
+                          </div>
                         </div>
                       </div>
-                      <div className="mt-0 -space-y-1">
+                      <div className="ml-9 mt-0 -space-y-1">
                         {selectedFile?.contacts?.map((contact, index) => (
                           <div key={contact.id} className="group flex items-center h-8">
                             {editingContact === contact.id ? (
