@@ -2899,7 +2899,7 @@ export default function MarwyckCopilot() {
                         >
                           {/* Texte en haut à gauche */}
                           <div className="absolute top-3 left-3">
-                            <div className="text-black text-sm font-medium">New address</div>
+                            <div className="text-black text-sm font-medium">{project.name || 'New File'}</div>
                           </div>
                           
                           {/* Icône de statut en haut à droite - toujours visible */}
