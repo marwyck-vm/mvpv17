@@ -2789,7 +2789,7 @@ export default function MarwyckCopilot() {
                               />
                               <button
                                 onClick={saveFileName}
-                                className="text-green-600 hover:text-green-700"
+                                className="text-black hover:text-gray-700"
                               >
                                 <Save className="w-5 h-5" />
                               </button>
@@ -2798,7 +2798,7 @@ export default function MarwyckCopilot() {
                                   setEditingFileName(false)
                                   setTempFileName('')
                                 }}
-                                className="text-red-600 hover:text-red-700"
+                                className="text-black hover:text-gray-700"
                               >
                                 <X className="w-5 h-5" />
                               </button>
