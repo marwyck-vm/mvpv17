@@ -2994,18 +2994,18 @@ export default function MarwyckCopilot() {
                       {/* Deux grosses boîtes avec effet hover */}
                       <div className="ml-9 mt-2 flex space-x-4">
                         {/* Boîte de gauche - 75% */}
-                        <div className="file-detail-box-left w-[75%] h-80 bg-white border border-gray-200 rounded-xl p-6 cursor-pointer hover:shadow-lg transition-shadow duration-200 relative">
+                        <div className="file-detail-box-left w-[75%] h-96 bg-white border border-gray-200 rounded-xl p-8 cursor-pointer hover:shadow-lg transition-shadow duration-200 relative">
                           {/* Contenu de la boîte gauche */}
-                          <div className="absolute top-6 left-6">
-                            <div className="text-black text-lg font-medium">Content Left</div>
+                          <div className="absolute top-8 left-8">
+                            <div className="text-black text-xl font-medium">Content Left</div>
                           </div>
                         </div>
                         
                         {/* Boîte de droite - 25% */}
-                        <div className="file-detail-box-right w-[25%] h-80 bg-white border border-gray-200 rounded-xl p-6 cursor-pointer hover:shadow-lg transition-shadow duration-200 relative">
+                        <div className="file-detail-box-right w-[25%] h-96 bg-white border border-gray-200 rounded-xl p-8 cursor-pointer hover:shadow-lg transition-shadow duration-200 relative">
                           {/* Contenu de la boîte droite */}
-                          <div className="absolute top-6 left-6">
-                            <div className="text-black text-lg font-medium">Content Right</div>
+                          <div className="absolute top-8 left-8">
+                            <div className="text-black text-xl font-medium">Content Right</div>
                           </div>
                         </div>
                       </div>
