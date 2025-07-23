@@ -2794,31 +2794,12 @@ export default function MarwyckCopilot() {
                     >
                       {/* Texte en haut à gauche */}
                       <div className="absolute top-4 left-4">
-                        <div className="text-black font-medium">New address</div>
-                        <div className="text-gray-500 text-sm mt-1">New contact</div>
+                        <div className="text-black text-sm font-medium">New address</div>
                       </div>
                       
-                      {/* Boutons en bas à gauche */}
-                      <div className="absolute bottom-4 left-4 flex items-center space-x-2">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="p-1 h-6 w-6 rounded-[9px] hover:bg-red-50 text-red-500 hover:text-red-600"
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            setCreatedProjects(prev => prev.filter(p => p.id !== project.id))
-                          }}
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="p-1 h-6 w-6 rounded-[9px] hover:bg-gray-50 text-gray-500"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <UserPlus className="w-4 h-4" />
-                        </Button>
+                      {/* Nombre de fichiers en bas à gauche */}
+                      <div className="absolute bottom-4 left-4">
+                        <span className="text-gray-500 text-xs font-normal">23 Files</span>
                       </div>
                     </div>
                   ))}
