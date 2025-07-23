@@ -2997,32 +2997,23 @@ export default function MarwyckCopilot() {
                         <div className="file-detail-box-left w-[75%] h-96 bg-white border border-gray-200 rounded-xl p-0 cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
                           {/* Zone des messages - remonte jusqu'en haut */}
                           <div className="flex-1 p-4 overflow-y-auto space-y-4">
-                            {/* Message du bot */}
-                            <div className="flex items-start space-x-3">
-                              <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-                                <span className="text-white text-xs">AI</span>
-                              </div>
-                              <div className="bg-gray-100 rounded-2xl rounded-tl-sm px-4 py-2 max-w-xs">
+                            {/* Message du bot - sans fond */}
+                            <div className="flex justify-start">
+                              <div className="px-4 py-2 max-w-xs">
                                 <p className="text-sm text-gray-800">Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd'hui ?</p>
                               </div>
                             </div>
 
-                            {/* Message de l'utilisateur */}
-                            <div className="flex items-start space-x-3 justify-end">
-                              <div className="bg-blue-500 rounded-2xl rounded-tr-sm px-4 py-2 max-w-xs">
-                                <p className="text-sm text-white">Pouvez-vous m'aider avec ce dossier ?</p>
-                              </div>
-                              <div className="w-6 h-6 bg-gray-400 rounded-full flex items-center justify-center flex-shrink-0">
-                                <span className="text-white text-xs">U</span>
+                            {/* Message de l'utilisateur - fond gris avec bords arrondis */}
+                            <div className="flex justify-end">
+                              <div className="bg-gray-200 rounded-[9px] px-4 py-2 max-w-xs">
+                                <p className="text-sm text-gray-800">Pouvez-vous m'aider avec ce dossier ?</p>
                               </div>
                             </div>
 
-                            {/* Message du bot */}
-                            <div className="flex items-start space-x-3">
-                              <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-                                <span className="text-white text-xs">AI</span>
-                              </div>
-                              <div className="bg-gray-100 rounded-2xl rounded-tl-sm px-4 py-2 max-w-xs">
+                            {/* Message du bot - sans fond */}
+                            <div className="flex justify-start">
+                              <div className="px-4 py-2 max-w-xs">
                                 <p className="text-sm text-gray-800">Bien sûr ! Je peux vous aider à analyser et gérer vos dossiers immobiliers. Que souhaitez-vous faire ?</p>
                               </div>
                             </div>
@@ -3031,6 +3022,13 @@ export default function MarwyckCopilot() {
                           {/* Zone de saisie - fond transparent sans bord */}
                           <div className="p-4 bg-transparent">
                             <div className="flex items-center space-x-3">
+                              {/* Icône trombone pour joindre des fichiers */}
+                              <button className="text-black hover:text-gray-600 transition-colors">
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                                </svg>
+                              </button>
+                              
                               <div className="flex-1 relative">
                                 <input
                                   type="text"
@@ -3038,9 +3036,11 @@ export default function MarwyckCopilot() {
                                   className="w-full px-4 py-2 border border-gray-300 rounded-[9px] focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm"
                                 />
                               </div>
-                              <button className="bg-blue-500 hover:bg-blue-600 text-white rounded-[9px] p-2 transition-colors">
+                              
+                              {/* Bouton envoyer - carré noir avec flèche blanche vers le haut */}
+                              <button className="bg-black hover:bg-gray-800 text-white rounded-[9px] p-2 transition-colors">
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
                                 </svg>
                               </button>
                             </div>
