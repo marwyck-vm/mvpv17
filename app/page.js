@@ -2747,6 +2747,21 @@ export default function MarwyckCopilot() {
                     <span className="text-gray-700 font-medium">New project</span>
                   </div>
                 </div>
+
+                {/* My Projects section */}
+                <div className="mt-8 flex items-center justify-between">
+                  <h3 className={`text-xl font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                    My Projects
+                  </h3>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className={`rounded-[9px] p-2 ${darkMode ? 'hover:bg-gray-700 text-gray-400' : 'hover:bg-gray-100 text-gray-500'}`}
+                    title="Filter projects"
+                  >
+                    <Filter className="w-5 h-5" />
+                  </Button>
+                </div>
               </div>
             </div>
           )}
