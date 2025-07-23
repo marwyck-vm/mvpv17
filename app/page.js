@@ -2821,7 +2821,7 @@ export default function MarwyckCopilot() {
                           )}
                         </div>
                       </div>
-                      <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Configure your file settings</p>
+                      <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Full name - Mail - Phone Number</p>
                     </div>
                     
                     
