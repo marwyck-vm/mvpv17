@@ -3000,8 +3000,8 @@ export default function MarwyckCopilot() {
                             {/* Dégradé de fondu en haut plus prononcé - n'affecte pas la scrollbar */}
                             <div className="absolute top-0 left-0 right-4 h-12 bg-gradient-to-b from-white via-white/80 to-transparent z-10 pointer-events-none rounded-t-xl"></div>
                             
-                            {/* Messages avec encore plus d'espacement des bords */}
-                            <div className="h-full px-8 py-4 pt-8 space-y-3 overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.3) transparent' }}>
+                            {/* Messages alignés avec l'input "Tapez votre message" */}
+                            <div className="h-full px-12 py-4 pt-8 space-y-3 overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.3) transparent' }}>
                               {/* Message du bot */}
                               <div className="flex justify-start">
                                 <div className="max-w-xs">
