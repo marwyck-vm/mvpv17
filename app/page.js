@@ -2786,20 +2786,26 @@ export default function MarwyckCopilot() {
                 </div>
 
                 {/* Grille des projets créés */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-6">
-                  {createdProjects.map(project => (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-6">
+                  {createdProjects.map((project, index) => (
                     <div 
                       key={project.id}
-                      className="w-72 h-36 bg-white border border-gray-200 rounded-[9px] p-4 cursor-pointer hover:shadow-md transition-all relative"
+                      className="w-72 h-36 bg-white border border-gray-200 rounded-[9px] p-3 cursor-pointer hover:shadow-md transition-all relative"
                     >
                       {/* Texte en haut à gauche */}
-                      <div className="absolute top-4 left-4">
+                      <div className="absolute top-3 left-3">
                         <div className="text-black text-sm font-medium">New address</div>
                       </div>
                       
-                      {/* Nombre de fichiers en bas à gauche */}
-                      <div className="absolute bottom-4 left-4">
+                      {/* Ligne du bas avec nombre de fichiers et statut de partage */}
+                      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
                         <span className="text-gray-500 text-xs font-normal">23 Files</span>
+                        {/* Icône de statut - alterne entre partagé et non partagé */}
+                        {index % 2 === 0 ? (
+                          <Building className="w-4 h-4 text-gray-500" />
+                        ) : (
+                          <Users className="w-4 h-4 text-gray-500" />
+                        )}
                       </div>
                     </div>
                   ))}
