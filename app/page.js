@@ -579,7 +579,7 @@ export default function MarwyckCopilot() {
   const [editingFileName, setEditingFileName] = useState(false)
   const [tempFileName, setTempFileName] = useState('')
   const [editingContact, setEditingContact] = useState(false)
-  const [tempContact, setTempContact] = useState('')
+  const [tempContactData, setTempContactData] = useState({ fullName: '', mail: '', phone: '' })
   
   // Fonction pour créer un nouveau projet
   const createNewProject = () => {
@@ -587,7 +587,7 @@ export default function MarwyckCopilot() {
       id: Date.now(),
       createdAt: new Date(),
       name: 'New File',
-      contact: 'Full name • Mail • Phone Number'
+      contactData: { fullName: '', mail: '', phone: '' }
     }
     console.log('Creating new project:', newProject)
     setCreatedProjects(prev => {
@@ -618,11 +618,11 @@ export default function MarwyckCopilot() {
     }
   }
 
-  // Fonction pour sauvegarder le contact
-  const saveContact = () => {
-    if (selectedFile && tempContact.trim()) {
+  // Fonction pour sauvegarder les données de contact
+  const saveContactData = () => {
+    if (selectedFile) {
       // Mettre à jour le projet sélectionné
-      const updatedProject = { ...selectedFile, contact: tempContact.trim() }
+      const updatedProject = { ...selectedFile, contactData: tempContactData }
       setSelectedFile(updatedProject)
       
       // Mettre à jour la liste des projets
@@ -635,7 +635,7 @@ export default function MarwyckCopilot() {
       )
       
       setEditingContact(false)
-      setTempContact('')
+      setTempContactData({ fullName: '', mail: '', phone: '' })
     }
   }
 
