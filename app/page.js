@@ -2994,9 +2994,16 @@ export default function MarwyckCopilot() {
                       {/* Deux grosses boîtes avec effet hover */}
                       <div className="ml-9 mt-2 flex space-x-4">
                         {/* Boîte de gauche - 75% - Interface de chat */}
-                        <div className="file-detail-box-left w-[75%] h-96 bg-white border border-gray-200 rounded-xl p-0 cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
+                        <div className="file-detail-box-left w-[75%] h-96 bg-white border border-gray-200 rounded-xl p-0 cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col overflow-hidden">
                           {/* Zone des messages - remonte jusqu'en haut avec scrollbar visible */}
-                          <div className="flex-1 p-4 overflow-y-scroll space-y-4 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+                          <div 
+                            className="flex-1 p-4 space-y-4"
+                            style={{
+                              overflowY: 'scroll',
+                              scrollbarWidth: 'thin',
+                              scrollbarColor: '#9CA3AF #F3F4F6'
+                            }}
+                          >
                             {/* Message du bot - sans fond */}
                             <div className="flex justify-start">
                               <div className="px-4 py-2 max-w-xs">
@@ -3042,10 +3049,16 @@ export default function MarwyckCopilot() {
                                 <p className="text-sm text-gray-800">Voici comment procéder : vous pouvez télécharger vos documents via l'icône trombone, et je les analyserai automatiquement.</p>
                               </div>
                             </div>
+
+                            <div className="flex justify-end">
+                              <div className="bg-gray-200 rounded-[9px] px-4 py-2 max-w-xs">
+                                <p className="text-sm text-gray-800">Excellent, merci pour cette explication détaillée !</p>
+                              </div>
+                            </div>
                           </div>
 
                           {/* Zone de saisie - fond transparent sans bord */}
-                          <div className="p-4 bg-transparent">
+                          <div className="p-4 bg-transparent flex-shrink-0">
                             <div className="flex items-center space-x-3">
                               {/* Icône trombone pour joindre des fichiers */}
                               <button className="text-black hover:text-gray-600 transition-colors">
