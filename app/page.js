@@ -2763,9 +2763,19 @@ export default function MarwyckCopilot() {
                     
                     {/* Contenu vide pour l'instant */}
                     <div className="text-center py-16">
-                      <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                        File configuration page - content coming soon
-                      </p>
+                      <div className="max-w-md mx-auto">
+                        <div className="bg-blue-50 border border-blue-200 rounded-[9px] p-8 mb-4">
+                          <h3 className="text-lg font-semibold text-blue-900 mb-2">
+                            📁 File Configuration
+                          </h3>
+                          <p className="text-blue-700">
+                            You are now in the file configuration page. This is where you'll be able to configure your file settings.
+                          </p>
+                        </div>
+                        <p className="text-gray-500 text-sm">
+                          Click on "Vault" in the sidebar to return to the file list
+                        </p>
+                      </div>
                     </div>
                   </div>
                 ) : (
