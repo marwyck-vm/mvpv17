@@ -578,13 +578,23 @@ export default function MarwyckCopilot() {
   const [selectedFile, setSelectedFile] = useState(null)
   const [editingFileName, setEditingFileName] = useState(false)
   const [tempFileName, setTempFileName] = useState('')
+  const [editingContact, setEditingContact] = useState(null)
+  const [tempContactData, setTempContactData] = useState({})
   
   // Fonction pour créer un nouveau projet
   const createNewProject = () => {
     const newProject = {
       id: Date.now(),
       createdAt: new Date(),
-      name: 'New File'
+      name: 'New File',
+      contacts: [
+        {
+          id: 1,
+          name: 'Name',
+          email: 'email@email.com',
+          phone: '+33 1 23 45 67 89'
+        }
+      ]
     }
     console.log('Creating new project:', newProject)
     setCreatedProjects(prev => {
@@ -612,6 +622,56 @@ export default function MarwyckCopilot() {
       
       setEditingFileName(false)
       setTempFileName('')
+    }
+  }
+
+  // Fonction pour ajouter un nouveau contact
+  const addNewContact = () => {
+    if (selectedFile) {
+      const newContact = {
+        id: Date.now(),
+        name: 'Name',
+        email: 'email@email.com',
+        phone: '+33 1 23 45 67 89'
+      }
+      
+      const updatedProject = {
+        ...selectedFile,
+        contacts: [...(selectedFile.contacts || []), newContact]
+      }
+      
+      setSelectedFile(updatedProject)
+      setCreatedProjects(prev => 
+        prev.map(project => 
+          project.id === selectedFile.id 
+            ? updatedProject 
+            : project
+        )
+      )
+    }
+  }
+
+  // Fonction pour sauvegarder un contact
+  const saveContact = (contactId) => {
+    if (selectedFile && tempContactData) {
+      const updatedProject = {
+        ...selectedFile,
+        contacts: selectedFile.contacts.map(contact =>
+          contact.id === contactId ? { ...contact, ...tempContactData } : contact
+        )
+      }
+      
+      setSelectedFile(updatedProject)
+      setCreatedProjects(prev => 
+        prev.map(project => 
+          project.id === selectedFile.id 
+            ? updatedProject 
+            : project
+        )
+      )
+      
+      setEditingContact(null)
+      setTempContactData({})
     }
   }
 
