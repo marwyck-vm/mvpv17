@@ -578,7 +578,7 @@ export default function MarwyckCopilot() {
   const [selectedFile, setSelectedFile] = useState(null)
   const [editingFileName, setEditingFileName] = useState(false)
   const [tempFileName, setTempFileName] = useState('')
-  const [editingContact, setEditingContact] = useState(false)
+  const [editingContact, setEditingContact] = useState(null)
   const [tempContactData, setTempContactData] = useState({ fullName: '', mail: '', phone: '' })
   
   // Fonction pour créer un nouveau projet
@@ -587,7 +587,7 @@ export default function MarwyckCopilot() {
       id: Date.now(),
       createdAt: new Date(),
       name: 'New File',
-      contactData: { fullName: '', mail: '', phone: '' }
+      contacts: [{ id: 1, fullName: '', mail: '', phone: '' }]
     }
     console.log('Creating new project:', newProject)
     setCreatedProjects(prev => {
@@ -619,10 +619,14 @@ export default function MarwyckCopilot() {
   }
 
   // Fonction pour sauvegarder les données de contact
-  const saveContactData = () => {
+  const saveContactData = (contactId) => {
     if (selectedFile) {
-      // Mettre à jour le projet sélectionné
-      const updatedProject = { ...selectedFile, contactData: tempContactData }
+      // Mettre à jour le contact spécifique
+      const updatedContacts = selectedFile.contacts.map(contact =>
+        contact.id === contactId ? { ...contact, ...tempContactData } : contact
+      )
+      
+      const updatedProject = { ...selectedFile, contacts: updatedContacts }
       setSelectedFile(updatedProject)
       
       // Mettre à jour la liste des projets
@@ -634,8 +638,28 @@ export default function MarwyckCopilot() {
         )
       )
       
-      setEditingContact(false)
+      setEditingContact(null)
       setTempContactData({ fullName: '', mail: '', phone: '' })
+    }
+  }
+
+  // Fonction pour ajouter un nouveau contact
+  const addNewContact = () => {
+    if (selectedFile) {
+      const newContact = { id: Date.now(), fullName: '', mail: '', phone: '' }
+      const updatedProject = {
+        ...selectedFile,
+        contacts: [...(selectedFile.contacts || []), newContact]
+      }
+      
+      setSelectedFile(updatedProject)
+      setCreatedProjects(prev => 
+        prev.map(project => 
+          project.id === selectedFile.id 
+            ? updatedProject 
+            : project
+        )
+      )
     }
   }
 
