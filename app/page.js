@@ -2798,12 +2798,12 @@ export default function MarwyckCopilot() {
                         <div className="text-black text-sm font-medium">New address</div>
                       </div>
                       
-                      {/* Icône de statut en haut à droite - apparaît au hover */}
-                      <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      {/* Icône de statut en haut à droite - toujours visible */}
+                      <div className="absolute top-3 right-3">
                         {index % 2 === 0 ? (
-                          <Building className="w-4 h-4 text-black" />
+                          <Building className="w-4 h-4 text-gray-500" />
                         ) : (
-                          <Users className="w-4 h-4 text-black" />
+                          <Users className="w-4 h-4 text-gray-500" />
                         )}
                       </div>
                       
@@ -2812,7 +2812,7 @@ export default function MarwyckCopilot() {
                         <span className="text-gray-500 text-xs font-normal">23 Files</span>
                       </div>
                       
-                      {/* Animation bouclier et texte "Secured by Marwyck" */}
+                      {/* Animation bouclier et texte "Secured by Marwyck" - glisse du bord */}
                       <div className="absolute bottom-3 right-3 flex items-center space-x-2 transform translate-x-full group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out">
                         <span className="text-black text-xs font-medium whitespace-nowrap">Secured by Marwyck</span>
                         <Shield className="w-4 h-4 text-black" />
