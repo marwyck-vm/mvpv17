@@ -2814,8 +2814,8 @@ export default function MarwyckCopilot() {
                       
                       {/* Animation bouclier et texte "Secured by Marwyck" - glisse du bord */}
                       <div className="absolute bottom-3 right-3 flex items-center space-x-2 transform translate-x-full group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out">
-                        <span className="text-black text-xs font-medium whitespace-nowrap">Secured by Marwyck</span>
                         <Shield className="w-4 h-4 text-black" />
+                        <span className="text-black text-xs font-medium whitespace-nowrap">Secured by Marwyck</span>
                       </div>
                     </div>
                   ))}
