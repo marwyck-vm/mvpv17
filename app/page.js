@@ -2776,13 +2776,52 @@ export default function MarwyckCopilot() {
                   <div>
                     <div className="mb-8">
                       <div className="flex items-center justify-between mb-6">
-                        <div>
-                          <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                            File Configuration
-                          </h2>
-                          <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Configure your file settings</p>
+                        <div className="flex items-center space-x-3">
+                          {editingFileName ? (
+                            <div className="flex items-center space-x-2">
+                              <input
+                                type="text"
+                                value={tempFileName}
+                                onChange={(e) => setTempFileName(e.target.value)}
+                                onKeyPress={(e) => e.key === 'Enter' && saveFileName()}
+                                className="text-2xl font-bold font-plus-jakarta bg-transparent border-b-2 border-gray-300 focus:border-black outline-none"
+                                autoFocus
+                              />
+                              <button
+                                onClick={saveFileName}
+                                className="text-green-600 hover:text-green-700"
+                              >
+                                <Save className="w-5 h-5" />
+                              </button>
+                              <button
+                                onClick={() => {
+                                  setEditingFileName(false)
+                                  setTempFileName('')
+                                }}
+                                className="text-red-600 hover:text-red-700"
+                              >
+                                <X className="w-5 h-5" />
+                              </button>
+                            </div>
+                          ) : (
+                            <>
+                              <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                {selectedFile?.name || 'New File'}
+                              </h2>
+                              <button
+                                onClick={() => {
+                                  setEditingFileName(true)
+                                  setTempFileName(selectedFile?.name || 'New File')
+                                }}
+                                className="text-gray-500 hover:text-gray-700 transition-colors"
+                              >
+                                <PenTool className="w-5 h-5" />
+                              </button>
+                            </>
+                          )}
                         </div>
                       </div>
+                      <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Configure your file settings</p>
                     </div>
                     
                     {/* Contenu vide pour l'instant */}
