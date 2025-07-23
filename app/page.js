@@ -573,6 +573,17 @@ export default function MarwyckCopilot() {
   }
 
   // États pour gérer les données des dossiers
+  const [createdProjects, setCreatedProjects] = useState([])
+  
+  // Fonction pour créer un nouveau projet
+  const createNewProject = () => {
+    const newProject = {
+      id: Date.now(),
+      createdAt: new Date()
+    }
+    setCreatedProjects(prev => [...prev, newProject])
+  }
+
   const [dossiersList, setDossiersList] = useState([
     { 
       id: 1, 
