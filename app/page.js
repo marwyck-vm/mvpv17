@@ -2892,78 +2892,92 @@ export default function MarwyckCopilot() {
                           )}
                         </div>
                       </div>
-                      <div className="mt-2 space-y-3">
+                      <div className="mt-1 space-y-2">
                         {selectedFile?.contacts?.map((contact, index) => (
-                          <div key={contact.id}>
-                            {editingContact === contact.id ? (
-                              <div className="flex items-center space-x-2">
-                                <div className="flex items-center space-x-2 bg-gray-50 px-3 py-2 rounded-[9px] border hover:border-gray-400 transition-colors">
-                                  <input
-                                    type="text"
-                                    value={tempContactData.fullName}
-                                    onChange={(e) => setTempContactData(prev => ({ ...prev, fullName: e.target.value }))}
-                                    placeholder="Full name"
-                                    className="bg-transparent outline-none text-gray-600 placeholder-gray-400 text-sm w-20"
-                                  />
-                                  <span className="text-gray-600">•</span>
-                                  <input
-                                    type="email"
-                                    value={tempContactData.mail}
-                                    onChange={(e) => setTempContactData(prev => ({ ...prev, mail: e.target.value }))}
-                                    placeholder="Mail"
-                                    className="bg-transparent outline-none text-gray-600 placeholder-gray-400 text-sm w-24"
-                                  />
-                                  <span className="text-gray-600">•</span>
-                                  <input
-                                    type="tel"
-                                    value={tempContactData.phone}
-                                    onChange={(e) => setTempContactData(prev => ({ ...prev, phone: e.target.value }))}
-                                    placeholder="Phone Number"
-                                    className="bg-transparent outline-none text-gray-600 placeholder-gray-400 text-sm w-28"
-                                  />
+                          <div key={contact.id} className="flex items-center">
+                            <div className="flex-1">
+                              {editingContact === contact.id ? (
+                                <div className="flex items-center space-x-2">
+                                  <div className="flex items-center space-x-2 bg-gray-50 px-3 py-2 rounded-[9px] border hover:border-gray-400 transition-colors">
+                                    <input
+                                      type="text"
+                                      value={tempContactData.fullName}
+                                      onChange={(e) => setTempContactData(prev => ({ ...prev, fullName: e.target.value }))}
+                                      placeholder="Full name"
+                                      className="bg-transparent outline-none text-gray-600 placeholder-gray-400 text-sm w-20"
+                                    />
+                                    <span className="text-gray-600">•</span>
+                                    <input
+                                      type="email"
+                                      value={tempContactData.mail}
+                                      onChange={(e) => setTempContactData(prev => ({ ...prev, mail: e.target.value }))}
+                                      placeholder="Mail"
+                                      className="bg-transparent outline-none text-gray-600 placeholder-gray-400 text-sm w-24"
+                                    />
+                                    <span className="text-gray-600">•</span>
+                                    <input
+                                      type="tel"
+                                      value={tempContactData.phone}
+                                      onChange={(e) => setTempContactData(prev => ({ ...prev, phone: e.target.value }))}
+                                      placeholder="Phone Number"
+                                      className="bg-transparent outline-none text-gray-600 placeholder-gray-400 text-sm w-28"
+                                    />
+                                  </div>
+                                  <button
+                                    onClick={() => saveContactData(contact.id)}
+                                    className="text-black hover:text-gray-700"
+                                  >
+                                    <Save className="w-4 h-4" />
+                                  </button>
                                 </div>
-                                <button
-                                  onClick={() => saveContactData(contact.id)}
-                                  className="text-black hover:text-gray-700"
+                              ) : (
+                                <div 
+                                  className="inline-flex items-center space-x-2 cursor-pointer hover:bg-gray-50 px-3 py-2 rounded-[9px] transition-colors"
+                                  onClick={() => {
+                                    setEditingContact(contact.id)
+                                    setTempContactData({
+                                      fullName: contact.fullName || '',
+                                      mail: contact.mail || '',
+                                      phone: contact.phone || ''
+                                    })
+                                  }}
                                 >
-                                  <Save className="w-4 h-4" />
-                                </button>
-                              </div>
-                            ) : (
-                              <div 
-                                className="inline-flex items-center space-x-2 cursor-pointer hover:bg-gray-50 px-3 py-2 rounded-[9px] transition-colors"
-                                onClick={() => {
-                                  setEditingContact(contact.id)
-                                  setTempContactData({
-                                    fullName: contact.fullName || '',
-                                    mail: contact.mail || '',
-                                    phone: contact.phone || ''
-                                  })
-                                }}
+                                  <span className={`text-sm ${contact.fullName ? 'text-gray-600' : 'text-gray-400'}`}>
+                                    {contact.fullName || 'Full name'}
+                                  </span>
+                                  <span className="text-gray-600">•</span>
+                                  <span className={`text-sm ${contact.mail ? 'text-gray-600' : 'text-gray-400'}`}>
+                                    {contact.mail || 'Mail'}
+                                  </span>
+                                  <span className="text-gray-600">•</span>
+                                  <span className={`text-sm ${contact.phone ? 'text-gray-600' : 'text-gray-400'}`}>
+                                    {contact.phone || 'Phone Number'}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+                            
+                            {/* Bouton de suppression pour le 2ème contact */}
+                            {index === 1 && (
+                              <button
+                                onClick={() => removeContact(contact.id)}
+                                className="ml-2 text-gray-400 hover:text-gray-600 transition-colors"
                               >
-                                <span className={`text-sm ${contact.fullName ? 'text-gray-600' : 'text-gray-400'}`}>
-                                  {contact.fullName || 'Full name'}
-                                </span>
-                                <span className="text-gray-600">•</span>
-                                <span className={`text-sm ${contact.mail ? 'text-gray-600' : 'text-gray-400'}`}>
-                                  {contact.mail || 'Mail'}
-                                </span>
-                                <span className="text-gray-600">•</span>
-                                <span className={`text-sm ${contact.phone ? 'text-gray-600' : 'text-gray-400'}`}>
-                                  {contact.phone || 'Phone Number'}
-                                </span>
-                              </div>
+                                <X className="w-4 h-4" />
+                              </button>
                             )}
                           </div>
                         ))}
                         
-                        {/* Bouton + pour ajouter un contact */}
-                        <div 
-                          className="inline-flex items-center cursor-pointer hover:bg-gray-50 px-2 py-1 rounded-[9px] transition-colors"
-                          onClick={addNewContact}
-                        >
-                          <span className="text-gray-400 text-lg">+</span>
-                        </div>
+                        {/* Bouton + pour ajouter un contact (max 2) */}
+                        {(!selectedFile?.contacts || selectedFile.contacts.length < 2) && (
+                          <div 
+                            className="inline-flex items-center cursor-pointer hover:bg-gray-50 px-2 py-1 rounded-[9px] transition-colors"
+                            onClick={addNewContact}
+                          >
+                            <span className="text-gray-400 text-lg">+</span>
+                          </div>
+                        )}
                       </div>
                     </div>
                     
