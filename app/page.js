@@ -2791,27 +2791,31 @@ export default function MarwyckCopilot() {
                   {createdProjects.map((project, index) => (
                     <div 
                       key={project.id}
-                      className="group w-72 h-36 bg-white border border-gray-200 rounded-[9px] p-3 cursor-pointer hover:shadow-md transition-all relative"
+                      className="group w-72 h-36 bg-white border border-gray-200 rounded-[9px] p-3 cursor-pointer hover:shadow-md transition-all relative overflow-hidden"
                     >
                       {/* Texte en haut à gauche */}
                       <div className="absolute top-3 left-3">
                         <div className="text-black text-sm font-medium">New address</div>
                       </div>
                       
-                      {/* Icône bouclier en haut à droite - apparaît au hover */}
+                      {/* Icône de statut en haut à droite - apparaît au hover */}
                       <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <Shield className="w-4 h-4 text-black" />
+                        {index % 2 === 0 ? (
+                          <Building className="w-4 h-4 text-black" />
+                        ) : (
+                          <Users className="w-4 h-4 text-black" />
+                        )}
                       </div>
                       
-                      {/* Ligne du bas avec nombre de fichiers et statut de partage */}
-                      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                      {/* Ligne du bas avec nombre de fichiers */}
+                      <div className="absolute bottom-3 left-3">
                         <span className="text-gray-500 text-xs font-normal">23 Files</span>
-                        {/* Icône de statut - alterne entre partagé et non partagé */}
-                        {index % 2 === 0 ? (
-                          <Building className="w-4 h-4 text-gray-500" />
-                        ) : (
-                          <Users className="w-4 h-4 text-gray-500" />
-                        )}
+                      </div>
+                      
+                      {/* Animation bouclier et texte "Secured by Marwyck" */}
+                      <div className="absolute bottom-3 right-3 flex items-center space-x-2 transform translate-x-full group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out">
+                        <span className="text-black text-xs font-medium whitespace-nowrap">Secured by Marwyck</span>
+                        <Shield className="w-4 h-4 text-black" />
                       </div>
                     </div>
                   ))}
