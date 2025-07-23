@@ -576,12 +576,15 @@ export default function MarwyckCopilot() {
   // États pour gérer les données des dossiers
   const [createdProjects, setCreatedProjects] = useState([])
   const [selectedFile, setSelectedFile] = useState(null)
+  const [editingFileName, setEditingFileName] = useState(false)
+  const [tempFileName, setTempFileName] = useState('')
   
   // Fonction pour créer un nouveau projet
   const createNewProject = () => {
     const newProject = {
       id: Date.now(),
-      createdAt: new Date()
+      createdAt: new Date(),
+      name: 'New File'
     }
     console.log('Creating new project:', newProject)
     setCreatedProjects(prev => {
@@ -589,6 +592,27 @@ export default function MarwyckCopilot() {
       console.log('Updated projects:', updated)
       return updated
     })
+  }
+
+  // Fonction pour sauvegarder le nom du fichier
+  const saveFileName = () => {
+    if (selectedFile && tempFileName.trim()) {
+      // Mettre à jour le projet sélectionné
+      const updatedProject = { ...selectedFile, name: tempFileName.trim() }
+      setSelectedFile(updatedProject)
+      
+      // Mettre à jour la liste des projets
+      setCreatedProjects(prev => 
+        prev.map(project => 
+          project.id === selectedFile.id 
+            ? updatedProject 
+            : project
+        )
+      )
+      
+      setEditingFileName(false)
+      setTempFileName('')
+    }
   }
 
   const [dossiersList, setDossiersList] = useState([
