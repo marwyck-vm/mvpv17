@@ -2842,8 +2842,8 @@ export default function MarwyckCopilot() {
                   // Vue détaillée du fichier sélectionné
                   <div>
                     <div className="mb-8">
-                      <div className="flex items-center justify-between mb-6">
-                        <div className="flex items-center space-x-3">
+                        <div className="flex items-center justify-between mb-6">
+                        <div className="group flex items-center space-x-3">
                           {editingFileName ? (
                             <div className="flex items-center space-x-2">
                               <input
@@ -2872,15 +2872,18 @@ export default function MarwyckCopilot() {
                             </div>
                           ) : (
                             <>
-                              <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                {selectedFile?.name || 'New File'}
-                              </h2>
+                              <div className="flex items-center space-x-2">
+                                <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                  {selectedFile?.name || 'New File'}
+                                </h2>
+                                <ChevronRight className="w-5 h-5 text-black" />
+                              </div>
                               <button
                                 onClick={() => {
                                   setEditingFileName(true)
                                   setTempFileName(selectedFile?.name || 'New File')
                                 }}
-                                className="text-black hover:text-gray-700 transition-colors"
+                                className="text-black hover:text-gray-700 transition-all duration-200 opacity-0 group-hover:opacity-100"
                               >
                                 <Edit className="w-5 h-5" />
                               </button>
