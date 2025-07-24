@@ -3264,7 +3264,7 @@ export default function MarwyckCopilot() {
                                   key={chat.id}
                                   className={`group cursor-pointer transition-colors duration-200 border rounded-[9px] p-3 ${
                                     selectedChatHistory?.id === chat.id 
-                                      ? 'bg-black text-white border-black' 
+                                      ? 'bg-gray-200 text-gray-800 border-gray-300' 
                                       : 'bg-gray-50 hover:bg-gray-100 border-gray-100'
                                   }`}
                                   onClick={() => loadChatFromHistory(chat)}
@@ -3272,7 +3272,7 @@ export default function MarwyckCopilot() {
                                   <div className="flex items-start justify-between">
                                     <div className="flex-1 min-w-0">
                                       <div className={`text-xs flex items-center space-x-2 ${
-                                        selectedChatHistory?.id === chat.id ? 'text-gray-300' : 'text-gray-500'
+                                        selectedChatHistory?.id === chat.id ? 'text-gray-600' : 'text-gray-500'
                                       }`}>
                                         <span>{chat.messages?.length || 0} messages</span>
                                         <span>•</span>
@@ -3280,16 +3280,16 @@ export default function MarwyckCopilot() {
                                       </div>
                                     </div>
                                     
-                                    {/* Indicateur de chat actif - plus petit */}
+                                    {/* Indicateur de chat actif - dot noire */}
                                     {selectedChatHistory?.id === chat.id && (
-                                      <div className="w-2 h-2 bg-white rounded-full ml-2"></div>
+                                      <div className="w-2 h-2 bg-black rounded-full ml-2"></div>
                                     )}
                                   </div>
                                   
                                   {/* Preview du dernier message */}
                                   {chat.messages?.length > 0 && (
                                     <div className={`text-xs mt-2 truncate ${
-                                      selectedChatHistory?.id === chat.id ? 'text-gray-300' : 'text-gray-600'
+                                      selectedChatHistory?.id === chat.id ? 'text-gray-600' : 'text-gray-600'
                                     }`}>
                                       {chat.messages[chat.messages.length - 1].content.substring(0, 50)}...
                                     </div>
