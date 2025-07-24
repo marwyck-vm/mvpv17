@@ -3291,7 +3291,7 @@ export default function MarwyckCopilot() {
                               selectedFile.chatHistory.map((chat, index) => (
                                 <div 
                                   key={chat.id}
-                                  className={`group cursor-pointer transition-colors duration-200 border rounded-lg p-3 ${
+                                  className={`group cursor-pointer transition-colors duration-200 border rounded-[9px] p-3 ${
                                     selectedChatHistory?.id === chat.id 
                                       ? 'bg-black text-white border-black' 
                                       : 'bg-gray-50 hover:bg-gray-100 border-gray-100'
