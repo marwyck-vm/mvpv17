@@ -3030,8 +3030,8 @@ export default function MarwyckCopilot() {
                                         [chatToSave]
                                     }
                                     
-                                    // Mettre à jour la liste des projets
-                                    setProjects(prevProjects => 
+                                    // Mettre à jour la liste des projets (utiliser createdProjects)
+                                    setCreatedProjects(prevProjects => 
                                       prevProjects.map(p => 
                                         p.id === selectedFile.id ? updatedFile : p
                                       )
