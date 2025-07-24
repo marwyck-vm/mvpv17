@@ -769,7 +769,7 @@ export default function MarwyckCopilot() {
       if (selectedChatHistory?.id === chatId) {
         setSelectedChatHistory(null)
         setCurrentChatMessages([
-          { id: Date.now(), role: 'bot', content: 'Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd\'hui ?', timestamp: new Date().toISOString() }
+          { id: Date.now(), role: 'bot', content: 'Hello! I\'m your Marwyck assistant. How can I help you today?', timestamp: new Date().toISOString() }
         ])
       }
     }
