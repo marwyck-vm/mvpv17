@@ -3006,7 +3006,7 @@ export default function MarwyckCopilot() {
                                   </svg>
                                 </button>
                                 {/* Custom Tooltip - Identique à Traffic: Light, mais au-dessus */}
-                                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 text-xs text-gray-800 bg-gray-200 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50 shadow-md">
+                                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 text-xs text-gray-800 bg-gray-200 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md" style={{ zIndex: 9999 }}>
                                   Create new chat
                                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-200 rotate-45 -mt-1"></div>
                                 </div>
