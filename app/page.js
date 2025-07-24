@@ -3087,11 +3087,66 @@ export default function MarwyckCopilot() {
                           </div>
                         </div>
                         
-                        {/* Boîte de droite - 25% */}
-                        <div className="file-detail-box-right w-[25%] h-96 bg-white border border-gray-200 rounded-xl p-8 cursor-pointer hover:shadow-lg transition-shadow duration-200 relative">
-                          {/* Contenu de la boîte droite */}
-                          <div className="absolute top-8 left-8">
-                            <div className="text-black text-xl font-medium">Content Right</div>
+                        {/* Boîte de droite - 25% - Liste des chats */}
+                        <div className="file-detail-box-right w-[25%] h-96 bg-white border border-gray-200 rounded-xl p-4 cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
+                          {/* Header de la liste des chats */}
+                          <div className="mb-4">
+                            <h3 className="text-lg font-medium text-gray-900 mb-2">Recent Chats</h3>
+                            <div className="text-xs text-gray-500">
+                              {selectedFile?.chatHistory?.length || 0} conversations
+                            </div>
+                          </div>
+
+                          {/* Liste des chats scrollable */}
+                          <div className="flex-1 overflow-y-auto space-y-2" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.3) transparent' }}>
+                            {selectedFile?.chatHistory?.length > 0 ? (
+                              selectedFile.chatHistory.map((chat, index) => (
+                                <div 
+                                  key={chat.id}
+                                  className="group cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg p-3 transition-colors duration-200 border border-gray-100"
+                                  onClick={() => {
+                                    // Logique pour charger ce chat (à implémenter)
+                                    console.log('Load chat:', chat.id)
+                                  }}
+                                >
+                                  <div className="flex items-start justify-between">
+                                    <div className="flex-1 min-w-0">
+                                      <div className="text-sm font-medium text-gray-900 truncate">
+                                        Chat {index + 1}
+                                      </div>
+                                      <div className="text-xs text-gray-500 mt-1">
+                                        {chat.messages?.length || 0} messages
+                                      </div>
+                                      <div className="text-xs text-gray-400 mt-1">
+                                        {new Date(chat.createdAt).toLocaleDateString()}
+                                      </div>
+                                    </div>
+                                    
+                                    {/* Indicateur de chat actif */}
+                                    {index === 0 && (
+                                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                    )}
+                                  </div>
+                                  
+                                  {/* Preview du dernier message */}
+                                  {chat.messages?.length > 0 && (
+                                    <div className="text-xs text-gray-600 mt-2 truncate">
+                                      {chat.messages[chat.messages.length - 1].content.substring(0, 50)}...
+                                    </div>
+                                  )}
+                                </div>
+                              ))
+                            ) : (
+                              <div className="text-center text-gray-400 text-sm mt-8">
+                                <div className="text-gray-300 mb-2">
+                                  <svg className="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a8.955 8.955 0 01-3.774-.829L3 21l1.829-6.226A8.955 8.955 0 013 12a8 8 0 018-8 8 8 0 018 8z" />
+                                  </svg>
+                                </div>
+                                No previous chats
+                                <div className="text-xs mt-1">Start a new conversation!</div>
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>
