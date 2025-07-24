@@ -679,15 +679,15 @@ export default function MarwyckCopilot() {
       const botMessage = {
         id: Date.now() + 1,
         role: 'bot',
-        content: generateAIResponse(currentChatInput),
+        content: generateChatAIResponse(currentChatInput),
         timestamp: new Date().toISOString()
       }
       setCurrentChatMessages(prev => [...prev, botMessage])
     }, 1000)
   }
 
-  // Fonction pour générer une réponse IA simple
-  const generateAIResponse = (userInput) => {
+  // Fonction pour générer une réponse IA simple pour le chat
+  const generateChatAIResponse = (userInput) => {
     const responses = [
       "Je comprends votre demande. Laissez-moi vous aider avec cela.",
       "Excellent point ! Voici ce que je peux vous proposer...",
