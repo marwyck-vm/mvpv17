@@ -577,6 +577,13 @@ export default function MarwyckCopilot() {
   const [editingContact, setEditingContact] = useState(null)
   const [tempContactData, setTempContactData] = useState({ fullName: '', mail: '', phone: '' })
   
+  // États pour gérer les conversations multiples
+  const [currentChatMessages, setCurrentChatMessages] = useState([
+    { id: 1, role: 'bot', content: 'Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd\'hui ?', timestamp: new Date().toISOString() }
+  ])
+  const [currentChatInput, setCurrentChatInput] = useState('')
+  const [selectedChatHistory, setSelectedChatHistory] = useState(null)
+  
   // Fonction pour créer un nouveau projet
   const createNewProject = () => {
     const newProject = {
