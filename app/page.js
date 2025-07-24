@@ -3127,45 +3127,15 @@ export default function MarwyckCopilot() {
                             
                             {/* Messages alignés précisément avec les bords de l'input "Tapez votre message" */}
                             <div className="h-full px-10 py-4 pt-8 space-y-3 overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.3) transparent' }}>
-                              {/* Message du bot */}
-                              <div className="flex justify-start">
-                                <div className="max-w-xs">
-                                  <p className="text-sm text-gray-800 px-3 py-2">Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd'hui ?</p>
+                              {currentChatMessages.map((message) => (
+                                <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                                  <div className={`max-w-xs ${message.role === 'user' ? 'bg-gray-200 rounded-[9px] px-3 py-2' : ''}`}>
+                                    <p className={`text-sm text-gray-800 ${message.role === 'bot' ? 'px-3 py-2' : ''}`}>
+                                      {message.content}
+                                    </p>
+                                  </div>
                                 </div>
-                              </div>
-
-                              {/* Message utilisateur */}
-                              <div className="flex justify-end">
-                                <div className="bg-gray-200 rounded-[9px] px-3 py-2 max-w-xs">
-                                  <p className="text-sm text-gray-800">Pouvez-vous m'aider avec ce dossier ?</p>
-                                </div>
-                              </div>
-
-                              {/* Message du bot */}
-                              <div className="flex justify-start">
-                                <div className="max-w-xs">
-                                  <p className="text-sm text-gray-800 px-3 py-2">Bien sûr ! Je peux vous aider à analyser et gérer vos dossiers immobiliers.</p>
-                                </div>
-                              </div>
-
-                              {/* Plus de messages pour tester le scroll */}
-                              <div className="flex justify-end">
-                                <div className="bg-gray-200 rounded-[9px] px-3 py-2 max-w-xs">
-                                  <p className="text-sm text-gray-800">Comment gérer mes documents ?</p>
-                                </div>
-                              </div>
-
-                              <div className="flex justify-start">
-                                <div className="max-w-xs">
-                                  <p className="text-sm text-gray-800 px-3 py-2">Je peux organiser vos documents et vous rappeler les échéances.</p>
-                                </div>
-                              </div>
-
-                              <div className="flex justify-end">
-                                <div className="bg-gray-200 rounded-[9px] px-3 py-2 max-w-xs">
-                                  <p className="text-sm text-gray-800">Parfait, merci !</p>
-                                </div>
-                              </div>
+                              ))}
                             </div>
                           </div>
 
