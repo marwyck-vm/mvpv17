@@ -3263,11 +3263,6 @@ export default function MarwyckCopilot() {
                                 >
                                   <div className="flex items-start justify-between">
                                     <div className="flex-1 min-w-0">
-                                      <div className={`text-xs mb-1 font-medium ${
-                                        selectedChatHistory?.id === chat.id ? 'text-gray-200' : 'text-gray-900'
-                                      }`}>
-                                        {chat.title || 'Conversation'}
-                                      </div>
                                       <div className={`text-xs flex items-center space-x-2 ${
                                         selectedChatHistory?.id === chat.id ? 'text-gray-300' : 'text-gray-500'
                                       }`}>
