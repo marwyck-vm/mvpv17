@@ -742,11 +742,11 @@ export default function MarwyckCopilot() {
   // Fonction pour générer une réponse IA simple pour le chat
   const generateChatAIResponse = (userInput) => {
     const responses = [
-      "Je comprends votre demande. Laissez-moi vous aider avec cela.",
-      "Excellent point ! Voici ce que je peux vous proposer...",
-      "C'est une bonne question. Pour ce type de dossier, je recommande...",
-      "Parfait ! Je vais analyser cela et vous donner des suggestions.",
-      "Je peux certainement vous aider avec cette tâche."
+      "I understand your request. Let me help you with that.",
+      "Excellent point! Here's what I can suggest...",
+      "That's a good question. For this type of file, I recommend...",
+      "Perfect! I'll analyze this and give you suggestions.",
+      "I can certainly help you with this task."
     ]
     return responses[Math.floor(Math.random() * responses.length)]
   }
