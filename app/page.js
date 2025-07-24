@@ -590,7 +590,8 @@ export default function MarwyckCopilot() {
       id: Date.now(),
       createdAt: new Date(),
       name: 'New File',
-      contacts: [{ id: 1, fullName: '', mail: '', phone: '' }]
+      contacts: [{ id: 1, fullName: '', mail: '', phone: '' }],
+      chatHistory: []
     }
     console.log('Creating new project:', newProject)
     setCreatedProjects(prev => {
@@ -598,6 +599,103 @@ export default function MarwyckCopilot() {
       console.log('Updated projects:', updated)
       return updated
     })
+  }
+
+  // Fonction pour créer une nouvelle conversation 
+  const createNewChat = () => {
+    if (selectedFile && currentChatMessages.length > 1) {
+      // Sauvegarder la conversation actuelle dans l'historique
+      const chatToSave = {
+        id: `chat_${Date.now()}`,
+        messages: [...currentChatMessages],
+        createdAt: new Date().toISOString(),
+        title: generateChatTitle(currentChatMessages)
+      }
+      
+      // Mettre à jour le fichier avec la conversation sauvée
+      const updatedFile = {
+        ...selectedFile,
+        chatHistory: selectedFile.chatHistory ? 
+          [chatToSave, ...selectedFile.chatHistory] : 
+          [chatToSave]
+      }
+      
+      // Mettre à jour la liste des projets
+      setCreatedProjects(prev => 
+        prev.map(p => p.id === selectedFile.id ? updatedFile : p)
+      )
+      
+      // Mettre à jour le fichier sélectionné
+      setSelectedFile(updatedFile)
+    }
+    
+    // Démarrer une nouvelle conversation vide
+    setCurrentChatMessages([
+      { id: Date.now(), role: 'bot', content: 'Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd\'hui ?', timestamp: new Date().toISOString() }
+    ])
+    setCurrentChatInput('')
+    setSelectedChatHistory(null)
+  }
+
+  // Fonction pour générer un titre basé sur la première question de l'utilisateur
+  const generateChatTitle = (messages) => {
+    const firstUserMessage = messages.find(msg => msg.role === 'user')
+    if (firstUserMessage) {
+      return firstUserMessage.content.length > 30 
+        ? firstUserMessage.content.substring(0, 30) + '...'
+        : firstUserMessage.content
+    }
+    return `Conversation ${new Date().toLocaleDateString()}`
+  }
+
+  // Fonction pour charger une conversation de l'historique
+  const loadChatFromHistory = (chat) => {
+    // Sauvegarder la conversation actuelle si elle a du contenu
+    if (currentChatMessages.length > 1) {
+      createNewChat()
+    }
+    
+    // Charger la conversation sélectionnée
+    setCurrentChatMessages([...chat.messages])
+    setSelectedChatHistory(chat)
+  }
+
+  // Fonction pour envoyer un message
+  const sendChatMessage = () => {
+    if (!currentChatInput.trim()) return
+    
+    const userMessage = {
+      id: Date.now(),
+      role: 'user',
+      content: currentChatInput,
+      timestamp: new Date().toISOString()
+    }
+    
+    setCurrentChatMessages(prev => [...prev, userMessage])
+    setCurrentChatInput('')
+    
+    // Simuler une réponse IA après un délai
+    setTimeout(() => {
+      const botMessage = {
+        id: Date.now() + 1,
+        role: 'bot',
+        content: generateAIResponse(currentChatInput),
+        timestamp: new Date().toISOString()
+      }
+      setCurrentChatMessages(prev => [...prev, botMessage])
+    }, 1000)
+  }
+
+  // Fonction pour générer une réponse IA simple
+  const generateAIResponse = (userInput) => {
+    const responses = [
+      "Je comprends votre demande. Laissez-moi vous aider avec cela.",
+      "Excellent point ! Voici ce que je peux vous proposer...",
+      "C'est une bonne question. Pour ce type de dossier, je recommande...",
+      "Parfait ! Je vais analyser cela et vous donner des suggestions.",
+      "Je peux certainement vous aider avec cette tâche."
+    ]
+    return responses[Math.floor(Math.random() * responses.length)]
   }
 
   // Fonction pour sauvegarder le nom du fichier
