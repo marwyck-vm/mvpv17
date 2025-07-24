@@ -2999,43 +2999,36 @@ export default function MarwyckCopilot() {
                             <button 
                               className="absolute top-3 right-6 text-gray-400 hover:text-black transition-colors duration-200"
                               onClick={() => {
-                                // Logique pour créer un nouveau chat
-                                if (selectedFile) {
-                                  // Récupérer les messages actuels de l'interface (simulation)
-                                  const currentMessages = [
-                                    { role: 'bot', content: 'Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd\'hui ?', timestamp: new Date().toISOString() },
-                                    { role: 'user', content: 'Pouvez-vous m\'aider avec ce dossier ?', timestamp: new Date().toISOString() },
-                                    { role: 'bot', content: 'Bien sûr ! Je peux vous aider à analyser et gérer vos dossiers immobiliers.', timestamp: new Date().toISOString() },
-                                    { role: 'user', content: 'Comment gérer mes documents ?', timestamp: new Date().toISOString() },
-                                    { role: 'bot', content: 'Je peux organiser vos documents et vous rappeler les échéances.', timestamp: new Date().toISOString() },
-                                    { role: 'user', content: 'Parfait, merci !', timestamp: new Date().toISOString() }
-                                  ]
-                                  
-                                  // Créer l'objet chat à sauvegarder
-                                  const chatToSave = {
-                                    id: `chat_${Date.now()}`,
-                                    messages: currentMessages,
-                                    createdAt: new Date().toISOString(),
-                                    title: `Chat ${(selectedFile.chatHistory?.length || 0) + 1}`
+                                console.log('🔥 Bouton + cliqué!')
+                                
+                                // Test simple d'abord
+                                alert('Bouton + fonctionne! Création d\'un nouveau chat...')
+                                
+                                // Logique simplifiée pour créer un nouveau chat
+                                try {
+                                  if (selectedFile) {
+                                    console.log('📂 Fichier sélectionné:', selectedFile.name)
+                                    
+                                    // Simuler la création d'un nouveau chat
+                                    const newChat = {
+                                      id: `chat_${Date.now()}`,
+                                      title: `Chat ${(selectedFile.chatHistory?.length || 0) + 1}`,
+                                      messages: [
+                                        { role: 'bot', content: 'Bonjour ! Nouvelle conversation démarrée.', timestamp: new Date().toISOString() }
+                                      ],
+                                      createdAt: new Date().toISOString()
+                                    }
+                                    
+                                    console.log('✅ Nouveau chat créé:', newChat)
+                                    
+                                    // Pour l'instant, juste un log pour vérifier que ça marche
+                                    console.log('🎯 Ready to update state!')
+                                    
+                                  } else {
+                                    console.log('❌ Aucun fichier sélectionné')
                                   }
-                                  
-                                  // Mettre à jour le fichier avec le nouvel historique
-                                  const updatedFile = {
-                                    ...selectedFile,
-                                    chatHistory: selectedFile.chatHistory ? 
-                                      [chatToSave, ...selectedFile.chatHistory] : 
-                                      [chatToSave]
-                                  }
-                                  
-                                  // Mettre à jour la liste des projets
-                                  const updatedProjects = projects.map(p => 
-                                    p.id === selectedFile.id ? updatedFile : p
-                                  )
-                                  setProjects(updatedProjects)
-                                  setSelectedFile(updatedFile)
-                                  
-                                  console.log('✅ Nouveau chat créé! Chat précédent sauvegardé dans la liste de droite')
-                                  console.log('📝 Historique des chats:', updatedFile.chatHistory.length)
+                                } catch (error) {
+                                  console.error('💥 Erreur:', error)
                                 }
                               }}
                             >
