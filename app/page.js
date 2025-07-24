@@ -711,19 +711,18 @@ export default function MarwyckCopilot() {
       }
       setCurrentChatMessages(prev => [...prev, botMessage])
       
-      // Si on est dans une conversation de l'historique, la mettre à jour
+      // Si on est dans une conversation de l'historique, la remettre en PREMIÈRE POSITION
       if (selectedChatHistory && selectedFile) {
         const updatedMessages = [...currentChatMessages, userMessage, botMessage]
         const updatedSelectedChat = {
           ...selectedChatHistory,
           messages: updatedMessages,
-          createdAt: new Date().toISOString()
+          createdAt: new Date().toISOString() // Nouvelle date pour la remettre en premier
         }
         
-        // Mettre à jour dans l'historique
-        const updatedHistory = selectedFile.chatHistory.map(chat => 
-          chat.id === selectedChatHistory.id ? updatedSelectedChat : chat
-        )
+        // Filtrer l'ancienne version et remettre la conversation mise à jour EN PREMIÈRE POSITION
+        const otherChats = selectedFile.chatHistory.filter(chat => chat.id !== selectedChatHistory.id)
+        const updatedHistory = [updatedSelectedChat, ...otherChats]
         
         const updatedFile = {
           ...selectedFile,
