@@ -3250,19 +3250,6 @@ export default function MarwyckCopilot() {
                           <div className="mb-4">
                             <div className="flex items-center justify-between mb-2">
                               <h3 className="text-lg font-medium text-gray-900">Recent Chats</h3>
-                              {selectedChatHistory && (
-                                <button
-                                  onClick={() => {
-                                    setSelectedChatHistory(null)
-                                  }}
-                                  className="text-black hover:text-gray-600 transition-colors p-1"
-                                  title="Return to current chat"
-                                >
-                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
-                                  </svg>
-                                </button>
-                              )}
                             </div>
                             <div className="text-xs text-gray-500">
                               {selectedFile?.chatHistory?.length || 0} conversations
