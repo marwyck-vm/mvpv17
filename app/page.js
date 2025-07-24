@@ -582,21 +582,21 @@ export default function MarwyckCopilot() {
       chatHistory: [
         {
           id: 'chat_demo_1',
-          title: 'Demande d\'estimation',
+          title: 'Property valuation request',
           messages: [
-            { id: 1, role: 'bot', content: 'Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd\'hui ?', timestamp: '2025-07-24T20:00:00.000Z' },
-            { id: 2, role: 'user', content: 'Pouvez-vous m\'aider à estimer la valeur de cette propriété ?', timestamp: '2025-07-24T20:01:00.000Z' },
-            { id: 3, role: 'bot', content: 'Bien sûr ! Basé sur les données du marché local, cette propriété est estimée entre 380 000€ et 420 000€.', timestamp: '2025-07-24T20:01:30.000Z' }
+            { id: 1, role: 'bot', content: 'Hello! I\'m your Marwyck assistant. How can I help you today?', timestamp: '2025-07-24T20:00:00.000Z' },
+            { id: 2, role: 'user', content: 'Can you help me estimate the value of this property?', timestamp: '2025-07-24T20:01:00.000Z' },
+            { id: 3, role: 'bot', content: 'Of course! Based on local market data, this property is estimated between $380,000 and $420,000.', timestamp: '2025-07-24T20:01:30.000Z' }
           ],
           createdAt: '2025-07-24T20:00:00.000Z'
         },
         {
           id: 'chat_demo_2',
-          title: 'Questions sur les documents',
+          title: 'Document questions',
           messages: [
-            { id: 1, role: 'bot', content: 'Nouvelle conversation démarrée. Comment puis-je vous aider ?', timestamp: '2025-07-24T19:30:00.000Z' },
-            { id: 2, role: 'user', content: 'Quels documents sont nécessaires pour cette vente ?', timestamp: '2025-07-24T19:31:00.000Z' },
-            { id: 3, role: 'bot', content: 'Pour une vente immobilière, vous aurez besoin du titre de propriété, des diagnostics techniques, et du certificat énergétique.', timestamp: '2025-07-24T19:31:15.000Z' }
+            { id: 1, role: 'bot', content: 'New conversation started. How can I help you?', timestamp: '2025-07-24T19:30:00.000Z' },
+            { id: 2, role: 'user', content: 'What documents are needed for this sale?', timestamp: '2025-07-24T19:31:00.000Z' },
+            { id: 3, role: 'bot', content: 'For a real estate sale, you will need the property title, technical diagnostics, and energy certificate.', timestamp: '2025-07-24T19:31:15.000Z' }
           ],
           createdAt: '2025-07-24T19:30:00.000Z'
         }
