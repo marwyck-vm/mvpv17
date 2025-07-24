@@ -682,7 +682,7 @@ export default function MarwyckCopilot() {
 
   // Fonction pour charger une conversation de l'historique
   const loadChatFromHistory = (chat) => {
-    // Charger directement la conversation sélectionnée sans sauvegarder la courante
+    // Charger directement la conversation sélectionnée ET permettre l'écriture
     setCurrentChatMessages([...chat.messages])
     setSelectedChatHistory(chat)
   }
