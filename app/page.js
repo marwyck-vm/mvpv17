@@ -1072,6 +1072,11 @@ export default function MarwyckCopilot() {
     }
   }, [selectedFile?.id])
 
+  // Effet pour l'auto-scroll vers le bas quand les messages changent
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [currentChatMessages])
+
   const handleSendMessage = async () => {
     if (!inputMessage.trim()) return
 
