@@ -2952,7 +2952,15 @@ export default function MarwyckCopilot() {
                           {/* Bouton de retour - sa propre boîte à gauche aligné avec le texte */}
                           <div className="mr-4">
                             <button
-                              onClick={() => setSelectedFile(null)}
+                              onClick={() => {
+                                setSelectedFile(null)
+                                // Réinitialiser les états de chat
+                                setCurrentChatMessages([
+                                  { id: Date.now(), role: 'bot', content: 'Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd\'hui ?', timestamp: new Date().toISOString() }
+                                ])
+                                setCurrentChatInput('')
+                                setSelectedChatHistory(null)
+                              }}
                               className="text-black hover:text-gray-700 transition-colors"
                             >
                               <ChevronLeft className="w-5 h-5" />
