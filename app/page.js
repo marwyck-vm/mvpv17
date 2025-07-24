@@ -706,6 +706,27 @@ export default function MarwyckCopilot() {
     setCurrentChatMessages(prev => [...prev, userMessage])
     setCurrentChatInput('')
     
+    // Si on est dans une conversation de l'historique, la remettre en première position
+    if (selectedChatHistory && selectedFile) {
+      const updatedHistory = selectedFile.chatHistory.filter(chat => chat.id !== selectedChatHistory.id)
+      const updatedSelectedChat = {
+        ...selectedChatHistory,
+        messages: [...currentChatMessages, userMessage],
+        createdAt: new Date().toISOString() // Met à jour la date pour le tri
+      }
+      
+      const updatedFile = {
+        ...selectedFile,
+        chatHistory: [updatedSelectedChat, ...updatedHistory]
+      }
+      
+      setCreatedProjects(prev => 
+        prev.map(p => p.id === selectedFile.id ? updatedFile : p)
+      )
+      setSelectedFile(updatedFile)
+      setSelectedChatHistory(updatedSelectedChat)
+    }
+    
     // Simuler une réponse IA après un délai
     setTimeout(() => {
       const botMessage = {
@@ -715,6 +736,27 @@ export default function MarwyckCopilot() {
         timestamp: new Date().toISOString()
       }
       setCurrentChatMessages(prev => [...prev, botMessage])
+      
+      // Mettre à jour l'historique avec la réponse IA aussi
+      if (selectedChatHistory && selectedFile) {
+        const updatedHistory = selectedFile.chatHistory.filter(chat => chat.id !== selectedChatHistory.id)
+        const updatedSelectedChat = {
+          ...selectedChatHistory,
+          messages: [...currentChatMessages, userMessage, botMessage],
+          createdAt: new Date().toISOString()
+        }
+        
+        const updatedFile = {
+          ...selectedFile,
+          chatHistory: [updatedSelectedChat, ...updatedHistory]
+        }
+        
+        setCreatedProjects(prev => 
+          prev.map(p => p.id === selectedFile.id ? updatedFile : p)
+        )
+        setSelectedFile(updatedFile)
+        setSelectedChatHistory(updatedSelectedChat)
+      }
     }, 1000)
   }
 
