@@ -3143,19 +3143,14 @@ export default function MarwyckCopilot() {
                                   className="group cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg p-3 transition-colors duration-200 border border-gray-100"
                                   onClick={() => {
                                     // Logique pour charger ce chat (à implémenter)
-                                    console.log('Load chat:', chat.id)
                                   }}
                                 >
                                   <div className="flex items-start justify-between">
                                     <div className="flex-1 min-w-0">
-                                      <div className="text-sm font-medium text-gray-900 truncate">
-                                        Chat {index + 1}
-                                      </div>
-                                      <div className="text-xs text-gray-500 mt-1">
-                                        {chat.messages?.length || 0} messages
-                                      </div>
-                                      <div className="text-xs text-gray-400 mt-1">
-                                        {new Date(chat.createdAt).toLocaleDateString()}
+                                      <div className="text-xs text-gray-500 flex items-center space-x-2">
+                                        <span>{chat.messages?.length || 0} messages</span>
+                                        <span>•</span>
+                                        <span>{new Date(chat.createdAt).toLocaleDateString()}</span>
                                       </div>
                                     </div>
                                     
