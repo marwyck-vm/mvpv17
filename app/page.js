@@ -3237,26 +3237,20 @@ export default function MarwyckCopilot() {
                                 </svg>
                               </button>
                               
-                              {/* Input plus compact - désactivé si on regarde l'historique */}
+                              {/* Input plus compact - maintenant toujours actif */}
                               <input
                                 type="text"
-                                placeholder={selectedChatHistory ? "Retournez à la conversation courante pour écrire" : "Tapez votre message..."}
-                                value={selectedChatHistory ? "" : currentChatInput}
-                                onChange={(e) => !selectedChatHistory && setCurrentChatInput(e.target.value)}
-                                onKeyPress={(e) => e.key === 'Enter' && !selectedChatHistory && sendChatMessage()}
-                                disabled={!!selectedChatHistory}
-                                className={`flex-1 px-3 py-1.5 border-2 border-black rounded-[9px] focus:outline-none focus:border-gray-700 text-sm bg-white ${
-                                  selectedChatHistory ? 'opacity-50 cursor-not-allowed' : ''
-                                }`}
+                                placeholder="Tapez votre message..."
+                                value={currentChatInput}
+                                onChange={(e) => setCurrentChatInput(e.target.value)}
+                                onKeyPress={(e) => e.key === 'Enter' && sendChatMessage()}
+                                className="flex-1 px-3 py-1.5 border-2 border-black rounded-[9px] focus:outline-none focus:border-gray-700 text-sm bg-white"
                               />
                               
                               {/* Bouton envoyer - carré noir avec bords arrondis */}
                               <button 
                                 onClick={sendChatMessage}
-                                disabled={!!selectedChatHistory}
-                                className={`bg-black hover:bg-gray-800 text-white rounded-[9px] p-1.5 transition-colors ${
-                                  selectedChatHistory ? 'opacity-50 cursor-not-allowed' : ''
-                                }`}
+                                className="bg-black hover:bg-gray-800 text-white rounded-[9px] p-1.5 transition-colors"
                               >
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
