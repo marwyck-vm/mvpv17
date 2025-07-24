@@ -754,6 +754,30 @@ export default function MarwyckCopilot() {
     return responses[Math.floor(Math.random() * responses.length)]
   }
 
+  // Fonction pour supprimer une conversation
+  const deleteConversation = (chatId) => {
+    if (selectedFile) {
+      const updatedHistory = selectedFile.chatHistory.filter(chat => chat.id !== chatId)
+      const updatedFile = {
+        ...selectedFile,
+        chatHistory: updatedHistory
+      }
+      
+      setCreatedProjects(prev => 
+        prev.map(p => p.id === selectedFile.id ? updatedFile : p)
+      )
+      setSelectedFile(updatedFile)
+      
+      // Si on supprime la conversation actuellement sélectionnée, revenir à une nouvelle
+      if (selectedChatHistory?.id === chatId) {
+        setSelectedChatHistory(null)
+        setCurrentChatMessages([
+          { id: Date.now(), role: 'bot', content: 'Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd\'hui ?', timestamp: new Date().toISOString() }
+        ])
+      }
+    }
+  }
+
   // Fonction pour sauvegarder le nom du fichier
   const saveFileName = () => {
     if (selectedFile && tempFileName.trim()) {
