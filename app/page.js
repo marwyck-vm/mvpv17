@@ -3261,7 +3261,7 @@ export default function MarwyckCopilot() {
                         </div>
                         
                         {/* Boîte de droite - 25% - Liste des chats */}
-                        <div className="file-detail-box-right w-[25%] h-96 bg-white border border-gray-200 rounded-xl p-4 cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
+                        <div className="file-detail-box-right w-[25%] h-96 bg-white border border-gray-200 rounded-[9px] p-4 cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
                           {/* Header de la liste des chats */}
                           <div className="mb-4">
                             <div className="flex items-center justify-between mb-2">
