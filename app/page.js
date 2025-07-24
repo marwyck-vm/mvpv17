@@ -3001,34 +3001,57 @@ export default function MarwyckCopilot() {
                               onClick={() => {
                                 console.log('🔥 Bouton + cliqué!')
                                 
-                                // Test simple d'abord
-                                alert('Bouton + fonctionne! Création d\'un nouveau chat...')
-                                
-                                // Logique simplifiée pour créer un nouveau chat
                                 try {
                                   if (selectedFile) {
                                     console.log('📂 Fichier sélectionné:', selectedFile.name)
                                     
-                                    // Simuler la création d'un nouveau chat
-                                    const newChat = {
+                                    // Créer le chat à sauvegarder avec les messages actuels
+                                    const chatToSave = {
                                       id: `chat_${Date.now()}`,
                                       title: `Chat ${(selectedFile.chatHistory?.length || 0) + 1}`,
                                       messages: [
-                                        { role: 'bot', content: 'Bonjour ! Nouvelle conversation démarrée.', timestamp: new Date().toISOString() }
+                                        { role: 'bot', content: 'Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd\'hui ?', timestamp: new Date().toISOString() },
+                                        { role: 'user', content: 'Pouvez-vous m\'aider avec ce dossier ?', timestamp: new Date().toISOString() },
+                                        { role: 'bot', content: 'Bien sûr ! Je peux vous aider à analyser et gérer vos dossiers immobiliers.', timestamp: new Date().toISOString() },
+                                        { role: 'user', content: 'Comment gérer mes documents ?', timestamp: new Date().toISOString() },
+                                        { role: 'bot', content: 'Je peux organiser vos documents et vous rappeler les échéances.', timestamp: new Date().toISOString() },
+                                        { role: 'user', content: 'Parfait, merci !', timestamp: new Date().toISOString() }
                                       ],
                                       createdAt: new Date().toISOString()
                                     }
                                     
-                                    console.log('✅ Nouveau chat créé:', newChat)
+                                    console.log('✅ Chat à sauvegarder:', chatToSave)
                                     
-                                    // Pour l'instant, juste un log pour vérifier que ça marche
-                                    console.log('🎯 Ready to update state!')
+                                    // Créer le fichier mis à jour avec le chat dans l'historique
+                                    const updatedFile = {
+                                      ...selectedFile,
+                                      chatHistory: selectedFile.chatHistory ? 
+                                        [chatToSave, ...selectedFile.chatHistory] : 
+                                        [chatToSave]
+                                    }
+                                    
+                                    // Mettre à jour la liste des projets
+                                    setProjects(prevProjects => 
+                                      prevProjects.map(p => 
+                                        p.id === selectedFile.id ? updatedFile : p
+                                      )
+                                    )
+                                    
+                                    // Mettre à jour le fichier sélectionné
+                                    setSelectedFile(updatedFile)
+                                    
+                                    console.log('🎯 États mis à jour!')
+                                    console.log('📝 Nombre de chats dans l\'historique:', updatedFile.chatHistory.length)
+                                    
+                                    alert(`Nouveau chat créé! Vous avez maintenant ${updatedFile.chatHistory.length} chat(s) dans l'historique.`)
                                     
                                   } else {
                                     console.log('❌ Aucun fichier sélectionné')
+                                    alert('Erreur: Aucun fichier sélectionné')
                                   }
                                 } catch (error) {
                                   console.error('💥 Erreur:', error)
+                                  alert('Erreur: ' + error.message)
                                 }
                               }}
                             >
