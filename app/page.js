@@ -3255,8 +3255,8 @@ export default function MarwyckCopilot() {
                             </div>
                           </div>
 
-                          {/* Liste des chats scrollable */}
-                          <div className="flex-1 overflow-y-auto space-y-2" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.3) transparent' }}>
+                          {/* Liste des chats avec scrollbar forcée à droite */}
+                          <div className="h-full space-y-3 overflow-y-scroll pr-3" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.3) transparent' }}>
                             {selectedFile?.chatHistory?.length > 0 ? (
                               selectedFile.chatHistory.map((chat, index) => (
                                 <div 
