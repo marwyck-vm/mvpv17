@@ -2994,7 +2994,7 @@ export default function MarwyckCopilot() {
                       {/* Deux grosses boîtes avec effet hover */}
                       <div className="ml-9 mt-2 flex space-x-4 relative">
                         {/* Tooltip pour le bouton nouveau chat - OUTSIDE des boîtes pour éviter overflow:hidden */}
-                        <div className="absolute top-0 right-0 z-50">
+                        <div className="absolute top-0 left-0 z-50 w-[75%]">
                           <div className="relative group">
                             <button className="absolute top-3 right-3 text-gray-400 hover:text-black transition-colors duration-200">
                               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -3002,9 +3002,9 @@ export default function MarwyckCopilot() {
                               </svg>
                             </button>
                             {/* Custom Tooltip - GARANTI d'être au-dessus de tout */}
-                            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 text-xs text-gray-800 bg-gray-200 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md" style={{ zIndex: 99999 }}>
+                            <div className="absolute bottom-full right-0 mb-2 px-3 py-2 text-xs text-gray-800 bg-gray-200 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md" style={{ zIndex: 99999 }}>
                               Create new chat
-                              <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-200 rotate-45 -mt-1"></div>
+                              <div className="absolute top-full right-3 w-2 h-2 bg-gray-200 rotate-45 -mt-1"></div>
                             </div>
                           </div>
                         </div>
