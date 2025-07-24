@@ -701,27 +701,6 @@ export default function MarwyckCopilot() {
     setCurrentChatMessages(prev => [...prev, userMessage])
     setCurrentChatInput('')
     
-    // Si on est dans une conversation de l'historique, la remettre en première position
-    if (selectedChatHistory && selectedFile) {
-      const updatedHistory = selectedFile.chatHistory.filter(chat => chat.id !== selectedChatHistory.id)
-      const updatedSelectedChat = {
-        ...selectedChatHistory,
-        messages: [...currentChatMessages, userMessage],
-        createdAt: new Date().toISOString() // Met à jour la date pour le tri
-      }
-      
-      const updatedFile = {
-        ...selectedFile,
-        chatHistory: [updatedSelectedChat, ...updatedHistory]
-      }
-      
-      setCreatedProjects(prev => 
-        prev.map(p => p.id === selectedFile.id ? updatedFile : p)
-      )
-      setSelectedFile(updatedFile)
-      setSelectedChatHistory(updatedSelectedChat)
-    }
-    
     // Simuler une réponse IA après un délai
     setTimeout(() => {
       const botMessage = {
@@ -732,18 +711,23 @@ export default function MarwyckCopilot() {
       }
       setCurrentChatMessages(prev => [...prev, botMessage])
       
-      // Mettre à jour l'historique avec la réponse IA aussi
+      // Si on est dans une conversation de l'historique, la mettre à jour
       if (selectedChatHistory && selectedFile) {
-        const updatedHistory = selectedFile.chatHistory.filter(chat => chat.id !== selectedChatHistory.id)
+        const updatedMessages = [...currentChatMessages, userMessage, botMessage]
         const updatedSelectedChat = {
           ...selectedChatHistory,
-          messages: [...currentChatMessages, userMessage, botMessage],
+          messages: updatedMessages,
           createdAt: new Date().toISOString()
         }
         
+        // Mettre à jour dans l'historique
+        const updatedHistory = selectedFile.chatHistory.map(chat => 
+          chat.id === selectedChatHistory.id ? updatedSelectedChat : chat
+        )
+        
         const updatedFile = {
           ...selectedFile,
-          chatHistory: [updatedSelectedChat, ...updatedHistory]
+          chatHistory: updatedHistory
         }
         
         setCreatedProjects(prev => 
