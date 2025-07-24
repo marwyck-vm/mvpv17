@@ -644,7 +644,7 @@ export default function MarwyckCopilot() {
         title: generateChatTitle(currentChatMessages)
       }
       
-      // Mettre à jour le fichier avec la conversation sauvée
+      // Mettre à jour le fichier avec la conversation sauvée EN PREMIÈRE PLACE
       const updatedFile = {
         ...selectedFile,
         chatHistory: selectedFile.chatHistory ? 
