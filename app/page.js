@@ -3103,41 +3103,8 @@ export default function MarwyckCopilot() {
                           <div className="relative group">
                             <button 
                               className="absolute top-3 right-6 text-gray-400 hover:text-black transition-colors duration-200"
-                              onClick={() => {
-                                if (selectedFile) {
-                                  // Créer le chat à sauvegarder avec les messages actuels
-                                  const chatToSave = {
-                                    id: `chat_${Date.now()}`,
-                                    messages: [
-                                      { role: 'bot', content: 'Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd\'hui ?', timestamp: new Date().toISOString() },
-                                      { role: 'user', content: 'Pouvez-vous m\'aider avec ce dossier ?', timestamp: new Date().toISOString() },
-                                      { role: 'bot', content: 'Bien sûr ! Je peux vous aider à analyser et gérer vos dossiers immobiliers.', timestamp: new Date().toISOString() },
-                                      { role: 'user', content: 'Comment gérer mes documents ?', timestamp: new Date().toISOString() },
-                                      { role: 'bot', content: 'Je peux organiser vos documents et vous rappeler les échéances.', timestamp: new Date().toISOString() },
-                                      { role: 'user', content: 'Parfait, merci !', timestamp: new Date().toISOString() }
-                                    ],
-                                    createdAt: new Date().toISOString()
-                                  }
-                                  
-                                  // Créer le fichier mis à jour avec le chat dans l'historique
-                                  const updatedFile = {
-                                    ...selectedFile,
-                                    chatHistory: selectedFile.chatHistory ? 
-                                      [chatToSave, ...selectedFile.chatHistory] : 
-                                      [chatToSave]
-                                  }
-                                  
-                                  // Mettre à jour la liste des projets
-                                  setCreatedProjects(prevProjects => 
-                                    prevProjects.map(p => 
-                                      p.id === selectedFile.id ? updatedFile : p
-                                    )
-                                  )
-                                  
-                                  // Mettre à jour le fichier sélectionné avec nouvelle conversation
-                                  setSelectedFile(updatedFile)
-                                }
-                              }}
+                              onClick={createNewChat}
+                              title="Create new chat"
                             >
                               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
