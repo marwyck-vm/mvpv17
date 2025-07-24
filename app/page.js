@@ -570,7 +570,39 @@ export default function MarwyckCopilot() {
   }
 
   // États pour gérer les données des dossiers
-  const [createdProjects, setCreatedProjects] = useState([])
+  const [createdProjects, setCreatedProjects] = useState([
+    {
+      id: 1,
+      createdAt: new Date(),
+      name: 'Demo File - 123 Oak Street',
+      contacts: [
+        { id: 1, fullName: 'John Smith', mail: 'john@example.com', phone: '+1 234 567 8901' },
+        { id: 2, fullName: 'Sarah Johnson', mail: 'sarah@example.com', phone: '+1 234 567 8902' }
+      ],
+      chatHistory: [
+        {
+          id: 'chat_demo_1',
+          title: 'Demande d\'estimation',
+          messages: [
+            { id: 1, role: 'bot', content: 'Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd\'hui ?', timestamp: '2025-07-24T20:00:00.000Z' },
+            { id: 2, role: 'user', content: 'Pouvez-vous m\'aider à estimer la valeur de cette propriété ?', timestamp: '2025-07-24T20:01:00.000Z' },
+            { id: 3, role: 'bot', content: 'Bien sûr ! Basé sur les données du marché local, cette propriété est estimée entre 380 000€ et 420 000€.', timestamp: '2025-07-24T20:01:30.000Z' }
+          ],
+          createdAt: '2025-07-24T20:00:00.000Z'
+        },
+        {
+          id: 'chat_demo_2',
+          title: 'Questions sur les documents',
+          messages: [
+            { id: 1, role: 'bot', content: 'Nouvelle conversation démarrée. Comment puis-je vous aider ?', timestamp: '2025-07-24T19:30:00.000Z' },
+            { id: 2, role: 'user', content: 'Quels documents sont nécessaires для cette vente ?', timestamp: '2025-07-24T19:31:00.000Z' },
+            { id: 3, role: 'bot', content: 'Pour une vente immobilière, vous aurez besoin du titre de propriété, des diagnostics techniques, et du certificat énergétique.', timestamp: '2025-07-24T19:31:15.000Z' }
+          ],
+          createdAt: '2025-07-24T19:30:00.000Z'
+        }
+      ]
+    }
+  ])
   const [selectedFile, setSelectedFile] = useState(null)
   const [editingFileName, setEditingFileName] = useState(false)
   const [tempFileName, setTempFileName] = useState('')
