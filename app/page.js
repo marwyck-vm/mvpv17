@@ -721,8 +721,8 @@ export default function MarwyckCopilot() {
           createdAt: new Date().toISOString() // Nouvelle date pour la remettre en premier
         }
         
-        // Filtrer l'ancienne version et remettre la conversation mise à jour EN PREMIÈRE POSITION
-        const otherChats = selectedFile.chatHistory.filter(chat => chat.id !== selectedChatHistory.id)
+        // CORRECTION : Filtrer par ID de manière plus fiable
+        const otherChats = selectedFile.chatHistory.filter(chat => chat.id !== updatedSelectedChat.id)
         const updatedHistory = [updatedSelectedChat, ...otherChats]
         
         const updatedFile = {
