@@ -3215,7 +3215,7 @@ export default function MarwyckCopilot() {
                             
                             {/* Messages alignés précisément avec les bords de l'input "Tapez votre message" */}
                             <div className="h-full px-10 py-4 pt-8 space-y-3 overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.3) transparent' }}>
-                              {currentChatMessages.map((message) => (
+                              {(selectedChatHistory ? selectedChatHistory.messages : currentChatMessages).map((message) => (
                                 <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                                   <div className={`max-w-xs ${message.role === 'user' ? 'bg-gray-200 rounded-[9px] px-3 py-2' : ''}`}>
                                     <p className={`text-sm text-gray-800 ${message.role === 'bot' ? 'px-3 py-2' : ''}`}>
