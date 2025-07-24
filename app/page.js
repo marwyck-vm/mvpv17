@@ -2996,7 +2996,41 @@ export default function MarwyckCopilot() {
                         {/* Tooltip pour le bouton nouveau chat - OUTSIDE des boîtes pour éviter overflow:hidden */}
                         <div className="absolute top-0 left-0 z-50 w-[75%]">
                           <div className="relative group">
-                            <button className="absolute top-3 right-6 text-gray-400 hover:text-black transition-colors duration-200">
+                            <button 
+                              className="absolute top-3 right-6 text-gray-400 hover:text-black transition-colors duration-200"
+                              onClick={() => {
+                                // Logique pour créer un nouveau chat
+                                if (selectedFile) {
+                                  // Sauvegarder le chat actuel dans l'historique
+                                  const currentChat = {
+                                    id: Date.now(),
+                                    messages: [
+                                      { role: 'bot', content: 'Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd\'hui ?' },
+                                      { role: 'user', content: 'Pouvez-vous m\'aider avec ce dossier ?' },
+                                      { role: 'bot', content: 'Bien sûr ! Je peux vous aider à analyser et gérer vos dossiers immobiliers.' }
+                                    ],
+                                    createdAt: new Date().toISOString()
+                                  }
+                                  
+                                  // Mettre à jour le fichier avec le nouvel historique
+                                  const updatedFile = {
+                                    ...selectedFile,
+                                    chatHistory: selectedFile.chatHistory ? 
+                                      [currentChat, ...selectedFile.chatHistory] : 
+                                      [currentChat]
+                                  }
+                                  
+                                  // Mettre à jour la liste des projets
+                                  const updatedProjects = projects.map(p => 
+                                    p.id === selectedFile.id ? updatedFile : p
+                                  )
+                                  setProjects(updatedProjects)
+                                  setSelectedFile(updatedFile)
+                                  
+                                  console.log('Nouveau chat créé, chat précédent sauvegardé')
+                                }
+                              }}
+                            >
                               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                               </svg>
