@@ -2992,27 +2992,27 @@ export default function MarwyckCopilot() {
                       </div>
                       
                       {/* Deux grosses boîtes avec effet hover */}
-                      <div className="ml-9 mt-2 flex space-x-4">
+                      <div className="ml-9 mt-2 flex space-x-4 relative">
+                        {/* Tooltip pour le bouton nouveau chat - OUTSIDE des boîtes pour éviter overflow:hidden */}
+                        <div className="absolute top-0 right-0 z-50">
+                          <div className="relative group">
+                            <button className="absolute top-3 right-3 text-gray-400 hover:text-black transition-colors duration-200">
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                              </svg>
+                            </button>
+                            {/* Custom Tooltip - GARANTI d'être au-dessus de tout */}
+                            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 text-xs text-gray-800 bg-gray-200 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md" style={{ zIndex: 99999 }}>
+                              Create new chat
+                              <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-200 rotate-45 -mt-1"></div>
+                            </div>
+                          </div>
+                        </div>
+                        
                         {/* Boîte de gauche - 75% - Interface de chat */}
                         <div className="file-detail-box-left w-[75%] h-96 bg-white border border-gray-200 rounded-xl cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
                           {/* Zone des messages scrollable avec dégradé en haut renforcé */}
                           <div className="flex-1 relative overflow-hidden">
-                            {/* Bouton nouveau chat en haut à droite - non affecté par le fade */}
-                            <div className="absolute top-3 right-3 z-30">
-                              <div className="relative group">
-                                <button className="text-gray-400 hover:text-black transition-colors duration-200">
-                                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                  </svg>
-                                </button>
-                                {/* Custom Tooltip - Identique à Traffic: Light, mais au-dessus */}
-                                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 text-xs text-gray-800 bg-gray-200 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md" style={{ zIndex: 9999 }}>
-                                  Create new chat
-                                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-200 rotate-45 -mt-1"></div>
-                                </div>
-                              </div>
-                            </div>
-                            
                             {/* Dégradé de fondu en haut plus prononcé - n'affecte pas la scrollbar */}
                             <div className="absolute top-0 left-0 right-4 h-12 bg-gradient-to-b from-white via-white/80 to-transparent z-10 pointer-events-none rounded-t-xl"></div>
                             
