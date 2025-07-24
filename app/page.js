@@ -616,9 +616,6 @@ export default function MarwyckCopilot() {
   const [currentChatInput, setCurrentChatInput] = useState('')
   const [selectedChatHistory, setSelectedChatHistory] = useState(null)
   
-  // Ref pour l'auto-scroll
-  const messagesEndRef = useRef(null)
-  
   // Fonction pour créer un nouveau projet
   const createNewProject = () => {
     const newProject = {
