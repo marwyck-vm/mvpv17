@@ -611,7 +611,7 @@ export default function MarwyckCopilot() {
   
   // États pour gérer les conversations multiples
   const [currentChatMessages, setCurrentChatMessages] = useState([
-    { id: 1, role: 'bot', content: 'Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd\'hui ?', timestamp: new Date().toISOString() }
+    { id: 1, role: 'bot', content: 'Hello! I\'m your Marwyck assistant. How can I help you today?', timestamp: new Date().toISOString() }
   ])
   const [currentChatInput, setCurrentChatInput] = useState('')
   const [selectedChatHistory, setSelectedChatHistory] = useState(null)
