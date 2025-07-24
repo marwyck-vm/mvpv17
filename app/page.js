@@ -698,7 +698,8 @@ export default function MarwyckCopilot() {
       timestamp: new Date().toISOString()
     }
     
-    setCurrentChatMessages(prev => [...prev, userMessage])
+    const newMessages = [...currentChatMessages, userMessage]
+    setCurrentChatMessages(newMessages)
     setCurrentChatInput('')
     
     // Simuler une réponse IA après un délai
@@ -709,14 +710,14 @@ export default function MarwyckCopilot() {
         content: generateChatAIResponse(currentChatInput),
         timestamp: new Date().toISOString()
       }
-      setCurrentChatMessages(prev => [...prev, botMessage])
+      const finalMessages = [...newMessages, botMessage]
+      setCurrentChatMessages(finalMessages)
       
       // Si on est dans une conversation de l'historique, la remettre en PREMIÈRE POSITION
       if (selectedChatHistory && selectedFile) {
-        const updatedMessages = [...currentChatMessages, userMessage, botMessage]
         const updatedSelectedChat = {
           ...selectedChatHistory,
-          messages: updatedMessages,
+          messages: finalMessages,
           createdAt: new Date().toISOString() // Nouvelle date pour la remettre en premier
         }
         
