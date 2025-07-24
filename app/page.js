@@ -3001,23 +3001,30 @@ export default function MarwyckCopilot() {
                               onClick={() => {
                                 // Logique pour créer un nouveau chat
                                 if (selectedFile) {
-                                  // Sauvegarder le chat actuel dans l'historique
-                                  const currentChat = {
-                                    id: Date.now(),
-                                    messages: [
-                                      { role: 'bot', content: 'Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd\'hui ?' },
-                                      { role: 'user', content: 'Pouvez-vous m\'aider avec ce dossier ?' },
-                                      { role: 'bot', content: 'Bien sûr ! Je peux vous aider à analyser et gérer vos dossiers immobiliers.' }
-                                    ],
-                                    createdAt: new Date().toISOString()
+                                  // Récupérer les messages actuels de l'interface (simulation)
+                                  const currentMessages = [
+                                    { role: 'bot', content: 'Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd\'hui ?', timestamp: new Date().toISOString() },
+                                    { role: 'user', content: 'Pouvez-vous m\'aider avec ce dossier ?', timestamp: new Date().toISOString() },
+                                    { role: 'bot', content: 'Bien sûr ! Je peux vous aider à analyser et gérer vos dossiers immobiliers.', timestamp: new Date().toISOString() },
+                                    { role: 'user', content: 'Comment gérer mes documents ?', timestamp: new Date().toISOString() },
+                                    { role: 'bot', content: 'Je peux organiser vos documents et vous rappeler les échéances.', timestamp: new Date().toISOString() },
+                                    { role: 'user', content: 'Parfait, merci !', timestamp: new Date().toISOString() }
+                                  ]
+                                  
+                                  // Créer l'objet chat à sauvegarder
+                                  const chatToSave = {
+                                    id: `chat_${Date.now()}`,
+                                    messages: currentMessages,
+                                    createdAt: new Date().toISOString(),
+                                    title: `Chat ${(selectedFile.chatHistory?.length || 0) + 1}`
                                   }
                                   
                                   // Mettre à jour le fichier avec le nouvel historique
                                   const updatedFile = {
                                     ...selectedFile,
                                     chatHistory: selectedFile.chatHistory ? 
-                                      [currentChat, ...selectedFile.chatHistory] : 
-                                      [currentChat]
+                                      [chatToSave, ...selectedFile.chatHistory] : 
+                                      [chatToSave]
                                   }
                                   
                                   // Mettre à jour la liste des projets
@@ -3027,7 +3034,8 @@ export default function MarwyckCopilot() {
                                   setProjects(updatedProjects)
                                   setSelectedFile(updatedFile)
                                   
-                                  console.log('Nouveau chat créé, chat précédent sauvegardé')
+                                  console.log('✅ Nouveau chat créé! Chat précédent sauvegardé dans la liste de droite')
+                                  console.log('📝 Historique des chats:', updatedFile.chatHistory.length)
                                 }
                               }}
                             >
