@@ -595,7 +595,7 @@ export default function MarwyckCopilot() {
           title: 'Questions sur les documents',
           messages: [
             { id: 1, role: 'bot', content: 'Nouvelle conversation démarrée. Comment puis-je vous aider ?', timestamp: '2025-07-24T19:30:00.000Z' },
-            { id: 2, role: 'user', content: 'Quels documents sont nécessaires для cette vente ?', timestamp: '2025-07-24T19:31:00.000Z' },
+            { id: 2, role: 'user', content: 'Quels documents sont nécessaires pour cette vente ?', timestamp: '2025-07-24T19:31:00.000Z' },
             { id: 3, role: 'bot', content: 'Pour une vente immobilière, vous aurez besoin du titre de propriété, des diagnostics techniques, et du certificat énergétique.', timestamp: '2025-07-24T19:31:15.000Z' }
           ],
           createdAt: '2025-07-24T19:30:00.000Z'
