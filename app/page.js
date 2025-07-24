@@ -3216,6 +3216,8 @@ export default function MarwyckCopilot() {
                                   </div>
                                 </div>
                               ))}
+                              {/* Élément pour l'auto-scroll */}
+                              <div ref={messagesEndRef} />
                             </div>
                           </div>
 
