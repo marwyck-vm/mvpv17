@@ -3174,7 +3174,7 @@ export default function MarwyckCopilot() {
                         <div className="absolute top-0 left-0 z-50 w-[75%]">
                           <div className="relative group">
                             <button 
-                              className="absolute top-3 right-6 text-gray-400 hover:text-black transition-colors duration-200"
+                              className="absolute top-3 right-10 text-gray-400 hover:text-black transition-colors duration-200"
                               onClick={createNewChat}
                               title="Create new chat"
                             >
