@@ -1005,6 +1005,17 @@ export default function MarwyckCopilot() {
     scrollToBottom()
   }, [messages, selectedClient])
 
+  // Effet pour initialiser les messages quand on sélectionne un fichier
+  useEffect(() => {
+    if (selectedFile) {
+      setCurrentChatMessages([
+        { id: Date.now(), role: 'bot', content: 'Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd\'hui ?', timestamp: new Date().toISOString() }
+      ])
+      setCurrentChatInput('')
+      setSelectedChatHistory(null)
+    }
+  }, [selectedFile?.id])
+
   const handleSendMessage = async () => {
     if (!inputMessage.trim()) return
 
