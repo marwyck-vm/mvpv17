@@ -3188,29 +3188,40 @@ export default function MarwyckCopilot() {
                               selectedFile.chatHistory.map((chat, index) => (
                                 <div 
                                   key={chat.id}
-                                  className="group cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg p-3 transition-colors duration-200 border border-gray-100"
-                                  onClick={() => {
-                                    // Logique pour charger ce chat (à implémenter)
-                                  }}
+                                  className={`group cursor-pointer transition-colors duration-200 border rounded-lg p-3 ${
+                                    selectedChatHistory?.id === chat.id 
+                                      ? 'bg-black text-white border-black' 
+                                      : 'bg-gray-50 hover:bg-gray-100 border-gray-100'
+                                  }`}
+                                  onClick={() => loadChatFromHistory(chat)}
                                 >
                                   <div className="flex items-start justify-between">
                                     <div className="flex-1 min-w-0">
-                                      <div className="text-xs text-gray-500 flex items-center space-x-2">
+                                      <div className={`text-xs mb-1 font-medium ${
+                                        selectedChatHistory?.id === chat.id ? 'text-gray-200' : 'text-gray-900'
+                                      }`}>
+                                        {chat.title || 'Conversation'}
+                                      </div>
+                                      <div className={`text-xs flex items-center space-x-2 ${
+                                        selectedChatHistory?.id === chat.id ? 'text-gray-300' : 'text-gray-500'
+                                      }`}>
                                         <span>{chat.messages?.length || 0} messages</span>
                                         <span>•</span>
                                         <span>{new Date(chat.createdAt).toLocaleDateString()}</span>
                                       </div>
                                     </div>
                                     
-                                    {/* Indicateur de chat actif */}
-                                    {index === 0 && (
-                                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                    {/* Indicateur de chat actif - plus petit */}
+                                    {selectedChatHistory?.id === chat.id && (
+                                      <div className="w-2 h-2 bg-white rounded-full ml-2"></div>
                                     )}
                                   </div>
                                   
                                   {/* Preview du dernier message */}
                                   {chat.messages?.length > 0 && (
-                                    <div className="text-xs text-gray-600 mt-2 truncate">
+                                    <div className={`text-xs mt-2 truncate ${
+                                      selectedChatHistory?.id === chat.id ? 'text-gray-300' : 'text-gray-600'
+                                    }`}>
                                       {chat.messages[chat.messages.length - 1].content.substring(0, 50)}...
                                     </div>
                                   )}
