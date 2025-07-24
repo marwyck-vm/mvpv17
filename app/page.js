@@ -3255,7 +3255,7 @@ export default function MarwyckCopilot() {
                               {/* Input plus compact - maintenant toujours actif */}
                               <input
                                 type="text"
-                                placeholder="Tapez votre message..."
+                                placeholder="Type your message..."
                                 value={currentChatInput}
                                 onChange={(e) => setCurrentChatInput(e.target.value)}
                                 onKeyPress={(e) => e.key === 'Enter' && sendChatMessage()}
