@@ -3424,28 +3424,102 @@ export default function MarwyckCopilot() {
                           </div>
                         </div>
                         
-                        {/* Nouvelle boîte de droite - 40% - Vide */}
-                        <div className="file-detail-box-right w-[40%] h-72 bg-white border border-gray-200 rounded-xl p-4 cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
-                          {/* Header similaire */}
-                          <div className="mb-4">
-                            <div className="flex items-center justify-between mb-2">
-                              <h3 className="text-lg font-medium text-gray-900">Additional Info</h3>
-                            </div>
-                            <div className="text-xs text-gray-500">
-                              Placeholder content
+                        {/* Nouvelle boîte de droite - 40% - File Activity */}
+                        <div className="file-detail-box-right w-[40%] h-72 bg-white border border-gray-200 rounded-xl cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
+                          {/* Header avec titre et compteur à droite - même style que Recent Chats */}
+                          <div className="p-4 border-b border-gray-100 flex-shrink-0">
+                            <div className="flex items-center justify-between">
+                              <h3 className="text-lg font-medium text-gray-900">File Activity</h3>
+                              <div className="text-xs text-gray-500">7 recent changes</div>
                             </div>
                           </div>
-
-                          {/* Zone de contenu vide */}
-                          <div className="h-full flex items-center justify-center">
-                            <div className="text-center text-gray-400">
-                              <div className="text-gray-300 mb-3">
-                                <svg className="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
+                          
+                          {/* Liste des activités avec scrollbar fine - hauteur flexible */}
+                          <div className="flex-1 overflow-hidden">
+                            <div className="h-full px-4 py-3 space-y-3 overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.2) transparent' }}>
+                              {/* Activité 1 */}
+                              <div className="flex items-start space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
+                                <div className="flex-shrink-0 mt-0.5">
+                                  <FileText className="w-4 h-4 text-gray-600" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-xs font-medium text-gray-900">Document uploaded</p>
+                                  <p className="text-xs text-gray-500">Property deed added</p>
+                                  <p className="text-xs text-gray-400 mt-1">2 hours ago</p>
+                                </div>
                               </div>
-                              <p className="text-sm">Info Panel</p>
-                              <div className="text-xs mt-1">Coming soon</div>
+
+                              {/* Activité 2 */}
+                              <div className="flex items-start space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
+                                <div className="flex-shrink-0 mt-0.5">
+                                  <User className="w-4 h-4 text-gray-600" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-xs font-medium text-gray-900">Contact updated</p>
+                                  <p className="text-xs text-gray-500">John Smith phone number</p>
+                                  <p className="text-xs text-gray-400 mt-1">4 hours ago</p>
+                                </div>
+                              </div>
+
+                              {/* Activité 3 */}
+                              <div className="flex items-start space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
+                                <div className="flex-shrink-0 mt-0.5">
+                                  <CheckCircle className="w-4 h-4 text-gray-600" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-xs font-medium text-gray-900">Status changed</p>
+                                  <p className="text-xs text-gray-500">Set to "Under Review"</p>
+                                  <p className="text-xs text-gray-400 mt-1">Yesterday</p>
+                                </div>
+                              </div>
+
+                              {/* Activité 4 */}
+                              <div className="flex items-start space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
+                                <div className="flex-shrink-0 mt-0.5">
+                                  <MessageCircle className="w-4 h-4 text-gray-600" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-xs font-medium text-gray-900">Note added</p>
+                                  <p className="text-xs text-gray-500">Client meeting notes</p>
+                                  <p className="text-xs text-gray-400 mt-1">Yesterday</p>
+                                </div>
+                              </div>
+
+                              {/* Activité 5 */}
+                              <div className="flex items-start space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
+                                <div className="flex-shrink-0 mt-0.5">
+                                  <Mail className="w-4 h-4 text-gray-600" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-xs font-medium text-gray-900">Email sent</p>
+                                  <p className="text-xs text-gray-500">Contract to client</p>
+                                  <p className="text-xs text-gray-400 mt-1">2 days ago</p>
+                                </div>
+                              </div>
+
+                              {/* Activité 6 */}
+                              <div className="flex items-start space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
+                                <div className="flex-shrink-0 mt-0.5">
+                                  <Edit className="w-4 h-4 text-gray-600" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-xs font-medium text-gray-900">File details edited</p>
+                                  <p className="text-xs text-gray-500">Address updated</p>
+                                  <p className="text-xs text-gray-400 mt-1">3 days ago</p>
+                                </div>
+                              </div>
+
+                              {/* Activité 7 */}
+                              <div className="flex items-start space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
+                                <div className="flex-shrink-0 mt-0.5">
+                                  <Plus className="w-4 h-4 text-gray-600" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-xs font-medium text-gray-900">File created</p>
+                                  <p className="text-xs text-gray-500">Initial setup completed</p>
+                                  <p className="text-xs text-gray-400 mt-1">1 week ago</p>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
