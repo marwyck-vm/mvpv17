@@ -3338,18 +3338,86 @@ export default function MarwyckCopilot() {
 
                       {/* Deuxième rangée de boîtes - Identique en style mais vides */}
                       <div className="ml-9 mt-4 flex space-x-4 relative">
-                        {/* Nouvelle boîte de gauche - 60% - Vide */}
+                        {/* Nouvelle boîte de gauche - 60% - Upcoming Appointments */}
                         <div className="file-detail-box-left w-[60%] h-72 bg-white border border-gray-200 rounded-xl cursor-default hover:shadow-lg transition-shadow duration-200 relative">
-                          {/* Zone centrale vide avec design similaire */}
-                          <div className="h-full flex items-center justify-center">
-                            <div className="text-center text-gray-400">
-                              <div className="text-gray-300 mb-3">
-                                <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                </svg>
+                          {/* Header avec titre et bouton Add */}
+                          <div className="flex items-center justify-between p-4 border-b border-gray-100">
+                            <h3 className="text-lg font-semibold text-gray-900">Upcoming Appointments</h3>
+                            <button className="text-sm px-3 py-1 text-gray-600 hover:text-gray-800 hover:bg-gray-100 transition-all duration-200 rounded-xl">
+                              + Add
+                            </button>
+                          </div>
+                          
+                          {/* Liste des événements */}
+                          <div className="p-4 space-y-3 h-[calc(100%-73px)] overflow-y-auto">
+                            {/* Événement 1 */}
+                            <div className="flex items-center space-x-3">
+                              <div className="flex-shrink-0">
+                                <Calendar className="w-5 h-5 text-gray-700" />
                               </div>
-                              <p className="text-sm">Content Area</p>
-                              <p className="text-xs mt-1 text-gray-300">Available for future features</p>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium text-gray-900">Property Visit - 123 Oak Street</p>
+                                <p className="text-xs text-gray-500">John Smith • Today 2:00 PM</p>
+                              </div>
+                              <span className="text-xs px-2 py-1 bg-blue-50 text-blue-800 border border-blue-200 rounded-full">
+                                visit
+                              </span>
+                            </div>
+
+                            {/* Événement 2 */}
+                            <div className="flex items-center space-x-3">
+                              <div className="flex-shrink-0">
+                                <PhoneCall className="w-5 h-5 text-gray-700" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium text-gray-900">Follow-up Call - Pine Avenue</p>
+                                <p className="text-xs text-gray-500">Marie Durant • Tomorrow 10:30 AM</p>
+                              </div>
+                              <span className="text-xs px-2 py-1 bg-green-50 text-green-800 border border-green-200 rounded-full">
+                                call
+                              </span>
+                            </div>
+
+                            {/* Événement 3 */}
+                            <div className="flex items-center space-x-3">
+                              <div className="flex-shrink-0">
+                                <FileText className="w-5 h-5 text-gray-700" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium text-gray-900">Document Signing - Elm Drive</p>
+                                <p className="text-xs text-gray-500">Paul Martin • Wed 3:15 PM</p>
+                              </div>
+                              <span className="text-xs px-2 py-1 bg-purple-50 text-purple-800 border border-purple-200 rounded-full">
+                                signature
+                              </span>
+                            </div>
+
+                            {/* Événement 4 */}
+                            <div className="flex items-center space-x-3">
+                              <div className="flex-shrink-0">
+                                <Home className="w-5 h-5 text-gray-700" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium text-gray-900">Property Estimate - Maple Court</p>
+                                <p className="text-xs text-gray-500">Sophie Leroux • Thu 4:00 PM</p>
+                              </div>
+                              <span className="text-xs px-2 py-1 bg-orange-50 text-orange-800 border border-orange-200 rounded-full">
+                                estimation
+                              </span>
+                            </div>
+
+                            {/* Événement 5 */}
+                            <div className="flex items-center space-x-3">
+                              <div className="flex-shrink-0">
+                                <Mail className="w-5 h-5 text-gray-700" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium text-gray-900">Client Meeting - Downtown Office</p>
+                                <p className="text-xs text-gray-500">Michel Dubois • Fri 11:00 AM</p>
+                              </div>
+                              <span className="text-xs px-2 py-1 bg-gray-50 text-gray-800 border border-gray-200 rounded-full">
+                                meeting
+                              </span>
                             </div>
                           </div>
                         </div>
