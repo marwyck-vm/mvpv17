@@ -3336,6 +3336,64 @@ export default function MarwyckCopilot() {
                         </div>
                       </div>
 
+                      {/* Deuxième rangée de boîtes - Identique en style mais vides */}
+                      <div className="ml-9 mt-4 flex space-x-4 relative">
+                        {/* Nouvelle boîte de gauche - 75% - Vide */}
+                        <div className="file-detail-box-left w-[75%] h-96 bg-white border border-gray-200 rounded-xl cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
+                          {/* Zone centrale vide avec design similaire */}
+                          <div className="flex-1 relative overflow-hidden">
+                            {/* Dégradé de fondu en haut pour cohérence */}
+                            <div className="absolute top-0 left-0 right-4 h-12 bg-gradient-to-b from-white via-white/80 to-transparent z-10 pointer-events-none rounded-t-xl"></div>
+                            
+                            {/* Zone vide avec padding similaire */}
+                            <div className="h-full px-10 py-4 pt-8 flex items-center justify-center">
+                              <div className="text-center text-gray-400">
+                                <div className="text-gray-300 mb-3">
+                                  <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                  </svg>
+                                </div>
+                                <p className="text-sm">Content Area</p>
+                                <p className="text-xs mt-1 text-gray-300">Available for future features</p>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Zone inférieure pour cohérence avec design du dessus */}
+                          <div className="px-3 py-2 bg-white border-t border-gray-100 rounded-b-xl">
+                            <div className="flex items-center justify-center">
+                              <div className="text-xs text-gray-400">Ready for integration</div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Nouvelle boîte de droite - 25% - Vide */}
+                        <div className="file-detail-box-right w-[25%] h-96 bg-white border border-gray-200 rounded-xl p-4 cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
+                          {/* Header similaire */}
+                          <div className="mb-4">
+                            <div className="flex items-center justify-between mb-2">
+                              <h3 className="text-lg font-medium text-gray-900">Additional Info</h3>
+                            </div>
+                            <div className="text-xs text-gray-500">
+                              Placeholder content
+                            </div>
+                          </div>
+
+                          {/* Zone de contenu vide */}
+                          <div className="h-full flex items-center justify-center">
+                            <div className="text-center text-gray-400">
+                              <div className="text-gray-300 mb-3">
+                                <svg className="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                              </div>
+                              <p className="text-sm">Info Panel</p>
+                              <div className="text-xs mt-1">Coming soon</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
                       <p className={`ml-9 mt-6 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-500'}`}>
                         Content coming soon
                       </p>
