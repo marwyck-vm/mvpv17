@@ -3340,20 +3340,18 @@ export default function MarwyckCopilot() {
                       <div className="ml-9 mt-4 flex space-x-4 relative">
                         {/* Nouvelle boîte de gauche - 60% - Upcoming Appointments */}
                         <div className="file-detail-box-left w-[60%] h-72 bg-white border border-gray-200 rounded-xl cursor-default hover:shadow-lg transition-shadow duration-200 relative">
-                          {/* Header avec titre - même style que Recent Chats */}
+                          {/* Header avec titre et compteur à droite - même style que Recent Chats */}
                           <div className="p-4 mb-4">
                             <div className="flex items-center justify-between mb-2">
                               <h3 className="text-lg font-medium text-gray-900">Upcoming Appointments</h3>
-                            </div>
-                            <div className="text-xs text-gray-500">
-                              5 appointments
+                              <div className="text-xs text-gray-500">5 appointments</div>
                             </div>
                           </div>
                           
-                          {/* Liste des événements avec scrollbar fine */}
-                          <div className="px-4 pb-4 space-y-3 h-[calc(100%-89px)] overflow-y-scroll pr-3" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.2) transparent' }}>
+                          {/* Liste des événements avec scrollbar fine et bonne hauteur */}
+                          <div className="px-4 pb-4 space-y-2 h-[calc(100%-73px)] overflow-y-scroll" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.2) transparent' }}>
                             {/* Événement 1 */}
-                            <div className="flex items-center space-x-3">
+                            <div className="flex items-center space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
                               <div className="flex-shrink-0">
                                 <Calendar className="w-5 h-5 text-gray-700" />
                               </div>
@@ -3361,13 +3359,13 @@ export default function MarwyckCopilot() {
                                 <p className="text-sm font-medium text-gray-900">Property Visit</p>
                                 <p className="text-xs text-gray-500">Today 2:00 PM</p>
                               </div>
-                              <span className="text-xs px-1.5 py-0.5 bg-blue-50 text-blue-800 border border-blue-200 rounded-full">
+                              <span className="text-xs px-1.5 py-0.5 bg-black text-white rounded-full">
                                 visit
                               </span>
                             </div>
 
                             {/* Événement 2 */}
-                            <div className="flex items-center space-x-3">
+                            <div className="flex items-center space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
                               <div className="flex-shrink-0">
                                 <PhoneCall className="w-5 h-5 text-gray-700" />
                               </div>
@@ -3375,13 +3373,13 @@ export default function MarwyckCopilot() {
                                 <p className="text-sm font-medium text-gray-900">Follow-up Call</p>
                                 <p className="text-xs text-gray-500">Tomorrow 10:30 AM</p>
                               </div>
-                              <span className="text-xs px-1.5 py-0.5 bg-green-50 text-green-800 border border-green-200 rounded-full">
+                              <span className="text-xs px-1.5 py-0.5 bg-black text-white rounded-full">
                                 call
                               </span>
                             </div>
 
                             {/* Événement 3 */}
-                            <div className="flex items-center space-x-3">
+                            <div className="flex items-center space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
                               <div className="flex-shrink-0">
                                 <FileText className="w-5 h-5 text-gray-700" />
                               </div>
@@ -3389,13 +3387,13 @@ export default function MarwyckCopilot() {
                                 <p className="text-sm font-medium text-gray-900">Document Signing</p>
                                 <p className="text-xs text-gray-500">Wed 3:15 PM</p>
                               </div>
-                              <span className="text-xs px-1.5 py-0.5 bg-purple-50 text-purple-800 border border-purple-200 rounded-full">
+                              <span className="text-xs px-1.5 py-0.5 bg-black text-white rounded-full">
                                 signature
                               </span>
                             </div>
 
                             {/* Événement 4 */}
-                            <div className="flex items-center space-x-3">
+                            <div className="flex items-center space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
                               <div className="flex-shrink-0">
                                 <Home className="w-5 h-5 text-gray-700" />
                               </div>
@@ -3403,13 +3401,13 @@ export default function MarwyckCopilot() {
                                 <p className="text-sm font-medium text-gray-900">Property Estimate</p>
                                 <p className="text-xs text-gray-500">Thu 4:00 PM</p>
                               </div>
-                              <span className="text-xs px-1.5 py-0.5 bg-orange-50 text-orange-800 border border-orange-200 rounded-full">
+                              <span className="text-xs px-1.5 py-0.5 bg-black text-white rounded-full">
                                 estimation
                               </span>
                             </div>
 
                             {/* Événement 5 */}
-                            <div className="flex items-center space-x-3">
+                            <div className="flex items-center space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
                               <div className="flex-shrink-0">
                                 <Mail className="w-5 h-5 text-gray-700" />
                               </div>
@@ -3417,7 +3415,7 @@ export default function MarwyckCopilot() {
                                 <p className="text-sm font-medium text-gray-900">Client Meeting</p>
                                 <p className="text-xs text-gray-500">Fri 11:00 AM</p>
                               </div>
-                              <span className="text-xs px-1.5 py-0.5 bg-gray-50 text-gray-800 border border-gray-200 rounded-full">
+                              <span className="text-xs px-1.5 py-0.5 bg-black text-white rounded-full">
                                 meeting
                               </span>
                             </div>
