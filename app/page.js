@@ -3339,85 +3339,87 @@ export default function MarwyckCopilot() {
                       {/* Deuxième rangée de boîtes - Identique en style mais vides */}
                       <div className="ml-9 mt-4 flex space-x-4 relative">
                         {/* Nouvelle boîte de gauche - 60% - Upcoming Appointments */}
-                        <div className="file-detail-box-left w-[60%] h-72 bg-white border border-gray-200 rounded-xl cursor-default hover:shadow-lg transition-shadow duration-200 relative">
+                        <div className="file-detail-box-left w-[60%] h-72 bg-white border border-gray-200 rounded-xl cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
                           {/* Header avec titre et compteur à droite - même style que Recent Chats */}
-                          <div className="p-4 mb-4">
-                            <div className="flex items-center justify-between mb-2">
+                          <div className="p-4 border-b border-gray-100 flex-shrink-0">
+                            <div className="flex items-center justify-between">
                               <h3 className="text-lg font-medium text-gray-900">Upcoming Appointments</h3>
                               <div className="text-xs text-gray-500">5 appointments</div>
                             </div>
                           </div>
                           
-                          {/* Liste des événements avec scrollbar fine et bonne hauteur */}
-                          <div className="px-4 pb-4 space-y-2 h-[calc(100%-73px)] overflow-y-scroll" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.2) transparent' }}>
-                            {/* Événement 1 */}
-                            <div className="flex items-center space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
-                              <div className="flex-shrink-0">
-                                <Calendar className="w-5 h-5 text-gray-700" />
+                          {/* Liste des événements avec scrollbar fine - hauteur flexible */}
+                          <div className="flex-1 overflow-hidden">
+                            <div className="h-full px-4 py-3 space-y-2 overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.2) transparent' }}>
+                              {/* Événement 1 */}
+                              <div className="flex items-center space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
+                                <div className="flex-shrink-0">
+                                  <Calendar className="w-5 h-5 text-gray-700" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-medium text-gray-900">Property Visit</p>
+                                  <p className="text-xs text-gray-500">Today 2:00 PM</p>
+                                </div>
+                                <span className="text-xs px-1.5 py-0.5 bg-transparent text-black border border-black rounded-full">
+                                  visit
+                                </span>
                               </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-900">Property Visit</p>
-                                <p className="text-xs text-gray-500">Today 2:00 PM</p>
-                              </div>
-                              <span className="text-xs px-1.5 py-0.5 bg-black text-white rounded-full">
-                                visit
-                              </span>
-                            </div>
 
-                            {/* Événement 2 */}
-                            <div className="flex items-center space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
-                              <div className="flex-shrink-0">
-                                <PhoneCall className="w-5 h-5 text-gray-700" />
+                              {/* Événement 2 */}
+                              <div className="flex items-center space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
+                                <div className="flex-shrink-0">
+                                  <PhoneCall className="w-5 h-5 text-gray-700" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-medium text-gray-900">Follow-up Call</p>
+                                  <p className="text-xs text-gray-500">Tomorrow 10:30 AM</p>
+                                </div>
+                                <span className="text-xs px-1.5 py-0.5 bg-transparent text-black border border-black rounded-full">
+                                  call
+                                </span>
                               </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-900">Follow-up Call</p>
-                                <p className="text-xs text-gray-500">Tomorrow 10:30 AM</p>
-                              </div>
-                              <span className="text-xs px-1.5 py-0.5 bg-black text-white rounded-full">
-                                call
-                              </span>
-                            </div>
 
-                            {/* Événement 3 */}
-                            <div className="flex items-center space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
-                              <div className="flex-shrink-0">
-                                <FileText className="w-5 h-5 text-gray-700" />
+                              {/* Événement 3 */}
+                              <div className="flex items-center space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
+                                <div className="flex-shrink-0">
+                                  <FileText className="w-5 h-5 text-gray-700" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-medium text-gray-900">Document Signing</p>
+                                  <p className="text-xs text-gray-500">Wed 3:15 PM</p>
+                                </div>
+                                <span className="text-xs px-1.5 py-0.5 bg-transparent text-black border border-black rounded-full">
+                                  signature
+                                </span>
                               </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-900">Document Signing</p>
-                                <p className="text-xs text-gray-500">Wed 3:15 PM</p>
-                              </div>
-                              <span className="text-xs px-1.5 py-0.5 bg-black text-white rounded-full">
-                                signature
-                              </span>
-                            </div>
 
-                            {/* Événement 4 */}
-                            <div className="flex items-center space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
-                              <div className="flex-shrink-0">
-                                <Home className="w-5 h-5 text-gray-700" />
+                              {/* Événement 4 */}
+                              <div className="flex items-center space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
+                                <div className="flex-shrink-0">
+                                  <Home className="w-5 h-5 text-gray-700" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-medium text-gray-900">Property Estimate</p>
+                                  <p className="text-xs text-gray-500">Thu 4:00 PM</p>
+                                </div>
+                                <span className="text-xs px-1.5 py-0.5 bg-transparent text-black border border-black rounded-full">
+                                  estimation
+                                </span>
                               </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-900">Property Estimate</p>
-                                <p className="text-xs text-gray-500">Thu 4:00 PM</p>
-                              </div>
-                              <span className="text-xs px-1.5 py-0.5 bg-black text-white rounded-full">
-                                estimation
-                              </span>
-                            </div>
 
-                            {/* Événement 5 */}
-                            <div className="flex items-center space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
-                              <div className="flex-shrink-0">
-                                <Mail className="w-5 h-5 text-gray-700" />
+                              {/* Événement 5 */}
+                              <div className="flex items-center space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
+                                <div className="flex-shrink-0">
+                                  <Mail className="w-5 h-5 text-gray-700" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-medium text-gray-900">Client Meeting</p>
+                                  <p className="text-xs text-gray-500">Fri 11:00 AM</p>
+                                </div>
+                                <span className="text-xs px-1.5 py-0.5 bg-transparent text-black border border-black rounded-full">
+                                  meeting
+                                </span>
                               </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-900">Client Meeting</p>
-                                <p className="text-xs text-gray-500">Fri 11:00 AM</p>
-                              </div>
-                              <span className="text-xs px-1.5 py-0.5 bg-black text-white rounded-full">
-                                meeting
-                              </span>
                             </div>
                           </div>
                         </div>
