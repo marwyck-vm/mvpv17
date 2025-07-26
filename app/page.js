@@ -3367,8 +3367,8 @@ export default function MarwyckCopilot() {
                           </div>
                         </div>
                         
-                        {/* Nouvelle boîte de droite - 25% - Vide */}
-                        <div className="file-detail-box-right w-[25%] h-96 bg-white border border-gray-200 rounded-xl p-4 cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
+                        {/* Nouvelle boîte de droite - 40% - Vide */}
+                        <div className="file-detail-box-right w-[40%] h-72 bg-white border border-gray-200 rounded-xl p-4 cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
                           {/* Header similaire */}
                           <div className="mb-4">
                             <div className="flex items-center justify-between mb-2">
