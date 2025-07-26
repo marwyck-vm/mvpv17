@@ -3340,26 +3340,28 @@ export default function MarwyckCopilot() {
                       <div className="ml-9 mt-4 flex space-x-4 relative">
                         {/* Nouvelle boîte de gauche - 60% - Upcoming Appointments */}
                         <div className="file-detail-box-left w-[60%] h-72 bg-white border border-gray-200 rounded-xl cursor-default hover:shadow-lg transition-shadow duration-200 relative">
-                          {/* Header avec titre et bouton Add */}
-                          <div className="flex items-center justify-between p-4 border-b border-gray-100">
-                            <h3 className="text-lg font-semibold text-gray-900">Upcoming Appointments</h3>
-                            <button className="text-sm px-3 py-1 text-gray-600 hover:text-gray-800 hover:bg-gray-100 transition-all duration-200 rounded-xl">
-                              + Add
-                            </button>
+                          {/* Header avec titre - même style que Recent Chats */}
+                          <div className="p-4 mb-4">
+                            <div className="flex items-center justify-between mb-2">
+                              <h3 className="text-lg font-medium text-gray-900">Upcoming Appointments</h3>
+                            </div>
+                            <div className="text-xs text-gray-500">
+                              5 appointments
+                            </div>
                           </div>
                           
-                          {/* Liste des événements */}
-                          <div className="p-4 space-y-3 h-[calc(100%-73px)] overflow-y-auto">
+                          {/* Liste des événements avec scrollbar fine */}
+                          <div className="px-4 pb-4 space-y-3 h-[calc(100%-89px)] overflow-y-scroll pr-3" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.2) transparent' }}>
                             {/* Événement 1 */}
                             <div className="flex items-center space-x-3">
                               <div className="flex-shrink-0">
                                 <Calendar className="w-5 h-5 text-gray-700" />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-900">Property Visit - 123 Oak Street</p>
-                                <p className="text-xs text-gray-500">John Smith • Today 2:00 PM</p>
+                                <p className="text-sm font-medium text-gray-900">Property Visit</p>
+                                <p className="text-xs text-gray-500">Today 2:00 PM</p>
                               </div>
-                              <span className="text-xs px-2 py-1 bg-blue-50 text-blue-800 border border-blue-200 rounded-full">
+                              <span className="text-xs px-1.5 py-0.5 bg-blue-50 text-blue-800 border border-blue-200 rounded-full">
                                 visit
                               </span>
                             </div>
@@ -3370,10 +3372,10 @@ export default function MarwyckCopilot() {
                                 <PhoneCall className="w-5 h-5 text-gray-700" />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-900">Follow-up Call - Pine Avenue</p>
-                                <p className="text-xs text-gray-500">Marie Durant • Tomorrow 10:30 AM</p>
+                                <p className="text-sm font-medium text-gray-900">Follow-up Call</p>
+                                <p className="text-xs text-gray-500">Tomorrow 10:30 AM</p>
                               </div>
-                              <span className="text-xs px-2 py-1 bg-green-50 text-green-800 border border-green-200 rounded-full">
+                              <span className="text-xs px-1.5 py-0.5 bg-green-50 text-green-800 border border-green-200 rounded-full">
                                 call
                               </span>
                             </div>
@@ -3384,10 +3386,10 @@ export default function MarwyckCopilot() {
                                 <FileText className="w-5 h-5 text-gray-700" />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-900">Document Signing - Elm Drive</p>
-                                <p className="text-xs text-gray-500">Paul Martin • Wed 3:15 PM</p>
+                                <p className="text-sm font-medium text-gray-900">Document Signing</p>
+                                <p className="text-xs text-gray-500">Wed 3:15 PM</p>
                               </div>
-                              <span className="text-xs px-2 py-1 bg-purple-50 text-purple-800 border border-purple-200 rounded-full">
+                              <span className="text-xs px-1.5 py-0.5 bg-purple-50 text-purple-800 border border-purple-200 rounded-full">
                                 signature
                               </span>
                             </div>
@@ -3398,10 +3400,10 @@ export default function MarwyckCopilot() {
                                 <Home className="w-5 h-5 text-gray-700" />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-900">Property Estimate - Maple Court</p>
-                                <p className="text-xs text-gray-500">Sophie Leroux • Thu 4:00 PM</p>
+                                <p className="text-sm font-medium text-gray-900">Property Estimate</p>
+                                <p className="text-xs text-gray-500">Thu 4:00 PM</p>
                               </div>
-                              <span className="text-xs px-2 py-1 bg-orange-50 text-orange-800 border border-orange-200 rounded-full">
+                              <span className="text-xs px-1.5 py-0.5 bg-orange-50 text-orange-800 border border-orange-200 rounded-full">
                                 estimation
                               </span>
                             </div>
@@ -3412,10 +3414,10 @@ export default function MarwyckCopilot() {
                                 <Mail className="w-5 h-5 text-gray-700" />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-900">Client Meeting - Downtown Office</p>
-                                <p className="text-xs text-gray-500">Michel Dubois • Fri 11:00 AM</p>
+                                <p className="text-sm font-medium text-gray-900">Client Meeting</p>
+                                <p className="text-xs text-gray-500">Fri 11:00 AM</p>
                               </div>
-                              <span className="text-xs px-2 py-1 bg-gray-50 text-gray-800 border border-gray-200 rounded-full">
+                              <span className="text-xs px-1.5 py-0.5 bg-gray-50 text-gray-800 border border-gray-200 rounded-full">
                                 meeting
                               </span>
                             </div>
