@@ -3338,8 +3338,8 @@ export default function MarwyckCopilot() {
 
                       {/* Deuxième rangée de boîtes - Identique en style mais vides */}
                       <div className="ml-9 mt-4 flex space-x-4 relative">
-                        {/* Nouvelle boîte de gauche - 75% - Vide */}
-                        <div className="file-detail-box-left w-[75%] h-96 bg-white border border-gray-200 rounded-xl cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
+                        {/* Nouvelle boîte de gauche - 60% - Vide */}
+                        <div className="file-detail-box-left w-[60%] h-72 bg-white border border-gray-200 rounded-xl cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
                           {/* Zone centrale vide avec design similaire */}
                           <div className="flex-1 relative overflow-hidden">
                             {/* Dégradé de fondu en haut pour cohérence */}
