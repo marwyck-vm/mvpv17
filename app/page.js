@@ -3199,25 +3199,7 @@ export default function MarwyckCopilot() {
                       
                       {/* Deux grosses boîtes avec effet hover */}
                       <div className="ml-9 mt-2 flex space-x-4 relative">
-                        {/* Tooltip pour le bouton nouveau chat - OUTSIDE des boîtes pour éviter overflow:hidden */}
-                        <div className="absolute top-0 left-0 z-50 w-[75%]">
-                          <div className="relative group">
-                            <button 
-                              className="absolute top-3 right-10 text-gray-400 hover:text-black transition-colors duration-200"
-                              onClick={createNewChat}
-                              title="Create new chat"
-                            >
-                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                              </svg>
-                            </button>
-                            {/* Custom Tooltip - GARANTI d'être au-dessus de tout */}
-                            <div className="absolute bottom-full right-0 mb-2 px-3 py-2 text-xs text-gray-800 bg-gray-200 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md" style={{ zIndex: 99999 }}>
-                              Create new chat
-                              <div className="absolute top-full right-3 w-2 h-2 bg-gray-200 rotate-45 -mt-1"></div>
-                            </div>
-                          </div>
-                        </div>
+
                         
                         {/* Boîte de gauche - 75% - Interface de chat */}
                         <div className="file-detail-box-left w-[75%] h-96 bg-white border border-gray-200 rounded-xl cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
