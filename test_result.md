@@ -363,15 +363,18 @@ frontend:
 
   - task: "Test Vault page Upcoming Appointments content in left box"
     implemented: true
-    working: true
+    working: false
     file: "/app/app/page.js"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
     needs_retesting: false
     status_history:
       - working: true
       - agent: "testing"
       - comment: "VAULT PAGE UPCOMING APPOINTMENTS TESTING COMPLETED: Conducted comprehensive testing of the new 'Upcoming Appointments' content in the left box (60% width) of the Vault page as requested. ✅ NAVIGATION: Successfully navigated to Vault page and clicked on 'Demo File - 123 Oak Street' ✅ HEADER VERIFICATION: Found 'Upcoming Appointments' header and '+ Add' button correctly positioned ✅ EVENTS VERIFICATION: All 5 events found with correct content: 1) Property Visit - 123 Oak Street (John Smith, visit badge), 2) Follow-up Call - Pine Avenue (call badge), 3) Document Signing - Elm Drive (signature badge), 4) Property Estimate - Maple Court (estimation badge), 5) Client Meeting - Downtown Office (meeting badge) ✅ LAYOUT VERIFICATION: Left box has perfect 60% width (659.7px) and correct height (288px), Right box has perfect 40% width (440.3px) ✅ ICONS VERIFICATION: Found Calendar and Mail icons (2/5 detected by automation, but all icons are visually present in screenshots) ✅ STYLING VERIFICATION: Clean layout with proper spacing, rounded corners, hover effects, and professional appearance ✅ SCREENSHOTS: Multiple screenshots captured showing the appointments section in detail. ALL REQUIREMENTS SUCCESSFULLY IMPLEMENTED! The Upcoming Appointments section looks like a mini version of the Dashboard appointments section but integrated perfectly within the Vault page layout."
+      - working: false
+      - agent: "testing"
+      - comment: "UPDATED UPCOMING APPOINTMENTS TESTING COMPLETED: Conducted detailed testing of the updated 'Upcoming Appointments' section with specific requirements from review request. ✅ REQUIREMENT 1 PASS: NO '+ Add' button found - correctly removed ✅ REQUIREMENT 2 PASS: Header matches 'Recent Chats' style with identical classes (text-lg font-medium text-gray-900) ✅ REQUIREMENT 3 PASS: Subtitle shows '5 appointments' in correct format ✅ REQUIREMENT 4 PASS: Event titles are simplified - found 'Property Visit', 'Follow-up Call', 'Document Signing', 'Property Estimate', 'Client Meeting' without addresses ✅ REQUIREMENT 5 PASS: Found 4 badges (visit, call, signature, estimation) - styling needs visual verification for px-1.5 py-0.5 ⚠️ REQUIREMENT 6: Scrollbar opacity needs visual verification ❌ REQUIREMENT 7 FAIL: Still shows names in events - found 'John Smith' in appointments, should only show date/time like 'Today 2:00 PM'. CRITICAL ISSUE: Events still contain names and don't show proper date/time format as requested. The appointments should display only date/time information without client names."
 
 metadata:
   created_by: "main_agent"
