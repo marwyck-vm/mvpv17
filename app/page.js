@@ -3742,36 +3742,143 @@ export default function MarwyckCopilot() {
                       {/* Troisième rangée de boîtes - Marwyck History + My Reminder */}
                       <div className="ml-9 mt-4 flex space-x-4 relative">
                         {/* Boîte de gauche - 70% - Marwyck History */}
-                        <div className="file-detail-box-left w-[70%] h-72 bg-white border border-gray-200 rounded-xl cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
-                          {/* Header avec titre et compteur à droite - même style que les autres */}
-                          <div className="p-4 border-b border-gray-100 flex-shrink-0">
-                            <div className="flex items-center justify-between">
+                        <div className="file-detail-box-left w-[70%] h-72 bg-white border border-gray-200 rounded-xl cursor-default hover:shadow-lg transition-shadow duration-200 relative flex">
+                          {/* Partie gauche - Liste des événements (50%) */}
+                          <div className="w-1/2 flex flex-col border-r border-gray-100">
+                            {/* Header avec titre - sans compteur */}
+                            <div className="p-4 border-b border-gray-100 flex-shrink-0">
                               <h3 className="text-lg font-medium text-gray-900">Marwyck History</h3>
-                              <div className="text-xs text-gray-500">{marwyckHistory.length} actions</div>
+                            </div>
+                            
+                            {/* Liste des actions Marwyck avec scrollbar fine */}
+                            <div className="flex-1 overflow-hidden">
+                              <div className="h-full px-4 py-3 space-y-2 overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.2) transparent' }}>
+                                {marwyckHistory.map((item) => (
+                                  <div 
+                                    key={item.id} 
+                                    className={`flex items-center justify-between p-2 rounded-xl transition-colors duration-200 cursor-pointer group ${
+                                      selectedMarwyckEvent?.id === item.id 
+                                        ? 'bg-gray-100 border border-gray-200' 
+                                        : 'hover:bg-gray-50'
+                                    }`}
+                                    onClick={() => setSelectedMarwyckEvent(item)}
+                                  >
+                                    <div className="flex items-center space-x-3 flex-1">
+                                      <div className="flex-shrink-0">
+                                        {getMarwyckActionIcon(item.type)}
+                                      </div>
+                                      <div className="flex-1 min-w-0">
+                                        <p className="text-sm font-medium text-gray-900">
+                                          {item.contact} {item.action} {item.date} at {item.time}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
                             </div>
                           </div>
-                          
-                          {/* Liste des actions Marwyck avec scrollbar fine - hauteur flexible */}
-                          <div className="flex-1 overflow-hidden">
-                            <div className="h-full px-4 py-3 space-y-2 overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.2) transparent' }}>
-                              {marwyckHistory.map((item) => (
-                                <div key={item.id} className="flex items-center justify-between p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer group">
-                                  <div className="flex items-center space-x-3 flex-1">
+
+                          {/* Partie droite - Détails de l'événement sélectionné (50%) */}
+                          <div className="w-1/2 flex flex-col">
+                            {/* Header des détails */}
+                            <div className="p-4 border-b border-gray-100 flex-shrink-0">
+                              <h3 className="text-lg font-medium text-gray-900">Event Details</h3>
+                            </div>
+
+                            {/* Contenu des détails */}
+                            <div className="flex-1 p-4 overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.2) transparent' }}>
+                              {selectedMarwyckEvent ? (
+                                <div className="space-y-4">
+                                  {/* En-tête avec contact et action */}
+                                  <div className="flex items-center space-x-3 pb-3 border-b border-gray-100">
                                     <div className="flex-shrink-0">
-                                      {getMarwyckActionIcon(item.type)}
+                                      {getMarwyckActionIcon(selectedMarwyckEvent.type)}
                                     </div>
-                                    <div className="flex-1 min-w-0">
-                                      <p className="text-sm font-medium text-gray-900">
-                                        {item.contact} {item.action} {item.date} at {item.time}
+                                    <div>
+                                      <h4 className="font-medium text-gray-900">
+                                        {selectedMarwyckEvent.contact} - {selectedMarwyckEvent.action}
+                                      </h4>
+                                      <p className="text-sm text-gray-500">
+                                        {selectedMarwyckEvent.date} at {selectedMarwyckEvent.time}
                                       </p>
                                     </div>
                                   </div>
-                                  {/* Flèche vers la droite */}
-                                  <div className="flex-shrink-0 ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                    <ChevronRight className="w-4 h-4 text-gray-400" />
+
+                                  {/* Détails spécifiques selon le type */}
+                                  <div className="space-y-3">
+                                    {selectedMarwyckEvent.type === 'call' && (
+                                      <>
+                                        <div>
+                                          <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Duration</span>
+                                          <p className="text-sm text-gray-900 mt-1">{selectedMarwyckEvent.details.duration}</p>
+                                        </div>
+                                        <div>
+                                          <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Outcome</span>
+                                          <p className="text-sm text-gray-900 mt-1">{selectedMarwyckEvent.details.outcome}</p>
+                                        </div>
+                                        <div>
+                                          <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Notes</span>
+                                          <p className="text-sm text-gray-900 mt-1">{selectedMarwyckEvent.details.notes}</p>
+                                        </div>
+                                        <div>
+                                          <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Next Action</span>
+                                          <p className="text-sm text-gray-900 mt-1">{selectedMarwyckEvent.details.nextAction}</p>
+                                        </div>
+                                      </>
+                                    )}
+
+                                    {selectedMarwyckEvent.type === 'sms' && (
+                                      <>
+                                        <div>
+                                          <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Message Sent</span>
+                                          <p className="text-sm text-gray-900 mt-1">{selectedMarwyckEvent.details.message}</p>
+                                        </div>
+                                        <div>
+                                          <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Response</span>
+                                          <p className="text-sm text-gray-900 mt-1">{selectedMarwyckEvent.details.response}</p>
+                                        </div>
+                                        <div>
+                                          <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Delivery Time</span>
+                                          <p className="text-sm text-gray-900 mt-1">{selectedMarwyckEvent.details.deliveryTime}</p>
+                                        </div>
+                                        <div>
+                                          <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Next Action</span>
+                                          <p className="text-sm text-gray-900 mt-1">{selectedMarwyckEvent.details.nextAction}</p>
+                                        </div>
+                                      </>
+                                    )}
+
+                                    {selectedMarwyckEvent.type === 'email' && (
+                                      <>
+                                        <div>
+                                          <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Subject</span>
+                                          <p className="text-sm text-gray-900 mt-1">{selectedMarwyckEvent.details.subject}</p>
+                                        </div>
+                                        <div>
+                                          <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Content</span>
+                                          <p className="text-sm text-gray-900 mt-1">{selectedMarwyckEvent.details.content}</p>
+                                        </div>
+                                        <div>
+                                          <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Attachments</span>
+                                          <p className="text-sm text-gray-900 mt-1">{selectedMarwyckEvent.details.attachments}</p>
+                                        </div>
+                                        <div>
+                                          <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Next Action</span>
+                                          <p className="text-sm text-gray-900 mt-1">{selectedMarwyckEvent.details.nextAction}</p>
+                                        </div>
+                                      </>
+                                    )}
                                   </div>
                                 </div>
-                              ))}
+                              ) : (
+                                <div className="flex items-center justify-center h-full text-gray-400">
+                                  <div className="text-center">
+                                    <FileText className="w-8 h-8 mx-auto mb-2 text-gray-300" />
+                                    <p className="text-sm">Select an event to view details</p>
+                                  </div>
+                                </div>
+                              )}
                             </div>
                           </div>
                         </div>
