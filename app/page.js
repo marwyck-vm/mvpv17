@@ -3275,7 +3275,20 @@ export default function MarwyckCopilot() {
                       </div>
                       
                       {/* Deux grosses boîtes avec effet hover */}
-                      <div className="ml-9 mt-2 flex space-x-4 relative">
+                      {/* Bouton d'invitation au-dessus de la box Recent Chats - aligné à droite */}
+                      <div className="ml-9 mt-2 flex justify-end mb-2">
+                        <div className="w-[25%] flex justify-end">
+                          <button 
+                            onClick={() => setShowInviteModal(true)}
+                            className="text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-[9px] p-1.5 transition-colors group"
+                            title="Invite collaborator to project"
+                          >
+                            <UserPlus className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="ml-9 flex space-x-4 relative">
 
                         
                         {/* Boîte de gauche - 75% - Interface de chat */}
