@@ -142,6 +142,9 @@ export default function MarwyckCopilot() {
   const [showDeleteMemberConfirm, setShowDeleteMemberConfirm] = useState(false)
   const [selectedMemberForDelete, setSelectedMemberForDelete] = useState(null)
 
+  // État pour la zone de rappels personnels
+  const [personalReminder, setPersonalReminder] = useState('Meeting with client tomorrow at 2 PM\nCall insurance company\nReview documents before closing')
+
   // Functions for managing contacts
   const addContact = () => {
     if (fileContacts.length < 2) {
