@@ -5052,14 +5052,14 @@ export default function MarwyckCopilot() {
             <Button 
               variant="outline" 
               onClick={handleCloseInviteModal}
-              className={`rounded-full px-6 ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-50'}`}
+              className={`rounded-[9px] px-6 ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-50'}`}
             >
               Cancel
             </Button>
             <Button 
               onClick={handleSendInvitation}
               disabled={!inviteEmail.trim()}
-              className="bg-black hover:bg-gray-800 text-white rounded-full px-6 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-black hover:bg-gray-800 text-white rounded-[9px] px-6 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Send Invitation
             </Button>
