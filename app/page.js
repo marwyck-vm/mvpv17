@@ -153,6 +153,61 @@ export default function MarwyckCopilot() {
   // État pour l'événement Marwyck sélectionné
   const [selectedMarwyckEvent, setSelectedMarwyckEvent] = useState(null)
 
+  // État pour la sélection des fichiers
+  const [selectedFiles, setSelectedFiles] = useState([])
+
+  // Données mockées pour les fichiers
+  const documentFiles = [
+    {
+      id: 1,
+      name: "Property_Contract_Final.pdf",
+      size: "2.4 MB",
+      dateAdded: "2025-01-15",
+      type: "PDF Document",
+      icon: "📄"
+    },
+    {
+      id: 2,
+      name: "Insurance_Policy_2025.docx",
+      size: "1.8 MB", 
+      dateAdded: "2025-01-14",
+      type: "Word Document",
+      icon: "📝"
+    },
+    {
+      id: 3,
+      name: "Property_Photos.zip",
+      size: "15.2 MB",
+      dateAdded: "2025-01-13",
+      type: "Archive",
+      icon: "🗂️"
+    },
+    {
+      id: 4,
+      name: "Market_Analysis_Report.xlsx",
+      size: "3.1 MB",
+      dateAdded: "2025-01-12",
+      type: "Excel Spreadsheet",
+      icon: "📊"
+    },
+    {
+      id: 5,
+      name: "Client_ID_Copy.jpg",
+      size: "850 KB",
+      dateAdded: "2025-01-11",
+      type: "Image",
+      icon: "🖼️"
+    },
+    {
+      id: 6,
+      name: "Mortgage_Pre_Approval.pdf",
+      size: "1.2 MB",
+      dateAdded: "2025-01-10",
+      type: "PDF Document", 
+      icon: "📄"
+    }
+  ]
+
   // Functions for managing contacts
   const addContact = () => {
     if (fileContacts.length < 2) {
