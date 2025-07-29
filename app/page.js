@@ -1090,6 +1090,20 @@ export default function MarwyckCopilot() {
     { id: 8, type: 'sms', contact: 'Julie', action: 'SMS sent to', date: '07/05', time: '11:20', status: 'delivered' }
   ]
 
+  // Fonction pour obtenir l'icône selon le type d'action Marwyck
+  const getMarwyckActionIcon = (type) => {
+    switch (type) {
+      case 'call':
+        return <Phone className="w-4 h-4 text-gray-700" />
+      case 'sms':
+        return <MessageCircle className="w-4 h-4 text-gray-700" />
+      case 'email':
+        return <Mail className="w-4 h-4 text-gray-700" />
+      default:
+        return <AlertCircle className="w-4 h-4 text-gray-700" />
+    }
+  }
+
   const scrollToBottom = () => {
     // Utiliser le scroll du container de chat au lieu de scrollIntoView pour éviter de scroller toute la page
     if (chatContainerRef.current) {
