@@ -150,6 +150,9 @@ export default function MarwyckCopilot() {
   const [inviteEmail, setInviteEmail] = useState('')
   const [inviteValidationError, setInviteValidationError] = useState(false)
 
+  // État pour l'événement Marwyck sélectionné
+  const [selectedMarwyckEvent, setSelectedMarwyckEvent] = useState(null)
+
   // Functions for managing contacts
   const addContact = () => {
     if (fileContacts.length < 2) {
