@@ -5033,7 +5033,7 @@ export default function MarwyckCopilot() {
               )}
             </div>
             
-            <div className={`p-3 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
+            <div className={`p-3 rounded-[9px] ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
               <div className="flex items-start space-x-2">
                 <UserPlus className={`w-4 h-4 mt-0.5 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`} />
                 <div>
