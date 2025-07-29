@@ -4988,6 +4988,84 @@ export default function MarwyckCopilot() {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Modal d'invitation collaborateur */}
+      <Dialog open={showInviteModal} onOpenChange={handleCloseInviteModal} modal={false}>
+        <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
+          <DialogHeader>
+            <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>
+              Invite Collaborator
+            </DialogTitle>
+            <p className={`text-sm mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+              Add a team member to collaborate on this project
+            </p>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <label className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-700'}`}>
+                Email Address
+              </label>
+              <div className="relative">
+                <input
+                  type="email"
+                  value={inviteEmail}
+                  onChange={(e) => {
+                    setInviteEmail(e.target.value)
+                    setInviteValidationError(false)
+                  }}
+                  placeholder="Enter collaborator's email address"
+                  className={`w-full px-3 py-2 border rounded-lg text-sm ${
+                    inviteValidationError 
+                      ? 'border-red-300 focus:border-red-500 focus:ring-red-500' 
+                      : darkMode 
+                        ? 'border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500' 
+                        : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500'
+                  } focus:outline-none focus:ring-1`}
+                />
+                {inviteValidationError && (
+                  <div className="absolute right-3 top-2.5">
+                    <AlertCircle className="w-4 h-4 text-red-500" />
+                  </div>
+                )}
+              </div>
+              {inviteValidationError && (
+                <p className="text-xs text-red-500">Please enter a valid email address</p>
+              )}
+            </div>
+            
+            <div className={`p-3 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
+              <div className="flex items-start space-x-2">
+                <UserPlus className={`w-4 h-4 mt-0.5 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`} />
+                <div>
+                  <p className={`text-xs font-medium ${darkMode ? 'text-gray-200' : 'text-gray-700'}`}>
+                    Collaboration Access
+                  </p>
+                  <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                    The invited user will have access to view and edit this project file
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="flex justify-end space-x-3 mt-6">
+            <Button 
+              variant="outline" 
+              onClick={handleCloseInviteModal}
+              className={`rounded-full px-6 ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-50'}`}
+            >
+              Cancel
+            </Button>
+            <Button 
+              onClick={handleSendInvitation}
+              disabled={!inviteEmail.trim()}
+              className="bg-black hover:bg-gray-800 text-white rounded-full px-6 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Send Invitation
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
