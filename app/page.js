@@ -1109,6 +1109,41 @@ export default function MarwyckCopilot() {
     }
   }
 
+  // Fonction pour valider l'email
+  const isValidEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  }
+
+  // Fonction pour envoyer l'invitation
+  const handleSendInvitation = () => {
+    if (!inviteEmail.trim()) {
+      setInviteValidationError(true)
+      return
+    }
+    
+    if (!isValidEmail(inviteEmail)) {
+      setInviteValidationError(true)
+      return
+    }
+
+    // Simuler l'envoi d'invitation
+    console.log('Sending invitation to:', inviteEmail)
+    
+    // Réinitialiser et fermer le modal
+    setInviteEmail('')
+    setInviteValidationError(false)
+    setShowInviteModal(false)
+    
+    // Ici on pourrait ajouter une notification de succès
+  }
+
+  // Fonction pour fermer le modal d'invitation
+  const handleCloseInviteModal = () => {
+    setShowInviteModal(false)
+    setInviteEmail('')
+    setInviteValidationError(false)
+  }
+
   const scrollToBottom = () => {
     // Utiliser le scroll du container de chat au lieu de scrollIntoView pour éviter de scroller toute la page
     if (chatContainerRef.current) {
