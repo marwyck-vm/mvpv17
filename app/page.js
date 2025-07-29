@@ -3571,6 +3571,65 @@ export default function MarwyckCopilot() {
                         </div>
                       </div>
 
+                      {/* Troisième rangée de boîtes - Marwyck History + My Reminder */}
+                      <div className="ml-9 mt-4 flex space-x-4 relative">
+                        {/* Boîte de gauche - 70% - Marwyck History */}
+                        <div className="file-detail-box-left w-[70%] h-72 bg-white border border-gray-200 rounded-xl cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
+                          {/* Header avec titre et compteur à droite - même style que les autres */}
+                          <div className="p-4 border-b border-gray-100 flex-shrink-0">
+                            <div className="flex items-center justify-between">
+                              <h3 className="text-lg font-medium text-gray-900">Marwyck History</h3>
+                              <div className="text-xs text-gray-500">{marwyckHistory.length} actions</div>
+                            </div>
+                          </div>
+                          
+                          {/* Liste des actions Marwyck avec scrollbar fine - hauteur flexible */}
+                          <div className="flex-1 overflow-hidden">
+                            <div className="h-full px-4 py-3 space-y-2 overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.2) transparent' }}>
+                              {marwyckHistory.map((item) => (
+                                <div key={item.id} className="flex items-center justify-between p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer group">
+                                  <div className="flex items-center space-x-3 flex-1">
+                                    <div className="flex-shrink-0">
+                                      {getMarwyckActionIcon(item.type)}
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                      <p className="text-sm font-medium text-gray-900">
+                                        {item.contact} {item.action} {item.date} at {item.time}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  {/* Flèche vers la droite */}
+                                  <div className="flex-shrink-0 ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                    <ChevronRight className="w-4 h-4 text-gray-400" />
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Boîte de droite - 30% - My Reminder */}
+                        <div className="file-detail-box-right w-[30%] h-72 bg-white border border-gray-200 rounded-xl cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
+                          {/* Header avec titre - même style que les autres */}
+                          <div className="p-4 border-b border-gray-100 flex-shrink-0">
+                            <div className="flex items-center justify-between">
+                              <h3 className="text-lg font-medium text-gray-900">My Reminder</h3>
+                            </div>
+                          </div>
+                          
+                          {/* Zone de texte pour les notes personnelles */}
+                          <div className="flex-1 p-4">
+                            <textarea
+                              value={personalReminder}
+                              onChange={(e) => setPersonalReminder(e.target.value)}
+                              placeholder="Write your personal reminders here..."
+                              className="w-full h-full resize-none border-none outline-none text-sm text-gray-700 placeholder-gray-400 bg-transparent"
+                              style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(156, 163, 175, 0.3) transparent' }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+
                       <p className={`ml-9 mt-6 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-500'}`}>
                         Content coming soon
                       </p>
