@@ -3336,19 +3336,19 @@ export default function MarwyckCopilot() {
                           </div>
                         </div>
                         
+                        {/* Bouton d'invitation au-dessus de la box Recent Chats */}
+                        <div className="w-[25%] flex justify-end mb-2">
+                          <button 
+                            onClick={() => setShowInviteModal(true)}
+                            className="text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-[9px] p-1.5 transition-colors group"
+                            title="Invite collaborator to project"
+                          >
+                            <UserPlus className="w-4 h-4" />
+                          </button>
+                        </div>
+
                         {/* Boîte de droite - 25% - Liste des chats */}
                         <div className="file-detail-box-right w-[25%] h-96 bg-white border border-gray-200 rounded-[9px] p-4 cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
-                          {/* Bouton d'invitation au-dessus */}
-                          <div className="flex justify-end mb-2">
-                            <button 
-                              onClick={() => setShowInviteModal(true)}
-                              className="text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-full p-1.5 transition-colors group"
-                              title="Invite collaborator to project"
-                            >
-                              <UserPlus className="w-4 h-4" />
-                            </button>
-                          </div>
-                          
                           {/* Header de la liste des chats */}
                           <div className="mb-4">
                             <div className="flex items-center justify-between mb-2">
