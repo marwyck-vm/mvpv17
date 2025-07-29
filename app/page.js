@@ -3263,6 +3263,13 @@ export default function MarwyckCopilot() {
                           <div className="mb-4">
                             <div className="flex items-center justify-between mb-2">
                               <h3 className="text-lg font-medium text-gray-900">Recent Chats</h3>
+                              <button 
+                                onClick={createNewChat}
+                                className="text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-full p-1 transition-colors"
+                                title="Start new chat"
+                              >
+                                <Plus className="w-4 h-4" />
+                              </button>
                             </div>
                             <div className="text-xs text-gray-500">
                               {selectedFile?.chatHistory?.length || 0} conversations
