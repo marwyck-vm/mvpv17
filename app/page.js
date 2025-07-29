@@ -3978,6 +3978,114 @@ export default function MarwyckCopilot() {
                         </div>
                       </div>
 
+                      {/* Section Files - Tableau de documents */}
+                      <div className="ml-9 mt-8">
+                        {/* Header de la section Files */}
+                        <div className="mb-4">
+                          <h3 className="text-lg font-medium text-gray-900 mb-2">Files</h3>
+                          <p className="text-sm text-gray-500">Manage and organize project documents</p>
+                        </div>
+
+                        {/* Tableau des fichiers */}
+                        <div className="bg-white border border-gray-200 rounded-[9px] overflow-hidden">
+                          {/* Header du tableau */}
+                          <div className="bg-gray-50 border-b border-gray-200 px-6 py-3">
+                            <div className="flex items-center space-x-4">
+                              {/* Checkbox pour sélectionner tout */}
+                              <div className="flex items-center">
+                                <input
+                                  type="checkbox"
+                                  checked={selectedFiles.length === documentFiles.length}
+                                  onChange={handleSelectAllFiles}
+                                  className="w-4 h-4 text-black bg-gray-100 border-gray-300 rounded focus:ring-black focus:border-black"
+                                />
+                              </div>
+                              
+                              {/* Headers des colonnes */}
+                              <div className="flex-1 grid grid-cols-4 gap-4 text-xs font-medium text-gray-500 uppercase tracking-wide">
+                                <div>Name</div>
+                                <div>Type</div>
+                                <div>Size</div>
+                                <div>Date Added</div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Liste des fichiers */}
+                          <div className="divide-y divide-gray-200">
+                            {documentFiles.map((file) => (
+                              <div key={file.id} className="px-6 py-4 hover:bg-gray-50 transition-colors duration-200">
+                                <div className="flex items-center space-x-4">
+                                  {/* Checkbox de sélection */}
+                                  <div className="flex items-center">
+                                    <input
+                                      type="checkbox"
+                                      checked={selectedFiles.includes(file.id)}
+                                      onChange={() => handleFileSelect(file.id)}
+                                      className="w-4 h-4 text-black bg-gray-100 border-gray-300 rounded focus:ring-black focus:border-black"
+                                    />
+                                  </div>
+                                  
+                                  {/* Informations du fichier */}
+                                  <div className="flex-1 grid grid-cols-4 gap-4 items-center">
+                                    {/* Nom du fichier avec icône */}
+                                    <div className="flex items-center space-x-3">
+                                      <span className="text-lg">{file.icon}</span>
+                                      <div>
+                                        <p className="text-sm font-medium text-gray-900">{file.name}</p>
+                                      </div>
+                                    </div>
+                                    
+                                    {/* Type */}
+                                    <div>
+                                      <p className="text-sm text-gray-600">{file.type}</p>
+                                    </div>
+                                    
+                                    {/* Taille */}
+                                    <div>
+                                      <p className="text-sm text-gray-600">{file.size}</p>
+                                    </div>
+                                    
+                                    {/* Date d'ajout */}
+                                    <div>
+                                      <p className="text-sm text-gray-600">
+                                        {new Date(file.dateAdded).toLocaleDateString('en-US', {
+                                          month: 'short',
+                                          day: 'numeric',
+                                          year: 'numeric'
+                                        })}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+
+                          {/* Footer avec actions sélectionnées */}
+                          {selectedFiles.length > 0 && (
+                            <div className="bg-gray-50 border-t border-gray-200 px-6 py-3">
+                              <div className="flex items-center justify-between">
+                                <p className="text-sm text-gray-600">
+                                  {selectedFiles.length} file{selectedFiles.length !== 1 ? 's' : ''} selected
+                                </p>
+                                <div className="flex items-center space-x-2">
+                                  <button className="text-sm text-gray-600 hover:text-gray-800 px-3 py-1 rounded-[9px] hover:bg-gray-100 transition-colors">
+                                    Download
+                                  </button>
+                                  <button className="text-sm text-gray-600 hover:text-gray-800 px-3 py-1 rounded-[9px] hover:bg-gray-100 transition-colors">
+                                    Share
+                                  </button>
+                                  <button className="text-sm text-red-600 hover:text-red-800 px-3 py-1 rounded-[9px] hover:bg-red-50 transition-colors">
+                                    Delete
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
                       <p className={`ml-9 mt-6 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-500'}`}>
                         Content coming soon
                       </p>
