@@ -1076,7 +1076,10 @@ export default function MarwyckCopilot() {
   ]
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    // Utiliser le scroll du container de chat au lieu de scrollIntoView pour éviter de scroller toute la page
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight
+    }
   }
 
   useEffect(() => {
