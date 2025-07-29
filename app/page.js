@@ -1097,11 +1097,12 @@ export default function MarwyckCopilot() {
     }
   }, [selectedFile?.id])
 
-  // Effet pour l'auto-scroll vers le bas quand les messages changent - seulement si pas de chat history sélectionné
+  // Effet pour l'auto-scroll vers le bas quand les messages changent - seulement pour nouvelles conversations
   useEffect(() => {
     // Seulement faire l'auto-scroll si nous ne sommes pas en train de regarder un chat de l'historique
-    if (!selectedChatHistory) {
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    if (!selectedChatHistory && chatContainerRef.current) {
+      // Utiliser le scroll du container au lieu de scrollIntoView pour éviter le scroll de la page
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight
     }
   }, [currentChatMessages, selectedChatHistory])
 
