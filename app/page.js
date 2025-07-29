@@ -145,6 +145,11 @@ export default function MarwyckCopilot() {
   // État pour la zone de rappels personnels
   const [personalReminder, setPersonalReminder] = useState('Meeting with client tomorrow at 2 PM\nCall insurance company\nReview documents before closing')
 
+  // États pour le modal d'invitation de collaborateur
+  const [showInviteModal, setShowInviteModal] = useState(false)
+  const [inviteEmail, setInviteEmail] = useState('')
+  const [inviteValidationError, setInviteValidationError] = useState(false)
+
   // Functions for managing contacts
   const addContact = () => {
     if (fileContacts.length < 2) {
