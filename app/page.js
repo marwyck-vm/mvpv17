@@ -3885,9 +3885,10 @@ export default function MarwyckCopilot() {
                         
                         {/* Boîte de droite - 30% - My Reminder */}
                         <div className="file-detail-box-right w-[30%] h-72 bg-white border border-gray-200 rounded-xl cursor-default hover:shadow-lg transition-shadow duration-200 relative flex flex-col">
-                          {/* Header avec titre - même style que les autres */}
+                          {/* Header avec titre et icône - même style que les autres */}
                           <div className="p-4 border-b border-gray-100 flex-shrink-0">
-                            <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-2">
+                              <Edit className="w-5 h-5 text-gray-600" />
                               <h3 className="text-lg font-medium text-gray-900">My Reminder</h3>
                             </div>
                           </div>
