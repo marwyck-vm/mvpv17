@@ -5014,12 +5014,12 @@ export default function MarwyckCopilot() {
                     setInviteValidationError(false)
                   }}
                   placeholder="Enter collaborator's email address"
-                  className={`w-full px-3 py-2 border rounded-lg text-sm ${
+                  className={`w-full px-3 py-2 border rounded-[9px] text-sm ${
                     inviteValidationError 
                       ? 'border-red-300 focus:border-red-500 focus:ring-red-500' 
                       : darkMode 
-                        ? 'border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500' 
-                        : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500'
+                        ? 'border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:border-black focus:ring-black' 
+                        : 'border-gray-300 focus:border-black focus:ring-black'
                   } focus:outline-none focus:ring-1`}
                 />
                 {inviteValidationError && (
