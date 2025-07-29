@@ -411,6 +411,7 @@ export default function MarwyckCopilot() {
   })
   
   const messagesEndRef = useRef(null)
+  const chatContainerRef = useRef(null) // Nouveau ref pour le container de chat
 
   // Available accent colors - Harvey AI style: black and white only
   const accentColors = [
