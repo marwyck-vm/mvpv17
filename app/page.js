@@ -1088,14 +1088,126 @@ export default function MarwyckCopilot() {
 
   // Données pour l'historique Marwyck
   const marwyckHistory = [
-    { id: 1, type: 'call', contact: 'John', action: 'Called', date: '07/12', time: '11:03', status: 'completed' },
-    { id: 2, type: 'sms', contact: 'Marie', action: 'SMS sent to', date: '07/11', time: '15:30', status: 'delivered' },
-    { id: 3, type: 'email', contact: 'Paul', action: 'Email sent to', date: '07/10', time: '09:15', status: 'sent' },
-    { id: 4, type: 'call', contact: 'Sophie', action: 'Called', date: '07/09', time: '14:22', status: 'completed' },
-    { id: 5, type: 'sms', contact: 'Michel', action: 'SMS sent to', date: '07/08', time: '16:45', status: 'delivered' },
-    { id: 6, type: 'email', contact: 'Clara', action: 'Email sent to', date: '07/07', time: '10:30', status: 'sent' },
-    { id: 7, type: 'call', contact: 'Thomas', action: 'Called', date: '07/06', time: '13:15', status: 'completed' },
-    { id: 8, type: 'sms', contact: 'Julie', action: 'SMS sent to', date: '07/05', time: '11:20', status: 'delivered' }
+    { 
+      id: 1, 
+      type: 'call', 
+      contact: 'John', 
+      action: 'Called', 
+      date: '07/12', 
+      time: '11:03', 
+      status: 'completed',
+      details: {
+        duration: '8 minutes',
+        outcome: 'Appointment confirmed for tomorrow at 2 PM',
+        notes: 'Client expressed interest in the downtown property. Mentioned budget concerns but seemed motivated.',
+        nextAction: 'Send property details and market analysis'
+      }
+    },
+    { 
+      id: 2, 
+      type: 'sms', 
+      contact: 'Marie', 
+      action: 'SMS sent to', 
+      date: '07/11', 
+      time: '15:30', 
+      status: 'delivered',
+      details: {
+        message: 'Hi Marie, just a reminder about our property viewing tomorrow at 3 PM. Please confirm.',
+        response: 'Thanks! Confirmed. See you tomorrow.',
+        deliveryTime: '2 seconds',
+        nextAction: 'Prepare property presentation materials'
+      }
+    },
+    { 
+      id: 3, 
+      type: 'email', 
+      contact: 'Paul', 
+      action: 'Email sent to', 
+      date: '07/10', 
+      time: '09:15', 
+      status: 'sent',
+      details: {
+        subject: 'Market Analysis Report - Downtown Property',
+        content: 'Comprehensive market analysis with comparable properties and pricing recommendations.',
+        attachments: '3 files (PDF, Excel, Images)',
+        nextAction: 'Follow up in 2 days if no response'
+      }
+    },
+    { 
+      id: 4, 
+      type: 'call', 
+      contact: 'Sophie', 
+      action: 'Called', 
+      date: '07/09', 
+      time: '14:22', 
+      status: 'completed',
+      details: {
+        duration: '12 minutes',
+        outcome: 'Negotiation successful - price reduced by €15,000',
+        notes: 'Seller agreed to repairs and faster closing date. Very positive conversation.',
+        nextAction: 'Draft updated contract and send to both parties'
+      }
+    },
+    { 
+      id: 5, 
+      type: 'sms', 
+      contact: 'Michel', 
+      action: 'SMS sent to', 
+      date: '07/08', 
+      time: '16:45', 
+      status: 'delivered',
+      details: {
+        message: 'Document package ready for pickup. Available Monday-Friday 9 AM - 5 PM.',
+        response: 'Perfect, will come Tuesday morning.',
+        deliveryTime: '1 second',
+        nextAction: 'Prepare document package and schedule pickup'
+      }
+    },
+    { 
+      id: 6, 
+      type: 'email', 
+      contact: 'Clara', 
+      action: 'Email sent to', 
+      date: '07/07', 
+      time: '10:30', 
+      status: 'sent',
+      details: {
+        subject: 'Property Inspection Report',
+        content: 'Detailed inspection findings with recommendations and estimated repair costs.',
+        attachments: '5 files (Photos, Report, Estimates)',
+        nextAction: 'Schedule follow-up meeting to discuss findings'
+      }
+    },
+    { 
+      id: 7, 
+      type: 'call', 
+      contact: 'Thomas', 
+      action: 'Called', 
+      date: '07/06', 
+      time: '13:15', 
+      status: 'completed',
+      details: {
+        duration: '15 minutes',
+        outcome: 'Loan pre-approval confirmed - ready to proceed',
+        notes: 'Bank approved full amount. Client very excited and ready to make offer.',
+        nextAction: 'Prepare offer letter and schedule property visit'
+      }
+    },
+    { 
+      id: 8, 
+      type: 'sms', 
+      contact: 'Julie', 
+      action: 'SMS sent to', 
+      date: '07/05', 
+      time: '11:20', 
+      status: 'delivered',
+      details: {
+        message: 'Keys ready for property viewing. Meet at main entrance at 2 PM sharp.',
+        response: 'On my way! See you in 10 minutes.',
+        deliveryTime: '3 seconds',
+        nextAction: 'Conduct property tour and gather feedback'
+      }
+    }
   ]
 
   // Fonction pour obtenir l'icône selon le type d'action Marwyck
