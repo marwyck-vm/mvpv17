@@ -1314,6 +1314,23 @@ export default function MarwyckCopilot() {
     setInviteValidationError(false)
   }
 
+  // Fonctions pour gérer la sélection des fichiers
+  const handleFileSelect = (fileId) => {
+    setSelectedFiles(prev => 
+      prev.includes(fileId) 
+        ? prev.filter(id => id !== fileId)
+        : [...prev, fileId]
+    )
+  }
+
+  const handleSelectAllFiles = () => {
+    if (selectedFiles.length === documentFiles.length) {
+      setSelectedFiles([])
+    } else {
+      setSelectedFiles(documentFiles.map(file => file.id))
+    }
+  }
+
   const scrollToBottom = () => {
     // Utiliser le scroll du container de chat au lieu de scrollIntoView pour éviter de scroller toute la page
     if (chatContainerRef.current) {
