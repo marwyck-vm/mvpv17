@@ -1078,6 +1078,18 @@ export default function MarwyckCopilot() {
     { id: 12, type: 'call', contact: 'Isabelle Petit', message: 'Closing date coordination', date: '16/07/2025', time: '05:20 PM', status: 'completed' }
   ]
 
+  // Données pour l'historique Marwyck
+  const marwyckHistory = [
+    { id: 1, type: 'call', contact: 'John', action: 'Called', date: '07/12', time: '11:03', status: 'completed' },
+    { id: 2, type: 'sms', contact: 'Marie', action: 'SMS sent to', date: '07/11', time: '15:30', status: 'delivered' },
+    { id: 3, type: 'email', contact: 'Paul', action: 'Email sent to', date: '07/10', time: '09:15', status: 'sent' },
+    { id: 4, type: 'call', contact: 'Sophie', action: 'Called', date: '07/09', time: '14:22', status: 'completed' },
+    { id: 5, type: 'sms', contact: 'Michel', action: 'SMS sent to', date: '07/08', time: '16:45', status: 'delivered' },
+    { id: 6, type: 'email', contact: 'Clara', action: 'Email sent to', date: '07/07', time: '10:30', status: 'sent' },
+    { id: 7, type: 'call', contact: 'Thomas', action: 'Called', date: '07/06', time: '13:15', status: 'completed' },
+    { id: 8, type: 'sms', contact: 'Julie', action: 'SMS sent to', date: '07/05', time: '11:20', status: 'delivered' }
+  ]
+
   const scrollToBottom = () => {
     // Utiliser le scroll du container de chat au lieu de scrollIntoView pour éviter de scroller toute la page
     if (chatContainerRef.current) {
