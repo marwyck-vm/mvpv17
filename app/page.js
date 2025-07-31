@@ -3986,19 +3986,21 @@ export default function MarwyckCopilot() {
                           <p className="text-sm text-gray-500">Manage and organize project documents</p>
                         </div>
 
-                        {/* Barre d'actions - compteur et boutons alignés à gauche */}
+                        {/* Barre d'actions - compteur et boutons alignés à droite */}
                         <div className="mb-6">
-                          <div className="flex items-center space-x-4">
-                            {/* Compteur de fichiers sélectionnés */}
-                            {selectedFiles.length > 0 && (
-                              <p className="text-sm font-medium text-gray-700">
-                                {selectedFiles.length} file{selectedFiles.length !== 1 ? 's' : ''} selected
-                              </p>
-                            )}
+                          <div className="flex items-center justify-end space-x-4">
+                            {/* Compteur de fichiers sélectionnés avec effet fade */}
+                            <p 
+                              className={`text-sm font-medium text-gray-700 transition-opacity duration-300 ${
+                                selectedFiles.length > 0 ? 'opacity-100' : 'opacity-0'
+                              }`}
+                            >
+                              {selectedFiles.length} file{selectedFiles.length !== 1 ? 's' : ''} selected
+                            </p>
                             
-                            {/* Boutons Add File et Upload avec hauteur réduite */}
+                            {/* Boutons Add File et Upload avec hauteur encore plus réduite */}
                             <button 
-                              className={`inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-[9px] border transition-colors ${
+                              className={`inline-flex items-center px-3 py-1 text-sm font-medium rounded-[9px] border transition-colors ${
                                 selectedFiles.length > 0 
                                   ? 'text-gray-700 bg-white border-gray-300 hover:bg-gray-50' 
                                   : 'text-gray-400 bg-gray-50 border-gray-200 cursor-not-allowed'
@@ -4011,7 +4013,7 @@ export default function MarwyckCopilot() {
                               Add File
                             </button>
                             <button 
-                              className={`inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-[9px] border transition-colors ${
+                              className={`inline-flex items-center px-3 py-1 text-sm font-medium rounded-[9px] border transition-colors ${
                                 selectedFiles.length > 0 
                                   ? 'text-gray-700 bg-white border-gray-300 hover:bg-gray-50' 
                                   : 'text-gray-400 bg-gray-50 border-gray-200 cursor-not-allowed'
