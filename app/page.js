@@ -3978,54 +3978,52 @@ export default function MarwyckCopilot() {
                         </div>
                       </div>
 
-                      {/* Section Files - Tableau minimaliste avec nouveaux boutons */}
+                      {/* Section Files - Tableau minimaliste avec mise en page réorganisée */}
                       <div className="ml-9 mt-8">
-                        {/* Header de la section Files avec boutons et compteur */}
+                        {/* Header de la section Files */}
+                        <div className="mb-4">
+                          <h3 className="text-xl font-semibold text-gray-900 mb-1">Files</h3>
+                          <p className="text-sm text-gray-500">Manage and organize project documents</p>
+                        </div>
+
+                        {/* Barre d'actions - compteur et boutons alignés à gauche */}
                         <div className="mb-6">
-                          <div className="flex items-center justify-between">
-                            <div>
-                              <h3 className="text-xl font-semibold text-gray-900 mb-1">Files</h3>
-                              <p className="text-sm text-gray-500">Manage and organize project documents</p>
-                            </div>
-                            <div className="flex items-center space-x-3">
-                              {/* Boutons Add File et Upload */}
-                              <button 
-                                className={`inline-flex items-center px-4 py-2 text-sm font-medium rounded-[9px] border transition-colors ${
-                                  selectedFiles.length > 0 
-                                    ? 'text-gray-700 bg-white border-gray-300 hover:bg-gray-50' 
-                                    : 'text-gray-400 bg-gray-50 border-gray-200 cursor-not-allowed'
-                                }`}
-                                disabled={selectedFiles.length === 0}
-                              >
-                                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                </svg>
-                                Add File
-                              </button>
-                              <button 
-                                className={`inline-flex items-center px-4 py-2 text-sm font-medium rounded-[9px] border transition-colors ${
-                                  selectedFiles.length > 0 
-                                    ? 'text-gray-700 bg-white border-gray-300 hover:bg-gray-50' 
-                                    : 'text-gray-400 bg-gray-50 border-gray-200 cursor-not-allowed'
-                                }`}
-                                disabled={selectedFiles.length === 0}
-                              >
-                                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                </svg>
-                                Upload
-                              </button>
-                            </div>
-                          </div>
-                          
-                          {/* Compteur de fichiers sélectionnés */}
-                          {selectedFiles.length > 0 && (
-                            <div className="mt-3">
+                          <div className="flex items-center space-x-4">
+                            {/* Compteur de fichiers sélectionnés */}
+                            {selectedFiles.length > 0 && (
                               <p className="text-sm font-medium text-gray-700">
                                 {selectedFiles.length} file{selectedFiles.length !== 1 ? 's' : ''} selected
                               </p>
-                            </div>
-                          )}
+                            )}
+                            
+                            {/* Boutons Add File et Upload avec hauteur réduite */}
+                            <button 
+                              className={`inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-[9px] border transition-colors ${
+                                selectedFiles.length > 0 
+                                  ? 'text-gray-700 bg-white border-gray-300 hover:bg-gray-50' 
+                                  : 'text-gray-400 bg-gray-50 border-gray-200 cursor-not-allowed'
+                              }`}
+                              disabled={selectedFiles.length === 0}
+                            >
+                              <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                              </svg>
+                              Add File
+                            </button>
+                            <button 
+                              className={`inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-[9px] border transition-colors ${
+                                selectedFiles.length > 0 
+                                  ? 'text-gray-700 bg-white border-gray-300 hover:bg-gray-50' 
+                                  : 'text-gray-400 bg-gray-50 border-gray-200 cursor-not-allowed'
+                              }`}
+                              disabled={selectedFiles.length === 0}
+                            >
+                              <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                              </svg>
+                              Upload
+                            </button>
+                          </div>
                         </div>
 
                         {/* Tableau des fichiers avec design minimaliste */}
@@ -4085,9 +4083,9 @@ export default function MarwyckCopilot() {
                                       </div>
                                     </div>
                                     
-                                    {/* Type avec badge simple */}
+                                    {/* Type avec badge plus gris */}
                                     <div>
-                                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-[9px] text-xs font-medium bg-gray-100 text-gray-800">
+                                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-[9px] text-xs font-medium bg-gray-200 text-gray-600">
                                         {file.type}
                                       </span>
                                     </div>
