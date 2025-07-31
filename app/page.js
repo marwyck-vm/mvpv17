@@ -142,21 +142,6 @@ export default function MarwyckCopilot() {
   const [showDeleteMemberConfirm, setShowDeleteMemberConfirm] = useState(false)
   const [selectedMemberForDelete, setSelectedMemberForDelete] = useState(null)
 
-  // État pour la zone de rappels personnels avec valeur dynamique
-  const [personalReminder, setPersonalReminder] = useState('')
-  
-  // Effet pour mettre à jour les rappels selon le file sélectionné
-  useEffect(() => {
-    if (selectedFile) {
-      setPersonalReminder(getPersonalReminderForProject(selectedFile.id))
-    }
-  }, [selectedFile])
-
-  // États pour le modal d'invitation de collaborateur
-  const [showInviteModal, setShowInviteModal] = useState(false)
-  const [inviteEmail, setInviteEmail] = useState('')
-  const [inviteValidationError, setInviteValidationError] = useState(false)
-
   // État pour l'événement Marwyck sélectionné
   const [selectedMarwyckEvent, setSelectedMarwyckEvent] = useState(null)
 
