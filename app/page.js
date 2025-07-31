@@ -640,32 +640,143 @@ export default function MarwyckCopilot() {
   const [createdProjects, setCreatedProjects] = useState([
     {
       id: 1,
-      createdAt: new Date(),
+      createdAt: new Date('2025-01-15'),
       name: 'Demo File - 123 Oak Street',
       contacts: [
-        { id: 1, fullName: 'John Smith', mail: 'john@example.com', phone: '+1 234 567 8901' },
-        { id: 2, fullName: 'Sarah Johnson', mail: 'sarah@example.com', phone: '+1 234 567 8902' }
+        { id: 1, fullName: 'John Smith', mail: 'john.smith@email.com', phone: '+1 555 0101' },
+        { id: 2, fullName: 'Sarah Johnson', mail: 'sarah.johnson@email.com', phone: '+1 555 0102' }
       ],
       chatHistory: [
         {
-          id: 'chat_demo_1',
+          id: 'chat_demo_1_1',
           title: 'Property valuation request',
           messages: [
-            { id: 1, role: 'bot', content: 'Hello! I\'m your Marwyck assistant. How can I help you today?', timestamp: '2025-07-24T20:00:00.000Z' },
-            { id: 2, role: 'user', content: 'Can you help me estimate the value of this property?', timestamp: '2025-07-24T20:01:00.000Z' },
-            { id: 3, role: 'bot', content: 'Of course! Based on local market data, this property is estimated between $380,000 and $420,000.', timestamp: '2025-07-24T20:01:30.000Z' }
+            { id: 1, role: 'bot', content: 'Hello! I\'m your Marwyck assistant. How can I help you today?', timestamp: '2025-01-15T10:00:00.000Z' },
+            { id: 2, role: 'user', content: 'Can you help me estimate the value of this Oak Street property?', timestamp: '2025-01-15T10:01:00.000Z' },
+            { id: 3, role: 'bot', content: 'Based on local market data, this 3-bedroom house is estimated between $380,000 and $420,000. The recent renovations add significant value.', timestamp: '2025-01-15T10:01:30.000Z' }
           ],
-          createdAt: '2025-07-24T20:00:00.000Z'
+          createdAt: '2025-01-15T10:00:00.000Z'
         },
         {
-          id: 'chat_demo_2',
+          id: 'chat_demo_1_2',
           title: 'Document questions',
           messages: [
-            { id: 1, role: 'bot', content: 'New conversation started. How can I help you?', timestamp: '2025-07-24T19:30:00.000Z' },
-            { id: 2, role: 'user', content: 'What documents are needed for this sale?', timestamp: '2025-07-24T19:31:00.000Z' },
-            { id: 3, role: 'bot', content: 'For a real estate sale, you will need the property title, technical diagnostics, and energy certificate.', timestamp: '2025-07-24T19:31:15.000Z' }
+            { id: 1, role: 'bot', content: 'New conversation started. How can I help you?', timestamp: '2025-01-15T09:30:00.000Z' },
+            { id: 2, role: 'user', content: 'What documents do I need for this house sale?', timestamp: '2025-01-15T09:31:00.000Z' },
+            { id: 3, role: 'bot', content: 'For this residential sale, you\'ll need: property deed, recent tax assessment, home inspection report, and disclosure forms.', timestamp: '2025-01-15T09:31:15.000Z' }
           ],
-          createdAt: '2025-07-24T19:30:00.000Z'
+          createdAt: '2025-01-15T09:30:00.000Z'
+        }
+      ]
+    },
+    {
+      id: 2,
+      createdAt: new Date('2025-01-12'),
+      name: 'Demo File - Downtown Condo 4B',
+      contacts: [
+        { id: 1, fullName: 'Michael Chen', mail: 'michael.chen@email.com', phone: '+1 555 0201' },
+        { id: 2, fullName: 'Lisa Wang', mail: 'lisa.wang@email.com', phone: '+1 555 0202' }
+      ],
+      chatHistory: [
+        {
+          id: 'chat_demo_2_1',
+          title: 'Market analysis discussion',
+          messages: [
+            { id: 1, role: 'bot', content: 'Welcome! Ready to discuss your downtown condo?', timestamp: '2025-01-12T14:00:00.000Z' },
+            { id: 2, role: 'user', content: 'What\'s the current market like for downtown condos?', timestamp: '2025-01-12T14:01:00.000Z' },
+            { id: 3, role: 'bot', content: 'Downtown condos are in high demand! Average price per sqft is $450-520. Your unit\'s amenities make it very competitive.', timestamp: '2025-01-12T14:01:45.000Z' },
+            { id: 4, role: 'user', content: 'That sounds promising. When should we list it?', timestamp: '2025-01-12T14:02:30.000Z' },
+            { id: 5, role: 'bot', content: 'Spring market starts in March - perfect timing for maximum exposure and better prices.', timestamp: '2025-01-12T14:03:00.000Z' }
+          ],
+          createdAt: '2025-01-12T14:00:00.000Z'
+        }
+      ]
+    },
+    {
+      id: 3,
+      createdAt: new Date('2025-01-10'),
+      name: 'Demo File - Suburban Villa Estate',
+      contacts: [
+        { id: 1, fullName: 'Robert Davis', mail: 'robert.davis@email.com', phone: '+1 555 0301' }
+      ],
+      chatHistory: [
+        {
+          id: 'chat_demo_3_1',
+          title: 'Luxury property consultation',
+          messages: [
+            { id: 1, role: 'bot', content: 'Good afternoon! I\'m here to assist with your luxury estate.', timestamp: '2025-01-10T16:00:00.000Z' },
+            { id: 2, role: 'user', content: 'This villa has unique features. How do we price it correctly?', timestamp: '2025-01-10T16:01:00.000Z' },
+            { id: 3, role: 'bot', content: 'Luxury properties require special attention. With the pool, wine cellar, and 2-acre lot, I estimate $1.2M-$1.4M range.', timestamp: '2025-01-10T16:02:00.000Z' },
+            { id: 4, role: 'user', content: 'What about the home theater and smart home features?', timestamp: '2025-01-10T16:03:00.000Z' },
+            { id: 5, role: 'bot', content: 'Those premium features add $50-80K value. Buyers in this segment highly value integrated smart systems.', timestamp: '2025-01-10T16:03:30.000Z' }
+          ],
+          createdAt: '2025-01-10T16:00:00.000Z'
+        },
+        {
+          id: 'chat_demo_3_2',
+          title: 'Marketing strategy',
+          messages: [
+            { id: 1, role: 'bot', content: 'Let\'s discuss marketing for your estate.', timestamp: '2025-01-10T15:00:00.000Z' },
+            { id: 2, role: 'user', content: 'How do we attract the right buyers?', timestamp: '2025-01-10T15:01:00.000Z' },
+            { id: 3, role: 'bot', content: 'Professional photography, virtual tours, and luxury lifestyle marketing. I recommend targeting high-net-worth networks.', timestamp: '2025-01-10T15:02:00.000Z' }
+          ],
+          createdAt: '2025-01-10T15:00:00.000Z'
+        }
+      ]
+    },
+    {
+      id: 4,
+      createdAt: new Date('2025-01-08'),
+      name: 'Demo File - Commercial Plaza Investment',
+      contacts: [
+        { id: 1, fullName: 'Jennifer Martinez', mail: 'jennifer.martinez@realty.com', phone: '+1 555 0401' },
+        { id: 2, fullName: 'David Thompson', mail: 'david.thompson@invest.com', phone: '+1 555 0402' }
+      ],
+      chatHistory: [
+        {
+          id: 'chat_demo_4_1',
+          title: 'Investment analysis',
+          messages: [
+            { id: 1, role: 'bot', content: 'Welcome! Ready to analyze this commercial investment?', timestamp: '2025-01-08T11:00:00.000Z' },
+            { id: 2, role: 'user', content: 'What\'s the projected ROI for this plaza?', timestamp: '2025-01-08T11:01:00.000Z' },
+            { id: 3, role: 'bot', content: 'Based on current tenant leases and market rates, projecting 8.5% annual ROI. The anchor tenant provides stable income.', timestamp: '2025-01-08T11:02:00.000Z' },
+            { id: 4, role: 'user', content: 'Any risks I should consider?', timestamp: '2025-01-08T11:03:00.000Z' },
+            { id: 5, role: 'bot', content: 'Monitor lease renewal dates and local zoning changes. Overall, strong fundamentals with growing foot traffic.', timestamp: '2025-01-08T11:04:00.000Z' }
+          ],
+          createdAt: '2025-01-08T11:00:00.000Z'
+        }
+      ]
+    },
+    {
+      id: 5,
+      createdAt: new Date('2025-01-05'),
+      name: 'Demo File - Waterfront Townhouse',
+      contacts: [
+        { id: 1, fullName: 'Amanda Wilson', mail: 'amanda.wilson@email.com', phone: '+1 555 0501' },
+        { id: 2, fullName: 'Kevin Brown', mail: 'kevin.brown@email.com', phone: '+1 555 0502' }
+      ],
+      chatHistory: [
+        {
+          id: 'chat_demo_5_1',
+          title: 'Waterfront property discussion',
+          messages: [
+            { id: 1, role: 'bot', content: 'Hello! Excited to discuss your waterfront townhouse.', timestamp: '2025-01-05T13:00:00.000Z' },
+            { id: 2, role: 'user', content: 'How does waterfront location affect the value?', timestamp: '2025-01-05T13:01:00.000Z' },
+            { id: 3, role: 'bot', content: 'Waterfront properties command 25-40% premium. Your dock access and unobstructed views are major selling points.', timestamp: '2025-01-05T13:02:00.000Z' },
+            { id: 4, role: 'user', content: 'What about flood insurance considerations?', timestamp: '2025-01-05T13:03:00.000Z' },
+            { id: 5, role: 'bot', content: 'Important point! Recent elevation surveys show you\'re above base flood level. This reduces insurance costs significantly.', timestamp: '2025-01-05T13:04:00.000Z' }
+          ],
+          createdAt: '2025-01-05T13:00:00.000Z'
+        },
+        {
+          id: 'chat_demo_5_2',
+          title: 'Seasonal market timing',
+          messages: [
+            { id: 1, role: 'bot', content: 'Let\'s talk about optimal timing for your sale.', timestamp: '2025-01-05T12:00:00.000Z' },
+            { id: 2, role: 'user', content: 'When do waterfront properties sell best?', timestamp: '2025-01-05T12:01:00.000Z' },
+            { id: 3, role: 'bot', content: 'Late spring to early summer is peak season. Buyers can envision summer activities and the property shows at its best.', timestamp: '2025-01-05T12:02:00.000Z' }
+          ],
+          createdAt: '2025-01-05T12:00:00.000Z'
         }
       ]
     }
