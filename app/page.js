@@ -3978,12 +3978,54 @@ export default function MarwyckCopilot() {
                         </div>
                       </div>
 
-                      {/* Section Files - Tableau minimaliste et propre */}
+                      {/* Section Files - Tableau minimaliste avec nouveaux boutons */}
                       <div className="ml-9 mt-8">
-                        {/* Header de la section Files */}
+                        {/* Header de la section Files avec boutons et compteur */}
                         <div className="mb-6">
-                          <h3 className="text-xl font-semibold text-gray-900 mb-1">Files</h3>
-                          <p className="text-sm text-gray-500">Manage and organize project documents</p>
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <h3 className="text-xl font-semibold text-gray-900 mb-1">Files</h3>
+                              <p className="text-sm text-gray-500">Manage and organize project documents</p>
+                            </div>
+                            <div className="flex items-center space-x-3">
+                              {/* Boutons Add File et Upload */}
+                              <button 
+                                className={`inline-flex items-center px-4 py-2 text-sm font-medium rounded-[9px] border transition-colors ${
+                                  selectedFiles.length > 0 
+                                    ? 'text-gray-700 bg-white border-gray-300 hover:bg-gray-50' 
+                                    : 'text-gray-400 bg-gray-50 border-gray-200 cursor-not-allowed'
+                                }`}
+                                disabled={selectedFiles.length === 0}
+                              >
+                                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
+                                Add File
+                              </button>
+                              <button 
+                                className={`inline-flex items-center px-4 py-2 text-sm font-medium rounded-[9px] border transition-colors ${
+                                  selectedFiles.length > 0 
+                                    ? 'text-gray-700 bg-white border-gray-300 hover:bg-gray-50' 
+                                    : 'text-gray-400 bg-gray-50 border-gray-200 cursor-not-allowed'
+                                }`}
+                                disabled={selectedFiles.length === 0}
+                              >
+                                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                </svg>
+                                Upload
+                              </button>
+                            </div>
+                          </div>
+                          
+                          {/* Compteur de fichiers sélectionnés */}
+                          {selectedFiles.length > 0 && (
+                            <div className="mt-3">
+                              <p className="text-sm font-medium text-gray-700">
+                                {selectedFiles.length} file{selectedFiles.length !== 1 ? 's' : ''} selected
+                              </p>
+                            </div>
+                          )}
                         </div>
 
                         {/* Tableau des fichiers avec design minimaliste */}
@@ -4009,6 +4051,9 @@ export default function MarwyckCopilot() {
                                   <div className="flex items-center">Size</div>
                                   <div className="flex items-center">Date Added</div>
                                 </div>
+                                
+                                {/* Espace pour l'icône poubelle */}
+                                <div className="w-8"></div>
                               </div>
                             </div>
                           </div>
@@ -4018,7 +4063,7 @@ export default function MarwyckCopilot() {
                             {documentFiles.map((file, index) => (
                               <div 
                                 key={file.id} 
-                                className="px-0 py-4 hover:bg-gray-50/30 transition-colors duration-200 cursor-pointer"
+                                className="px-0 py-4 hover:bg-gray-50/30 transition-colors duration-200"
                               >
                                 <div className="flex items-center space-x-4">
                                   {/* Checkbox de sélection sans effet bleu */}
@@ -4063,46 +4108,26 @@ export default function MarwyckCopilot() {
                                       </p>
                                     </div>
                                   </div>
+                                  
+                                  {/* Icône poubelle à droite */}
+                                  <div className="flex items-center">
+                                    <button
+                                      onClick={() => {
+                                        // Logique pour supprimer le fichier
+                                        console.log('Delete file:', file.name)
+                                      }}
+                                      className="p-1 text-gray-400 hover:text-red-500 transition-colors duration-200 rounded"
+                                      title={`Delete ${file.name}`}
+                                    >
+                                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                      </svg>
+                                    </button>
+                                  </div>
                                 </div>
                               </div>
                             ))}
                           </div>
-
-                          {/* Footer avec actions sélectionnées - design simplifié */}
-                          {selectedFiles.length > 0 && (
-                            <div className="border-t border-gray-200 px-0 py-4 mt-4">
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-2">
-                                  <div className="w-5 h-5 rounded-[9px] bg-gray-500 flex items-center justify-center">
-                                    <span className="text-xs font-bold text-white">{selectedFiles.length}</span>
-                                  </div>
-                                  <p className="text-sm font-medium text-gray-700">
-                                    {selectedFiles.length} file{selectedFiles.length !== 1 ? 's' : ''} selected
-                                  </p>
-                                </div>
-                                <div className="flex items-center space-x-2">
-                                  <button className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-[9px] hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors">
-                                    <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                    </svg>
-                                    Download
-                                  </button>
-                                  <button className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-[9px] hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors">
-                                    <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
-                                    </svg>
-                                    Share
-                                  </button>
-                                  <button className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-white bg-red-600 border border-transparent rounded-[9px] hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors">
-                                    <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                    </svg>
-                                    Delete
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          )}
                         </div>
                       </div>
                     </div>
