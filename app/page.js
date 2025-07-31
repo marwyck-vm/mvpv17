@@ -195,8 +195,6 @@ export default function MarwyckCopilot() {
     return filesByProject[projectId] || []
   }
 
-  // Utilisation dynamique des documents selon le projet sélectionné
-  const documentFiles = selectedFile ? getDocumentFilesForProject(selectedFile.id) : []
 
   // Functions for managing contacts
   const addContact = () => {
