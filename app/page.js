@@ -1284,9 +1284,6 @@ export default function MarwyckCopilot() {
     return historyByProject[projectId] || []
   }
 
-  // Utilisation dynamique de l'historique selon le projet sélectionné
-  const marwyckHistory = selectedFile ? getMarwyckHistoryForProject(selectedFile.id) : []
-
   // Notes personnelles selon le projet sélectionné
   const getPersonalReminderForProject = (projectId) => {
     const remindersByProject = {
