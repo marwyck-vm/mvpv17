@@ -776,6 +776,21 @@ export default function MarwyckCopilot() {
   const [tempFileName, setTempFileName] = useState('')
   const [editingContact, setEditingContact] = useState(null)
   const [tempContactData, setTempContactData] = useState({ fullName: '', mail: '', phone: '' })
+
+  // États pour le modal d'invitation de collaborateur
+  const [showInviteModal, setShowInviteModal] = useState(false)
+  const [inviteEmail, setInviteEmail] = useState('')
+  const [inviteValidationError, setInviteValidationError] = useState(false)
+
+  // État pour la zone de rappels personnels avec valeur dynamique
+  const [personalReminder, setPersonalReminder] = useState('')
+  
+  // Effet pour mettre à jour les rappels selon le file sélectionné
+  useEffect(() => {
+    if (selectedFile) {
+      setPersonalReminder(getPersonalReminderForProject(selectedFile.id))
+    }
+  }, [selectedFile])
   
   // États pour gérer les conversations multiples
   const [currentChatMessages, setCurrentChatMessages] = useState([
