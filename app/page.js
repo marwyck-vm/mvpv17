@@ -791,7 +791,7 @@ export default function MarwyckCopilot() {
 
   // Utilisation dynamique des documents et historique selon le projet sélectionné
   const documentFiles = selectedFile ? getDocumentFilesForProject(selectedFile.id) : []
-  const marwyckHistory = selectedFile ? getMarwyckHistoryForProject(selectedFile.id) : []
+  const marwyckHistory = selectedFile && typeof getMarwyckHistoryForProject !== 'undefined' ? getMarwyckHistoryForProject(selectedFile.id) : []
   
   // États pour gérer les conversations multiples
   const [currentChatMessages, setCurrentChatMessages] = useState([
