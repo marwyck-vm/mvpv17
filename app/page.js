@@ -3978,7 +3978,7 @@ export default function MarwyckCopilot() {
                         </div>
                       </div>
 
-                      {/* Section Files - Tableau de documents inspiré du design de référence */}
+                      {/* Section Files - Tableau minimaliste et propre */}
                       <div className="ml-9 mt-8">
                         {/* Header de la section Files */}
                         <div className="mb-6">
@@ -3986,23 +3986,23 @@ export default function MarwyckCopilot() {
                           <p className="text-sm text-gray-500">Manage and organize project documents</p>
                         </div>
 
-                        {/* Tableau des fichiers avec design moderne */}
-                        <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
-                          {/* Header du tableau avec fond subtil */}
-                          <div className="bg-gray-50/70 border-b border-gray-200">
-                            <div className="px-6 py-4">
+                        {/* Tableau des fichiers avec design minimaliste */}
+                        <div className="bg-transparent">
+                          {/* Header du tableau avec ligne de séparation seulement */}
+                          <div className="border-b border-gray-200">
+                            <div className="px-0 py-4">
                               <div className="flex items-center space-x-4">
-                                {/* Checkbox pour sélectionner tout avec style moderne */}
+                                {/* Checkbox pour sélectionner tout */}
                                 <div className="flex items-center">
                                   <input
                                     type="checkbox"
                                     checked={selectedFiles.length === documentFiles.length && documentFiles.length > 0}
                                     onChange={handleSelectAllFiles}
-                                    className="w-4 h-4 text-blue-600 bg-white border-2 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                                    className="w-4 h-4 text-gray-600 bg-white border-2 border-gray-300 rounded focus:ring-gray-500 focus:border-gray-500"
                                   />
                                 </div>
                                 
-                                {/* Headers des colonnes avec font weight approprié */}
+                                {/* Headers des colonnes */}
                                 <div className="flex-1 grid grid-cols-4 gap-6 text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                   <div className="flex items-center">Name</div>
                                   <div className="flex items-center">Type</div>
@@ -4013,51 +4013,46 @@ export default function MarwyckCopilot() {
                             </div>
                           </div>
 
-                          {/* Liste des fichiers avec hover amélioré */}
-                          <div className="divide-y divide-gray-100">
+                          {/* Liste des fichiers sans bordures ni backgrounds */}
+                          <div>
                             {documentFiles.map((file, index) => (
                               <div 
                                 key={file.id} 
-                                className={`px-6 py-4 hover:bg-blue-50/30 transition-all duration-200 cursor-pointer ${
-                                  selectedFiles.includes(file.id) ? 'bg-blue-50/50 border-l-2 border-blue-500' : ''
-                                }`}
+                                className="px-0 py-4 hover:bg-gray-50/30 transition-colors duration-200 cursor-pointer"
                               >
                                 <div className="flex items-center space-x-4">
-                                  {/* Checkbox de sélection avec style moderne */}
+                                  {/* Checkbox de sélection sans effet bleu */}
                                   <div className="flex items-center">
                                     <input
                                       type="checkbox"
                                       checked={selectedFiles.includes(file.id)}
                                       onChange={() => handleFileSelect(file.id)}
-                                      className="w-4 h-4 text-blue-600 bg-white border-2 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                                      className="w-4 h-4 text-gray-600 bg-white border-2 border-gray-300 rounded focus:ring-gray-500 focus:border-gray-500"
                                     />
                                   </div>
                                   
-                                  {/* Informations du fichier avec meilleur espacement */}
+                                  {/* Informations du fichier sans icônes */}
                                   <div className="flex-1 grid grid-cols-4 gap-6 items-center">
-                                    {/* Nom du fichier avec icône plus stylisée */}
-                                    <div className="flex items-center space-x-3">
-                                      <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center">
-                                        <span className="text-base">{file.icon}</span>
-                                      </div>
+                                    {/* Nom du fichier sans icône */}
+                                    <div className="flex items-center">
                                       <div className="min-w-0 flex-1">
                                         <p className="text-sm font-medium text-gray-900 truncate">{file.name}</p>
                                       </div>
                                     </div>
                                     
-                                    {/* Type avec badge style */}
+                                    {/* Type avec badge simple */}
                                     <div>
-                                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-[9px] text-xs font-medium bg-gray-100 text-gray-800">
                                         {file.type}
                                       </span>
                                     </div>
                                     
-                                    {/* Taille avec couleur subtile */}
+                                    {/* Taille */}
                                     <div>
                                       <p className="text-sm font-medium text-gray-600">{file.size}</p>
                                     </div>
                                     
-                                    {/* Date d'ajout formatée */}
+                                    {/* Date d'ajout */}
                                     <div>
                                       <p className="text-sm text-gray-500">
                                         {new Date(file.dateAdded).toLocaleDateString('en-US', {
@@ -4073,32 +4068,32 @@ export default function MarwyckCopilot() {
                             ))}
                           </div>
 
-                          {/* Footer avec actions sélectionnées - style amélioré */}
+                          {/* Footer avec actions sélectionnées - design simplifié */}
                           {selectedFiles.length > 0 && (
-                            <div className="bg-blue-50/30 border-t border-blue-200 px-6 py-4">
+                            <div className="border-t border-gray-200 px-0 py-4 mt-4">
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-2">
-                                  <div className="w-5 h-5 rounded-full bg-blue-500 flex items-center justify-center">
+                                  <div className="w-5 h-5 rounded-[9px] bg-gray-500 flex items-center justify-center">
                                     <span className="text-xs font-bold text-white">{selectedFiles.length}</span>
                                   </div>
-                                  <p className="text-sm font-medium text-blue-900">
+                                  <p className="text-sm font-medium text-gray-700">
                                     {selectedFiles.length} file{selectedFiles.length !== 1 ? 's' : ''} selected
                                   </p>
                                 </div>
                                 <div className="flex items-center space-x-2">
-                                  <button className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
+                                  <button className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-[9px] hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors">
                                     <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                     </svg>
                                     Download
                                   </button>
-                                  <button className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
+                                  <button className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-[9px] hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors">
                                     <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
                                     </svg>
                                     Share
                                   </button>
-                                  <button className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors">
+                                  <button className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-white bg-red-600 border border-transparent rounded-[9px] hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors">
                                     <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                     </svg>
