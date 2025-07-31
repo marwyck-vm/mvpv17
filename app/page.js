@@ -4105,10 +4105,6 @@ export default function MarwyckCopilot() {
                           )}
                         </div>
                       </div>
-
-                      <p className={`ml-9 mt-6 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-500'}`}>
-                        Content coming soon
-                      </p>
                     </div>
                   </div>
                 ) : (
