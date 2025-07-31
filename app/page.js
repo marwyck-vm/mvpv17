@@ -195,8 +195,6 @@ export default function MarwyckCopilot() {
     return filesByProject[projectId] || []
   }
 
-  const documentFiles = selectedFile ? getDocumentFilesForProject(selectedFile.id) : []
-
   // Functions for managing contacts
   const addContact = () => {
     if (fileContacts.length < 2) {
