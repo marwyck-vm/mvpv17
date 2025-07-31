@@ -156,57 +156,55 @@ export default function MarwyckCopilot() {
   // État pour la sélection des fichiers
   const [selectedFiles, setSelectedFiles] = useState([])
 
-  // Données mockées pour les fichiers
-  const documentFiles = [
-    {
-      id: 1,
-      name: "Property_Contract_Final.pdf",
-      size: "2.4 MB",
-      dateAdded: "2025-01-15",
-      type: "PDF Document",
-      icon: "📄"
-    },
-    {
-      id: 2,
-      name: "Insurance_Policy_2025.docx",
-      size: "1.8 MB", 
-      dateAdded: "2025-01-14",
-      type: "Word Document",
-      icon: "📝"
-    },
-    {
-      id: 3,
-      name: "Property_Photos.zip",
-      size: "15.2 MB",
-      dateAdded: "2025-01-13",
-      type: "Archive",
-      icon: "🗂️"
-    },
-    {
-      id: 4,
-      name: "Market_Analysis_Report.xlsx",
-      size: "3.1 MB",
-      dateAdded: "2025-01-12",
-      type: "Excel Spreadsheet",
-      icon: "📊"
-    },
-    {
-      id: 5,
-      name: "Client_ID_Copy.jpg",
-      size: "850 KB",
-      dateAdded: "2025-01-11",
-      type: "Image",
-      icon: "🖼️"
-    },
-    {
-      id: 6,
-      name: "Mortgage_Pre_Approval.pdf",
-      size: "1.2 MB",
-      dateAdded: "2025-01-10",
-      type: "PDF Document", 
-      icon: "📄"
+  // Données mockées pour les fichiers selon le file sélectionné
+  const getDocumentFilesForProject = (projectId) => {
+    const filesByProject = {
+      1: [ // Oak Street
+        { id: 1, name: "Property_Deed_Oak_Street.pdf", size: "2.4 MB", dateAdded: "2025-01-15", type: "Legal Document", icon: "📄" },
+        { id: 2, name: "Home_Inspection_Report.pdf", size: "3.2 MB", dateAdded: "2025-01-14", type: "Report", icon: "📝" },
+        { id: 3, name: "Property_Photos_Oak.zip", size: "18.5 MB", dateAdded: "2025-01-13", type: "Archive", icon: "🗂️" },
+        { id: 4, name: "Tax_Assessment_2024.pdf", size: "856 KB", dateAdded: "2025-01-12", type: "Tax Document", icon: "📄" },
+        { id: 5, name: "Renovation_Receipts.xlsx", size: "1.8 MB", dateAdded: "2025-01-11", type: "Financial", icon: "📊" },
+        { id: 6, name: "Neighborhood_Analysis.pdf", size: "2.1 MB", dateAdded: "2025-01-10", type: "Market Report", icon: "📄" }
+      ],
+      2: [ // Downtown Condo
+        { id: 1, name: "Condo_Association_Docs.pdf", size: "4.1 MB", dateAdded: "2025-01-12", type: "Legal Document", icon: "📄" },
+        { id: 2, name: "Floor_Plans_4B.pdf", size: "2.8 MB", dateAdded: "2025-01-11", type: "Blueprint", icon: "📝" },
+        { id: 3, name: "Building_Amenities_Tour.mp4", size: "125 MB", dateAdded: "2025-01-10", type: "Video", icon: "🎥" },
+        { id: 4, name: "HOA_Financial_Statement.xlsx", size: "1.2 MB", dateAdded: "2025-01-09", type: "Financial", icon: "📊" },
+        { id: 5, name: "Downtown_Market_Trends.pdf", size: "3.5 MB", dateAdded: "2025-01-08", type: "Market Report", icon: "📄" },
+        { id: 6, name: "Unit_Photos_Professional.zip", size: "22.3 MB", dateAdded: "2025-01-07", type: "Archive", icon: "🗂️" }
+      ],
+      3: [ // Suburban Villa
+        { id: 1, name: "Villa_Estate_Survey.pdf", size: "5.2 MB", dateAdded: "2025-01-10", type: "Survey", icon: "📄" },
+        { id: 2, name: "Luxury_Appraisal_Report.pdf", size: "4.8 MB", dateAdded: "2025-01-09", type: "Appraisal", icon: "📝" },
+        { id: 3, name: "Smart_Home_Documentation.pdf", size: "3.1 MB", dateAdded: "2025-01-08", type: "Technical", icon: "📄" },
+        { id: 4, name: "Wine_Cellar_Inventory.xlsx", size: "892 KB", dateAdded: "2025-01-07", type: "Inventory", icon: "📊" },
+        { id: 5, name: "Landscape_Architecture_Plans.pdf", size: "6.7 MB", dateAdded: "2025-01-06", type: "Design", icon: "📄" },
+        { id: 6, name: "Estate_Photography_Portfolio.zip", size: "45.2 MB", dateAdded: "2025-01-05", type: "Archive", icon: "🗂️" }
+      ],
+      4: [ // Commercial Plaza
+        { id: 1, name: "Commercial_Lease_Agreements.pdf", size: "8.4 MB", dateAdded: "2025-01-08", type: "Legal Document", icon: "📄" },
+        { id: 2, name: "Tenant_Financial_Analysis.xlsx", size: "2.9 MB", dateAdded: "2025-01-07", type: "Financial", icon: "📊" },
+        { id: 3, name: "Property_Management_Report.pdf", size: "3.7 MB", dateAdded: "2025-01-06", type: "Management", icon: "📝" },
+        { id: 4, name: "Traffic_Study_Analysis.pdf", size: "4.1 MB", dateAdded: "2025-01-05", type: "Study", icon: "📄" },
+        { id: 5, name: "Plaza_Layout_CAD_Files.dwg", size: "12.8 MB", dateAdded: "2025-01-04", type: "CAD File", icon: "🗂️" },
+        { id: 6, name: "Investment_ROI_Projections.xlsx", size: "1.6 MB", dateAdded: "2025-01-03", type: "Financial", icon: "📊" }
+      ],
+      5: [ // Waterfront Townhouse
+        { id: 1, name: "Waterfront_Property_Title.pdf", size: "3.2 MB", dateAdded: "2025-01-05", type: "Legal Document", icon: "📄" },
+        { id: 2, name: "Flood_Zone_Certificate.pdf", size: "1.8 MB", dateAdded: "2025-01-04", type: "Certificate", icon: "📝" },
+        { id: 3, name: "Dock_Permits_Marina_Rights.pdf", size: "2.1 MB", dateAdded: "2025-01-03", type: "Permit", icon: "📄" },
+        { id: 4, name: "Waterfront_Restrictions.pdf", size: "1.4 MB", dateAdded: "2025-01-02", type: "Legal Document", icon: "📄" },
+        { id: 5, name: "Marine_Survey_Report.pdf", size: "4.6 MB", dateAdded: "2025-01-01", type: "Survey", icon: "📝" },
+        { id: 6, name: "Waterfront_Lifestyle_Photos.zip", size: "28.9 MB", dateAdded: "2024-12-30", type: "Archive", icon: "🗂️" }
+      ]
     }
-  ]
+    return filesByProject[projectId] || []
+  }
+
+  // Utilisation dynamique des documents selon le projet sélectionné
+  const documentFiles = selectedFile ? getDocumentFilesForProject(selectedFile.id) : []
 
   // Functions for managing contacts
   const addContact = () => {
