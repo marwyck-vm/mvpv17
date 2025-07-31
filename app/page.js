@@ -1250,129 +1250,48 @@ export default function MarwyckCopilot() {
     { id: 12, type: 'call', contact: 'Isabelle Petit', message: 'Closing date coordination', date: '16/07/2025', time: '05:20 PM', status: 'completed' }
   ]
 
-  // Données pour l'historique Marwyck
-  const marwyckHistory = [
-    { 
-      id: 1, 
-      type: 'call', 
-      contact: 'John', 
-      action: 'Called', 
-      date: '07/12', 
-      time: '11:03', 
-      status: 'completed',
-      details: {
-        duration: '8 minutes',
-        outcome: 'Appointment confirmed for tomorrow at 2 PM',
-        notes: 'Client expressed interest in the downtown property. Mentioned budget concerns but seemed motivated.',
-        nextAction: 'Send property details and market analysis'
-      }
-    },
-    { 
-      id: 2, 
-      type: 'sms', 
-      contact: 'Marie', 
-      action: 'SMS sent to', 
-      date: '07/11', 
-      time: '15:30', 
-      status: 'delivered',
-      details: {
-        message: 'Hi Marie, just a reminder about our property viewing tomorrow at 3 PM. Please confirm.',
-        response: 'Thanks! Confirmed. See you tomorrow.',
-        deliveryTime: '2 seconds',
-        nextAction: 'Prepare property presentation materials'
-      }
-    },
-    { 
-      id: 3, 
-      type: 'email', 
-      contact: 'Paul', 
-      action: 'Email sent to', 
-      date: '07/10', 
-      time: '09:15', 
-      status: 'sent',
-      details: {
-        subject: 'Market Analysis Report - Downtown Property',
-        content: 'Comprehensive market analysis with comparable properties and pricing recommendations.',
-        attachments: '3 files (PDF, Excel, Images)',
-        nextAction: 'Follow up in 2 days if no response'
-      }
-    },
-    { 
-      id: 4, 
-      type: 'call', 
-      contact: 'Sophie', 
-      action: 'Called', 
-      date: '07/09', 
-      time: '14:22', 
-      status: 'completed',
-      details: {
-        duration: '12 minutes',
-        outcome: 'Negotiation successful - price reduced by €15,000',
-        notes: 'Seller agreed to repairs and faster closing date. Very positive conversation.',
-        nextAction: 'Draft updated contract and send to both parties'
-      }
-    },
-    { 
-      id: 5, 
-      type: 'sms', 
-      contact: 'Michel', 
-      action: 'SMS sent to', 
-      date: '07/08', 
-      time: '16:45', 
-      status: 'delivered',
-      details: {
-        message: 'Document package ready for pickup. Available Monday-Friday 9 AM - 5 PM.',
-        response: 'Perfect, will come Tuesday morning.',
-        deliveryTime: '1 second',
-        nextAction: 'Prepare document package and schedule pickup'
-      }
-    },
-    { 
-      id: 6, 
-      type: 'email', 
-      contact: 'Clara', 
-      action: 'Email sent to', 
-      date: '07/07', 
-      time: '10:30', 
-      status: 'sent',
-      details: {
-        subject: 'Property Inspection Report',
-        content: 'Detailed inspection findings with recommendations and estimated repair costs.',
-        attachments: '5 files (Photos, Report, Estimates)',
-        nextAction: 'Schedule follow-up meeting to discuss findings'
-      }
-    },
-    { 
-      id: 7, 
-      type: 'call', 
-      contact: 'Thomas', 
-      action: 'Called', 
-      date: '07/06', 
-      time: '13:15', 
-      status: 'completed',
-      details: {
-        duration: '15 minutes',
-        outcome: 'Loan pre-approval confirmed - ready to proceed',
-        notes: 'Bank approved full amount. Client very excited and ready to make offer.',
-        nextAction: 'Prepare offer letter and schedule property visit'
-      }
-    },
-    { 
-      id: 8, 
-      type: 'sms', 
-      contact: 'Julie', 
-      action: 'SMS sent to', 
-      date: '07/05', 
-      time: '11:20', 
-      status: 'delivered',
-      details: {
-        message: 'Keys ready for property viewing. Meet at main entrance at 2 PM sharp.',
-        response: 'On my way! See you in 10 minutes.',
-        deliveryTime: '3 seconds',
-        nextAction: 'Conduct property tour and gather feedback'
-      }
+  // Données pour l'historique Marwyck selon le projet sélectionné
+  const getMarwyckHistoryForProject = (projectId) => {
+    const historyByProject = {
+      1: [ // Oak Street
+        { id: 1, type: 'call', contact: 'John', action: 'Called', date: '01/15', time: '11:03', status: 'completed', details: { duration: '8 minutes', outcome: 'Oak Street viewing scheduled for tomorrow', notes: 'Client excited about the renovated kitchen and backyard space', nextAction: 'Prepare property presentation materials' }},
+        { id: 2, type: 'sms', contact: 'Sarah', action: 'SMS sent to', date: '01/14', time: '15:30', status: 'delivered', details: { message: 'Hi Sarah, property inspection completed. Report available in your portal', response: 'Thanks! When can we discuss the findings?', deliveryTime: '2 seconds', nextAction: 'Schedule inspection review meeting' }},
+        { id: 3, type: 'email', contact: 'John', action: 'Email sent to', date: '01/13', time: '09:15', status: 'sent', details: { subject: 'Oak Street Property Valuation Report', content: 'Detailed market analysis showing strong appreciation potential', attachments: '3 files (Market report, Comparables, Photos)', nextAction: 'Follow up on pricing strategy' }}
+      ],
+      2: [ // Downtown Condo
+        { id: 1, type: 'call', contact: 'Michael', action: 'Called', date: '01/12', time: '14:22', status: 'completed', details: { duration: '12 minutes', outcome: 'Discussed downtown condo market conditions', notes: 'Strong demand for units with amenities. Building gym and rooftop very appealing', nextAction: 'Send comparative market analysis' }},
+        { id: 2, type: 'email', contact: 'Lisa', action: 'Email sent to', date: '01/11', time: '10:30', status: 'sent', details: { subject: 'Condo 4B Marketing Strategy', content: 'Professional photos scheduled, virtual tour planned', attachments: '2 files (Marketing plan, Timeline)', nextAction: 'Coordinate photography session' }}
+      ],
+      3: [ // Suburban Villa
+        { id: 1, type: 'call', contact: 'Robert', action: 'Called', date: '01/10', time: '16:15', status: 'completed', details: { duration: '15 minutes', outcome: 'Luxury estate pricing strategy approved', notes: 'Wine cellar and smart home features are major selling points', nextAction: 'Arrange high-end photography' }},
+        { id: 2, type: 'sms', contact: 'Robert', action: 'SMS sent to', date: '01/09', time: '11:20', status: 'delivered', details: { message: 'Luxury market report ready. Your estate shows excellent potential', response: 'Perfect! Let\'s schedule a detailed review', deliveryTime: '1 second', nextAction: 'Prepare luxury marketing materials' }}
+      ],
+      4: [ // Commercial Plaza
+        { id: 1, type: 'call', contact: 'Jennifer', action: 'Called', date: '01/08', time: '11:45', status: 'completed', details: { duration: '20 minutes', outcome: 'Commercial investment analysis completed', notes: 'Strong tenant mix, excellent foot traffic location', nextAction: 'Prepare ROI projections presentation' }},
+        { id: 2, type: 'email', contact: 'David', action: 'Email sent to', date: '01/07', time: '16:30', status: 'sent', details: { subject: 'Plaza Investment Opportunity Analysis', content: 'Comprehensive financial analysis with 5-year projections', attachments: '4 files (Financial models, Tenant profiles, Market data)', nextAction: 'Schedule investor presentation' }}
+      ],
+      5: [ // Waterfront Townhouse
+        { id: 1, type: 'call', contact: 'Amanda', action: 'Called', date: '01/05', time: '13:15', status: 'completed', details: { duration: '10 minutes', outcome: 'Waterfront property details confirmed', notes: 'Dock rights and flood insurance advantages discussed', nextAction: 'Prepare waterfront marketing package' }},
+        { id: 2, type: 'sms', contact: 'Kevin', action: 'SMS sent to', date: '01/04', time: '09:45', status: 'delivered', details: { message: 'Flood zone certificate received. Great news - you\'re in preferred zone!', response: 'That\'s fantastic! Lower insurance costs?', deliveryTime: '3 seconds', nextAction: 'Calculate insurance savings for buyer presentation' }}
+      ]
     }
-  ]
+    return historyByProject[projectId] || []
+  }
+
+  // Utilisation dynamique de l'historique selon le projet sélectionné
+  const marwyckHistory = selectedFile ? getMarwyckHistoryForProject(selectedFile.id) : []
+
+  // Notes personnelles selon le projet sélectionné
+  const getPersonalReminderForProject = (projectId) => {
+    const remindersByProject = {
+      1: 'Oak Street follow-up:\n• Schedule final walkthrough with John & Sarah\n• Verify renovation permits are complete\n• Prepare closing documentation\n• Contact mortgage broker for rate update',
+      2: 'Downtown Condo tasks:\n• Professional photography session Thursday 2PM\n• Review HOA financials with Lisa\n• Coordinate building amenity tour for buyers\n• Check comparable unit sales this month',
+      3: 'Villa Estate priorities:\n• High-end marketing materials needed\n• Wine cellar appraisal scheduled\n• Smart home demo video creation\n• Luxury broker network outreach',
+      4: 'Commercial Plaza action items:\n• Investor presentation deck\n• Tenant lease renewal timeline\n• Traffic count verification\n• Zoning compliance check',
+      5: 'Waterfront property notes:\n• Marine survey results pending\n• Dock permit transfer process\n• Seasonal marketing timing plan\n• Insurance benefits calculation'
+    }
+    return remindersByProject[projectId] || 'Add your personal reminders for this project...'
+  }
 
   // Fonction pour obtenir l'icône selon le type d'action Marwyck
   const getMarwyckActionIcon = (type) => {
