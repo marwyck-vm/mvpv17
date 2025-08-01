@@ -4080,12 +4080,8 @@ export default function MarwyckCopilot() {
                             
                             {/* Boutons Add File et Upload avec hauteur encore plus réduite */}
                             <button 
-                              className={`inline-flex items-center px-3 py-1 text-sm font-medium rounded-[9px] border transition-colors ${
-                                selectedFiles.length > 0 
-                                  ? 'text-gray-700 bg-white border-gray-300 hover:bg-gray-50' 
-                                  : 'text-gray-400 bg-gray-50 border-gray-200 cursor-not-allowed'
-                              }`}
-                              disabled={selectedFiles.length === 0}
+                              onClick={createNewProject}
+                              className="inline-flex items-center px-3 py-1 text-sm font-medium rounded-[9px] border transition-colors text-gray-700 bg-white border-gray-300 hover:bg-gray-50"
                             >
                               <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
