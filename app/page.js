@@ -824,6 +824,9 @@ export default function MarwyckCopilot() {
   // États pour le modal Team
   const [showTeamModal, setShowTeamModal] = useState(false)
 
+  // États pour le modal de suppression de fichier
+  const [showDeleteFileModal, setShowDeleteFileModal] = useState(false)
+
   // État pour la zone de rappels personnels avec valeur dynamique
   const [personalReminder, setPersonalReminder] = useState('')
   
