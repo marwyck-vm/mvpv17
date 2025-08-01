@@ -820,6 +820,9 @@ export default function MarwyckCopilot() {
   const [inviteEmail, setInviteEmail] = useState('')
   const [inviteValidationError, setInviteValidationError] = useState(false)
 
+  // États pour le modal Team
+  const [showTeamModal, setShowTeamModal] = useState(false)
+
   // État pour la zone de rappels personnels avec valeur dynamique
   const [personalReminder, setPersonalReminder] = useState('')
   
