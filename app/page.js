@@ -69,11 +69,7 @@ import {
   LockKeyhole,
   LockKeyholeOpen,
   PenTool,
-  Shield,
-  Upload,
-  Copy,
-  Download,
-  Share
+  Shield
 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
