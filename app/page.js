@@ -670,6 +670,7 @@ export default function MarwyckCopilot() {
       id: 1,
       createdAt: new Date('2025-01-15'),
       name: 'Demo File - 123 Oak Street',
+      collaborators: ['marie.dubois@marwyck.com', 'jean.martin@marwyck.com'],
       contacts: [
         { id: 1, fullName: 'John Smith', mail: 'john.smith@email.com', phone: '+1 555 0101' },
         { id: 2, fullName: 'Sarah Johnson', mail: 'sarah.johnson@email.com', phone: '+1 555 0102' }
