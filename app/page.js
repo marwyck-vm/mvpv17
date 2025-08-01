@@ -834,11 +834,7 @@ export default function MarwyckCopilot() {
   const [squareFootage, setSquareFootage] = useState('1,200 sq ft')
   const [bedroomsBathrooms, setBedroomsBathrooms] = useState('3 bed, 2 bath')
   const [propertyDescription, setPropertyDescription] = useState('Modern home with updated kitchen, spacious living areas, and beautiful backyard perfect for families.')
-  const [generatedListing, setGeneratedListing] = useState({
-    title: 'Charming 3-bedroom, 2-bathroom house in the sought-after Downtown Montreal neighborhood',
-    description: 'This 1,200 sq ft property offers an inviting living area, a modern kitchen with stainless steel appliances, and a spacious backyard perfect for outdoor gatherings. Modern home with updated kitchen, spacious living areas, and beautiful backyard perfect for families.',
-    images: []
-  })
+  const [generatedListing, setGeneratedListing] = useState(null)
   const [isGenerating, setIsGenerating] = useState(false)
 
   // État pour la zone de rappels personnels avec valeur dynamique
