@@ -3396,6 +3396,17 @@ export default function MarwyckCopilot() {
                               <ChevronLeft className="w-5 h-5" />
                             </button>
                           </div>
+
+                          {/* Bouton de suppression - en haut à gauche */}
+                          <div className="mr-4">
+                            <button
+                              onClick={() => setShowDeleteFileModal(true)}
+                              className="text-gray-400 hover:text-red-500 transition-colors p-1.5 rounded-[9px] hover:bg-red-50"
+                              title="Delete file"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
                           
                           {/* Titre New File - sa propre boîte alignée avec les contacts */}
                           <div className="group flex items-center space-x-3 flex-1 mt-2">
