@@ -3407,6 +3407,7 @@ export default function MarwyckCopilot() {
                         
                         {/* Titre du fichier */}
                         <div className="ml-9 mt-4">
+                          <div className="group flex items-center space-x-3">
                             {editingFileName ? (
                               <div className="flex items-center space-x-2">
                                 <input
