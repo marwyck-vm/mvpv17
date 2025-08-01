@@ -3099,7 +3099,7 @@ export default function MarwyckCopilot() {
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
-                        <div className={`p-3 rounded-[9px] ${darkMode ? 'bg-gray-700' : 'bg-gray-50'} border-l-4 border-gray-500`}>
+                        <div className={`p-3 rounded-[9px] ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
                           <div className="flex items-start space-x-3">
                             <AlertTriangle className="w-4 h-4 text-gray-500 mt-0.5" />
                             <div>
@@ -3113,7 +3113,7 @@ export default function MarwyckCopilot() {
                           </div>
                         </div>
                         
-                        <div className={`p-3 rounded-[9px] ${darkMode ? 'bg-gray-700' : 'bg-gray-50'} border-l-4 border-gray-500`}>
+                        <div className={`p-3 rounded-[9px] ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
                           <div className="flex items-start space-x-3">
                             <Clock className="w-4 h-4 text-gray-500 mt-0.5" />
                             <div>
@@ -3127,7 +3127,7 @@ export default function MarwyckCopilot() {
                           </div>
                         </div>
                         
-                        <div className={`p-3 rounded-[9px] ${darkMode ? 'bg-gray-700' : 'bg-gray-50'} border-l-4 border-gray-500`}>
+                        <div className={`p-3 rounded-[9px] ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
                           <div className="flex items-start space-x-3">
                             <Info className="w-4 h-4 text-gray-500 mt-0.5" />
                             <div>
