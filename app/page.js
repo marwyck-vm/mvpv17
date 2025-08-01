@@ -5573,6 +5573,58 @@ export default function MarwyckCopilot() {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Modal Team */}
+      <Dialog open={showTeamModal} onOpenChange={setShowTeamModal} modal={false}>
+        <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
+          <DialogHeader>
+            <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>
+              Team Members
+            </DialogTitle>
+          </DialogHeader>
+          
+          <div className="mt-4">
+            {selectedFile && selectedFile.collaborators && selectedFile.collaborators.length > 0 ? (
+              <div className="space-y-3">
+                {selectedFile.collaborators.map((email, index) => (
+                  <div key={index} className={`flex items-center justify-between p-3 rounded-[9px] ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
+                    <div className="flex items-center space-x-3">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-gray-600' : 'bg-gray-200'}`}>
+                        <User className={`w-4 h-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`} />
+                      </div>
+                      <span className={`text-sm ${darkMode ? 'text-gray-200' : 'text-gray-700'}`}>
+                        {email}
+                      </span>
+                    </div>
+                    <button
+                      onClick={() => removeCollaboratorFromFile(email)}
+                      className={`p-1 rounded-[6px] transition-colors ${darkMode ? 'text-gray-400 hover:text-red-400 hover:bg-gray-600' : 'text-gray-500 hover:text-red-600 hover:bg-gray-100'}`}
+                      title="Remove collaborator"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className={`text-center py-8 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                <Users className={`w-12 h-12 mx-auto mb-3 ${darkMode ? 'text-gray-600' : 'text-gray-300'}`} />
+                <p className="text-sm">No team members added to this file yet</p>
+              </div>
+            )}
+          </div>
+          
+          <div className="flex justify-end mt-6">
+            <Button 
+              variant="outline" 
+              onClick={() => setShowTeamModal(false)}
+              className={`rounded-[9px] px-6 ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-50'}`}
+            >
+              Close
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
