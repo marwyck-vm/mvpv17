@@ -831,6 +831,16 @@ export default function MarwyckCopilot() {
   // États pour le modal de suppression de fichier
   const [showDeleteFileModal, setShowDeleteFileModal] = useState(false)
 
+  // États pour la page Studio
+  const [uploadedImages, setUploadedImages] = useState([])
+  const [propertyType, setPropertyType] = useState('House')
+  const [propertyAddress, setPropertyAddress] = useState('')
+  const [squareFootage, setSquareFootage] = useState('')
+  const [bedroomsBathrooms, setBedroomsBathrooms] = useState('')
+  const [propertyDescription, setPropertyDescription] = useState('')
+  const [generatedListing, setGeneratedListing] = useState(null)
+  const [isGenerating, setIsGenerating] = useState(false)
+
   // État pour la zone de rappels personnels avec valeur dynamique
   const [personalReminder, setPersonalReminder] = useState('')
   
