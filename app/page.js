@@ -3301,7 +3301,7 @@ export default function MarwyckCopilot() {
                             <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                               123 Oak Street • 10:00 AM
                             </p>
-                            <Badge className={`mt-1 text-xs ${darkMode ? 'bg-gray-700 text-gray-300 border-gray-600' : 'bg-gray-100 text-gray-800 border-gray-300'}`}>
+                            <Badge className={`mt-1 text-xs rounded-full ${darkMode ? 'bg-gray-700 text-gray-300 border-gray-600' : 'bg-gray-100 text-gray-800 border-gray-300'}`}>
                               High Priority
                             </Badge>
                           </div>
@@ -3321,7 +3321,7 @@ export default function MarwyckCopilot() {
                             <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                               Downtown Condo 4B • 2:00 PM
                             </p>
-                            <Badge className={`mt-1 text-xs ${darkMode ? 'bg-gray-700 text-gray-300 border-gray-600' : 'bg-gray-100 text-gray-800 border-gray-300'}`}>
+                            <Badge className={`mt-1 text-xs rounded-full ${darkMode ? 'bg-gray-700 text-gray-300 border-gray-600' : 'bg-gray-100 text-gray-800 border-gray-300'}`}>
                               Meeting
                             </Badge>
                           </div>
@@ -3341,7 +3341,7 @@ export default function MarwyckCopilot() {
                             <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                               Waterfront Townhouse • 4:00 PM
                             </p>
-                            <Badge className={`mt-1 text-xs ${darkMode ? 'bg-gray-700 text-gray-300 border-gray-600' : 'bg-gray-100 text-gray-800 border-gray-300'}`}>
+                            <Badge className={`mt-1 text-xs rounded-full ${darkMode ? 'bg-gray-700 text-gray-300 border-gray-600' : 'bg-gray-100 text-gray-800 border-gray-300'}`}>
                               Contract
                             </Badge>
                           </div>
