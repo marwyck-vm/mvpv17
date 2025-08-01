@@ -3378,8 +3378,8 @@ export default function MarwyckCopilot() {
                   <div>
                     <div className="mb-8">
                         <div className="mb-4">
-                        <div className="flex items-center justify-between">
-                          {/* Bouton de retour - à gauche */}
+                        {/* Bouton de retour - seul sur sa ligne */}
+                        <div className="mb-4">
                           <button
                             onClick={() => {
                               setSelectedFile(null)
@@ -3394,21 +3394,13 @@ export default function MarwyckCopilot() {
                           >
                             <ChevronLeft className="w-5 h-5" />
                           </button>
-
-                          {/* Bouton de suppression - à droite */}
-                          <button
-                            onClick={() => setShowDeleteFileModal(true)}
-                            className="text-gray-400 hover:text-red-500 transition-colors p-1.5 rounded-[9px] hover:bg-red-50"
-                            title="Delete file"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
                         </div>
                         
-                        {/* Titre du fichier */}
-                        <div className="ml-9 mt-4">
-                          <div className="group flex items-center space-x-3">
-                            {editingFileName ? (
+                        {/* Titre du fichier avec bouton de suppression sur la même ligne */}
+                        <div className="ml-9">
+                          <div className="flex items-center justify-between">
+                            <div className="group flex items-center space-x-3">
+                              {editingFileName ? (
                               <div className="flex items-center space-x-2">
                                 <input
                                   type="text"
