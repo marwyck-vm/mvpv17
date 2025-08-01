@@ -3578,8 +3578,8 @@ export default function MarwyckCopilot() {
                     </div>
                   </div>
                   
-                  {/* Colonne de droite : Generated Listing */}
-                  <div className={`bg-white rounded-2xl shadow-sm border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'border-gray-200'}`}>
+                  {/* Colonne de droite : Generated Listing avec hauteur réduite */}
+                  <div className={`bg-white rounded-2xl shadow-sm border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'border-gray-200'} h-fit`}>
                     {!generatedListing ? (
                       <div>
                         <h2 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} mb-4`}>
@@ -3615,10 +3615,12 @@ export default function MarwyckCopilot() {
                           {generatedListing.title}
                         </h3>
                         
-                        {/* Description du listing */}
-                        <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'} leading-relaxed mb-6`}>
-                          {generatedListing.description}
-                        </p>
+                        {/* Description du listing avec scroll bar */}
+                        <div className={`max-h-32 overflow-y-auto mb-6 pr-2 ${darkMode ? 'scrollbar-dark' : 'scrollbar-light'}`}>
+                          <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'} leading-relaxed`}>
+                            {generatedListing.description}
+                          </p>
+                        </div>
                         
                         {/* Boutons d'action alignés verticalement */}
                         <div className="space-y-3">
