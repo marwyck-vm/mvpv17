@@ -1351,6 +1351,21 @@ export default function MarwyckCopilot() {
     setInviteValidationError(false)
   }
 
+  // Fonction pour supprimer un collaborateur du fichier
+  const removeCollaboratorFromFile = (collaboratorEmail) => {
+    if (selectedFile) {
+      const updatedCollaborators = (selectedFile.collaborators || []).filter(email => email !== collaboratorEmail)
+      const updatedFile = { ...selectedFile, collaborators: updatedCollaborators }
+      
+      setSelectedFile(updatedFile)
+      setCreatedProjects(prev => 
+        prev.map(project => 
+          project.id === selectedFile.id ? updatedFile : project
+        )
+      )
+    }
+  }
+
   // Fonctions pour gérer la sélection des fichiers
   const handleFileSelect = (fileId) => {
     setSelectedFiles(prev => 
