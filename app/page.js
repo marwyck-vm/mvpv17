@@ -5659,19 +5659,20 @@ export default function MarwyckCopilot() {
       <Dialog open={showDeleteFileModal} onOpenChange={setShowDeleteFileModal} modal={false}>
         <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
           <DialogHeader>
-            <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>
-              Delete File
-            </DialogTitle>
+            <div className="flex justify-center mb-4">
+              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                <Trash2 className="w-6 h-6 text-red-600" />
+              </div>
+            </div>
           </DialogHeader>
           
           <div className="mt-4">
-            <div className={`flex items-start space-x-3 p-4 rounded-[9px] ${darkMode ? 'bg-gray-700' : 'bg-red-50'}`}>
-              <AlertTriangle className={`w-5 h-5 mt-0.5 ${darkMode ? 'text-red-400' : 'text-red-500'}`} />
+            <div className={`p-4 rounded-[9px] ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
               <div>
-                <p className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-900'}`}>
+                <p className={`text-sm font-medium text-center ${darkMode ? 'text-gray-200' : 'text-gray-900'}`}>
                   This action cannot be undone
                 </p>
-                <p className={`text-sm mt-1 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                <p className={`text-sm mt-2 text-center ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                   Are you sure you want to delete "{selectedFile?.name}"? 
                   {selectedFile?.collaborators && selectedFile.collaborators.length > 0 && (
                     <span> All collaborators will lose access to this file.</span>
