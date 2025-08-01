@@ -1412,8 +1412,8 @@ export default function MarwyckCopilot() {
     // Simulation de génération de listing avec IA
     setTimeout(() => {
       const mockListing = {
-        title: `${propertyType} in ${propertyAddress}`,
-        description: `Beautiful ${bedroomsBathrooms ? bedroomsBathrooms.toLowerCase() + ' ' : ''}${propertyType.toLowerCase()} ${squareFootage ? `with ${squareFootage} sq ft ` : ''}located in ${propertyAddress}. ${propertyDescription || 'This property offers modern amenities and comfortable living spaces perfect for families or professionals.'}`,
+        title: `Charming ${bedroomsBathrooms ? bedroomsBathrooms.toLowerCase() + ' ' : '3-bedroom, 2-bathroom '}${propertyType.toLowerCase()} in the sought-after ${propertyAddress} neighborhood`,
+        description: `This ${squareFootage || '1,000'} sq ft property offers an inviting living area, a modern kitchen with stainless steel appliances, and a spacious backyard perfect for outdoor gatherings. ${propertyDescription || 'Perfect for families looking for comfort and convenience in a desirable location.'}`,
         images: uploadedImages.slice(0, 3)
       }
       setGeneratedListing(mockListing)
