@@ -3166,7 +3166,7 @@ export default function MarwyckCopilot() {
                             </div>
                           </div>
                           <div className="flex justify-end">
-                            <button className={`bg-black hover:bg-gray-800 text-white text-sm py-2 px-4 rounded-[9px] transition-colors ${darkMode ? 'bg-white text-black hover:bg-gray-200' : ''}`}>
+                            <button className={`bg-black hover:bg-gray-800 text-white text-xs py-1.5 px-3 rounded-[9px] transition-colors ${darkMode ? 'bg-white text-black hover:bg-gray-200' : ''}`}>
                               Accept
                             </button>
                           </div>
@@ -3185,7 +3185,7 @@ export default function MarwyckCopilot() {
                             </div>
                           </div>
                           <div className="flex justify-end">
-                            <button className={`bg-black hover:bg-gray-800 text-white text-sm py-2 px-4 rounded-[9px] transition-colors ${darkMode ? 'bg-white text-black hover:bg-gray-200' : ''}`}>
+                            <button className={`bg-black hover:bg-gray-800 text-white text-xs py-1.5 px-3 rounded-[9px] transition-colors ${darkMode ? 'bg-white text-black hover:bg-gray-200' : ''}`}>
                               Accept
                             </button>
                           </div>
