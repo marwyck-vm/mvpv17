@@ -1370,6 +1370,23 @@ export default function MarwyckCopilot() {
     }
   }
 
+  // Fonction pour supprimer complètement un fichier
+  const deleteSelectedFile = () => {
+    if (selectedFile) {
+      // Supprimer le fichier de la liste des projets
+      setCreatedProjects(prev => prev.filter(project => project.id !== selectedFile.id))
+      
+      // Retourner à la vue principale Vault
+      setSelectedFile(null)
+      setCurrentChatMessages([
+        { id: Date.now(), role: 'bot', content: 'Hello! I\'m your Marwyck assistant. How can I help you today?', timestamp: new Date().toISOString() }
+      ])
+      setCurrentChatInput('')
+      setSelectedChatHistory(null)
+      setShowDeleteFileModal(false)
+    }
+  }
+
   // Fonctions pour gérer la sélection des fichiers
   const handleFileSelect = (fileId) => {
     setSelectedFiles(prev => 
