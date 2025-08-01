@@ -3401,113 +3401,80 @@ export default function MarwyckCopilot() {
                   Studio
                 </h1>
                 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  {/* Section Upload Photos */}
-                  <div className={`bg-white rounded-2xl shadow-sm border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'border-gray-200'}`}>
-                    <h2 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} mb-4`}>
-                      Upload Photos
-                    </h2>
-                    
-                    <div 
-                      className={`border-2 border-dashed rounded-xl p-8 text-center transition-colors cursor-pointer ${
-                        darkMode ? 'border-gray-600 hover:border-gray-500 bg-gray-700' : 'border-gray-300 hover:border-gray-400 bg-gray-50'
-                      }`}
-                      onClick={() => document.getElementById('photo-upload').click()}
-                      onDragOver={(e) => e.preventDefault()}
-                      onDrop={(e) => {
-                        e.preventDefault()
-                        handleImageUpload(e.dataTransfer.files)
-                      }}
-                    >
-                      <Upload className={`w-10 h-10 mx-auto mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`} />
-                      <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                        Drag and drop image files, or click to upload
-                      </p>
-                      <input
-                        id="photo-upload"
-                        type="file"
-                        multiple
-                        accept="image/*"
-                        className="hidden"
-                        onChange={(e) => handleImageUpload(e.target.files)}
-                      />
-                    </div>
-                    
-                    {uploadedImages.length > 0 && (
-                      <div className="mt-4">
-                        <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'} mb-2`}>
-                          {uploadedImages.length} image(s) uploaded
-                        </p>
-                        <div className="grid grid-cols-3 gap-2">
-                          {uploadedImages.slice(0, 6).map((image, index) => (
-                            <img
-                              key={index}
-                              src={image}
-                              alt={`Upload ${index + 1}`}
-                              className="w-full h-16 object-cover rounded-lg"
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                  
-                  {/* Section Property Details */}
-                  <div className={`bg-white rounded-2xl shadow-sm border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'border-gray-200'}`}>
-                    <h2 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} mb-4`}>
-                      Property Details
-                    </h2>
-                    
-                    <div className="space-y-4">
-                      <div>
-                        <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
-                          Property Type
-                        </label>
-                        <select
-                          value={propertyType}
-                          onChange={(e) => setPropertyType(e.target.value)}
-                          className={`w-full px-3 py-2 border rounded-lg ${
-                            darkMode 
-                              ? 'bg-gray-700 border-gray-600 text-white' 
-                              : 'bg-white border-gray-300 text-gray-900'
-                          } focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
-                        >
-                          <option value="House">House</option>
-                          <option value="Apartment">Apartment</option>
-                          <option value="Townhouse">Townhouse</option>
-                          <option value="Condo">Condo</option>
-                          <option value="Villa">Villa</option>
-                        </select>
-                      </div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {/* Colonne de gauche : Upload Photos + Property Details */}
+                  <div className="space-y-6">
+                    {/* Section Upload Photos */}
+                    <div className={`bg-white rounded-2xl shadow-sm border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'border-gray-200'}`}>
+                      <h2 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} mb-4`}>
+                        Upload Photos
+                      </h2>
                       
-                      <div>
-                        <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
-                          Address or Neighborhood
-                        </label>
+                      <div 
+                        className={`border-2 border-dashed rounded-xl p-12 text-center transition-colors cursor-pointer ${
+                          darkMode ? 'border-gray-600 hover:border-gray-500 bg-gray-700' : 'border-gray-300 hover:border-gray-400 bg-gray-50'
+                        }`}
+                        onClick={() => document.getElementById('photo-upload').click()}
+                        onDragOver={(e) => e.preventDefault()}
+                        onDrop={(e) => {
+                          e.preventDefault()
+                          handleImageUpload(e.dataTransfer.files)
+                        }}
+                      >
+                        <div className={`w-16 h-16 mx-auto mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-400'} flex items-center justify-center border-2 border-current rounded-lg`}>
+                          <Upload className="w-8 h-8" />
+                        </div>
+                        <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                          Drag and drop image files,
+                        </p>
+                        <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                          or click to upload
+                        </p>
                         <input
-                          type="text"
-                          value={propertyAddress}
-                          onChange={(e) => setPropertyAddress(e.target.value)}
-                          placeholder="e.g., Downtown Toronto"
-                          className={`w-full px-3 py-2 border rounded-lg ${
-                            darkMode 
-                              ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
-                              : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
-                          } focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                          id="photo-upload"
+                          type="file"
+                          multiple
+                          accept="image/*"
+                          className="hidden"
+                          onChange={(e) => handleImageUpload(e.target.files)}
                         />
                       </div>
+                    </div>
+                    
+                    {/* Section Property Details */}
+                    <div className={`bg-white rounded-2xl shadow-sm border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'border-gray-200'}`}>
+                      <h2 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} mb-4`}>
+                        Property Details
+                      </h2>
                       
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-4">
+                        <div>
+                          <select
+                            value={propertyType}
+                            onChange={(e) => setPropertyType(e.target.value)}
+                            className={`w-full px-4 py-3 border rounded-lg text-base ${
+                              darkMode 
+                                ? 'bg-gray-700 border-gray-600 text-white' 
+                                : 'bg-white border-gray-300 text-gray-900'
+                            } focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                          >
+                            <option value="House">House</option>
+                            <option value="Apartment">Apartment</option>
+                            <option value="Townhouse">Townhouse</option>
+                            <option value="Condo">Condo</option>
+                            <option value="Villa">Villa</option>
+                          </select>
+                        </div>
+                        
                         <div>
                           <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
-                            Square Footage
+                            Address or Neighborhood
                           </label>
                           <input
                             type="text"
-                            value={squareFootage}
-                            onChange={(e) => setSquareFootage(e.target.value)}
-                            placeholder="1,200 sq ft"
-                            className={`w-full px-3 py-2 border rounded-lg ${
+                            value={propertyAddress}
+                            onChange={(e) => setPropertyAddress(e.target.value)}
+                            className={`w-full px-4 py-3 border rounded-lg text-base ${
                               darkMode 
                                 ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
                                 : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
@@ -3515,68 +3482,85 @@ export default function MarwyckCopilot() {
                           />
                         </div>
                         
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
+                              Square Footage
+                            </label>
+                            <input
+                              type="text"
+                              value={squareFootage}
+                              onChange={(e) => setSquareFootage(e.target.value)}
+                              className={`w-full px-4 py-3 border rounded-lg text-base ${
+                                darkMode 
+                                  ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
+                                  : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
+                              } focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                            />
+                          </div>
+                          
+                          <div>
+                            <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
+                              Bedrooms & Bathrooms
+                            </label>
+                            <input
+                              type="text"
+                              value={bedroomsBathrooms}
+                              onChange={(e) => setBedroomsBathrooms(e.target.value)}
+                              className={`w-full px-4 py-3 border rounded-lg text-base ${
+                                darkMode 
+                                  ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
+                                  : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
+                              } focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                            />
+                          </div>
+                        </div>
+                        
                         <div>
                           <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
-                            Bedrooms & Bathrooms
+                            Description
                           </label>
-                          <input
-                            type="text"
-                            value={bedroomsBathrooms}
-                            onChange={(e) => setBedroomsBathrooms(e.target.value)}
-                            placeholder="3 bed, 2 bath"
-                            className={`w-full px-3 py-2 border rounded-lg ${
+                          <textarea
+                            value={propertyDescription}
+                            onChange={(e) => setPropertyDescription(e.target.value)}
+                            rows="4"
+                            className={`w-full px-4 py-3 border rounded-lg text-base ${
                               darkMode 
                                 ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
                                 : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
-                            } focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                            } focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none`}
                           />
                         </div>
+                        
+                        <button
+                          onClick={generateListing}
+                          disabled={!propertyAddress || uploadedImages.length === 0 || isGenerating}
+                          className="w-full bg-black text-white py-4 px-6 rounded-lg font-medium hover:bg-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors text-base"
+                        >
+                          {isGenerating ? 'Generating...' : 'Generate Listing'}
+                        </button>
                       </div>
-                      
-                      <div>
-                        <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
-                          Description
-                        </label>
-                        <textarea
-                          value={propertyDescription}
-                          onChange={(e) => setPropertyDescription(e.target.value)}
-                          placeholder="Additional details about the property..."
-                          rows="4"
-                          className={`w-full px-3 py-2 border rounded-lg ${
-                            darkMode 
-                              ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
-                              : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
-                          } focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none`}
-                        />
-                      </div>
-                      
-                      <button
-                        onClick={generateListing}
-                        disabled={!propertyAddress || uploadedImages.length === 0 || isGenerating}
-                        className="w-full bg-black text-white py-3 px-4 rounded-lg font-medium hover:bg-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
-                      >
-                        {isGenerating ? 'Generating...' : 'Generate Listing'}
-                      </button>
                     </div>
                   </div>
                   
-                  {/* Section Generated Listing */}
+                  {/* Colonne de droite : Generated Listing */}
                   <div className={`bg-white rounded-2xl shadow-sm border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'border-gray-200'}`}>
-                    <h2 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} mb-4`}>
-                      Generated Listing
-                    </h2>
-                    
                     {!generatedListing ? (
-                      <div className={`text-center py-12 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                        <PenTool className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                        <p className="text-sm">
-                          Upload photos and fill in property details to generate your listing
-                        </p>
+                      <div>
+                        <h2 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} mb-4`}>
+                          Generated Listing
+                        </h2>
+                        <div className={`text-center py-12 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                          <PenTool className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                          <p className="text-sm">
+                            Upload photos and fill in property details to generate your listing
+                          </p>
+                        </div>
                       </div>
                     ) : (
                       <div>
-                        {/* Photos générées */}
-                        <div className="grid grid-cols-1 gap-3 mb-4">
+                        {/* Photos en haut en grille horizontale */}
+                        <div className="grid grid-cols-3 gap-3 mb-6">
                           {generatedListing.images.map((image, index) => (
                             <img
                               key={index}
@@ -3587,49 +3571,53 @@ export default function MarwyckCopilot() {
                           ))}
                         </div>
                         
-                        {/* Contenu du listing */}
-                        <div className="mb-6">
-                          <h3 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} mb-2`}>
-                            {generatedListing.title}
-                          </h3>
-                          <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'} leading-relaxed`}>
-                            {generatedListing.description}
-                          </p>
-                        </div>
+                        <h2 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} mb-4`}>
+                          Generated Listing
+                        </h2>
                         
-                        {/* Boutons d'action */}
-                        <div className="space-y-2">
+                        {/* Titre du listing */}
+                        <h3 className={`text-base font-medium ${darkMode ? 'text-white' : 'text-gray-900'} mb-4`}>
+                          {generatedListing.title}
+                        </h3>
+                        
+                        {/* Description du listing */}
+                        <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'} leading-relaxed mb-6`}>
+                          {generatedListing.description}
+                        </p>
+                        
+                        {/* Boutons d'action alignés verticalement */}
+                        <div className="space-y-3">
                           <button
                             onClick={copyToClipboard}
-                            className={`w-full px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                            className={`w-full px-4 py-3 rounded-lg text-sm font-medium transition-colors flex items-center ${
                               darkMode
                                 ? 'bg-gray-700 text-white hover:bg-gray-600 border border-gray-600'
                                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300'
                             }`}
                           >
-                            <Copy className="w-4 h-4 inline mr-2" />
+                            <Copy className="w-4 h-4 mr-2" />
                             Copy
                           </button>
                           
                           <button
-                            className={`w-full px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                            className={`w-full px-4 py-3 rounded-lg text-sm font-medium transition-colors flex items-center ${
                               darkMode
                                 ? 'bg-gray-700 text-white hover:bg-gray-600 border border-gray-600'
                                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300'
                             }`}
                           >
-                            <Download className="w-4 h-4 inline mr-2" />
+                            <Download className="w-4 h-4 mr-2" />
                             Download Photos
                           </button>
                           
                           <button
-                            className={`w-full px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                            className={`w-full px-4 py-3 rounded-lg text-sm font-medium transition-colors flex items-center ${
                               darkMode
                                 ? 'bg-gray-700 text-white hover:bg-gray-600 border border-gray-600'
                                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300'
                             }`}
                           >
-                            <Share className="w-4 h-4 inline mr-2" />
+                            <Share className="w-4 h-4 mr-2" />
                             Send to Myself
                           </button>
                         </div>
