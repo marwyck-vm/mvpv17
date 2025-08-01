@@ -3378,39 +3378,35 @@ export default function MarwyckCopilot() {
                   <div>
                     <div className="mb-8">
                         <div className="mb-4">
-                        <div className="flex items-baseline justify-between">
+                        <div className="flex items-center justify-between">
                           {/* Bouton de retour - à gauche */}
-                          <div className="mr-4">
-                            <button
-                              onClick={() => {
-                                setSelectedFile(null)
-                                // Réinitialiser les états de chat
-                                setCurrentChatMessages([
-                                  { id: Date.now(), role: 'bot', content: 'Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd\'hui ?', timestamp: new Date().toISOString() }
-                                ])
-                                setCurrentChatInput('')
-                                setSelectedChatHistory(null)
-                              }}
-                              className="text-black hover:text-gray-700 transition-colors"
-                            >
-                              <ChevronLeft className="w-5 h-5" />
-                            </button>
-                          </div>
+                          <button
+                            onClick={() => {
+                              setSelectedFile(null)
+                              // Réinitialiser les états de chat
+                              setCurrentChatMessages([
+                                { id: Date.now(), role: 'bot', content: 'Bonjour ! Je suis votre assistant Marwyck. Comment puis-je vous aider aujourd\'hui ?', timestamp: new Date().toISOString() }
+                              ])
+                              setCurrentChatInput('')
+                              setSelectedChatHistory(null)
+                            }}
+                            className="text-black hover:text-gray-700 transition-colors"
+                          >
+                            <ChevronLeft className="w-5 h-5" />
+                          </button>
 
                           {/* Bouton de suppression - à droite */}
-                          <div>
-                            <button
-                              onClick={() => setShowDeleteFileModal(true)}
-                              className="text-gray-400 hover:text-red-500 transition-colors p-1.5 rounded-[9px] hover:bg-red-50"
-                              title="Delete file"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
-                          </div>
+                          <button
+                            onClick={() => setShowDeleteFileModal(true)}
+                            className="text-gray-400 hover:text-red-500 transition-colors p-1.5 rounded-[9px] hover:bg-red-50"
+                            title="Delete file"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
                         </div>
                         
-                        {/* Titre New File - sa propre boîte alignée avec les contacts */}
-                        <div className="group flex items-center space-x-3 flex-1 mt-4 ml-9">
+                        {/* Titre du fichier */}
+                        <div className="ml-9 mt-4">
                             {editingFileName ? (
                               <div className="flex items-center space-x-2">
                                 <input
