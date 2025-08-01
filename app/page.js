@@ -3442,6 +3442,9 @@ export default function MarwyckCopilot() {
                                 </button>
                               </>
                             )}
+                            </div>
+                            
+                            {/* Bouton de suppression - à droite du titre */}
                             <button
                               onClick={() => setShowDeleteFileModal(true)}
                               className="text-gray-400 hover:text-red-500 transition-colors p-1.5 rounded-[9px] hover:bg-red-50"
