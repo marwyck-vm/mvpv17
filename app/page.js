@@ -3454,6 +3454,24 @@ export default function MarwyckCopilot() {
                           onChange={(e) => handleImageUpload(e.target.files)}
                         />
                       </div>
+                      
+                      {uploadedImages.length > 0 && (
+                        <div className="mt-4">
+                          <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'} mb-2`}>
+                            {uploadedImages.length} image(s) uploaded
+                          </p>
+                          <div className="grid grid-cols-3 gap-2">
+                            {uploadedImages.slice(0, 6).map((image, index) => (
+                              <img
+                                key={index}
+                                src={image}
+                                alt={`Upload ${index + 1}`}
+                                className="w-full h-16 object-cover rounded-[9px]"
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                     
                     {/* Section Property Details */}
