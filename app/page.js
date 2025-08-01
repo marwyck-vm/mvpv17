@@ -835,16 +835,21 @@ export default function MarwyckCopilot() {
   const [squareFootage, setSquareFootage] = useState('1,200 sq ft')
   const [bedroomsBathrooms, setBedroomsBathrooms] = useState('3 bed, 2 bath')
   const [propertyDescription, setPropertyDescription] = useState('Modern home with updated kitchen, spacious living areas, and beautiful backyard perfect for families.')
-  const [generatedListing, setGeneratedListing] = useState({
-    title: 'Charming 3-bedroom, 2-bathroom house in the sought-after Downtown Montreal neighborhood',
-    description: 'This 1,200 sq ft property offers an inviting living area, a modern kitchen with stainless steel appliances, and a spacious backyard perfect for outdoor gatherings. Modern home with updated kitchen, spacious living areas, and beautiful backyard perfect for families.',
-    images: [
-      'https://images.unsplash.com/photo-1628624747186-a941c476b7ef?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwxfHxob3VzZSUyMGV4dGVyaW9yfGVufDB8fHx8MTc1NDAyNzA4OHww&ixlib=rb-4.1.0&q=85',
-      'https://images.unsplash.com/photo-1592506119503-c0b18879bd5a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBraXRjaGVufGVufDB8fHx8MTc1NDAyNzA5NHww&ixlib=rb-4.1.0&q=85',
-      'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBraXRjaGVufGVufDB8fHx8MTc1NDAyNzA5OXww&ixlib=rb-4.1.0&q=85'
-    ]
-  })
+  const [generatedListing, setGeneratedListing] = useState(null)
   const [isGenerating, setIsGenerating] = useState(false)
+
+  // Charger la démo par défaut côté client pour éviter l'hydratation
+  useEffect(() => {
+    setGeneratedListing({
+      title: 'Charming 3-bedroom, 2-bathroom house in the sought-after Downtown Montreal neighborhood',
+      description: 'This 1,200 sq ft property offers an inviting living area, a modern kitchen with stainless steel appliances, and a spacious backyard perfect for outdoor gatherings. Modern home with updated kitchen, spacious living areas, and beautiful backyard perfect for families.',
+      images: [
+        'https://images.unsplash.com/photo-1628624747186-a941c476b7ef?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwxfHxob3VzZSUyMGV4dGVyaW9yfGVufDB8fHx8MTc1NDAyNzA4OHww&ixlib=rb-4.1.0&q=85',
+        'https://images.unsplash.com/photo-1592506119503-c0b18879bd5a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBraXRjaGVufGVufDB8fHx8MTc1NDAyNzA5NHww&ixlib=rb-4.1.0&q=85',
+        'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBraXRjaGVufGVufDB8fHx8MTc1NDAyNzA5OXww&ixlib=rb-4.1.0&q=85'
+      ]
+    })
+  }, [])
 
   // État pour la zone de rappels personnels avec valeur dynamique
   const [personalReminder, setPersonalReminder] = useState('')
