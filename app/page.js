@@ -702,6 +702,7 @@ export default function MarwyckCopilot() {
       id: 2,
       createdAt: new Date('2025-01-12'),
       name: 'Demo File - Downtown Condo 4B',
+      collaborators: ['sophie.leroux@marwyck.com'],
       contacts: [
         { id: 1, fullName: 'Michael Chen', mail: 'michael.chen@email.com', phone: '+1 555 0201' },
         { id: 2, fullName: 'Lisa Wang', mail: 'lisa.wang@email.com', phone: '+1 555 0202' }
