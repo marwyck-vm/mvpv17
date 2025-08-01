@@ -3397,21 +3397,24 @@ export default function MarwyckCopilot() {
           {activeTab === 'studio' && (
             <div className="p-6 h-full overflow-y-auto">
               <div className="max-w-7xl mx-auto">
-                <h1 className={`text-3xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'} mb-8`}>
+                <h1 className={`text-3xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'} mb-2`}>
                   Studio
                 </h1>
+                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'} mb-8`}>
+                  Generate professional property listings with AI assistance
+                </p>
                 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {/* Colonne de gauche : Upload Photos + Property Details */}
-                  <div className="space-y-6">
+                  {/* Colonne de gauche : Upload Photos + Property Details dans une seule boîte */}
+                  <div className={`bg-white rounded-2xl shadow-sm border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'border-gray-200'} space-y-6`}>
                     {/* Section Upload Photos */}
-                    <div className={`bg-white rounded-2xl shadow-sm border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'border-gray-200'}`}>
+                    <div>
                       <h2 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} mb-4`}>
                         Upload Photos
                       </h2>
                       
                       <div 
-                        className={`border-2 border-dashed rounded-xl p-12 text-center transition-colors cursor-pointer ${
+                        className={`border-2 border-dashed rounded-[9px] p-12 text-center transition-colors cursor-pointer ${
                           darkMode ? 'border-gray-600 hover:border-gray-500 bg-gray-700' : 'border-gray-300 hover:border-gray-400 bg-gray-50'
                         }`}
                         onClick={() => document.getElementById('photo-upload').click()}
@@ -3421,9 +3424,7 @@ export default function MarwyckCopilot() {
                           handleImageUpload(e.dataTransfer.files)
                         }}
                       >
-                        <div className={`w-16 h-16 mx-auto mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-400'} flex items-center justify-center border-2 border-current rounded-lg`}>
-                          <Upload className="w-8 h-8" />
-                        </div>
+                        <Upload className={`w-8 h-8 mx-auto mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-400'}`} />
                         <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                           Drag and drop image files,
                         </p>
@@ -3442,7 +3443,7 @@ export default function MarwyckCopilot() {
                     </div>
                     
                     {/* Section Property Details */}
-                    <div className={`bg-white rounded-2xl shadow-sm border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'border-gray-200'}`}>
+                    <div>
                       <h2 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} mb-4`}>
                         Property Details
                       </h2>
@@ -3452,7 +3453,7 @@ export default function MarwyckCopilot() {
                           <select
                             value={propertyType}
                             onChange={(e) => setPropertyType(e.target.value)}
-                            className={`w-full px-4 py-3 border rounded-lg text-base ${
+                            className={`w-full px-4 py-3 border rounded-[9px] text-base ${
                               darkMode 
                                 ? 'bg-gray-700 border-gray-600 text-white' 
                                 : 'bg-white border-gray-300 text-gray-900'
@@ -3474,7 +3475,7 @@ export default function MarwyckCopilot() {
                             type="text"
                             value={propertyAddress}
                             onChange={(e) => setPropertyAddress(e.target.value)}
-                            className={`w-full px-4 py-3 border rounded-lg text-base ${
+                            className={`w-full px-4 py-3 border rounded-[9px] text-base ${
                               darkMode 
                                 ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
                                 : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
@@ -3491,7 +3492,7 @@ export default function MarwyckCopilot() {
                               type="text"
                               value={squareFootage}
                               onChange={(e) => setSquareFootage(e.target.value)}
-                              className={`w-full px-4 py-3 border rounded-lg text-base ${
+                              className={`w-full px-4 py-3 border rounded-[9px] text-base ${
                                 darkMode 
                                   ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
                                   : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
@@ -3507,7 +3508,7 @@ export default function MarwyckCopilot() {
                               type="text"
                               value={bedroomsBathrooms}
                               onChange={(e) => setBedroomsBathrooms(e.target.value)}
-                              className={`w-full px-4 py-3 border rounded-lg text-base ${
+                              className={`w-full px-4 py-3 border rounded-[9px] text-base ${
                                 darkMode 
                                   ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
                                   : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
@@ -3524,7 +3525,7 @@ export default function MarwyckCopilot() {
                             value={propertyDescription}
                             onChange={(e) => setPropertyDescription(e.target.value)}
                             rows="4"
-                            className={`w-full px-4 py-3 border rounded-lg text-base ${
+                            className={`w-full px-4 py-3 border rounded-[9px] text-base ${
                               darkMode 
                                 ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
                                 : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
@@ -3535,7 +3536,7 @@ export default function MarwyckCopilot() {
                         <button
                           onClick={generateListing}
                           disabled={!propertyAddress || uploadedImages.length === 0 || isGenerating}
-                          className="w-full bg-black text-white py-4 px-6 rounded-lg font-medium hover:bg-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors text-base"
+                          className="w-full bg-black text-white py-4 px-6 rounded-[9px] font-medium hover:bg-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors text-base"
                         >
                           {isGenerating ? 'Generating...' : 'Generate Listing'}
                         </button>
@@ -3566,7 +3567,7 @@ export default function MarwyckCopilot() {
                               key={index}
                               src={image}
                               alt={`Property ${index + 1}`}
-                              className="w-full h-32 object-cover rounded-lg"
+                              className="w-full h-32 object-cover rounded-[9px]"
                             />
                           ))}
                         </div>
@@ -3589,7 +3590,7 @@ export default function MarwyckCopilot() {
                         <div className="space-y-3">
                           <button
                             onClick={copyToClipboard}
-                            className={`w-full px-4 py-3 rounded-lg text-sm font-medium transition-colors flex items-center ${
+                            className={`w-full px-4 py-3 rounded-[9px] text-sm font-medium transition-colors flex items-center ${
                               darkMode
                                 ? 'bg-gray-700 text-white hover:bg-gray-600 border border-gray-600'
                                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300'
@@ -3600,7 +3601,7 @@ export default function MarwyckCopilot() {
                           </button>
                           
                           <button
-                            className={`w-full px-4 py-3 rounded-lg text-sm font-medium transition-colors flex items-center ${
+                            className={`w-full px-4 py-3 rounded-[9px] text-sm font-medium transition-colors flex items-center ${
                               darkMode
                                 ? 'bg-gray-700 text-white hover:bg-gray-600 border border-gray-600'
                                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300'
@@ -3611,7 +3612,7 @@ export default function MarwyckCopilot() {
                           </button>
                           
                           <button
-                            className={`w-full px-4 py-3 rounded-lg text-sm font-medium transition-colors flex items-center ${
+                            className={`w-full px-4 py-3 rounded-[9px] text-sm font-medium transition-colors flex items-center ${
                               darkMode
                                 ? 'bg-gray-700 text-white hover:bg-gray-600 border border-gray-600'
                                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300'
