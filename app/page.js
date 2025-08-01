@@ -3410,7 +3410,7 @@ export default function MarwyckCopilot() {
                         </div>
                           
                           {/* Titre New File - sa propre boîte alignée avec les contacts */}
-                          <div className="group flex items-center space-x-3 flex-1 mt-2">
+                          <div className="group flex items-center space-x-3 flex-1 mt-4 ml-9">
                             {editingFileName ? (
                               <div className="flex items-center space-x-2">
                                 <input
