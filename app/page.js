@@ -3378,8 +3378,8 @@ export default function MarwyckCopilot() {
                   <div>
                     <div className="mb-8">
                         <div className="mb-4">
-                        <div className="flex items-baseline">
-                          {/* Bouton de retour - sa propre boîte à gauche aligné avec le texte */}
+                        <div className="flex items-baseline justify-between">
+                          {/* Bouton de retour - à gauche */}
                           <div className="mr-4">
                             <button
                               onClick={() => {
@@ -3397,8 +3397,8 @@ export default function MarwyckCopilot() {
                             </button>
                           </div>
 
-                          {/* Bouton de suppression - en haut à gauche */}
-                          <div className="mr-4">
+                          {/* Bouton de suppression - à droite */}
+                          <div>
                             <button
                               onClick={() => setShowDeleteFileModal(true)}
                               className="text-gray-400 hover:text-red-500 transition-colors p-1.5 rounded-[9px] hover:bg-red-50"
@@ -3407,6 +3407,7 @@ export default function MarwyckCopilot() {
                               <Trash2 className="w-4 h-4" />
                             </button>
                           </div>
+                        </div>
                           
                           {/* Titre New File - sa propre boîte alignée avec les contacts */}
                           <div className="group flex items-center space-x-3 flex-1 mt-2">
