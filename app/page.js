@@ -5580,6 +5580,9 @@ export default function MarwyckCopilot() {
             <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>
               Team Members
             </DialogTitle>
+            <p className={`text-sm mt-1 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+              Collaborators who have access to this project file
+            </p>
           </DialogHeader>
           
           <div className="mt-4">
