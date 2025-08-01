@@ -3080,188 +3080,345 @@ export default function MarwyckCopilot() {
             <div className="p-6 h-full overflow-y-auto">
               <div className="max-w-7xl mx-auto">
                 <div className="mb-8">
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <h2 className="text-2xl font-bold font-plus-jakarta text-gray-900">Good afternoon {userProfile.fullName}</h2>
-                      <p className={`font-inter ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Here's what's happening today</p>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Button
-                        size="sm"
-                        onClick={() => setCurrentWeek(currentWeek - 1)}
-                        className={`rounded-full ${darkMode ? 'bg-gray-700 border-gray-600 text-gray-100 hover:bg-gray-600' : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-100'} border`}
-                      >
-                        <ChevronLeft className="w-4 h-4" />
-                      </Button>
-                      <Button
-                        size="sm"
-                        onClick={() => setCurrentWeek(currentWeek + 1)}
-                        className={`rounded-full ${darkMode ? 'bg-gray-700 border-gray-600 text-gray-100 hover:bg-gray-600' : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-100'} border`}
-                      >
-                        <ChevronRight className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
+                  <h2 className={`text-2xl font-bold font-plus-jakarta ${darkMode ? 'text-white' : 'text-gray-900'} mb-2`}>
+                    Good afternoon {userProfile.fullName}
+                  </h2>
+                  <p className={`font-inter ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                    Here's what's happening today
+                  </p>
                 </div>
 
-                {/* KPIs Grid with Week Info Box */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                  {/* Week Info Box (first position) */}
-                  <Card className={`hover:shadow-lg transition-shadow h-full ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                    <CardHeader className="pb-3">
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>This week</CardTitle>
-                      <p className={`font-inter text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{getWeekLabel(currentWeek).date}</p>
-                    </CardHeader>
-                    <CardContent className="flex-1 flex flex-col justify-center">
-                      <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                        Efficiency {kpis[0].change.startsWith('+') ? 'increased' : 'decreased'} by <span className={`font-medium ${kpis[0].change.startsWith('+') ? 'text-success' : 'text-red-500'}`}>{kpis[0].change}</span> from last week
-                      </p>
-                    </CardContent>
-                  </Card>
-
-                  {/* KPI Cards (positions 2, 3, 4) */}
-                  {kpis.map((kpi, index) => (
-                    <Card key={index} className={`hover:shadow-lg transition-shadow h-full ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className={`text-sm font-medium ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                          {kpi.title}
-                        </CardTitle>
-                        <kpi.icon className={`w-4 h-4 ${kpi.color === 'text-black' ? '' : kpi.color}`} style={kpi.color === 'text-black' ? { color: '#000000' } : {}} />
-                      </CardHeader>
-                      <CardContent>
-                        <div className={`text-2xl font-bold font-space-grotesk mb-1 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                          {kpi.value}
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <div className="flex items-center space-x-1">
-                            {kpi.change.startsWith('+') ? (
-                              <>
-                                <span className="text-emerald-600 font-medium">↑</span>
-                                <p className="text-xs text-emerald-600 font-medium">{kpi.change.replace('+', '')}</p>
-                              </>
-                            ) : (
-                              <>
-                                <span className="text-red-500 font-medium">↓</span>
-                                <p className="text-xs text-red-500 font-medium">{kpi.change.replace('-', '')}</p>
-                              </>
-                            )}
-                          </div>
-                          <p className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>vs {kpi.previousValue}</p>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-
-                {/* Dashboard Bottom Section - Appointments and Activity */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <Card className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-6">
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Upcoming Appointments</CardTitle>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => {
-                          setActiveTab('planning')
-                          setShowNewEventDialog(true)
-                        }}
-                        className={`text-sm px-3 py-1 h-auto transition-all duration-200 rounded-none hover:rounded-xl ${darkMode ? 'text-gray-400 hover:text-gray-200 hover:bg-gray-700' : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'}`}
-                      >
-                        + Add
-                      </Button>
+                {/* Top Section - 3 boxes */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                  {/* Left Box - Important Notifications */}
+                  <Card className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                    <CardHeader>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} flex items-center`}>
+                        <AlertCircle className="w-5 h-5 mr-2 text-orange-500" />
+                        Important Notifications
+                      </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
-                        {getCurrentWeekEvents().slice(0, 3).map(event => (
-                          <div key={event.id} className="flex items-center space-x-3">
-                            <div className="flex-shrink-0">
-                              <Calendar className="w-5 h-5" style={{ color: '#000000' }} />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                {event.title}
+                        <div className={`p-3 rounded-[9px] ${darkMode ? 'bg-red-900/20' : 'bg-red-50'} border-l-4 border-red-500`}>
+                          <div className="flex items-start space-x-3">
+                            <AlertTriangle className="w-4 h-4 text-red-500 mt-0.5" />
+                            <div>
+                              <p className={`text-sm font-medium ${darkMode ? 'text-red-400' : 'text-red-800'}`}>
+                                Contract deadline approaching
                               </p>
-                              <p className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'} font-light`}>
-                                {event.client} • {event.time}
+                              <p className={`text-xs ${darkMode ? 'text-red-300' : 'text-red-600'}`}>
+                                123 Oak Street - Due in 2 days
                               </p>
                             </div>
-                            <Badge 
-                              variant="outline" 
-                              className={`text-xs px-1.5 py-0 rounded-full border ${getTypeColor(event.type)}`}
-                            >
-                              {event.type}
-                            </Badge>
                           </div>
-                        ))}
+                        </div>
+                        
+                        <div className={`p-3 rounded-[9px] ${darkMode ? 'bg-orange-900/20' : 'bg-orange-50'} border-l-4 border-orange-500`}>
+                          <div className="flex items-start space-x-3">
+                            <Clock className="w-4 h-4 text-orange-500 mt-0.5" />
+                            <div>
+                              <p className={`text-sm font-medium ${darkMode ? 'text-orange-400' : 'text-orange-800'}`}>
+                                Inspection scheduled
+                              </p>
+                              <p className={`text-xs ${darkMode ? 'text-orange-300' : 'text-orange-600'}`}>
+                                Downtown Condo 4B - Tomorrow 2:00 PM
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className={`p-3 rounded-[9px] ${darkMode ? 'bg-blue-900/20' : 'bg-blue-50'} border-l-4 border-blue-500`}>
+                          <div className="flex items-start space-x-3">
+                            <Info className="w-4 h-4 text-blue-500 mt-0.5" />
+                            <div>
+                              <p className={`text-sm font-medium ${darkMode ? 'text-blue-400' : 'text-blue-800'}`}>
+                                New document uploaded
+                              </p>
+                              <p className={`text-xs ${darkMode ? 'text-blue-300' : 'text-blue-600'}`}>
+                                Financial statement - Waterfront Townhouse
+                              </p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
 
-                  <div className="space-y-4">
-                    <Card className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                      <CardHeader>
-                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Recent Activity</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-4">
-                          {recentActivities.slice(-3).reverse().map(activity => (
-                            <div key={activity.id} className="flex items-center space-x-3">
-                              <div className="flex-shrink-0">
-                                {activity.type === 'sms' && <Smartphone className="w-5 h-5" style={{ color: '#000000' }} />}
-                                {activity.type === 'email' && <Mail className="w-5 h-5" style={{ color: '#000000' }} />}
-                                {activity.type === 'call' && <PhoneCall className="w-5 h-5" style={{ color: '#000000' }} />}
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                  {activity.contact}
-                                </p>
-                                <p className={`text-xs truncate ${darkMode ? 'text-gray-500' : 'text-gray-400'} font-light`}>
-                                  {activity.message}
-                                </p>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <span className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>{activity.time}</span>
-                                {getStatusIcon(activity.status)}
-                              </div>
+                  {/* Middle Box - AI Suggestions */}
+                  <Card className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                    <CardHeader>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} flex items-center`}>
+                        <Lightbulb className="w-5 h-5 mr-2 text-yellow-500" />
+                        AI Suggestions
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div className={`p-4 rounded-[9px] ${darkMode ? 'bg-gray-700' : 'bg-gray-50'} border ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
+                          <div className="flex items-start space-x-3 mb-3">
+                            <Sparkles className="w-4 h-4 text-purple-500 mt-0.5" />
+                            <div className="flex-1">
+                              <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                123 Oak Street
+                              </p>
+                              <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'} mt-1`}>
+                                Consider scheduling a follow-up call with the buyer. They viewed the property twice and seem very interested.
+                              </p>
                             </div>
-                          ))}
+                          </div>
+                          <button className="w-full bg-green-600 hover:bg-green-700 text-white text-sm py-2 px-4 rounded-[9px] transition-colors">
+                            Accept
+                          </button>
                         </div>
-                      </CardContent>
-                    </Card>
+                        
+                        <div className={`p-4 rounded-[9px] ${darkMode ? 'bg-gray-700' : 'bg-gray-50'} border ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
+                          <div className="flex items-start space-x-3 mb-3">
+                            <Target className="w-4 h-4 text-blue-500 mt-0.5" />
+                            <div className="flex-1">
+                              <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                Downtown Condo 4B
+                              </p>
+                              <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'} mt-1`}>
+                                Price adjustment recommended based on market analysis. Consider reducing by 3-5%.
+                              </p>
+                            </div>
+                          </div>
+                          <button className="w-full bg-green-600 hover:bg-green-700 text-white text-sm py-2 px-4 rounded-[9px] transition-colors">
+                            Accept
+                          </button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
 
-                    <Card className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : ''}`}>
-                      <CardHeader>
-                        <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} flex items-center`}>
-                          <Lightbulb className="w-5 h-5 mr-2" style={{ color: '#000000' }} />
-                          Today's AI Suggestions
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className={`text-sm mb-3 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                          For your visit tomorrow:
-                        </p>
-                        <div className="space-y-2">
-                          {meetingChecklist.map((item) => (
-                            <div key={item.id} className="flex items-center space-x-2">
-                              <button
-                                onClick={() => toggleChecklistItem(item.id)}
-                                className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-colors ${
-                                  item.checked 
-                                    ? 'bg-green-500 border-green-500' 
-                                    : `border-gray-300 ${darkMode ? 'border-gray-600' : ''}`
-                                }`}
-                              >
-                                {item.checked && <CheckCircle className="w-3 h-3 text-white" />}
-                              </button>
-                              <span className={`text-sm ${item.checked ? 'line-through opacity-75' : ''} ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                                {item.icon} {item.text}
-                              </span>
+                  {/* Right Box - Recent Chats */}
+                  <Card className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                    <CardHeader>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} flex items-center`}>
+                        <MessageCircle className="w-5 h-5 mr-2 text-green-500" />
+                        Recent Chats
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        <div 
+                          className={`p-3 rounded-[9px] cursor-pointer transition-colors ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'}`}
+                          onClick={() => {
+                            setSelectedFile(createdProjects.find(p => p.name === 'Demo File - 123 Oak Street'))
+                            setActiveTab('documents')
+                          }}
+                        >
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-blue-600' : 'bg-blue-100'}`}>
+                              <Building className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-blue-600'}`} />
                             </div>
-                          ))}
+                            <div className="flex-1">
+                              <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                123 Oak Street
+                              </p>
+                              <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'} truncate`}>
+                                How should I prepare for the inspection?
+                              </p>
+                            </div>
+                            <span className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>2h</span>
+                          </div>
                         </div>
-                      </CardContent>
-                    </Card>
-                  </div>
+                        
+                        <div 
+                          className={`p-3 rounded-[9px] cursor-pointer transition-colors ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'}`}
+                          onClick={() => {
+                            setSelectedFile(createdProjects.find(p => p.name === 'Demo File - Downtown Condo 4B'))
+                            setActiveTab('documents')
+                          }}
+                        >
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-purple-600' : 'bg-purple-100'}`}>
+                              <Home className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-purple-600'}`} />
+                            </div>
+                            <div className="flex-1">
+                              <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                Downtown Condo 4B
+                              </p>
+                              <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'} truncate`}>
+                                What's the best pricing strategy?
+                              </p>
+                            </div>
+                            <span className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>4h</span>
+                          </div>
+                        </div>
+                        
+                        <div 
+                          className={`p-3 rounded-[9px] cursor-pointer transition-colors ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'}`}
+                          onClick={() => {
+                            setSelectedFile(createdProjects.find(p => p.name === 'Demo File - Waterfront Townhouse'))
+                            setActiveTab('documents')
+                          }}
+                        >
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-green-600' : 'bg-green-100'}`}>
+                              <Users className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-green-600'}`} />
+                            </div>
+                            <div className="flex-1">
+                              <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                Waterfront Townhouse
+                              </p>
+                              <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'} truncate`}>
+                                Generate property description
+                              </p>
+                            </div>
+                            <span className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>1d</span>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Bottom Section - 2 boxes */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {/* Left Box - Upcoming Events */}
+                  <Card className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                    <CardHeader>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} flex items-center`}>
+                        <Calendar className="w-5 h-5 mr-2 text-blue-500" />
+                        Upcoming Events
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div className="flex items-center space-x-4">
+                          <div className="flex-shrink-0">
+                            <div className={`w-12 h-12 rounded-[9px] flex items-center justify-center ${darkMode ? 'bg-red-600' : 'bg-red-100'}`}>
+                              <span className={`text-sm font-bold ${darkMode ? 'text-white' : 'text-red-600'}`}>15</span>
+                            </div>
+                          </div>
+                          <div className="flex-1">
+                            <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                              Property Inspection
+                            </p>
+                            <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                              123 Oak Street • 10:00 AM
+                            </p>
+                            <Badge className="mt-1 text-xs bg-red-100 text-red-800 border-red-200">
+                              High Priority
+                            </Badge>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-center space-x-4">
+                          <div className="flex-shrink-0">
+                            <div className={`w-12 h-12 rounded-[9px] flex items-center justify-center ${darkMode ? 'bg-blue-600' : 'bg-blue-100'}`}>
+                              <span className={`text-sm font-bold ${darkMode ? 'text-white' : 'text-blue-600'}`}>16</span>
+                            </div>
+                          </div>
+                          <div className="flex-1">
+                            <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                              Client Meeting
+                            </p>
+                            <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                              Downtown Condo 4B • 2:00 PM
+                            </p>
+                            <Badge className="mt-1 text-xs bg-blue-100 text-blue-800 border-blue-200">
+                              Meeting
+                            </Badge>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-center space-x-4">
+                          <div className="flex-shrink-0">
+                            <div className={`w-12 h-12 rounded-[9px] flex items-center justify-center ${darkMode ? 'bg-green-600' : 'bg-green-100'}`}>
+                              <span className={`text-sm font-bold ${darkMode ? 'text-white' : 'text-green-600'}`}>18</span>
+                            </div>
+                          </div>
+                          <div className="flex-1">
+                            <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                              Contract Signing
+                            </p>
+                            <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                              Waterfront Townhouse • 4:00 PM
+                            </p>
+                            <Badge className="mt-1 text-xs bg-green-100 text-green-800 border-green-200">
+                              Contract
+                            </Badge>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Right Box - Recent File Activities */}
+                  <Card className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                    <CardHeader>
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} flex items-center`}>
+                        <FileText className="w-5 h-5 mr-2 text-purple-500" />
+                        Recent File Activities
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div className="flex items-start space-x-3">
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-green-600' : 'bg-green-100'}`}>
+                            <CheckCircle className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-green-600'}`} />
+                          </div>
+                          <div className="flex-1">
+                            <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                              Document uploaded
+                            </p>
+                            <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                              123 Oak Street • Financial statement.pdf
+                            </p>
+                            <span className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>2 hours ago</span>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-start space-x-3">
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-blue-600' : 'bg-blue-100'}`}>
+                            <Edit className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-blue-600'}`} />
+                          </div>
+                          <div className="flex-1">
+                            <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                              Contact updated
+                            </p>
+                            <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                              Downtown Condo 4B • John Smith phone number
+                            </p>
+                            <span className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>5 hours ago</span>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-start space-x-3">
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-purple-600' : 'bg-purple-100'}`}>
+                            <MessageCircle className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-purple-600'}`} />
+                          </div>
+                          <div className="flex-1">
+                            <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                              AI chat session
+                            </p>
+                            <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                              Waterfront Townhouse • Property description generated
+                            </p>
+                            <span className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>1 day ago</span>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-start space-x-3">
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-orange-600' : 'bg-orange-100'}`}>
+                            <Users className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-orange-600'}`} />
+                          </div>
+                          <div className="flex-1">
+                            <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                              Collaborator added
+                            </p>
+                            <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                              123 Oak Street • marie.dubois@marwyck.com
+                            </p>
+                            <span className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>2 days ago</span>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
               </div>
             </div>
