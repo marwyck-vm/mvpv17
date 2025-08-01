@@ -1417,16 +1417,18 @@ export default function MarwyckCopilot() {
   }
 
   const generateListing = async () => {
-    if (!propertyAddress || uploadedImages.length === 0) return
-    
     setIsGenerating(true)
     
     // Simulation de génération de listing avec IA
     setTimeout(() => {
       const mockListing = {
-        title: `Charming ${bedroomsBathrooms ? bedroomsBathrooms.toLowerCase() + ' ' : '3-bedroom, 2-bathroom '}${propertyType.toLowerCase()} in the sought-after ${propertyAddress} neighborhood`,
-        description: `This ${squareFootage || '1,000'} sq ft property offers an inviting living area, a modern kitchen with stainless steel appliances, and a spacious backyard perfect for outdoor gatherings. ${propertyDescription || 'Perfect for families looking for comfort and convenience in a desirable location.'}`,
-        images: uploadedImages.slice(0, 3)
+        title: `Charming ${bedroomsBathrooms ? bedroomsBathrooms.toLowerCase() + ' ' : '3-bedroom, 2-bathroom '}${propertyType.toLowerCase()} in the sought-after ${propertyAddress || 'downtown'} neighborhood`,
+        description: `This ${squareFootage || '1,200'} sq ft property offers an inviting living area, a modern kitchen with stainless steel appliances, and a spacious backyard perfect for outdoor gatherings. ${propertyDescription || 'Perfect for families looking for comfort and convenience in a desirable location.'}`,
+        images: uploadedImages.length > 0 ? uploadedImages.slice(0, 3) : [
+          'https://images.unsplash.com/photo-1628624747186-a941c476b7ef?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwxfHxob3VzZSUyMGV4dGVyaW9yfGVufDB8fHx8MTc1NDAyNzA4OHww&ixlib=rb-4.1.0&q=85',
+          'https://images.unsplash.com/photo-1592506119503-c0b18879bd5a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBraXRjaGVufGVufDB8fHx8MTc1NDAyNzA5NHww&ixlib=rb-4.1.0&q=85',
+          'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBraXRjaGVufGVufDB8fHx8MTc1NDAyNzA5OXww&ixlib=rb-4.1.0&q=85'
+        ]
       }
       setGeneratedListing(mockListing)
       setIsGenerating(false)
