@@ -3567,7 +3567,7 @@ export default function MarwyckCopilot() {
                         
                         <button
                           onClick={generateListing}
-                          disabled={!propertyAddress || uploadedImages.length === 0 || isGenerating}
+                          disabled={isGenerating}
                           className="w-full bg-black text-white py-4 px-6 rounded-[9px] font-medium hover:bg-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors text-base"
                         >
                           {isGenerating ? 'Generating...' : 'Generate Listing'}
