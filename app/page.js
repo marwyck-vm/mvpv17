@@ -5654,6 +5654,50 @@ export default function MarwyckCopilot() {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Modal de confirmation de suppression de fichier */}
+      <Dialog open={showDeleteFileModal} onOpenChange={setShowDeleteFileModal} modal={false}>
+        <DialogContent className={`sm:max-w-md !rounded-2xl shadow-xl border p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} [&>button]:hidden`} style={{ borderRadius: '1rem' }}>
+          <DialogHeader>
+            <DialogTitle className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>
+              Delete File
+            </DialogTitle>
+          </DialogHeader>
+          
+          <div className="mt-4">
+            <div className={`flex items-start space-x-3 p-4 rounded-[9px] ${darkMode ? 'bg-gray-700' : 'bg-red-50'}`}>
+              <AlertTriangle className={`w-5 h-5 mt-0.5 ${darkMode ? 'text-red-400' : 'text-red-500'}`} />
+              <div>
+                <p className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-900'}`}>
+                  This action cannot be undone
+                </p>
+                <p className={`text-sm mt-1 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                  Are you sure you want to delete "{selectedFile?.name}"? 
+                  {selectedFile?.collaborators && selectedFile.collaborators.length > 0 && (
+                    <span> All collaborators will lose access to this file.</span>
+                  )}
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="flex justify-end space-x-3 mt-6">
+            <Button 
+              variant="outline" 
+              onClick={() => setShowDeleteFileModal(false)}
+              className={`rounded-[9px] px-6 ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-50'}`}
+            >
+              Cancel
+            </Button>
+            <Button 
+              onClick={deleteSelectedFile}
+              className="bg-red-600 hover:bg-red-700 text-white rounded-[9px] px-6"
+            >
+              Delete
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
