@@ -1401,6 +1401,36 @@ export default function MarwyckCopilot() {
     }
   }
 
+  // Fonctions pour la page Studio
+  const handleImageUpload = (files) => {
+    const imageFiles = Array.from(files).filter(file => file.type.startsWith('image/'))
+    const imageUrls = imageFiles.map(file => URL.createObjectURL(file))
+    setUploadedImages(prev => [...prev, ...imageUrls])
+  }
+
+  const generateListing = async () => {
+    if (!propertyAddress || uploadedImages.length === 0) return
+    
+    setIsGenerating(true)
+    
+    // Simulation de génération de listing avec IA
+    setTimeout(() => {
+      const mockListing = {
+        title: `${propertyType} in ${propertyAddress}`,
+        description: `Beautiful ${bedroomsBathrooms ? bedroomsBathrooms.toLowerCase() + ' ' : ''}${propertyType.toLowerCase()} ${squareFootage ? `with ${squareFootage} sq ft ` : ''}located in ${propertyAddress}. ${propertyDescription || 'This property offers modern amenities and comfortable living spaces perfect for families or professionals.'}`,
+        images: uploadedImages.slice(0, 3)
+      }
+      setGeneratedListing(mockListing)
+      setIsGenerating(false)
+    }, 2000)
+  }
+
+  const copyToClipboard = () => {
+    if (generatedListing) {
+      navigator.clipboard.writeText(`${generatedListing.title}\n\n${generatedListing.description}`)
+    }
+  }
+
   // Fonctions pour gérer la sélection des fichiers
   const handleFileSelect = (fileId) => {
     setSelectedFiles(prev => 
