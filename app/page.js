@@ -3093,49 +3093,48 @@ export default function MarwyckCopilot() {
                   {/* Left Box - Important Notifications */}
                   <Card className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
                     <CardHeader>
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} flex items-center`}>
-                        <AlertCircle className="w-5 h-5 mr-2 text-orange-500" />
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                         Important Notifications
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
-                        <div className={`p-3 rounded-[9px] ${darkMode ? 'bg-red-900/20' : 'bg-red-50'} border-l-4 border-red-500`}>
+                        <div className={`p-3 rounded-[9px] ${darkMode ? 'bg-gray-700' : 'bg-gray-50'} border-l-4 border-gray-500`}>
                           <div className="flex items-start space-x-3">
-                            <AlertTriangle className="w-4 h-4 text-red-500 mt-0.5" />
+                            <AlertTriangle className="w-4 h-4 text-gray-500 mt-0.5" />
                             <div>
-                              <p className={`text-sm font-medium ${darkMode ? 'text-red-400' : 'text-red-800'}`}>
+                              <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                                 Contract deadline approaching
                               </p>
-                              <p className={`text-xs ${darkMode ? 'text-red-300' : 'text-red-600'}`}>
+                              <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                                 123 Oak Street - Due in 2 days
                               </p>
                             </div>
                           </div>
                         </div>
                         
-                        <div className={`p-3 rounded-[9px] ${darkMode ? 'bg-orange-900/20' : 'bg-orange-50'} border-l-4 border-orange-500`}>
+                        <div className={`p-3 rounded-[9px] ${darkMode ? 'bg-gray-700' : 'bg-gray-50'} border-l-4 border-gray-500`}>
                           <div className="flex items-start space-x-3">
-                            <Clock className="w-4 h-4 text-orange-500 mt-0.5" />
+                            <Clock className="w-4 h-4 text-gray-500 mt-0.5" />
                             <div>
-                              <p className={`text-sm font-medium ${darkMode ? 'text-orange-400' : 'text-orange-800'}`}>
+                              <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                                 Inspection scheduled
                               </p>
-                              <p className={`text-xs ${darkMode ? 'text-orange-300' : 'text-orange-600'}`}>
+                              <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                                 Downtown Condo 4B - Tomorrow 2:00 PM
                               </p>
                             </div>
                           </div>
                         </div>
                         
-                        <div className={`p-3 rounded-[9px] ${darkMode ? 'bg-blue-900/20' : 'bg-blue-50'} border-l-4 border-blue-500`}>
+                        <div className={`p-3 rounded-[9px] ${darkMode ? 'bg-gray-700' : 'bg-gray-50'} border-l-4 border-gray-500`}>
                           <div className="flex items-start space-x-3">
-                            <Info className="w-4 h-4 text-blue-500 mt-0.5" />
+                            <Info className="w-4 h-4 text-gray-500 mt-0.5" />
                             <div>
-                              <p className={`text-sm font-medium ${darkMode ? 'text-blue-400' : 'text-blue-800'}`}>
+                              <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                                 New document uploaded
                               </p>
-                              <p className={`text-xs ${darkMode ? 'text-blue-300' : 'text-blue-600'}`}>
+                              <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                                 Financial statement - Waterfront Townhouse
                               </p>
                             </div>
@@ -3148,8 +3147,7 @@ export default function MarwyckCopilot() {
                   {/* Middle Box - AI Suggestions */}
                   <Card className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
                     <CardHeader>
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} flex items-center`}>
-                        <Lightbulb className="w-5 h-5 mr-2 text-yellow-500" />
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                         AI Suggestions
                       </CardTitle>
                     </CardHeader>
@@ -3157,7 +3155,7 @@ export default function MarwyckCopilot() {
                       <div className="space-y-4">
                         <div className={`p-4 rounded-[9px] ${darkMode ? 'bg-gray-700' : 'bg-gray-50'} border ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
                           <div className="flex items-start space-x-3 mb-3">
-                            <Sparkles className="w-4 h-4 text-purple-500 mt-0.5" />
+                            <Sparkles className="w-4 h-4 text-gray-500 mt-0.5" />
                             <div className="flex-1">
                               <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                                 123 Oak Street
@@ -3167,14 +3165,16 @@ export default function MarwyckCopilot() {
                               </p>
                             </div>
                           </div>
-                          <button className="w-full bg-green-600 hover:bg-green-700 text-white text-sm py-2 px-4 rounded-[9px] transition-colors">
-                            Accept
-                          </button>
+                          <div className="flex justify-end">
+                            <button className={`bg-black hover:bg-gray-800 text-white text-sm py-2 px-4 rounded-[9px] transition-colors ${darkMode ? 'bg-white text-black hover:bg-gray-200' : ''}`}>
+                              Accept
+                            </button>
+                          </div>
                         </div>
                         
                         <div className={`p-4 rounded-[9px] ${darkMode ? 'bg-gray-700' : 'bg-gray-50'} border ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
                           <div className="flex items-start space-x-3 mb-3">
-                            <Target className="w-4 h-4 text-blue-500 mt-0.5" />
+                            <Target className="w-4 h-4 text-gray-500 mt-0.5" />
                             <div className="flex-1">
                               <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                                 Downtown Condo 4B
@@ -3184,9 +3184,11 @@ export default function MarwyckCopilot() {
                               </p>
                             </div>
                           </div>
-                          <button className="w-full bg-green-600 hover:bg-green-700 text-white text-sm py-2 px-4 rounded-[9px] transition-colors">
-                            Accept
-                          </button>
+                          <div className="flex justify-end">
+                            <button className={`bg-black hover:bg-gray-800 text-white text-sm py-2 px-4 rounded-[9px] transition-colors ${darkMode ? 'bg-white text-black hover:bg-gray-200' : ''}`}>
+                              Accept
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </CardContent>
@@ -3195,8 +3197,7 @@ export default function MarwyckCopilot() {
                   {/* Right Box - Recent Chats */}
                   <Card className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
                     <CardHeader>
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} flex items-center`}>
-                        <MessageCircle className="w-5 h-5 mr-2 text-green-500" />
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                         Recent Chats
                       </CardTitle>
                     </CardHeader>
@@ -3210,8 +3211,8 @@ export default function MarwyckCopilot() {
                           }}
                         >
                           <div className="flex items-center space-x-3">
-                            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-blue-600' : 'bg-blue-100'}`}>
-                              <Building className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-blue-600'}`} />
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-gray-600' : 'bg-gray-200'}`}>
+                              <Building className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-gray-600'}`} />
                             </div>
                             <div className="flex-1">
                               <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -3233,8 +3234,8 @@ export default function MarwyckCopilot() {
                           }}
                         >
                           <div className="flex items-center space-x-3">
-                            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-purple-600' : 'bg-purple-100'}`}>
-                              <Home className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-purple-600'}`} />
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-gray-600' : 'bg-gray-200'}`}>
+                              <Home className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-gray-600'}`} />
                             </div>
                             <div className="flex-1">
                               <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -3256,8 +3257,8 @@ export default function MarwyckCopilot() {
                           }}
                         >
                           <div className="flex items-center space-x-3">
-                            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-green-600' : 'bg-green-100'}`}>
-                              <Users className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-green-600'}`} />
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-gray-600' : 'bg-gray-200'}`}>
+                              <Users className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-gray-600'}`} />
                             </div>
                             <div className="flex-1">
                               <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -3280,8 +3281,7 @@ export default function MarwyckCopilot() {
                   {/* Left Box - Upcoming Events */}
                   <Card className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
                     <CardHeader>
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} flex items-center`}>
-                        <Calendar className="w-5 h-5 mr-2 text-blue-500" />
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                         Upcoming Events
                       </CardTitle>
                     </CardHeader>
@@ -3289,8 +3289,9 @@ export default function MarwyckCopilot() {
                       <div className="space-y-4">
                         <div className="flex items-center space-x-4">
                           <div className="flex-shrink-0">
-                            <div className={`w-12 h-12 rounded-[9px] flex items-center justify-center ${darkMode ? 'bg-red-600' : 'bg-red-100'}`}>
-                              <span className={`text-sm font-bold ${darkMode ? 'text-white' : 'text-red-600'}`}>15</span>
+                            <div className={`w-12 h-12 rounded-[9px] flex flex-col items-center justify-center ${darkMode ? 'bg-gray-600' : 'bg-gray-200'}`}>
+                              <span className={`text-xs font-medium ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>Jan</span>
+                              <span className={`text-sm font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>15</span>
                             </div>
                           </div>
                           <div className="flex-1">
@@ -3300,7 +3301,7 @@ export default function MarwyckCopilot() {
                             <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                               123 Oak Street • 10:00 AM
                             </p>
-                            <Badge className="mt-1 text-xs bg-red-100 text-red-800 border-red-200">
+                            <Badge className={`mt-1 text-xs ${darkMode ? 'bg-gray-700 text-gray-300 border-gray-600' : 'bg-gray-100 text-gray-800 border-gray-300'}`}>
                               High Priority
                             </Badge>
                           </div>
@@ -3308,8 +3309,9 @@ export default function MarwyckCopilot() {
                         
                         <div className="flex items-center space-x-4">
                           <div className="flex-shrink-0">
-                            <div className={`w-12 h-12 rounded-[9px] flex items-center justify-center ${darkMode ? 'bg-blue-600' : 'bg-blue-100'}`}>
-                              <span className={`text-sm font-bold ${darkMode ? 'text-white' : 'text-blue-600'}`}>16</span>
+                            <div className={`w-12 h-12 rounded-[9px] flex flex-col items-center justify-center ${darkMode ? 'bg-gray-600' : 'bg-gray-200'}`}>
+                              <span className={`text-xs font-medium ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>Jan</span>
+                              <span className={`text-sm font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>16</span>
                             </div>
                           </div>
                           <div className="flex-1">
@@ -3319,7 +3321,7 @@ export default function MarwyckCopilot() {
                             <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                               Downtown Condo 4B • 2:00 PM
                             </p>
-                            <Badge className="mt-1 text-xs bg-blue-100 text-blue-800 border-blue-200">
+                            <Badge className={`mt-1 text-xs ${darkMode ? 'bg-gray-700 text-gray-300 border-gray-600' : 'bg-gray-100 text-gray-800 border-gray-300'}`}>
                               Meeting
                             </Badge>
                           </div>
@@ -3327,8 +3329,9 @@ export default function MarwyckCopilot() {
                         
                         <div className="flex items-center space-x-4">
                           <div className="flex-shrink-0">
-                            <div className={`w-12 h-12 rounded-[9px] flex items-center justify-center ${darkMode ? 'bg-green-600' : 'bg-green-100'}`}>
-                              <span className={`text-sm font-bold ${darkMode ? 'text-white' : 'text-green-600'}`}>18</span>
+                            <div className={`w-12 h-12 rounded-[9px] flex flex-col items-center justify-center ${darkMode ? 'bg-gray-600' : 'bg-gray-200'}`}>
+                              <span className={`text-xs font-medium ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>Jan</span>
+                              <span className={`text-sm font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>18</span>
                             </div>
                           </div>
                           <div className="flex-1">
@@ -3338,7 +3341,7 @@ export default function MarwyckCopilot() {
                             <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                               Waterfront Townhouse • 4:00 PM
                             </p>
-                            <Badge className="mt-1 text-xs bg-green-100 text-green-800 border-green-200">
+                            <Badge className={`mt-1 text-xs ${darkMode ? 'bg-gray-700 text-gray-300 border-gray-600' : 'bg-gray-100 text-gray-800 border-gray-300'}`}>
                               Contract
                             </Badge>
                           </div>
@@ -3350,16 +3353,15 @@ export default function MarwyckCopilot() {
                   {/* Right Box - Recent File Activities */}
                   <Card className={`hover:shadow-lg transition-shadow ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
                     <CardHeader>
-                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} flex items-center`}>
-                        <FileText className="w-5 h-5 mr-2 text-purple-500" />
+                      <CardTitle className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                         Recent File Activities
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
                         <div className="flex items-start space-x-3">
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-green-600' : 'bg-green-100'}`}>
-                            <CheckCircle className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-green-600'}`} />
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-gray-600' : 'bg-gray-200'}`}>
+                            <CheckCircle className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-gray-600'}`} />
                           </div>
                           <div className="flex-1">
                             <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -3373,8 +3375,8 @@ export default function MarwyckCopilot() {
                         </div>
                         
                         <div className="flex items-start space-x-3">
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-blue-600' : 'bg-blue-100'}`}>
-                            <Edit className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-blue-600'}`} />
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-gray-600' : 'bg-gray-200'}`}>
+                            <Edit className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-gray-600'}`} />
                           </div>
                           <div className="flex-1">
                             <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -3388,8 +3390,8 @@ export default function MarwyckCopilot() {
                         </div>
                         
                         <div className="flex items-start space-x-3">
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-purple-600' : 'bg-purple-100'}`}>
-                            <MessageCircle className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-purple-600'}`} />
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-gray-600' : 'bg-gray-200'}`}>
+                            <MessageCircle className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-gray-600'}`} />
                           </div>
                           <div className="flex-1">
                             <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -3403,8 +3405,8 @@ export default function MarwyckCopilot() {
                         </div>
                         
                         <div className="flex items-start space-x-3">
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-orange-600' : 'bg-orange-100'}`}>
-                            <Users className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-orange-600'}`} />
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-gray-600' : 'bg-gray-200'}`}>
+                            <Users className={`w-4 h-4 ${darkMode ? 'text-white' : 'text-gray-600'}`} />
                           </div>
                           <div className="flex-1">
                             <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
