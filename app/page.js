@@ -3501,7 +3501,14 @@ export default function MarwyckCopilot() {
                       {/* Deux grosses boîtes avec effet hover */}
                       {/* Bouton d'invitation au-dessus de la box Recent Chats - aligné à droite */}
                       <div className="ml-9 mt-2 flex justify-end mb-2">
-                        <div className="w-[25%] flex justify-end">
+                        <div className="w-[25%] flex justify-end space-x-2">
+                          <button 
+                            onClick={() => setShowTeamModal(true)}
+                            className="text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-[9px] p-1.5 transition-colors group"
+                            title="View team members"
+                          >
+                            <Users className="w-4 h-4" />
+                          </button>
                           <button 
                             onClick={() => setShowInviteModal(true)}
                             className="text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-[9px] p-1.5 transition-colors group"
